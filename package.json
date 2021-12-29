@@ -1,0 +1,11 @@
+{
+  "name": "fruitwars-app",
+  "author": "@chiyukikana",
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  }
+}

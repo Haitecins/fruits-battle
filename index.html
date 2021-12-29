@@ -1,0 +1,508 @@
+<!--
+    H5Game - Fruit Wars
+    Version: 1.2.10-SNAPSHOT
+    Built: 2021-4-24 18:04:58
+    GitHub: https://github.com/chiyukikana/H5Games/Fruit_Wars
+    Author: 千雪カナ
+    言いたいことがあるんだよ
+    やっぱりSerenaはかわいいよ
+    すきすき大好き、やっぱ好き
+    やっと見つけたお姫様
+    俺が生まれてきた理由
+    それはお前に出会うため
+    俺と一緒に人生歩もう
+    世界で一番愛してる
+    アイシテル
+-->
+<!DOCTYPE html>
+<html lang="cn">
+  <head>
+    <meta charset="UTF-8" />
+    <title>水果大作战</title>
+    <meta name="description" content="Fruit Wars, join us together." />
+    <meta
+      name="keywords"
+      content="Fruit Wars, FW, 水果大作战, 水果作战, 吃水果, 捡水果"
+    />
+    <meta name="renderer" content="webkit" />
+    <meta name="author" content="CHIYUKIKANA" />
+    <meta name="generator" content="PhpStorm 2021.1" />
+    <meta name="copyright" content="CHIYUKIKANA" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="icon" href="img/fruits/cherry.svg" />
+    <link rel="shortcut icon" href="img/fruits/cherry.svg" />
+    <link rel="stylesheet" href="css/main.css" />
+
+    <!--导入依赖库-->
+    <script src="js/libs/md5.js"></script>
+    <script src="js/libs/jquery-3.6.0.js"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="readme">
+        <h1>
+          <img src="img/fruits/cherry.svg" alt="" />水果大作战<img
+            src="img/fruits/cherry.svg"
+            alt=""
+          />
+        </h1>
+        <div id="gameplay">
+          <aside>
+            <span>游戏说明</span>
+            <span>得分说明</span>
+            <span>难度说明</span>
+            <span>水果信息</span>
+            <span>道具信息</span>
+            <i></i>
+          </aside>
+          <div>
+            <article class="art-active def-opacity">
+              <p>
+                在该游戏中，玩家将需要使用鼠标拖动
+                <img
+                  src="img/box.svg"
+                  alt=""
+                  title="水果篮"
+                />进行移动，目标是在有限的时间内拾取更多的水果，拿取更多的分数。当游戏的难度到达一定高度时，你的目标可能不再是拾取更多水果，而是躲避所有的水果。
+              </p>
+              &nbsp;
+              <p>
+                玩家初始拥有
+                <b>60s</b
+                >的游戏时间，在游戏中可以拾取道具来增加游戏时间。倒计时结束，游戏结束。
+              </p>
+              <p>玩家初始拥有 <b>5点</b>生命值，最大上限为 <b>10点</b>。</p>
+              &nbsp;
+              <p>生命值 <b class="get">增加</b>有以下条件：</p>
+              <ol>
+                <li>
+                  <p>
+                    1. 每次累计拾取 <b>10次</b>
+                    <b class="healthy-fruits">健康水果</b>可以增加
+                    <b>1点</b>生命值，过程中如果拾取到
+                    <b class="bad-fruits">腐烂水果</b>将重新累计。
+                  </p>
+                </li>
+              </ol>
+              &nbsp;
+              <p>生命值 <b class="lose">减少</b>有以下条件：</p>
+              <ol>
+                <li>
+                  <p>
+                    1. 当玩家的分数在负数以下，每次拾取
+                    <b class="bad-fruits">腐烂水果</b>将减少生命值。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    2. 每次累计拾取 <b>5次</b>
+                    <b class="bad-fruits">腐烂水果</b>，将减少
+                    <b>1点</b>生命值。
+                  </p>
+                </li>
+              </ol>
+              &nbsp;
+              <p>游戏分数 <b class="get">增加</b>有以下条件：</p>
+              <ol>
+                <li>
+                  <p>
+                    1. 拾取
+                    <b class="healthy-fruits">健康水果</b>可以增加游戏分数。
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    2. 每次累计拾取 <b>15</b>个
+                    <b class="healthy-fruits">健康水果</b>必定奖励
+                    <b>15</b>个水果总和的 <b>35%</b>分数。如果途中拾取到<b
+                      class="bad-fruits"
+                      >腐烂水果</b
+                    >，将重新累计。当获得奖励分数的时候会播放特殊的音效。
+                  </p>
+                </li>
+              </ol>
+              &nbsp;
+              <p>游戏分数 <b class="lose">减少</b>有以下条件：</p>
+              <ol>
+                <li>
+                  <p>
+                    1. 拾取 <b class="bad-fruits">腐烂水果</b>将减少游戏分数。
+                  </p>
+                </li>
+              </ol>
+              &nbsp;
+              <p>
+                玩家在 <b>5秒</b>内不进行移动，则会减少
+                <b>1点</b>生命值，玩家的游戏分数大于0，则会额外失去当前分数的
+                <b>10%</b>。
+              </p>
+              <p>
+                <b class="bad-fruits">腐烂水果</b>在游戏中一般以灰色的样子出现。
+              </p>
+              <p>游戏每进行一段时间将会增加难度，初始难度为 <b>1</b>级。</p>
+            </article>
+            <article>
+              <p>
+                玩家的 <b class="base-scores">基础得分</b>为
+                <b>1.0</b>分，在游戏中可以拾取道具、增加难度来提升
+                <b class="base-scores">基础得分</b>。
+              </p>
+              <p>
+                玩家的 <b class="base-multiple">基础得分倍率</b>为
+                <b>0.25x</b>，在游戏中可以拾取道具来提升
+                <b class="base-multiple">基础得分倍率</b>。
+              </p>
+              <p>
+                玩家拾取
+                <b class="healthy-fruits">健康水果</b>可以增加分数，拾取
+                <b class="bad-fruits">腐烂水果</b>将失去分数。
+              </p>
+              &nbsp;
+              <p>
+                <strong
+                  ><b class="get">获得</b> 的分数 = (<b class="base-scores"
+                    >基础得分</b
+                  >
+                  + <b class="healthy-fruits">水果得分</b>) + (<b
+                    class="base-scores"
+                    >基础得分</b
+                  >
+                  + <b class="healthy-fruits">水果得分</b>) *
+                  <b class="base-multiple">基础得分倍率</b></strong
+                >
+              </p>
+              <p>
+                <strong
+                  ><b class="lose">失去</b> 的分数 = ((<b class="base-scores"
+                    >基础得分</b
+                  >
+                  + <b class="healthy-fruits">水果得分</b>) + ((<b
+                    class="base-scores"
+                    >基础得分</b
+                  >
+                  + <b class="healthy-fruits">水果得分</b>) *
+                  <b class="base-multiple">基础得分倍率</b>)) / 0.35</strong
+                >
+              </p>
+            </article>
+            <article>
+              <p>随着游戏时间的增加，难度也会提高，以下是所有可提升的项目：</p>
+              &nbsp;
+              <p>
+                <b class="base-scores">基础得分</b><br />小幅度提高拾取
+                <b class="healthy-fruits">水果</b> <b class="get">获得</b>/<b
+                  class="lose"
+                  >失去</b
+                >的 <b class="base-scores">分数</b>。每次难度提升增加
+                <b>0.01</b> - <b>0.1</b>。
+              </p>
+              &nbsp;
+              <p>
+                <b class="base-multiple">基础得分倍率</b><br />大幅度提高拾取
+                <b class="healthy-fruits">水果</b> <b class="get">获得</b>/<b
+                  class="lose"
+                  >失去</b
+                >的 <b class="base-scores">分数</b>。每次难度提升增加
+                <b>0.01x</b> - <b>0.02x</b>，最大上限为 <b>1.25x</b>。
+              </p>
+              &nbsp;
+              <p>
+                <b class="base-speed">基础移动速度</b><br />提高
+                <b class="healthy-fruits">水果</b>、<b class="items-des-chance"
+                  >道具</b
+                >等在游戏区域内的
+                <b class="base-speed">移动速度</b>。每次难度提升增加
+                <b>0.01</b> - <b>0.015</b>。
+              </p>
+              &nbsp;
+              <p>
+                <b class="entity-spawn-speed">实体</b> 生成速度<br />提高
+                <b class="entity-spawn-speed">实体</b
+                >生成的速度。每次难度提升增加 <b>0.2%</b> -
+                <b>1.4%</b>，最大上限为 <b>150%</b>。
+              </p>
+              &nbsp;
+              <p>
+                <b class="items-des-chance">游戏道具</b>
+                生成概率<br />提高生成的
+                <b class="entity-spawn-speed">实体</b>为
+                <b class="items-des-chance">道具</b>的概率。每次难度提升增加
+                <b>0.1%</b> - <b>1.6%</b>，最大上限为 <b>28%</b>。
+              </p>
+              &nbsp;
+              <p>
+                <b class="healthy-fruits">健康水果</b> 生成概率<br />提高生成的
+                <b class="entity-spawn-speed">实体</b>为
+                <b class="healthy-fruits">水果</b>的概率。每次难度提升增加
+                <b>0.1%</b> - <b>1.6%</b>，最大上限为 <b>70%。</b>
+              </p>
+              &nbsp;
+              <p>
+                <b class="bad-fruits">腐烂水果</b> 生成概率<br />提高
+                <b class="healthy-fruits">健康水果</b>变为
+                <b class="bad-fruits">腐烂水果</b>的概率。每次难度提升增加
+                <b>1%</b> - <b>3.2%</b>，最大上限为 <b>50%。</b>
+              </p>
+            </article>
+
+            <article>
+              <div id="fruits-info">
+                <div>
+                  <img src="img/fruits/apple.svg" alt="" title="苹果" />
+                  <p>基础分数: <b class="healthy-fruits">0.08</b></p>
+                  <p>
+                    移动速度: <b class="fruits-min-speed">1.1</b> -
+                    <b class="fruits-max-speed">2.2</b>
+                  </p>
+                </div>
+                <div>
+                  <img src="img/fruits/banana.svg" alt="" title="香蕉" />
+                  <p>基础分数: <b class="healthy-fruits">0.08</b></p>
+                  <p>
+                    移动速度: <b class="fruits-min-speed">1.2</b> -
+                    <b class="fruits-max-speed">2.4</b>
+                  </p>
+                </div>
+                <div>
+                  <img src="img/fruits/orange.svg" alt="" title="橘子" />
+                  <p>基础分数: <b class="healthy-fruits">0.11</b></p>
+                  <p>
+                    移动速度: <b class="fruits-min-speed">1.3</b> -
+                    <b class="fruits-max-speed">2.6</b>
+                  </p>
+                </div>
+                <div>
+                  <img src="img/fruits/lemon.svg" alt="" title="柠檬" />
+                  <p>基础分数: <b class="healthy-fruits">0.11</b></p>
+                  <p>
+                    移动速度: <b class="fruits-min-speed">1.4</b> -
+                    <b class="fruits-max-speed">2.8</b>
+                  </p>
+                </div>
+                <div>
+                  <img src="img/fruits/watermelon.svg" alt="" title="西瓜" />
+                  <p>基础分数: <b class="healthy-fruits">0.13</b></p>
+                  <p>
+                    移动速度: <b class="fruits-min-speed">1.5</b> -
+                    <b class="fruits-max-speed">3.0</b>
+                  </p>
+                </div>
+                <div>
+                  <img src="img/fruits/mango.svg" alt="" title="芒果" />
+                  <p>基础分数: <b class="healthy-fruits">0.17</b></p>
+                  <p>
+                    移动速度: <b class="fruits-min-speed">1.6</b> -
+                    <b class="fruits-max-speed">3.2</b>
+                  </p>
+                </div>
+                <div>
+                  <img src="img/fruits/peach.svg" alt="" title="桃子" />
+                  <p>基础分数: <b class="healthy-fruits">0.17</b></p>
+                  <p>
+                    移动速度: <b class="fruits-min-speed">1.7</b> -
+                    <b class="fruits-max-speed">3.4</b>
+                  </p>
+                </div>
+                <div>
+                  <img src="img/fruits/cherry.svg" alt="" title="樱桃" />
+                  <p>基础分数: <b class="healthy-fruits">0.23</b></p>
+                  <p>
+                    移动速度: <b class="fruits-min-speed">1.8</b> -
+                    <b class="fruits-max-speed">3.6</b>
+                  </p>
+                </div>
+              </div>
+              <p>
+                实体 <b class="base-speed">基础移动速度</b>为
+                <b>1.0</b>，将会随着难度增加而提高速度。
+              </p>
+              &nbsp;
+              <p>水果移动速度计算方式：</p>
+              <p>
+                从 <b class="base-speed">基础移动速度</b> +
+                <b class="fruits-min-speed">水果移动速度最小值</b> 到
+                <b class="base-speed">基础移动速度</b> +
+                <b class="fruits-max-speed">水果移动速度最大值</b
+                >的范围内获取随机值。
+              </p>
+            </article>
+            <article>
+              <div id="items-info">
+                <div>
+                  <img src="img/items/clock.svg" alt="" title="" />
+                  <div class="items-sec">
+                    <h4>道具效果</h4>
+                    <p>
+                      增加小量游戏时间。有
+                      <b class="items-des-chance">85%</b>的概率增加
+                      <b class="items-des-val">5.4 - 11.2秒</b>游戏时间，有
+                      <b class="items-des-chance">15%</b>的概率减少
+                      <b class="items-des-val">4.1 - 9.6秒</b>游戏时间。
+                    </p>
+                  </div>
+                  <div class="items-sec">
+                    <h4>有效概率</h4>
+                    <p>
+                      <b class="items-min-valid">30%</b> -
+                      <b class="items-max-valid">45%</b>
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <img src="img/items/magnet.svg" alt="" title="" />
+                  <div class="items-sec">
+                    <h4>道具效果</h4>
+                    <p>
+                      吸引所有
+                      <b class="healthy-fruits">健康水果</b>至玩家的位置，有
+                      <b class="items-des-chance">25%</b>的概率额外吸引
+                      <b class="bad-fruits">腐烂水果</b
+                      >。如果吸引的水果正在移动中，玩家的位置发生变化，则将移动到上次移动的地点。水果在吸引后将停留
+                      <b>0.5秒</b>。
+                    </p>
+                  </div>
+                  <div class="items-sec">
+                    <h4>有效概率</h4>
+                    <p>
+                      <b class="items-min-valid">30%</b> -
+                      <b class="items-max-valid">45%</b>
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <img src="img/items/cake.svg" alt="" title="" />
+                  <div class="items-sec">
+                    <h4>道具效果</h4>
+                    <p>
+                      真 · 随地大小变。有
+                      <b class="items-des-chance">55%</b>的概率将玩家变大，有
+                      <b class="items-des-chance">45%</b>的概率变小。该效果持续
+                      <b>10秒</b>。重复拾取将覆盖上一次的效果。
+                    </p>
+                  </div>
+                  <div class="items-sec">
+                    <h4>有效概率</h4>
+                    <p>
+                      <b class="items-min-valid">30%</b> -
+                      <b class="items-max-valid">45%</b>
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <img src="img/items/book.svg" alt="" title="" />
+                  <div class="items-sec">
+                    <h4>道具效果</h4>
+                    <p>
+                      将游戏区域内的水果反转。有
+                      <b class="items-des-chance">65%</b>的概率将所有
+                      <b class="bad-fruits">腐烂水果</b>转换为
+                      <b class="healthy-fruits">健康水果</b>，有
+                      <b class="items-des-chance">35%</b>的概率相反。
+                    </p>
+                  </div>
+                  <div class="items-sec">
+                    <h4>有效概率</h4>
+                    <p>
+                      <b class="items-min-valid">30%</b> -
+                      <b class="items-max-valid">45%</b>
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <img src="img/items/hourglass.svg" alt="" title="" />
+                  <div class="items-sec">
+                    <h4>道具效果</h4>
+                    <p>
+                      增加大量游戏时间。有
+                      <b class="items-des-chance">21%</b>的概率获得当前
+                      <b class="items-des-val">70%</b>的游戏时间。有
+                      <b class="items-des-chance">34%</b>的概率获得当前
+                      <b class="items-des-val">40%</b>的游戏时间。有
+                      <b class="items-des-chance">45%</b>的概率获得当前
+                      <b class="items-des-val">20%</b>的游戏时间。
+                    </p>
+                  </div>
+                  <div class="items-sec">
+                    <h4>有效概率</h4>
+                    <p>
+                      <b class="items-min-valid">30%</b> -
+                      <b class="items-max-valid">45%</b>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <p>
+                每次拾取的道具并不一定是有效的，有效的道具拾取后将会播放特殊的音效。
+              </p>
+            </article>
+          </div>
+        </div>
+
+        <div id="start-game">
+          <span>点击此处开始游戏</span>
+          <button id="sg-btn" type="button"><span></span></button>
+        </div>
+      </div>
+
+      <div id="finished">
+        <img src="img/reward.svg" alt="" />
+        <h1>游戏结束</h1>
+        <div id="all-data">
+          <div id="achievements">
+            <h3>获得的成就</h3>
+            <ul></ul>
+          </div>
+          <div id="statistics">
+            <h3>玩家数据统计</h3>
+            <span id="get-playtime">游戏时长: <i></i></span>
+            <span id="get-scores">总分数: <i></i></span>
+            <span id="get-total-fruits">总计拾取: <i></i></span>
+            <span id="get-total-achievements">达成成就: <i></i></span>
+            <span id="get-total-medals">获得奖牌: <i></i></span>
+            <span>...</span>
+          </div>
+          <div id="medals">
+            <h3>获得的奖牌</h3>
+            <ul></ul>
+          </div>
+        </div>
+      </div>
+      <div id="diff-notify">
+        <h4>DIFFICULTY LEVELS UP</h4>
+        <p id="diff-levels_up"><i class="bef"></i> -> <i class="aft"></i></p>
+        <div></div>
+      </div>
+      <div id="status">
+        <div id="health">
+          <img src="img/heart.svg" alt="" />
+          <i></i>
+        </div>
+        <div id="mana">
+          <img src="img/mana.svg" alt="" />
+          <i></i>
+        </div>
+        <div id="current-scores">
+          <img src="img/box.svg" alt="" />
+          <i></i>
+        </div>
+        <div id="countdown">
+          <img src="img/countdown.svg" alt="" />
+          <i></i>
+        </div>
+      </div>
+      <div id="fruit-basket"></div>
+    </div>
+    <!--数据储存模块-->
+    <script type="module" src="js/core/data.js"></script>
+    <!--函数方法模块-->
+    <script type="module" src="js/core/methods.js"></script>
+    <!--页面特效模块-->
+    <script type="module" src="js/core/page.js"></script>
+    <!--游戏核心代码模块-->
+    <script type="module" src="js/core/main.js"></script>
+  </body>
+</html>
