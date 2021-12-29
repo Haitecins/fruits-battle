@@ -6,7 +6,7 @@ $("#gameplay > aside > i")
   .stop()
   .css({
     backgroundImage:
-      'url("img/fruits/' + RandArrItems(DATA.fruits)[0].id + '.svg")',
+      'url("../public/img/fruits/' + RandArrItems(DATA.fruits)[0].id + '.svg")',
   });
 
 $("#gameplay > aside > span").each(function (index) {
@@ -22,7 +22,7 @@ $("#gameplay > aside > span").each(function (index) {
       .stop(true)
       .css({
         backgroundImage:
-          'url("img/fruits/' + RandArrItems(DATA.fruits)[0].id + '.svg")',
+          'url("../public/img/fruits/' + RandArrItems(DATA.fruits)[0].id + '.svg")',
       })
       .animate({ top: 70 * index + 14 }, 200);
 
