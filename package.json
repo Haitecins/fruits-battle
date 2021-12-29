@@ -3,7 +3,8 @@
   "author": "@chiyukikana",
   "license": "MIT",
   "scripts": {
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "serve": "serve ./"
   },
   "devDependencies": {
     "prettier": "^2.5.1"

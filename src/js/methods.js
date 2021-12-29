@@ -391,9 +391,14 @@ function PlaySound({ src, volume = 25, loop = false, promise = false } = {}) {
   audio.volume = volume / 100;
   audio.loop = loop;
 
-  // const playPromise = audio.play();
-
-  // if (playPromise) playPromise.then().catch();
+  audio
+    .play()
+    .then(() => {
+      console.log("play");
+    })
+    .catch(() => {
+      console.error("no play");
+    });
 }
 
 function PlayRandSound({ audio, volume, loop, promise } = {}) {
