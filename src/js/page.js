@@ -1,12 +1,13 @@
-import { RandArrItems, PlayRandSound } from "./methods.js";
+import { RandArrItems, PlayRandSound } from "./libs.js";
 import { DATA } from "./data.js";
 
 // 显示随机的一种水果图标
 $("#gameplay > aside > i")
   .stop()
   .css({
-    backgroundImage:
-      'url("../public/img/fruits/' + RandArrItems(DATA.fruits)[0].id + '.svg")',
+    backgroundImage: `url("/public/img/fruits/${
+      RandArrItems(DATA.fruits)[0].id
+    }.svg"`,
   });
 
 $("#gameplay > aside > span").each(function (index) {
@@ -21,10 +22,9 @@ $("#gameplay > aside > span").each(function (index) {
     $("#gameplay > aside > i")
       .stop(true)
       .css({
-        backgroundImage:
-          'url("../public/img/fruits/' +
-          RandArrItems(DATA.fruits)[0].id +
-          '.svg")',
+        backgroundImage: `url("/public/img/fruits/${
+          RandArrItems(DATA.fruits)[0].id
+        }.svg")`,
       })
       .animate({ top: 70 * index + 14 }, 200);
 

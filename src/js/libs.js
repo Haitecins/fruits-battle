@@ -71,7 +71,7 @@ function TimeFormat(num) {
 
 function GameOver() {
   // save data in database
-  UploadDatabase("../php/data.php", {
+  UploadDatabase("/src/php/data.php", {
     uid,
     scores: DATA.statistics.SCORES,
     playtime: DATA.statistics.PLAYTIME,
@@ -249,7 +249,7 @@ function GameOver() {
             DATA.statistics.TOTAL_ACHIEVEMENTS++;
             $achievements.html(
               $achievements.html() +
-                `<li><img src="../public/img/achievements_2.svg" alt=""><div><span>${
+                `<li><img src="/public/img/achievements_2.svg" alt=""><div><span>${
                   $(this)[0].title
                 }</span><p>${$(this)[0].description}</p></div></li>`
             );
@@ -297,7 +297,7 @@ function BuiltEntity({ className, x, y, xSpeed, ySpeed, extra } = {}) {
 function CollideEntity({ id, contrast, collided } = {}) {
   const getContrast = contrast;
 
-  $("." + id).each(function () {
+  $(`.${id}`).each(function () {
     if (
       !(
         getContrast.position().top + getContrast.height() <
@@ -323,9 +323,9 @@ function ShowDetails({ type, id, pos, before, after, extra, fixed } = {}) {
       .appendTo($("#wrapper"))
       .addClass("pickup " + className)
       .html(
-        `<img class="icons ${
-          extra ? extra() : ""
-        }" src="../public/img/${type}/${id}.svg" alt=""> ${text}`
+        `<img class="icons${
+          extra ? ` ${extra()}` : ""
+        }" src="/public/img/${type}/${id}.svg" alt=""> ${text}`
       )
       .css({
         left() {
@@ -391,14 +391,9 @@ function PlaySound({ src, volume = 25, loop = false, promise = false } = {}) {
   audio.volume = volume / 100;
   audio.loop = loop;
 
-  audio
-    .play()
-    .then(() => {
-      console.log("play");
-    })
-    .catch(() => {
-      console.error("no play");
-    });
+  audio.play().catch(() => {
+    console.error("play error.");
+  });
 }
 
 function PlayRandSound({ audio, volume, loop, promise } = {}) {

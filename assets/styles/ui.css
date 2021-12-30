@@ -1,16 +1,16 @@
 body {
-  background: url("../../public/img/apples-5666483.svg") center center fixed;
+  background: #fde275 url("/public/img/apples-5666483.svg") center center fixed;
   background-size: cover;
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
 }
 
 #wrapper {
-  width: 1024px;
-  height: 768px;
   position: absolute;
-  left: calc(50% - 1024px / 2);
-  top: calc(50% - 768px / 2);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   overflow: hidden;
 }
 
@@ -94,7 +94,7 @@ body {
 
 #fruits-info > div,
 #items-info > div {
-  width: calc(100% / 4);
+  width: calc(100% / 3);
   font-size: 16px;
   text-align: center;
   margin-bottom: 20px;
@@ -243,7 +243,7 @@ body {
   content: "";
   width: 21px;
   height: 21px;
-  background: url("../../public/img/right_bottom_arrow.svg") center center;
+  background: url("/public/img/right_bottom_arrow.svg") center center;
   background-size: 100%;
   position: absolute;
   right: -25px;
@@ -418,23 +418,24 @@ body {
 
 #diff-levels_up {
   margin: 0 10px 2px;
+  font-size: 16px !important;
+  color: #009688;
   border-bottom: 1px solid #505050;
 }
 
 .bef,
 .aft {
-  color: #009688;
   font-style: normal;
 }
 
 #status {
-  width: 100%;
   height: 0;
   color: #505050;
-  padding: 0 20px;
+  padding-left: 20px;
   overflow: hidden;
   position: absolute;
   left: 0;
+  right: 0;
   bottom: 0;
   z-index: 10001;
 }
@@ -442,7 +443,7 @@ body {
 #status > div {
   height: 100%;
   font-size: 0;
-  line-height: 40px;
+  line-height: 32px;
   display: inline-block;
 }
 
@@ -462,11 +463,11 @@ body {
 #fruit-basket {
   width: 50px;
   height: 42px;
-  background: url("../../public/img/box.svg") center center no-repeat;
+  background: url("/public/img/box.svg") center center no-repeat;
   background-size: 100%;
   position: absolute;
   left: calc(50% - 50px / 2);
-  top: 768px;
+  top: 100%;
   z-index: 10000;
   cursor: pointer;
 }

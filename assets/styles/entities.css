@@ -1,89 +1,89 @@
 .apple {
-  background-image: url("../../public/img/fruits/apple.svg") !important;
+  background-image: url("/public/img/fruits/apple.svg") !important;
   width: 32px;
   height: 32px;
   z-index: 1;
 }
 
 .banana {
-  background-image: url("../../public/img/fruits/banana.svg") !important;
+  background-image: url("/public/img/fruits/banana.svg") !important;
   width: 32px;
   height: 32px;
   z-index: 2;
 }
 
 .orange {
-  background-image: url("../../public/img/fruits/orange.svg") !important;
+  background-image: url("/public/img/fruits/orange.svg") !important;
   width: 32px;
   height: 32px;
   z-index: 3;
 }
 
 .lemon {
-  background-image: url("../../public/img/fruits/lemon.svg") !important;
+  background-image: url("/public/img/fruits/lemon.svg") !important;
   width: 32px;
   height: 32px;
   z-index: 4;
 }
 
 .watermelon {
-  background-image: url("../../public/img/fruits/watermelon.svg") !important;
+  background-image: url("/public/img/fruits/watermelon.svg") !important;
   width: 32px;
   height: 32px;
   z-index: 5;
 }
 
 .mango {
-  background-image: url("../../public/img/fruits/mango.svg") !important;
+  background-image: url("/public/img/fruits/mango.svg") !important;
   width: 32px;
   height: 32px;
   z-index: 6;
 }
 
 .peach {
-  background-image: url("../../public/img/fruits/peach.svg") !important;
+  background-image: url("/public/img/fruits/peach.svg") !important;
   width: 32px;
   height: 32px;
   z-index: 7;
 }
 
 .cherry {
-  background-image: url("../../public/img/fruits/cherry.svg") !important;
+  background-image: url("/public/img/fruits/cherry.svg") !important;
   width: 32px;
   height: 32px;
   z-index: 8;
 }
 
 .clock {
-  background-image: url("../../public/img/items/clock.svg") !important;
+  background-image: url("/public/img/items/clock.svg") !important;
   width: 32px;
   height: 32px;
   z-index: 101;
 }
 
 .magnet {
-  background-image: url("../../public/img/items/magnet.svg") !important;
+  background-image: url("/public/img/items/magnet.svg") !important;
   width: 32px;
   height: 32px;
   z-index: 102;
 }
 
 .book {
-  background-image: url("../../public/img/items/book.svg") !important;
+  background-image: url("/public/img/items/book.svg") !important;
   width: 32px;
   height: 32px;
   z-index: 103;
 }
 
 .cake {
-  background-image: url("../../public/img/items/cake.svg") !important;
+  background-image: url("/public/img/items/cake.svg") !important;
   width: 32px;
   height: 32px;
   z-index: 103;
 }
 
 .hourglass {
-  background-image: url("../../public/img/items/hourglass.svg") !important;
+  background-image: url("/public/img/items/hourglass.svg") !important;
   width: 32px;
   height: 32px;
   z-index: 104;

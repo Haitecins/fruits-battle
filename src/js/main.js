@@ -1,5 +1,6 @@
-import * as libs from "./methods.js";
+import * as libs from "./libs.js";
 import { uid, DATA } from "./data.js";
+import "./page.js";
 
 ("use strict");
 
@@ -47,7 +48,7 @@ console.warn(
 
 $("#sg-btn").one("click", () => {
   // Get the cache id and upload it to the server.
-  libs.UploadDatabase("../php/cache.php", { uid });
+  libs.UploadDatabase("/src/php/cache.php", { uid });
 
   // 暂时关闭游戏区域验证，等待其他项目验证完毕后再次打开。
   DATA.verify.LEAVING_THE_GAME_AREA.enabled = false;
@@ -69,7 +70,7 @@ $("#sg-btn").one("click", () => {
   });
 
   $("#readme").fadeOut(300, () => {
-    $("#status").animate({ height: 40 }, 300, "swing");
+    $("#status").animate({ height: 42 }, 300, "swing");
     $("#fruit-basket").animate(
       {
         top: $("#wrapper").height() / 2 - $("#fruit-basket").width() / 2,
@@ -552,13 +553,13 @@ $("#sg-btn").one("click", () => {
             $("#diff-notify").fadeIn(500).delay(3000).fadeOut(500);
 
             // 等级提升
-            $("#diff-levels_up > .aft").text(function () {
-              $(this)
-                .parent()
-                .find(".bef")
-                .text("Lv." + DATA.statistics.DIFFICULTY_LEVELS);
-              DATA.statistics.DIFFICULTY_LEVELS++;
-              return "Lv." + DATA.statistics.DIFFICULTY_LEVELS;
+            $("#diff-levels_up").text(function () {
+              // $(this)
+              //   .parent()
+              //   .find(".bef")
+              //   .text("Lv." + DATA.statistics.DIFFICULTY_LEVELS);
+              // DATA.statistics.DIFFICULTY_LEVELS++;
+              return "Lv." + ++DATA.statistics.DIFFICULTY_LEVELS;
             });
 
             // 所有升级项目
@@ -658,7 +659,7 @@ $("#sg-btn").one("click", () => {
               },
               {
                 chance: 37.1,
-                title: '<b class="healthy-fruits">健康水果</b> 生成概率',
+                title: '<b class="healthy-fruits">新鲜水果</b> 生成概率',
                 data: DATA.statistics.HEALTHY_FRUITS_SPAWN_CHANCE,
                 symbol: "%",
                 change() {
@@ -709,18 +710,15 @@ $("#sg-btn").one("click", () => {
             function write(obj) {
               $diff.html(
                 $diff.html() +
-                  `
-                        <p>
-                            ${obj.title}
-                            <i class="bef">${libs.CalcRepair({
-                              formula: obj.data,
-                            })}${obj.symbol || ""}</i>
-                            ->
-                            <i class="aft">${libs.CalcRepair({
-                              formula: obj.change(),
-                            })}${obj.symbol || ""}</i>
-                        </p>
-                    `
+                  `<p>${
+                    obj.title
+                  }&nbsp;<i class="items-min-valid bef">${libs.CalcRepair({
+                    formula: obj.data,
+                  })}${
+                    obj.symbol || ""
+                  }</i>&nbsp;to&nbsp;<i class="healthy-fruits aft">${libs.CalcRepair({
+                    formula: obj.change(),
+                  })}${obj.symbol || ""}</i></p>`
               );
             }
 
@@ -760,7 +758,7 @@ $("#sg-btn").one("click", () => {
 // Output game information.
 console.info(
   "\n%cFruit Wars" +
-    "\n%cv1.2.10-SNAPSHOT\n" +
+    "\n%cv2.0-alpha\n" +
     "%cMD5: b8e2bccb9b7301a31b1a00819be642d2\n",
   "color:hotpink",
   "color:green",
