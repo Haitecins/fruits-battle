@@ -10,7 +10,6 @@ import randArrItem from "./functions/randArrItem.js";
 import randomNumber from "./functions/randomNumber.js";
 import showDetails from "./functions/showDetails.js";
 import timeFormat from "./functions/timeFormat.js";
-import uploadDatabase from "./functions/uploadDatabase.js";
 
 export {
   antiCheatVerification,
@@ -25,5 +24,4 @@ export {
   randomNumber,
   showDetails,
   timeFormat,
-  uploadDatabase,
 };

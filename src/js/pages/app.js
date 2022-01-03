@@ -1,7 +1,6 @@
 import "./gameplay.js";
 import "./wrapper.js";
 import {
-  uid,
   audio,
   fruits,
   items,
@@ -24,13 +23,9 @@ import {
   randomNumber,
   showDetails,
   timeFormat,
-  uploadDatabase,
 } from "../libs/index.js";
 
 $("#sg-btn").one("click", () => {
-  // Get the cache id and upload it to the server.
-  uploadDatabase("/src/php/cache.php", { uid });
-
   // 暂时关闭游戏区域验证，等待其他项目验证完毕后再次打开。
   verify.LEAVING_THE_GAME_AREA.enabled = false;
 

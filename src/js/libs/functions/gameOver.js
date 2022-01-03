@@ -1,23 +1,9 @@
-import { uid, statistics, timer, audio, player } from "../../data/index.js";
-import uploadDatabase from "./uploadDatabase.js";
+import { statistics, timer, audio, player } from "../../data/index.js";
 import playSound from "./playSound.js";
 import timeFormat from "./timeFormat.js";
 import calcRepair from "./calcRepair.js";
 
 function gameOver() {
-  // save data in database
-  uploadDatabase("/src/php/data.php", {
-    uid,
-    scores: statistics.SCORES,
-    playtime: statistics.PLAYTIME,
-    useSkills: statistics.USE_SKILLS,
-    totalFruits: statistics.TOTAL_FRUITS,
-    totalBadFruits: statistics.TOTAL_BAD_FRUITS,
-    totalAchievements: statistics.TOTAL_ACHIEVEMENTS,
-    totalMedals: statistics.TOTAL_MEDALS,
-    difficultyLevels: statistics.DIFFICULTY_LEVELS,
-  });
-
   // 关闭所有定时器
   $.each(timer, function () {
     clearInterval($(this)[0]);
