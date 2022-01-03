@@ -6,6 +6,7 @@ body {
 }
 
 #wrapper {
+  min-width: 400px;
   position: absolute;
   top: 0;
   left: 0;
@@ -16,15 +17,18 @@ body {
 
 #readme,
 #finished {
-  width: 850px;
-  height: 600px;
   position: absolute;
-  left: calc(50% - 850px / 2);
-  top: calc(50% - 600px / 2);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  max-width: 850px;
+  max-height: 600px;
+  margin: auto;
 }
 
 #gameplay {
-  height: 445px;
+  height: 478px;
   font-size: 0;
 }
 
@@ -226,28 +230,6 @@ body {
   -webkit-animation-delay: 200ms;
   -moz-animation-delay: 200ms;
   -o-animation-delay: 200ms;
-}
-
-#start-game > span {
-  font-weight: bold;
-  position: absolute;
-  left: 249px;
-  bottom: 64px;
-  animation: Instruct 1s linear infinite;
-  -webkit-animation: Instruct 1s linear infinite;
-  -moz-animation: Instruct 1s linear infinite;
-  -o-animation: Instruct 1s linear infinite;
-}
-
-#start-game > span::after {
-  content: "";
-  width: 21px;
-  height: 21px;
-  background: url("/public/img/right_bottom_arrow.svg") center center;
-  background-size: 100%;
-  position: absolute;
-  right: -25px;
-  top: 15px;
 }
 
 #sg-btn {
