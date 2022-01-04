@@ -46,7 +46,7 @@ const verify = {
         $("#fruit-basket").position().top < 0 ||
         $("#fruit-basket").position().top >
           $("#wrapper").height() -
-            $("#status").height() -
+            $("#player-status").height() -
             $("#fruit-basket").height()
       );
     },
@@ -68,13 +68,13 @@ const verify = {
       if (
         $("#fruit-basket").position().top >
         $("#wrapper").height() -
-          $("#status").height() -
+          $("#player-status").height() -
           $("#fruit-basket").height()
       ) {
         $("#fruit-basket").css({
           top:
             $("#wrapper").height() -
-            $("#status").height() -
+            $("#player-status").height() -
             $("#fruit-basket").height(),
         });
       }

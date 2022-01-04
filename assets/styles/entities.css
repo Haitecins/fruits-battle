@@ -1,3 +1,27 @@
+.pickup {
+  font-size: 16px;
+  white-space: nowrap;
+  position: absolute;
+  z-index: 9999;
+  line-height: 40px;
+  opacity: 1;
+}
+
+.fruits,
+.items,
+.pickup-icons {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  position: absolute;
+}
+
+.pickup-icons {
+  position: static;
+  width: 32px;
+  height: 32px;
+}
+
 .apple {
   background-image: url("/public/img/fruits/apple.svg");
   width: 32px;

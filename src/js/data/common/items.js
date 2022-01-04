@@ -156,7 +156,7 @@ const items = [
             _this.custom.timer = setTimeout(() => {
               if (
                 $this.position().top + height >
-                $("#wrapper").height() - $("#status").height()
+                $("#wrapper").height() - $("#player-status").height()
               ) {
                 $this.css({ top: $this.position().top - height });
               }

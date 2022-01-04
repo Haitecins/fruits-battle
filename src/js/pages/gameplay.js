@@ -1,42 +1,38 @@
-import { randArrItem, playRandSound } from "../libs/index.js";
 import { fruits, audio } from "../data/index.js";
+import { randArrItem, playRandSound } from "../libs/index.js";
 
+// 上一个索引值
 let beforeIndex = 0;
 
+const fruitIcon = $("#fruit-icon");
+
+const menuItems = $("#readme-menu>ul>li>span");
+
+const menuContents = $("#readme>div:last-child>article");
+
+// 随机获取一个水果的URL
+const backgroundImage = () =>
+  `url("/public/img/fruits/${randArrItem(fruits)[0].id}.svg"`;
+
 // 显示随机的一种水果图标
-$("#gameplay > aside > i")
-  .stop()
-  .css({
-    backgroundImage: `url("/public/img/fruits/${
-      randArrItem(fruits)[0].id
-    }.svg"`,
-  });
+const randomFruitIcon = (stopValue = false) =>
+  fruitIcon.stop(stopValue).css({ backgroundImage });
 
-$("#gameplay > aside > span").each(function (index) {
-  $(this).click(() => {
-    if (beforeIndex === index) return;
-    beforeIndex = index;
-    // 随机播放一种声音
-    playRandSound({
-      audio: audio.open_flip,
-      volume: 60,
-      promise: true,
-    });
+const clickHandler = (index) => {
+  if (beforeIndex === index) return;
+  beforeIndex = index;
 
-    $("#gameplay > aside > i")
-      .stop(true)
-      .css({
-        backgroundImage: `url("/public/img/fruits/${
-          randArrItem(fruits)[0].id
-        }.svg")`,
-      })
-      .animate({ top: 70 * index + 14 }, 200);
+  playRandSound({ audio: audio.open_flip, volume: 60, promise: true });
+  randomFruitIcon(true).animate({ top: 50 * index + 14 }, 200);
+  menuContents
+    .stop(true)
+    .removeAttr("style class")
+    .eq(index)
+    .addClass("readme-article-active")
+    .animate({ opacity: 1 }, 500);
+};
 
-    $("#gameplay > div > article")
-      .stop(true)
-      .removeAttr("style class")
-      .eq(index)
-      .addClass("art-active")
-      .animate({ opacity: 1 }, 500);
-  });
+randomFruitIcon();
+menuItems.each(function (index) {
+  $(this).click(clickHandler.bind(this, index));
 });

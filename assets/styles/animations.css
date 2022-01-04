@@ -1,4 +1,4 @@
-@keyframes Jump {
+@keyframes FloatEffect {
   0% {
     transform: translateY(0);
     -webkit-transform: translateY(0);
@@ -36,7 +36,7 @@
   }
 }
 
-@keyframes Reward {
+@keyframes RewardRotate {
   0% {
     transform: translate(0, 0) rotate(0deg);
     -webkit-transform: translate(0, 0) rotate(0deg);

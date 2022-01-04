@@ -1,0 +1,125 @@
+#readme {
+  width: 80vw;
+  height: 70vh;
+  max-width: 1080px;
+  max-height: 1080px;
+  display: flex;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+#readme > div {
+  height: 100%;
+  text-align: center;
+}
+#readme > div:first-child {
+  width: 25%;
+}
+#readme > div:first-child > h1 {
+  height: 32px;
+  line-height: 32px;
+  font-size: 20px;
+  font-weight: normal;
+  margin-top: 10px;
+}
+#readme > div:first-child > h1 > img {
+  width: 32px;
+  margin: 0 8px;
+  animation: FloatEffect 2s ease-in-out infinite;
+}
+#readme > div:first-child > h1 > img:last-of-type {
+  animation-delay: 200ms;
+}
+#fruit-icon {
+  width: 22px;
+  height: 22px;
+  background: center center no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: 14px;
+  left: 24%;
+}
+#readme-menu {
+  height: calc(100% - 42px - 48px - 20px);
+  overflow: scroll;
+  overflow-x: hidden;
+  margin: 10px 0;
+}
+#readme-menu > ul > li {
+  width: calc(100% + 6px);
+  height: 50px;
+  line-height: 50px;
+}
+#readme-menu > ul > li > span {
+  cursor: pointer;
+}
+#STARTGAME {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #f44336;
+  cursor: pointer;
+}
+#STARTGAME > span {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 350ms linear, height 350ms linear, opacity 450ms linear;
+}
+#STARTGAME:hover > span {
+  width: 50px;
+  height: 50px;
+  opacity: 0;
+}
+#readme > div:last-child {
+  width: 75%;
+  padding: 0 10px;
+  overflow: scroll;
+  overflow-x: hidden;
+  text-align: left;
+}
+#readme > div:last-child > article {
+  display: none;
+  opacity: 0;
+}
+#readme > div:last-child > article p {
+  font-size: 14px;
+  line-height: 24px;
+}
+#readme > div:last-child > article img {
+  width: 23px;
+  height: 23px;
+}
+.readme-article-active {
+  display: block !important;
+}
+.readme-default-article {
+  opacity: 1 !important;
+}
+.article-split-box {
+  font-size: 0;
+}
+.article-split-box > * {
+  display: inline-block;
+}
+.article-row-3 > * {
+  width: calc(100% / 3);
+  vertical-align: top;
+  margin-bottom: 10px;
+}
+.article-row-4 > * {
+  width: calc(100% / 4);
+  vertical-align: top;
+  margin-bottom: 10px;
+}
+.article-title-strong > * > p:first-child {
+  font-size: 16px !important;
+}

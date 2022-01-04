@@ -1,0 +1,31 @@
+#player-status {
+  height: 0;
+  color: #505050;
+  padding-left: 20px;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10001;
+}
+
+#player-status > div {
+  height: 100%;
+  font-size: 0;
+  line-height: 32px;
+  display: inline-block;
+}
+
+#player-status > div > img {
+  width: 32px;
+  height: 32px;
+}
+
+#player-status > div > i {
+  margin: 0 10px;
+  font-size: 16px;
+  font-style: normal;
+  vertical-align: middle;
+  display: inline-block;
+}

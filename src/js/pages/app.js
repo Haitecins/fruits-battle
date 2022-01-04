@@ -25,7 +25,7 @@ import {
   timeFormat,
 } from "../libs/index.js";
 
-$("#sg-btn").one("click", () => {
+$("#STARTGAME").one("click", () => {
   // 暂时关闭游戏区域验证，等待其他项目验证完毕后再次打开。
   verify.LEAVING_THE_GAME_AREA.enabled = false;
 
@@ -44,7 +44,7 @@ $("#sg-btn").one("click", () => {
   playSound({ src: audio.click });
 
   $("#readme").fadeOut(300, () => {
-    $("#status").animate({ height: 42 }, 300, "swing");
+    $("#player-status").animate({ height: 42 }, 300, "swing");
     $("#fruit-basket").animate(
       {
         top: $("#wrapper").height() / 2 - $("#fruit-basket").width() / 2,
@@ -74,12 +74,12 @@ $("#sg-btn").one("click", () => {
                   top >
                   $("#wrapper").height() -
                     $("#fruit-basket").height() -
-                    $("#status").height()
+                    $("#player-status").height()
                 ) {
                   top =
                     $("#wrapper").height() -
                     $("#fruit-basket").height() -
-                    $("#status").height();
+                    $("#player-status").height();
                 }
 
                 player.not_moving_ticks = 0;
@@ -364,14 +364,14 @@ $("#sg-btn").one("click", () => {
                       max:
                         $("#wrapper").height() -
                         $(this).height() -
-                        $("#status").height(),
+                        $("#player-status").height(),
                     });
                   }
                 },
                 xSpeed() {
                   const getXSpeed = randomNumber({
                     min:
-                      levels.ENTITY_MOVE_SPEED *
+                      levels.BASE_MOVE_SPEED *
                       speed.min *
                       randomNumber({
                         min: 0.7,
@@ -379,7 +379,7 @@ $("#sg-btn").one("click", () => {
                         fixed: 2,
                       }),
                     max:
-                      levels.ENTITY_MOVE_SPEED *
+                      levels.BASE_MOVE_SPEED *
                       speed.max *
                       randomNumber({
                         min: 0.7,
@@ -415,8 +415,8 @@ $("#sg-btn").one("click", () => {
                 },
                 ySpeed() {
                   const getYSpeed = randomNumber({
-                    min: levels.ENTITY_MOVE_SPEED * speed.min,
-                    max: levels.ENTITY_MOVE_SPEED * speed.max,
+                    min: levels.BASE_MOVE_SPEED * speed.min,
+                    max: levels.BASE_MOVE_SPEED * speed.max,
                     fixed: 1,
                   });
 
@@ -481,10 +481,10 @@ $("#sg-btn").one("click", () => {
             playSound({ src: audio.orb });
 
             // 淡入淡出效果
-            $("#diff-notify").fadeIn(500).delay(3000).fadeOut(500);
+            $("#diff-notifications").fadeIn(500).delay(3000).fadeOut(500);
 
             // 等级提升
-            $("#diff-levels_up").text(function () {
+            $("#diff-notifications > p").text(function () {
               return "Lv." + ++levels.DIFFICULTY_LEVELS;
             });
 
@@ -528,9 +528,9 @@ $("#sg-btn").one("click", () => {
               {
                 chance: 31.3,
                 title: '<b class="base-speed">基础移动速度</b>',
-                data: levels.ENTITY_MOVE_SPEED,
+                data: levels.BASE_MOVE_SPEED,
                 change() {
-                  return (levels.ENTITY_MOVE_SPEED += randomNumber({
+                  return (levels.BASE_MOVE_SPEED += randomNumber({
                     min: 0.01,
                     max: 0.15,
                     fixed: 2,
@@ -631,22 +631,20 @@ $("#sg-btn").one("click", () => {
               },
             ];
 
-            const $diff = $("#diff-notify > div");
+            const $diff = $("#diff-notifications > div");
 
             function write(obj) {
               $diff.html(
                 $diff.html() +
-                  `<p>${
-                    obj.title
-                  }&nbsp;<i class="items-min-valid bef">${calcRepair({
-                    formula: obj.data,
-                  })}${
-                    obj.symbol || ""
-                  }</i>&nbsp;to&nbsp;<i class="healthy-fruits aft">${calcRepair(
+                  `<p>${obj.title}&nbsp;<i class="items-min-valid">${calcRepair(
                     {
-                      formula: obj.change(),
+                      formula: obj.data,
                     }
-                  )}${obj.symbol || ""}</i></p>`
+                  )}${
+                    obj.symbol || ""
+                  }</i>&nbsp;to&nbsp;<i class="healthy-fruits">${calcRepair({
+                    formula: obj.change(),
+                  })}${obj.symbol || ""}</i></p>`
               );
             }
 

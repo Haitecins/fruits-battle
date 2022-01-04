@@ -1,38 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: Monaco, Menlo, -apple-system, BlinkMacSystemFont, Consolas,
-    "Microsoft YaHei", 微软雅黑, monospace;
-  position: relative;
-  user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  -moz-user-select: none;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
-
-li {
-  list-style: none;
-}
-
-a {
-  color: inherit;
-}
-
-input,
-button {
-  outline: none;
-  border: none;
-}
-
-img {
-  vertical-align: middle;
-}
+@import url(./styles/scrollbar.css);
+@import url(./styles/animations.css);
+@import url(./styles/ui.css);
+@import url(./styles/color.css);

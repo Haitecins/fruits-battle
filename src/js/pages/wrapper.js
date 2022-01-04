@@ -1,8 +1,8 @@
-import { uid } from "../data/index.js";
+import "./gameplay.js";
+import "./history.js";
 
-// Add logo at the bottom of the page.
 $("head").append(`
-    <style data-type="jquery-build">
+    <style data-type="copyright">
         #jquery {
             background: rgba(255, 255, 255, 0.5);
             color: #1b1b1b;
@@ -20,8 +20,7 @@ $("head").append(`
     </style>
 `);
 $("#wrapper").after(`
-    <div id="jquery" data-type="jquery-build">
-        <p>${uid}</p>
+    <div id="jquery" data-type="copyright">
         <p>Copyright 2021, Powered by
             <a href="https://jquery.com" target="_blank" title="jquery.com">jQuery</a>
             <a href="https://api.jquery.com/" target="_blank" title="api.jquery.com">API</a>.

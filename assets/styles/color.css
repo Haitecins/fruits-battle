@@ -1,0 +1,60 @@
+.items-des-chance {
+  color: #3f51b5;
+}
+
+.items-des-val {
+  color: #9c27b0;
+}
+
+.items-min-valid {
+  color: #9e9e9e;
+}
+
+.items-max-valid {
+  color: #484848;
+}
+
+.entity-spawn-speed {
+  color: #ff6670;
+}
+
+.base-scores {
+  color: #8a2be2;
+}
+
+.base-multiple {
+  color: #ff5722;
+}
+
+.healthy-fruits {
+  color: #4caf50;
+}
+
+.bad-fruits {
+  color: #5d4037;
+}
+
+.base-speed {
+  color: #03a9f4;
+}
+
+.fruits-min-speed {
+  color: #673ab7;
+}
+
+.fruits-max-speed {
+  color: #ff9800;
+}
+
+.get {
+  color: green;
+}
+
+.lose {
+  color: red;
+}
+
+.bad {
+  filter: drop-shadow(0 0 5px #fff) grayscale(100%);
+  -webkit-filter: drop-shadow(0 0 5px #fff) grayscale(100%);
+}

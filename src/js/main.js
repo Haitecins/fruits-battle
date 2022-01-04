@@ -1,8 +1,7 @@
 import "./pages/app.js";
-import "./pages/gameplay.js";
 import "./pages/wrapper.js";
 
-console.info(
+console.log(
   "%cp" + "%cr" + "%co" + "%cd" + "%cu" + "%cc" + "%ct" + "%ci" + "%co" + "%cn",
   "color:red",
   "color:green",
@@ -11,7 +10,7 @@ console.info(
   "color:hotpink",
   "color:gray",
   "color:purple",
-  "color:white",
+  "color:black",
   "color:pink",
   "color:yellow"
 );

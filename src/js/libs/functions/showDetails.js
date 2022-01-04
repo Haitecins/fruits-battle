@@ -8,7 +8,7 @@ function showDetails({ type, id, pos, before, after, extra, fixed } = {}) {
       .appendTo($("#wrapper"))
       .addClass("pickup " + className)
       .html(
-        `<img class="icons${
+        `<img class="pickup-icons${
           extra ? ` ${extra()}` : ""
         }" src="/public/img/${type}/${id}.svg" alt=""> ${text}`
       )
@@ -26,10 +26,10 @@ function showDetails({ type, id, pos, before, after, extra, fixed } = {}) {
           if (getPos.y < 0) getPos.y = 0;
           if (
             getPos.y >
-            $("#wrapper").height() - $("#status").height() - $(this).height()
+            $("#wrapper").height() - $("#player-status").height() - $(this).height()
           ) {
             getPos.y =
-              $("#wrapper").height() - $("#status").height() - $(this).height();
+              $("#wrapper").height() - $("#player-status").height() - $(this).height();
           }
 
           return getPos.y;

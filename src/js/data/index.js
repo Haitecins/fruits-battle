@@ -7,8 +7,6 @@ import STATISTICS from "./common/statistics.js";
 import TIMER from "./common/timer.js";
 import VERIFY from "./common/verity.js";
 
-export const uid = md5(new Date().getTime());
-
 export const audio = AUDIO;
 
 export const fruits = FRUITS;
