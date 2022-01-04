@@ -1,3 +1,9 @@
 # FruitWars
 
-需要启动 HTTP 服务器！
+Required Node.js and npm or yarn.
+
+## Start
+yarn start
+
+## Format
+yarn format

@@ -1,4 +1,5 @@
 import "./gameplay.js";
+import "./details.js";
 import "./history.js";
 
 $("head").append(`

@@ -3,11 +3,8 @@ import { randArrItem, playRandSound } from "../libs/index.js";
 
 // 上一个索引值
 let beforeIndex = 0;
-
 const fruitIcon = $("#fruit-icon");
-
 const menuItems = $("#readme-menu>ul>li>span");
-
 const menuContents = $("#readme>div:last-child>article");
 
 // 随机获取一个水果的URL
@@ -17,7 +14,6 @@ const backgroundImage = () =>
 // 显示随机的一种水果图标
 const randomFruitIcon = (stopValue = false) =>
   fruitIcon.stop(stopValue).css({ backgroundImage });
-
 const clickHandler = (index) => {
   if (beforeIndex === index) return;
   beforeIndex = index;

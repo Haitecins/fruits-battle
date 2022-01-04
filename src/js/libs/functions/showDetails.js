@@ -26,10 +26,14 @@ function showDetails({ type, id, pos, before, after, extra, fixed } = {}) {
           if (getPos.y < 0) getPos.y = 0;
           if (
             getPos.y >
-            $("#wrapper").height() - $("#player-status").height() - $(this).height()
+            $("#wrapper").height() -
+              $("#player-status").height() -
+              $(this).height()
           ) {
             getPos.y =
-              $("#wrapper").height() - $("#player-status").height() - $(this).height();
+              $("#wrapper").height() -
+              $("#player-status").height() -
+              $(this).height();
           }
 
           return getPos.y;

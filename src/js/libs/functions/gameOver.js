@@ -191,7 +191,7 @@ function gameOver() {
     .show()
     .animate({ opacity: 1 }, 300, "swing", () => {
       $("#all-data").animate({ height: 252 }, 500, "swing", () => {
-        fillContainer.html([...fillItem]);
+        fillContainer.html(fillItem);
         $("#get-playtime > i").text(
           timeFormat(Math.floor(statistics.PLAYTIME))
         );
