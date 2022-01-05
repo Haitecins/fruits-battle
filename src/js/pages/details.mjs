@@ -1,4 +1,4 @@
-import { fruits, items } from "../data/index.js";
+import { fruits, items } from "../data/index.mjs";
 
 const fruitContainer = $("#total-fruits");
 const itemContainer = $("#total-items");

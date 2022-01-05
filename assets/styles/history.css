@@ -1,0 +1,17 @@
+#history > div {
+  height: 80px;
+  margin-bottom: 20px;
+  font-size: 0;
+  border: 1px solid #0a1929;
+}
+#history > div > div {
+  text-align: center;
+  display: inline-block;
+  width: calc(100% / 3);
+  vertical-align: top;
+  height: 100%;
+}
+#history > div > div:nth-child(2) {
+  border-left: 1px solid #0a1929;
+  border-right: 1px solid #0a1929;
+}

@@ -1,6 +1,6 @@
-import "./gameplay.js";
-import "./details.js";
-import "./history.js";
+import "./gameplay.mjs";
+import "./details.mjs";
+import "./history.mjs";
 
 $("head").append(`
     <style data-type="copyright">

@@ -9,7 +9,6 @@ const verify = {
       $(location).attr("href", "about:blank");
     },
   },
-
   // Players modify CSS property parameters.
   PLAYER_EDIT_ARGUMENTS: {
     enabled: true,
@@ -34,7 +33,6 @@ const verify = {
       });
     },
   },
-
   // Prevent leaving the game area.
   LEAVING_THE_GAME_AREA: {
     enabled: true,

@@ -1,4 +1,4 @@
-import { verify } from "../../data/index.js";
+import { verify } from "../../data/index.mjs";
 
 function antiCheatVerification() {
   for (let verifyKey in verify) {

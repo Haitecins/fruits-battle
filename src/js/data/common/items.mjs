@@ -1,11 +1,10 @@
-import { randomNumber, probability, showDetails } from "../../libs/index.js";
-import { player, verify } from "../index.js";
+import { randomNumber, probability, showDetails } from "../../libs/index.mjs";
+import { player, verify } from "../index.mjs";
 
 const items = [
   {
     id: "clock",
     type: "items",
-
     // 有效概率
     valid: {
       min: 30,
@@ -96,11 +95,9 @@ const items = [
           attract($(this));
         }
       });
-
       // 防止短时间内多次拾取该道具引发的问题，每次拾取道具后，
       // 先清除原先的定时器，再开启一个新的定时器。
       clearTimeout(this.custom.timer);
-
       this.custom.timer = setTimeout(() => {
         $(".fruits").each(function () {
           if ($(this).prop("disX") && $(this).prop("disX")) {

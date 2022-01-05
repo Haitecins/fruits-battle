@@ -1,8 +1,8 @@
 #readme {
   width: 80vw;
   height: 70vh;
-  max-width: 1080px;
-  max-height: 1080px;
+  max-width: 800px;
+  max-height: 500px;
   display: flex;
   position: absolute;
   left: 0;
@@ -40,7 +40,7 @@
   background-size: contain;
   position: absolute;
   top: 14px;
-  left: 24%;
+  left: calc(25% - 22px / 2);
 }
 #readme-menu {
   height: calc(100% - 42px - 48px - 20px);
@@ -129,7 +129,7 @@
   position: absolute;
 }
 #total-fruits > div > p {
-  text-indent: 44px;
+  text-indent: 48px;
 }
 #total-items > div > div {
   border-bottom: 1px solid #0a1929;
@@ -142,5 +142,6 @@
   height: 48px !important;
 }
 #total-items > div > div > p {
-  text-indent: 44px;
+  text-indent: 48px;
+  font-size: 12px !important;
 }

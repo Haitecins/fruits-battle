@@ -1,5 +1,4 @@
-import "./pages/app.js";
-import "./pages/wrapper.js";
+import "./pages/app.mjs";
 
 console.log(
   "%cp" + "%cr" + "%co" + "%cd" + "%cu" + "%cc" + "%ct" + "%ci" + "%co" + "%cn",

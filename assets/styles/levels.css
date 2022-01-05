@@ -1,4 +1,4 @@
-#diff-notifications {
+#levels {
   color: #505050;
   position: absolute;
   line-height: 24px;
@@ -10,19 +10,19 @@
   overflow: hidden;
 }
 
-#diff-notifications > h4 {
+#levels > h4 {
   font-size: 18px;
   font-weight: normal;
   text-align: center;
   letter-spacing: 2px;
 }
 
-#diff-notifications p {
+#levels p {
   font-size: 14px;
   text-align: center;
 }
 
-#diff-notifications > p {
+#levels > p {
   margin: 0 10px 2px;
   font-size: 16px !important;
   color: #009688;

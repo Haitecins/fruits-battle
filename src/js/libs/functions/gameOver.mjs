@@ -1,16 +1,14 @@
-import { statistics, timer, audio, player } from "../../data/index.js";
-import playSound from "./playSound.js";
-import timeFormat from "./timeFormat.js";
-import calcRepair from "./calcRepair.js";
+import { statistics, timer, audio, player, levels } from "../../data/index.mjs";
+import playSound from "./playSound.mjs";
+import timeFormat from "./timeFormat.mjs";
+import calcRepair from "./calcRepair.mjs";
 
 function gameOver() {
   // 关闭所有定时器
   $.each(timer, function () {
     clearInterval($(this)[0]);
   });
-
   // 停止所有正在播放的声音
-  // Use native for..in/for..of for better performance.
   for (let item in audio) {
     if (Array.isArray(audio[item])) {
       const audioList = audio[item];
@@ -20,14 +18,11 @@ function gameOver() {
       audio[item].pause();
     }
   }
-
   $("#wrapper > *:not(div)").remove();
-  $("#diff-notifications").stop(true).removeAttr("style");
+  $("#levels").stop(true).removeAttr("style");
   $("#fruit-basket").removeAttr("style").hide();
-
   // 结束时播放特定声音
   playSound({ src: audio.end });
-
   // 计算偏差，游戏数值在计算时可能会出现偏差，使用后可以避免偏差。
   const deviation = 0.1;
   // 成就总览
@@ -173,21 +168,57 @@ function gameOver() {
       </div>
     </li>`;
   });
-
+  // 解构赋值，需要保存的数据。
+  const {
+    SCORES,
+    PLAYTIME,
+    USE_SKILLS,
+    TOTAL_FRUITS,
+    TOTAL_BAD_FRUITS,
+    TOTAL_ACHIEVEMENTS,
+    TOTAL_MEDALS,
+  } = statistics;
+  const { DIFFICULTY_LEVELS } = levels;
+  // 记录
+  const save = {
+    statistics: {
+      SCORES,
+      PLAYTIME,
+      USE_SKILLS,
+      TOTAL_FRUITS,
+      TOTAL_BAD_FRUITS,
+      TOTAL_ACHIEVEMENTS,
+      TOTAL_MEDALS,
+      DIFFICULTY_LEVELS,
+    },
+    achievements: getCompletion.map(({ title, description }) => ({
+      title,
+      description,
+    })),
+  };
   // 保存游戏记录
   if (!window.localStorage.getItem("app_history")) {
     window.localStorage.setItem(
       "app_history",
-      JSON.stringify([{ statistics, achievements: getCompletion }])
+      JSON.stringify([
+        {
+          ...save,
+          timestamp: new Date().getTime(),
+        },
+      ])
     );
   } else {
     const getHistory = JSON.parse(window.localStorage.getItem("app_history"));
-    getHistory.push({ statistics, achievements: getCompletion });
-    window.localStorage.setItem("app_history", JSON.stringify(getHistory));
+    getHistory.push({
+      ...save,
+      timestamp: new Date().getTime(),
+    });
+    const reversed = getHistory.reverse();
+    window.localStorage.setItem("app_history", JSON.stringify(reversed));
   }
 
   $("#player-status").animate({ height: 0 }, 300, "swing");
-  $("#finished")
+  $("#gameover")
     .show()
     .animate({ opacity: 1 }, 300, "swing", () => {
       $("#all-data").animate({ height: 252 }, 500, "swing", () => {
