@@ -13,8 +13,11 @@
     <meta name="copyright" content="CHIYUKIKANA" />
     <meta name="generator" content="VSCode" />
     <meta name="theme-color" content="#fde275" />
-    <meta name="viewport" content="user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <link rel="mask-icon" href="/public/img/fruits/cherry.svg" />
     <link
       rel="icon"
@@ -276,6 +279,15 @@
       </div>
       <div id="fruit-basket"></div>
     </div>
+    <script>
+      if (
+        window.navigator.userAgent.match(
+          /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+        )
+      ) {
+        $("body").empty().html('<p id="isMobile">暂不支持移动端运行此游戏</p>');
+      }
+    </script>
     <script type="module" src="/src/js/main.mjs"></script>
   </body>
 </html>

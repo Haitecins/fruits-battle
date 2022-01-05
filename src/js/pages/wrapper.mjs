@@ -1,5 +1,5 @@
-import "./gameplay.mjs";
-import "./details.mjs";
+import "./icon.mjs";
+import "./detail.mjs";
 import "./history.mjs";
 
 $("head").append(`

@@ -1,8 +1,6 @@
 #readme {
-  width: 80vw;
-  height: 70vh;
-  max-width: 800px;
-  max-height: 500px;
+  width: 800px;
+  height: 500px;
   display: flex;
   position: absolute;
   left: 0;

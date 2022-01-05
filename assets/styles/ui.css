@@ -75,3 +75,12 @@ body {
   z-index: 10000;
   cursor: pointer;
 }
+
+#isMobile {
+  font-size: 5vw;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
