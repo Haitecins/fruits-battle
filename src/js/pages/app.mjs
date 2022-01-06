@@ -24,6 +24,7 @@ import {
 } from "../libs/index.mjs";
 import "./wrapper.mjs";
 
+$("#wrapper").removeAttr("style");
 $("#STARTGAME").one("click", () => {
   // 暂时关闭游戏区域验证，等待其他项目验证完毕后再次打开。
   verify.LEAVING_THE_GAME_AREA.enabled = false;
@@ -485,12 +486,19 @@ $("#STARTGAME").one("click", () => {
                 chance: 31.3,
                 title: '<b class="base-speed">基础移动速度</b>',
                 data: levels.BASE_MOVE_SPEED,
+                symbol: levels.BASE_MOVE_SPEED < 10.5 ? "" : " (Max)",
                 change() {
-                  return (levels.BASE_MOVE_SPEED += randomNumber({
+                  levels.BASE_MOVE_SPEED += randomNumber({
                     min: 0.01,
-                    max: 0.15,
+                    max: 0.1,
                     fixed: 2,
-                  }));
+                  });
+
+                  if (levels.BASE_MOVE_SPEED > 10.5) {
+                    levels.BASE_MOVE_SPEED = 10.5;
+                    return levels.BASE_MOVE_SPEED;
+                  }
+                  return levels.BASE_MOVE_SPEED;
                 },
               },
               {
@@ -600,13 +608,13 @@ $("#STARTGAME").one("click", () => {
               levelsUp,
               randomNumber({
                 min: 5000,
-                max: 14000,
+                max: 15000,
               })
             );
           },
           randomNumber({
             min: 5000,
-            max: 14000,
+            max: 15000,
           })
         );
       }

@@ -29,7 +29,7 @@
     <script src="/packages/jquery-3.6.0.min.js"></script>
   </head>
   <body>
-    <div id="wrapper">
+    <div id="wrapper" style="display: none">
       <div id="readme">
         <div>
           <h1>
@@ -191,7 +191,7 @@
           <article>
             <p>随着游戏时间的增加，难度也会逐步递增。</p>
             <p>下方列出了所有可递增的项目。</p>
-            <div class="article-split-box article-row-3">
+            <div class="article-split-box article-row-2">
               <div>
                 <p class="base-scores">基础得分</p>
                 <p>初始值 1.0</p>
@@ -208,7 +208,8 @@
               <div>
                 <p class="base-speed">基础移动速度</p>
                 <p>初始值 1.0</p>
-                <p>难度递增 0.01-0.015</p>
+                <p>难度递增 0.01-0.1</p>
+                <p>最大值: 10.5</p>
                 <p>提高水果、道具的移动速度</p>
               </div>
               <div>
@@ -279,15 +280,6 @@
       </div>
       <div id="fruit-basket"></div>
     </div>
-    <script>
-      if (
-        window.navigator.userAgent.match(
-          /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
-        )
-      ) {
-        $("body").empty().html('<p id="isMobile">暂不支持移动端运行此游戏</p>');
-      }
-    </script>
-    <script type="module" src="/src/js/main.mjs"></script>
+    <script type="module" async src="/src/js/main.mjs"></script>
   </body>
 </html>

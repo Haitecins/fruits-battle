@@ -41,9 +41,9 @@ if (!window.localStorage.getItem("app_history")) {
     };
 
     return `<div>
-    ${mainChunk()}
-    ${detailChunk()}
-    ${countChunk()}
+      ${mainChunk()}
+      ${detailChunk()}
+      ${countChunk()}
     </div>`;
   });
 

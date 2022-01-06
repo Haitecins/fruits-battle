@@ -7,8 +7,8 @@ const items = [
     type: "items",
     // 有效概率
     valid: {
-      min: 30,
-      max: 45,
+      min: 21,
+      max: 66,
     },
     effect(obj) {
       const before = player.countdown,
@@ -51,8 +51,8 @@ const items = [
     id: "magnet",
     type: "items",
     valid: {
-      min: 30,
-      max: 45,
+      min: 11,
+      max: 49,
     },
     custom: {
       timer: null,
@@ -121,8 +121,8 @@ const items = [
     id: "cake",
     type: "items",
     valid: {
-      min: 30,
-      max: 45,
+      min: 7,
+      max: 81,
     },
     custom: {
       timer: null,
@@ -211,8 +211,8 @@ const items = [
     id: "book",
     type: "items",
     valid: {
-      min: 30,
-      max: 45,
+      min: 41,
+      max: 70,
     },
     effect() {
       const getChance = probability(65);
@@ -240,20 +240,20 @@ const items = [
     id: "hourglass",
     type: "items",
     valid: {
-      min: 30,
-      max: 45,
+      min: 13,
+      max: 44,
     },
     effect(obj) {
       const before = player.countdown,
         { type, id } = this,
         minTime = 1.5;
 
-      if (probability(21)) {
-        player.countdown += minTime + player.countdown * 0.7;
-      } else if (probability(34)) {
-        player.countdown += minTime + player.countdown * 0.4;
+      if (probability(5)) {
+        player.countdown += minTime + player.countdown * 0.5;
+      } else if (probability(10)) {
+        player.countdown += minTime + player.countdown * 0.3;
       } else {
-        player.countdown += minTime + player.countdown * 0.2;
+        player.countdown += minTime + player.countdown * 0.1;
       }
 
       showDetails({
@@ -273,7 +273,7 @@ const items = [
       max: 2.6,
     },
     descriptions:
-      "增加大量游戏时间。有21%的概率获得当前70%的游戏时间。有34%的概率获得当前40%的游戏时间。有45%的概率获得当前20%的游戏时间。",
+      "增加大量游戏时间。有5%的概率获得当前50%的游戏时间。有10%的概率获得当前30%的游戏时间。有85%的概率获得当前10%的游戏时间。",
   },
 ];
 
