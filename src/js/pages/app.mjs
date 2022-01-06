@@ -245,7 +245,6 @@ $("#STARTGAME").one("click", () => {
                 }
                 // 显示分数细节
                 showDetails({
-                  type,
                   id,
                   pos: {
                     x: obj.position().left,

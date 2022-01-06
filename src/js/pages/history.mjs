@@ -23,20 +23,20 @@ if (!window.localStorage.getItem("app_history")) {
       }/${historyDate.getDate()} ${historyDate.getHours()}:${historyDate.getMinutes()}
       </p>
       <p>游戏时间 ${timeFormat(calcRepair({ formula: PLAYTIME, fixed: 0 }))}</p>
-      <p>最终得分 ${calcRepair({ formula: SCORES })}</p>
+      <p>最终得分 <span class="base-scores">${calcRepair({ formula: SCORES })}</span></p>
       </div>`;
     };
     const detailChunk = () => {
       return `<div>
-      <p>到达最高等级 ${DIFFICULTY_LEVELS}</p>
+      <p>到达最高等级 <span class="current-levels">${DIFFICULTY_LEVELS}</p>
       <p>达成的成就数 ${TOTAL_ACHIEVEMENTS}</p>
       <p>获得的奖牌数 ${TOTAL_MEDALS}</p>
       </div>`;
     };
     const countChunk = () => {
       return `<div>
-      <p>总计拾取水果 ${TOTAL_FRUITS}</p>
-      <p>总计拾取腐烂水果 ${TOTAL_BAD_FRUITS}</p>
+      <p>总计拾取水果 <span class="healthy-fruits">${TOTAL_FRUITS}</span></p>
+      <p>总计拾取腐烂水果 <span class="bad-fruits">${TOTAL_BAD_FRUITS}</span></p>
       </div>`;
     };
 

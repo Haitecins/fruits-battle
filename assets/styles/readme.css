@@ -1,6 +1,6 @@
 #readme {
   width: 800px;
-  height: 500px;
+  max-height: 500px;
   display: flex;
   position: absolute;
   left: 0;
@@ -121,7 +121,7 @@
 .article-row-4 > * {
   width: calc(100% / 4);
 }
-#total-fruits > div > img {
+#total-fruits > div > i {
   width: 40px !important;
   height: 48px !important;
   position: absolute;
@@ -134,7 +134,7 @@
   padding-bottom: 6px;
   margin-bottom: 6px;
 }
-#total-items > div > div > img {
+#total-items > div > div > i {
   position: absolute;
   width: 40px !important;
   height: 48px !important;

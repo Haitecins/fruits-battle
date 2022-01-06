@@ -1,17 +1,17 @@
 import calcRepair from "./calcRepair.mjs";
 
-function showDetails({ type, id, pos, before, after, extra, fixed } = {}) {
+function showDetails({ id, pos, before, after, extra, fixed } = {}) {
   const getPos = pos;
 
   function send(className, text) {
     $("<span/>")
       .appendTo($("#wrapper"))
-      .addClass("pickup " + className)
-      .html(
-        `<img class="pickup-icons${
-          extra ? ` ${extra()}` : ""
-        }" src="/public/img/${type}/${id}.svg" alt=""> ${text}`
-      )
+      .addClass(`pickup ${className}`)
+      .html(() => {
+        const extraClass = extra ? extra() : "";
+
+        return `<span class="picked-icon picked-${id} ${extraClass}"></span> ${text}`;
+      })
       .css({
         left() {
           // 阻止拾取后显示的信息超出游戏区域

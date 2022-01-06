@@ -29,7 +29,6 @@ const items = [
       }
 
       showDetails({
-        type,
         id,
         pos: {
           x: obj.position().left,
@@ -257,7 +256,6 @@ const items = [
       }
 
       showDetails({
-        type,
         id,
         pos: {
           x: obj.position().left,

@@ -218,6 +218,7 @@ function gameOver() {
   }
 
   $("#player-status").animate({ height: 0 }, 300, "swing");
+  // 显示结算界面
   $("#gameover")
     .show()
     .animate({ opacity: 1 }, 300, "swing", () => {

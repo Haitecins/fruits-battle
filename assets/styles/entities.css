@@ -1,112 +1,126 @@
 .pickup {
+  height: 40px;
+  line-height: 40px;
   font-size: 16px;
   white-space: nowrap;
   position: absolute;
   z-index: 9999;
-  line-height: 40px;
   opacity: 1;
 }
 
 .fruits,
 .items,
-.pickup-icons {
+.picked-icon {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 100%;
   position: absolute;
 }
 
-.pickup-icons {
-  position: static;
-  width: 32px;
-  height: 32px;
+.picked-icon {
+  position: unset;
+  vertical-align: middle;
+  display: inline-block;
 }
 
-.apple {
+.apple,
+.picked-apple {
   background-image: url("/public/img/fruits/apple.svg");
   width: 32px;
   height: 32px;
   z-index: 1;
 }
 
-.banana {
+.banana,
+.picked-banana {
   background-image: url("/public/img/fruits/banana.svg");
   width: 32px;
   height: 32px;
   z-index: 2;
 }
 
-.orange {
+.orange,
+.picked-orange {
   background-image: url("/public/img/fruits/orange.svg");
   width: 32px;
   height: 32px;
   z-index: 3;
 }
 
-.lemon {
+.lemon,
+.picked-lemon {
   background-image: url("/public/img/fruits/lemon.svg");
   width: 32px;
   height: 32px;
   z-index: 4;
 }
 
-.watermelon {
+.watermelon,
+.picked-watermelon {
   background-image: url("/public/img/fruits/watermelon.svg");
   width: 32px;
   height: 32px;
   z-index: 5;
 }
 
-.mango {
+.mango,
+.picked-mango {
   background-image: url("/public/img/fruits/mango.svg");
   width: 32px;
   height: 32px;
   z-index: 6;
 }
 
-.peach {
+.peach,
+.picked-peach {
   background-image: url("/public/img/fruits/peach.svg");
   width: 32px;
   height: 32px;
   z-index: 7;
 }
 
-.cherry {
+.cherry,
+.picked-cherry {
   background-image: url("/public/img/fruits/cherry.svg");
   width: 32px;
   height: 32px;
   z-index: 8;
 }
 
-.clock {
+.clock,
+.picked-clock {
   background-image: url("/public/img/items/clock.svg");
   width: 32px;
   height: 32px;
   z-index: 101;
 }
 
-.magnet {
+.magnet,
+.picked-magnet {
   background-image: url("/public/img/items/magnet.svg");
   width: 32px;
   height: 32px;
   z-index: 102;
 }
 
-.book {
+.book,
+.picked-book {
   background-image: url("/public/img/items/book.svg");
   width: 32px;
   height: 32px;
   z-index: 103;
 }
 
-.cake {
+.cake,
+.picked-cake {
   background-image: url("/public/img/items/cake.svg");
   width: 32px;
   height: 32px;
   z-index: 103;
 }
 
-.hourglass {
+.hourglass,
+.picked-hourglass {
   background-image: url("/public/img/items/hourglass.svg");
   width: 32px;
   height: 32px;
