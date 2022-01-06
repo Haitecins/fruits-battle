@@ -11,8 +11,8 @@ const items = [
       max: 66,
     },
     effect(obj) {
-      const before = player.countdown,
-        { type, id } = this;
+      const before = player.countdown;
+      const { id } = this;
 
       if (probability(85)) {
         player.countdown += randomNumber({
@@ -131,13 +131,13 @@ const items = [
       },
     },
     effect() {
-      const _this = this,
-        width = this.custom.attrs.width,
-        height = this.custom.attrs.height;
+      const _this = this;
+      const width = this.custom.attrs.width;
+      const height = this.custom.attrs.height;
 
       function change(size) {
-        const changeWidth = Math.floor(width * size),
-          changeHeight = Math.floor(height * size);
+        const changeWidth = Math.floor(width * size);
+        const changeHeight = Math.floor(height * size);
 
         verify.PLAYER_EDIT_ARGUMENTS.custom.attrs.width = changeWidth;
         verify.PLAYER_EDIT_ARGUMENTS.custom.attrs.height = changeHeight;
@@ -149,23 +149,23 @@ const items = [
           },
           250,
           function () {
-            const $this = $(this);
+            const player = $(this);
 
             clearTimeout(_this.custom.timer);
 
             _this.custom.timer = setTimeout(() => {
               if (
-                $this.position().top + height >
+                player.position().top + height >
                 $("#wrapper").height() - $("#player-status").height()
               ) {
-                $this.css({ top: $this.position().top - height });
+                player.css({ top: player.position().top - height });
               }
 
-              if ($this.position().left + width > $("#wrapper").width()) {
-                $this.css({ left: $this.position().left - width });
+              if (player.position().left + width > $("#wrapper").width()) {
+                player.css({ left: player.position().left - width });
               }
 
-              $this.animate(
+              player.animate(
                 {
                   width,
                   height,
@@ -243,9 +243,9 @@ const items = [
       max: 44,
     },
     effect(obj) {
-      const before = player.countdown,
-        { type, id } = this,
-        minTime = 1.5;
+      const before = player.countdown;
+      const { type, id } = this;
+      const minTime = 1.5;
 
       if (probability(5)) {
         player.countdown += minTime + player.countdown * 0.5;

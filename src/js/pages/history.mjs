@@ -20,10 +20,16 @@ if (!window.localStorage.getItem("app_history")) {
       return `<div>
       <p>${historyDate.getFullYear()}/${
         historyDate.getMonth() + 1
-      }/${historyDate.getDate()} ${historyDate.getHours()}:${historyDate.getMinutes()}
+      }/${historyDate.getDate()} ${historyDate.getHours()}:${
+        historyDate.getMinutes() < 10
+          ? `0${historyDate.getMinutes()}`
+          : historyDate.getMinutes()
+      }
       </p>
       <p>游戏时间 ${timeFormat(calcRepair({ formula: PLAYTIME, fixed: 0 }))}</p>
-      <p>最终得分 <span class="base-scores">${calcRepair({ formula: SCORES })}</span></p>
+      <p>最终得分 <span class="base-scores">${calcRepair({
+        formula: SCORES,
+      })}</span></p>
       </div>`;
     };
     const detailChunk = () => {

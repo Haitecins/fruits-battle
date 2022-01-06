@@ -49,15 +49,15 @@ $("#STARTGAME").one("click", () => {
       function () {
         $(this).mousedown((e) => {
           // 获取鼠标的坐标与该对象的坐标之间的距离
-          const x = e.clientX - $(this).position().left,
-            y = e.clientY - $(this).position().top;
+          const x = e.clientX - $(this).position().left;
+          const y = e.clientY - $(this).position().top;
 
           $(document).on({
             mousemove(e) {
               if (player.countdown > 0 && player.health > 0) {
                 // 获取鼠标的坐标减去对象之间坐标的位置
-                let left = e.clientX - x,
-                  top = e.clientY - y;
+                let left = e.clientX - x;
+                let top = e.clientY - y;
 
                 // 阻止超出游戏区域
                 if (left < 0) left = 0;
@@ -138,25 +138,24 @@ $("#STARTGAME").one("click", () => {
           $(".fruits, .items").each(function () {
             const left = $(this).prop("xSpeed");
             const top = $(this).prop("ySpeed");
+
             $(this).animate({ left, top }, 0, "swing", function () {
-              const limit = 20,
-                $this = $(this);
+              const limit = 4;
 
               // 超出一定距离时删除元素
               if (
-                $this.position().left < -($this.width() + limit) ||
-                $this.position().top < -($this.height() + limit) ||
-                $this.position().left > $("#wrapper").width() + limit ||
-                $this.position().top > $("#wrapper").height() + limit
+                $(this).position().left < -($(this).width() + limit) ||
+                $(this).position().top < -($(this).height() + limit) ||
+                $(this).position().left > $("#wrapper").width() + limit ||
+                $(this).position().top > $("#wrapper").height() + limit
               ) {
-                $this.remove();
+                $(this).remove();
               }
             });
           });
           // 玩家与水果之间发生的碰撞
           $.each(fruits, function () {
-            const $this = $(this),
-              { scores, type, id } = $this[0];
+            const { scores, id } = $(this)[0];
 
             collideEntity({
               // 对象
@@ -265,8 +264,8 @@ $("#STARTGAME").one("click", () => {
           });
           // 玩家与道具之间发生的碰撞
           $.each(items, function (index) {
-            const { id } = $(this)[0],
-              { min, max } = items[index].valid;
+            const { id } = $(this)[0];
+            const { min, max } = items[index].valid;
 
             collideEntity({
               id,
