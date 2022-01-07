@@ -1,4 +1,4 @@
-import { calcRepair, timeFormat } from "../libs/index.mjs";
+import { calcRepair, timeFormat } from "../libs/index.js";
 
 if (!window.localStorage.getItem("app_history")) {
   $("#history").html('<h1 style="font-weight:normal;">暂无游戏记录</h1>');
@@ -34,7 +34,7 @@ if (!window.localStorage.getItem("app_history")) {
     };
     const detailChunk = () => {
       return `<div>
-      <p>到达最高等级 <span class="current-levels">${DIFFICULTY_LEVELS}</p>
+      <p>最高难度等级 <span class="current-levels">Lv.${DIFFICULTY_LEVELS}</p>
       <p>达成的成就数 ${TOTAL_ACHIEVEMENTS}</p>
       <p>获得的奖牌数 ${TOTAL_MEDALS}</p>
       </div>`;

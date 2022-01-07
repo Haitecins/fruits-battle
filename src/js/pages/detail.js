@@ -1,4 +1,4 @@
-import { fruits, items } from "../data/index.mjs";
+import { fruits, items } from "../data/index.js";
 
 $("#total-fruits").html(
   fruits.map(({ id, type, scores, speed }) => {

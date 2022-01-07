@@ -49,7 +49,8 @@ i {
 }
 
 body {
-  background: #fde275 url("/public/img/apples-5666483.svg") center center fixed;
+  background: #fde275 url("../../public/img/apples-5666483.svg") center center
+    fixed;
   background-size: cover;
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
@@ -67,7 +68,7 @@ body {
 #fruit-basket {
   width: 50px;
   height: 42px;
-  background: url("/public/img/box.svg") center center no-repeat;
+  background: url("../../public/img/box.svg") center center no-repeat;
   background-size: 100%;
   position: absolute;
   left: calc(50% - 50px / 2);

@@ -1,5 +1,5 @@
-import { fruits, audio } from "../data/index.mjs";
-import { randArrItem, playRandSound } from "../libs/index.mjs";
+import { fruits, audio } from "../data/index.js";
+import { randArrItem, playRandSound } from "../libs/index.js";
 
 // 获取索引值，没有则默认为0
 let getLocalIndex = window.localStorage.getItem("app_index")

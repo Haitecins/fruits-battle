@@ -1,5 +1,5 @@
-import { randomNumber, probability, showDetails } from "../../libs/index.mjs";
-import { player, verify } from "../index.mjs";
+import { randomNumber, probability, showDetails } from "../../libs/index.js";
+import { player, verify } from "../index.js";
 
 const items = [
   {

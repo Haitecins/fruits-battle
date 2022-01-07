@@ -1,4 +1,4 @@
-import randomNumber from "./randomNumber.mjs";
+import randomNumber from "./randomNumber.js";
 
 function randArrItem(arr) {
   // 从自定义数组中随机获取其中一项

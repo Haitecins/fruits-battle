@@ -1,6 +1,6 @@
-import "./icon.mjs";
-import "./detail.mjs";
-import "./history.mjs";
+import "./icon.js";
+import "./detail.js";
+import "./history.js";
 
 $("head").append(`
     <style data-type="copyright">

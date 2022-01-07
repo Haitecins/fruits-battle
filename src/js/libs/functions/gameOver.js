@@ -1,7 +1,7 @@
-import { statistics, timer, audio, player, levels } from "../../data/index.mjs";
-import playSound from "./playSound.mjs";
-import timeFormat from "./timeFormat.mjs";
-import calcRepair from "./calcRepair.mjs";
+import { statistics, timer, audio, player, levels } from "../../data/index.js";
+import playSound from "./playSound.js";
+import timeFormat from "./timeFormat.js";
+import calcRepair from "./calcRepair.js";
 
 function gameOver() {
   // 关闭所有定时器

@@ -1,11 +1,13 @@
 {
   "name": "fruitwars-app",
   "version": "2.1.23",
-  "author": "@chiyukikana",
+  "author": "chiyukikana",
+  "description": "Fruit Wars, join us together.",
+  "main": "./src/js/main.js",
   "license": "MIT",
   "scripts": {
-    "format": "prettier --write .",
-    "serve": "http-server ./ -c-1 -g -b -p 80"
+    "serve": "http-server ./ -c-1 -g -b -p 80",
+    "format": "prettier --write ."
   },
   "devDependencies": {
     "http-server": "^14.0.0",

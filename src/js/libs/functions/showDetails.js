@@ -1,4 +1,4 @@
-import calcRepair from "./calcRepair.mjs";
+import calcRepair from "./calcRepair.js";
 
 function showDetails({ id, pos, before, after, extra, fixed } = {}) {
   const getPos = pos;
