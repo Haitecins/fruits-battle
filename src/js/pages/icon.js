@@ -12,7 +12,7 @@ const randomFruitIcon = (stopValue = false) => {
   return $("#fruit-icon")
     .stop(stopValue)
     .css({
-      backgroundImage: `url("/public/img/fruits/${
+      backgroundImage: `url("./public/img/fruits/${
         randArrItem(fruits)[0].id
       }.svg"`,
     });

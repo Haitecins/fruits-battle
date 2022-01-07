@@ -6,10 +6,12 @@
   "main": "./src/js/main.js",
   "license": "MIT",
   "scripts": {
+    "start": "electron .",
     "serve": "http-server ./ -c-1 -g -b -p 80",
     "format": "prettier --write ."
   },
   "devDependencies": {
+    "electron": "^16.0.6",
     "http-server": "^14.0.0",
     "prettier": "^2.5.1"
   }
