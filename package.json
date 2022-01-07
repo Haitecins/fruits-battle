@@ -6,13 +6,19 @@
   "main": "./src/js/main.js",
   "license": "MIT",
   "scripts": {
-    "start": "electron .",
+    "start": "electron-forge start",
     "serve": "http-server ./ -c-1 -g -b -p 80",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.61",
     "electron": "^16.0.6",
     "http-server": "^14.0.0",
     "prettier": "^2.5.1"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0"
   }
 }
