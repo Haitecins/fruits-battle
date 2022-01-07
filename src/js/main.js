@@ -1,22 +1,19 @@
-const { app, BrowserWindow } = require("electron");
+import "./pages/app.js";
 
-function createWindow() {
-  const mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 900,
-    webPreferences: {
-      nodeIntegration: true,
-    },
-  });
-  mainWindow.loadFile("index.html");
-}
-app.whenReady().then(() => {
-  createWindow();
+window.navigator.userAgent.match(
+  /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+) && $("body").empty().html('<p id="isMobile">暂不支持移动端运行此游戏</p>');
 
-  app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
-  });
-});
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") app.quit();
-});
+console.log(
+  "%cp" + "%cr" + "%co" + "%cd" + "%cu" + "%cc" + "%ct" + "%ci" + "%co" + "%cn",
+  "color:red",
+  "color:green",
+  "color:orange",
+  "color:aqua",
+  "color:hotpink",
+  "color:gray",
+  "color:purple",
+  "color:black",
+  "color:pink",
+  "color:yellow"
+);
