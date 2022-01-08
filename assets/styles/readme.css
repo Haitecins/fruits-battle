@@ -136,6 +136,7 @@
   padding-bottom: 6px;
   margin-bottom: 6px;
 }
+#total-fruits > div > p,
 #total-items > div > div > p {
   font-size: 12px !important;
 }

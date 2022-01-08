@@ -24,7 +24,6 @@ import {
 } from "../libs/index.js";
 import "./wrapper.js";
 
-$("#wrapper").removeAttr("style");
 $("#STARTGAME").one("click", () => {
   // 暂时关闭游戏区域验证，等待其他项目验证完毕后再次打开。
   verify.LEAVING_THE_GAME_AREA.enabled = false;

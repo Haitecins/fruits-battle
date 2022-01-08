@@ -26,7 +26,9 @@ if (!window.localStorage.getItem("app_history")) {
           : historyDate.getMinutes()
       }
       </p>
-      <p>游戏时间 ${timeFormat(calcRepair({ formula: PLAYTIME, fixed: 0 }))}</p>
+      <p>游戏时间 <span class="countdown-color">${timeFormat(
+        Math.floor(PLAYTIME)
+      )}</span></p>
       <p>最终得分 <span class="base-scores">${calcRepair({
         formula: SCORES,
       })}</span></p>
