@@ -6,7 +6,7 @@ const player = {
   // 玩家未进行移动行为的计时
   not_moving_ticks: 0,
   // 游戏倒计时。
-  countdown: 10,
+  countdown: 90,
   // 游戏运行状态
   isRunning: false,
   reset() {
