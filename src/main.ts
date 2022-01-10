@@ -8,3 +8,4 @@ window.navigator.userAgent.match(
 )
   ? $("body").empty().html('<p id="isMobile">暂不支持移动端运行此游戏</p>')
   : $("#app").removeAttr("style");
+console.log(import.meta.env.MODE);

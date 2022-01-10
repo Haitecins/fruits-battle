@@ -1,11 +1,10 @@
-# FruitWars
+# 水果大作战
 
-Required Node.js and npm or yarn.
+**本项目仅供学习使用**
 
-## Start
-
-yarn serve
-
-## Format
-
-yarn format
+| 技术栈     |
+| :--------- |
+| TypeScript |
+| Webpack5   |
+| Node.js    |
+| jQuery     |
