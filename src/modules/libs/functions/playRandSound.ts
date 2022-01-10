@@ -1,4 +1,4 @@
-import { playSound, randArrItem } from "../index.js";
+import { playSound, randArrItem } from "../index";
 
 function playRandSound({ audio, volume, loop = false, promise } = {}) {
   // 播放列表中随机一种声音

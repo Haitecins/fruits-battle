@@ -1,4 +1,4 @@
-import { randomNumber } from "../index.js";
+import { randomNumber } from "../index";
 
 function probability(chance, fixed = 0) {
   // 返回1-100的百分比数值

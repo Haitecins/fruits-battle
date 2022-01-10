@@ -25,7 +25,7 @@
 
 .apple,
 .picked-apple {
-  background-image: url("../../public/img/fruits/apple.svg");
+  background-image: url(../images/fruits/apple.svg);
   width: 32px;
   height: 32px;
   z-index: 1;
@@ -33,7 +33,7 @@
 
 .banana,
 .picked-banana {
-  background-image: url("../../public/img/fruits/banana.svg");
+  background-image: url(../images/fruits/banana.svg);
   width: 32px;
   height: 32px;
   z-index: 2;
@@ -41,7 +41,7 @@
 
 .orange,
 .picked-orange {
-  background-image: url("../../public/img/fruits/orange.svg");
+  background-image: url(../images/fruits/orange.svg);
   width: 32px;
   height: 32px;
   z-index: 3;
@@ -49,7 +49,7 @@
 
 .lemon,
 .picked-lemon {
-  background-image: url("../../public/img/fruits/lemon.svg");
+  background-image: url(../images/fruits/lemon.svg);
   width: 32px;
   height: 32px;
   z-index: 4;
@@ -57,7 +57,7 @@
 
 .watermelon,
 .picked-watermelon {
-  background-image: url("../../public/img/fruits/watermelon.svg");
+  background-image: url(../images/fruits/watermelon.svg);
   width: 32px;
   height: 32px;
   z-index: 5;
@@ -65,7 +65,7 @@
 
 .mango,
 .picked-mango {
-  background-image: url("../../public/img/fruits/mango.svg");
+  background-image: url(../images/fruits/mango.svg);
   width: 32px;
   height: 32px;
   z-index: 6;
@@ -73,7 +73,7 @@
 
 .peach,
 .picked-peach {
-  background-image: url("../../public/img/fruits/peach.svg");
+  background-image: url(../images/fruits/peach.svg);
   width: 32px;
   height: 32px;
   z-index: 7;
@@ -81,7 +81,7 @@
 
 .cherry,
 .picked-cherry {
-  background-image: url("../../public/img/fruits/cherry.svg");
+  background-image: url(../images/fruits/cherry.svg);
   width: 32px;
   height: 32px;
   z-index: 8;
@@ -89,7 +89,7 @@
 
 .clock,
 .picked-clock {
-  background-image: url("../../public/img/items/clock.svg");
+  background-image: url(../images/items/clock.svg);
   width: 32px;
   height: 32px;
   z-index: 101;
@@ -97,7 +97,7 @@
 
 .magnet,
 .picked-magnet {
-  background-image: url("../../public/img/items/magnet.svg");
+  background-image: url(../images/items/magnet.svg);
   width: 32px;
   height: 32px;
   z-index: 102;
@@ -105,7 +105,7 @@
 
 .book,
 .picked-book {
-  background-image: url("../../public/img/items/book.svg");
+  background-image: url(../images/items/book.svg);
   width: 32px;
   height: 32px;
   z-index: 103;
@@ -113,7 +113,7 @@
 
 .cake,
 .picked-cake {
-  background-image: url("../../public/img/items/cake.svg");
+  background-image: url(../images/items/cake.svg);
   width: 32px;
   height: 32px;
   z-index: 103;
@@ -121,7 +121,7 @@
 
 .hourglass,
 .picked-hourglass {
-  background-image: url("../../public/img/items/hourglass.svg");
+  background-image: url(../images/items/hourglass.svg);
   width: 32px;
   height: 32px;
   z-index: 104;

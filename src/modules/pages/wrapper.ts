@@ -1,6 +1,7 @@
-import "./icon.js";
-import "./detail.js";
-import "./history.js";
+import $ from "jquery";
+import "./icon";
+import "./detail";
+import "./history";
 
 $("head").append(`
     <style data-type="copyright">
@@ -20,7 +21,7 @@ $("head").append(`
         }
     </style>
 `);
-$("#wrapper").after(`
+$("#app").after(`
     <div id="jquery" data-type="copyright">
         <p>Copyright 2021, Powered by
             <a href="https://jquery.com" target="_blank" title="jquery.com">jQuery</a>

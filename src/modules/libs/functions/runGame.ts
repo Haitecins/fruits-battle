@@ -1,3 +1,4 @@
+import $ from "jquery";
 import {
   audio,
   fruits,
@@ -6,7 +7,7 @@ import {
   player,
   statistics,
   timer,
-} from "../../data/index.js";
+} from "../../data/index";
 import {
   antiCheatVerification,
   builtEntity,
@@ -20,7 +21,7 @@ import {
   randomNumber,
   refreshStatus,
   showDetails,
-} from "../index.js";
+} from "../index";
 
 function runGame() {
   $("#fruit-basket").mousedown(function (e) {
@@ -37,17 +38,17 @@ function runGame() {
           // 阻止超出游戏区域
           if (left < 0) left = 0;
           if (top < 0) top = 0;
-          if (left > $("#wrapper").width() - $("#fruit-basket").width()) {
-            left = $("#wrapper").width() - $("#fruit-basket").width();
+          if (left > $("#app").width() - $("#fruit-basket").width()) {
+            left = $("#app").width() - $("#fruit-basket").width();
           }
           if (
             top >
-            $("#wrapper").height() -
+            $("#app").height() -
               $("#fruit-basket").height() -
               $("#player-status").height()
           ) {
             top =
-              $("#wrapper").height() -
+              $("#app").height() -
               $("#fruit-basket").height() -
               $("#player-status").height();
           }
@@ -75,8 +76,6 @@ function runGame() {
   timer.main = setInterval(() => {
     // 反作弊验证
     antiCheatVerification();
-    // 满足结束游戏的条件
-    if (player.countdown < 0 || player.health <= 0) gameOver();
     // 玩家未进行移动行为的惩罚
     player.not_moving_ticks++;
     // 500=5秒
@@ -105,8 +104,8 @@ function runGame() {
         if (
           $(this).position().left < -($(this).width() + limit) ||
           $(this).position().top < -($(this).height() + limit) ||
-          $(this).position().left > $("#wrapper").width() + limit ||
-          $(this).position().top > $("#wrapper").height() + limit
+          $(this).position().left > $("#app").width() + limit ||
+          $(this).position().top > $("#app").height() + limit
         ) {
           $(this).remove();
         }
@@ -254,6 +253,8 @@ function runGame() {
         },
       });
     });
+    // 满足结束游戏的条件
+    if (player.countdown < 0 || player.health <= 0) gameOver();
 
     function built(callback) {
       // 创建实体函数
@@ -265,24 +266,24 @@ function runGame() {
               // 30% 的概率会生成在顶部
               return randomNumber({
                 min: 0,
-                max: $("#wrapper").width() - $(this).width(),
+                max: $("#app").width() - $(this).width(),
               });
             } else {
-              return randArrItem([-$(this).width(), $("#wrapper").width()])[0];
+              return randArrItem([-$(this).width(), $("#app").width()])[0];
             }
           },
           y() {
             // 判断该元素的X轴是否在游戏区域可见范围内
             if (
               $(this).position().left >= 0 &&
-              $(this).position().left < $("#wrapper").width()
+              $(this).position().left < $("#app").width()
             ) {
               return -$(this).height();
             } else {
               return randomNumber({
                 min: 0,
                 max:
-                  $("#wrapper").height() -
+                  $("#app").height() -
                   $(this).height() -
                   $("#player-status").height(),
               });
@@ -311,7 +312,7 @@ function runGame() {
 
             if ($(this).position().left < 0) {
               return "+=" + getXSpeed;
-            } else if ($(this).position().left >= $("#wrapper").width()) {
+            } else if ($(this).position().left >= $("#app").width()) {
               return "-=" + getXSpeed;
             } else if ($(this).position().top < 0) {
               if (probability(25)) {

@@ -1,4 +1,5 @@
-import { calcRepair, timeFormat } from "../libs/index.js";
+import $ from "jquery";
+import { calcRepair, timeFormat } from "../libs/index";
 
 if (!window.localStorage.getItem("app_history")) {
   $("#history").html('<h1 style="font-weight:normal;">暂无游戏记录</h1>');

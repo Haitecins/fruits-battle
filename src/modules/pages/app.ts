@@ -1,3 +1,4 @@
+import $ from "jquery";
 import { audio, levels, player, statistics, verify } from "../data/index.js";
 import {
   antiCheatVerification,
@@ -20,14 +21,14 @@ $("#STARTGAME").on("click", () => {
   verify.LEAVING_THE_GAME_AREA.enabled = true;
   // 重置玩家的默认位置
   $("#fruit-basket").css({
-    left: $("#wrapper").width() / 2 - $("#fruit-basket").width() / 2,
-    top: $("#wrapper").height,
+    left: $("#app").width() / 2 - $("#fruit-basket").width() / 2,
+    top: $("#app").height,
   });
   playSound({ src: audio.click });
   $("#readme").fadeOut(300, () => {
     $("#player-status").animate({ height: 42 }, 300, "swing");
     $("#fruit-basket").animate(
-      { top: $("#wrapper").height() / 2 - $("#fruit-basket").width() / 2 },
+      { top: $("#app").height() / 2 - $("#fruit-basket").width() / 2 },
       600,
       "swing",
       runGame

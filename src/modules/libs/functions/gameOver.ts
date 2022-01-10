@@ -1,5 +1,6 @@
-import { statistics, timer, audio, player, levels } from "../../data/index.js";
-import { calcRepair, playSound, timeFormat } from "../index.js";
+import $ from "jquery";
+import { statistics, timer, audio, player, levels } from "../../data/index";
+import { calcRepair, playSound, timeFormat } from "../index";
 
 function gameOver() {
   // 关闭所有定时器
@@ -15,7 +16,7 @@ function gameOver() {
       audio[item].pause();
     }
   }
-  $("#wrapper > *:not(div)").remove();
+  $("#app > *:not(div)").remove();
   $("#levels").stop(true).removeAttr("style");
   $("#fruit-basket").removeAttr("style").hide();
   // 结束时播放特定声音

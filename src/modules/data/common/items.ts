@@ -1,5 +1,6 @@
-import { randomNumber, probability, showDetails } from "../../libs/index.js";
-import { player, verify } from "../index.js";
+import $ from "jquery";
+import { randomNumber, probability, showDetails } from "../../libs/index";
+import { player, verify } from "../index";
 
 const items = [
   {
@@ -156,12 +157,12 @@ const items = [
             _this.custom.timer = setTimeout(() => {
               if (
                 player.position().top + height >
-                $("#wrapper").height() - $("#player-status").height()
+                $("#app").height() - $("#player-status").height()
               ) {
                 player.css({ top: player.position().top - height });
               }
 
-              if (player.position().left + width > $("#wrapper").width()) {
+              if (player.position().left + width > $("#app").width()) {
                 player.css({ left: player.position().left - width });
               }
 

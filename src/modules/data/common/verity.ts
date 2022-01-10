@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 const verify = {
   // Prevent elements from disappearing (delete elements).
   DELETE_PLAYER_ELEMENT: {
@@ -40,10 +42,10 @@ const verify = {
       return (
         $("#fruit-basket").position().left < 0 ||
         $("#fruit-basket").position().left >
-          $("#wrapper").width() - $("#fruit-basket").width() ||
+          $("#app").width() - $("#fruit-basket").width() ||
         $("#fruit-basket").position().top < 0 ||
         $("#fruit-basket").position().top >
-          $("#wrapper").height() -
+          $("#app").height() -
             $("#player-status").height() -
             $("#fruit-basket").height()
       );
@@ -54,10 +56,10 @@ const verify = {
       }
       if (
         $("#fruit-basket").position().left >
-        $("#wrapper").width() - $("#fruit-basket").width()
+        $("#app").width() - $("#fruit-basket").width()
       ) {
         $("#fruit-basket").css({
-          left: $("#wrapper").width() - $("#fruit-basket").width(),
+          left: $("#app").width() - $("#fruit-basket").width(),
         });
       }
       if ($("#fruit-basket").position().top < 0) {
@@ -65,13 +67,13 @@ const verify = {
       }
       if (
         $("#fruit-basket").position().top >
-        $("#wrapper").height() -
+        $("#app").height() -
           $("#player-status").height() -
           $("#fruit-basket").height()
       ) {
         $("#fruit-basket").css({
           top:
-            $("#wrapper").height() -
+            $("#app").height() -
             $("#player-status").height() -
             $("#fruit-basket").height(),
         });

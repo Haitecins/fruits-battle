@@ -1,5 +1,6 @@
-import { player, statistics } from "../../data/index.js";
-import { calcRepair, timeFormat } from "../index.js";
+import $ from "jquery";
+import { player, statistics } from "../../data/index";
+import { calcRepair, timeFormat } from "../index";
 
 function refreshStatus() {
   $("#health > i").text(() => {

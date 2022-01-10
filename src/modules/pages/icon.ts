@@ -1,5 +1,6 @@
-import { fruits, audio } from "../data/index.js";
-import { randArrItem, playRandSound } from "../libs/index.js";
+import $ from "jquery";
+import { fruits, audio } from "../data/index";
+import { randArrItem, playRandSound } from "../libs/index";
 
 // 获取索引值，没有则默认为0
 let getLocalIndex = window.localStorage.getItem("app_index")
@@ -11,11 +12,8 @@ const menuContents = $("#readme>div:last-child>article");
 const randomFruitIcon = (stopValue = false) => {
   return $("#fruit-icon")
     .stop(stopValue)
-    .css({
-      backgroundImage: `url("./public/img/fruits/${
-        randArrItem(fruits)[0].id
-      }.svg"`,
-    });
+    .removeAttr("class")
+    .addClass(randArrItem(fruits)[0].id);
 };
 const clickHandler = (index) => {
   if (getLocalIndex === index) return;
