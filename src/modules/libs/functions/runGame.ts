@@ -38,19 +38,23 @@ function runGame() {
           // 阻止超出游戏区域
           if (left < 0) left = 0;
           if (top < 0) top = 0;
-          if (left > $("#app").width() - $("#fruit-basket").width()) {
-            left = $("#app").width() - $("#fruit-basket").width();
+          if (
+            left >
+            ($("#app") as any).width() - ($("#fruit-basket") as any).width()
+          ) {
+            left =
+              ($("#app") as any).width() - ($("#fruit-basket") as any).width();
           }
           if (
             top >
-            $("#app").height() -
-              $("#fruit-basket").height() -
-              $("#player-status").height()
+            ($("#app") as any).height() -
+              ($("#fruit-basket") as any).height() -
+              ($("#player-status") as any).height()
           ) {
             top =
-              $("#app").height() -
-              $("#fruit-basket").height() -
-              $("#player-status").height();
+              ($("#app") as any).height() -
+              ($("#fruit-basket") as any).height() -
+              ($("#player-status") as any).height();
           }
 
           player.not_moving_ticks = 0;
@@ -102,10 +106,10 @@ function runGame() {
 
         // 超出一定距离时删除元素
         if (
-          $(this).position().left < -($(this).width() + limit) ||
-          $(this).position().top < -($(this).height() + limit) ||
-          $(this).position().left > $("#app").width() + limit ||
-          $(this).position().top > $("#app").height() + limit
+          $(this).position().left < -(($(this) as any).width() + limit) ||
+          $(this).position().top < -(($(this) as any).height() + limit) ||
+          $(this).position().left > ($("#app") as any).width() + limit ||
+          $(this).position().top > ($("#app") as any).height() + limit
         ) {
           $(this).remove();
         }
@@ -180,10 +184,9 @@ function runGame() {
             if (statistics.REWARD_SCORES_ARRAY.length >= 15) {
               let rewardScores = 0;
 
-              $.each(
-                statistics.REWARD_SCORES_ARRAY,
-                (index, value) => (rewardScores += value)
-              );
+              statistics.REWARD_SCORES_ARRAY.forEach((value) => {
+                rewardScores += value;
+              });
               // 奖励 15个水果总和的 35%游戏分数
               statistics.SCORES += rewardScores * 0.35;
               // 播放特殊的声音
@@ -256,7 +259,7 @@ function runGame() {
     // 满足结束游戏的条件
     if (player.countdown < 0 || player.health <= 0) gameOver();
 
-    function built(callback) {
+    function built(callback: () => void) {
       // 创建实体函数
       const summon = () =>
         builtEntity({
@@ -266,26 +269,29 @@ function runGame() {
               // 30% 的概率会生成在顶部
               return randomNumber({
                 min: 0,
-                max: $("#app").width() - $(this).width(),
+                max: ($("#app") as any).width() - ($(this) as any).width(),
               });
             } else {
-              return randArrItem([-$(this).width(), $("#app").width()])[0];
+              return randArrItem([
+                -($(this) as any).width(),
+                $("#app").width(),
+              ])[0];
             }
           },
           y() {
             // 判断该元素的X轴是否在游戏区域可见范围内
             if (
               $(this).position().left >= 0 &&
-              $(this).position().left < $("#app").width()
+              $(this).position().left < ($("#app") as any).width()
             ) {
-              return -$(this).height();
+              return -($(this) as any).height();
             } else {
               return randomNumber({
                 min: 0,
                 max:
-                  $("#app").height() -
-                  $(this).height() -
-                  $("#player-status").height(),
+                  ($("#app") as any).height() -
+                  ($(this) as any).height() -
+                  ($("#player-status") as any).height(),
               });
             }
           },
@@ -312,7 +318,7 @@ function runGame() {
 
             if ($(this).position().left < 0) {
               return "+=" + getXSpeed;
-            } else if ($(this).position().left >= $("#app").width()) {
+            } else if ($(this).position().left >= ($("#app") as any).width()) {
               return "-=" + getXSpeed;
             } else if ($(this).position().top < 0) {
               if (probability(25)) {
@@ -393,7 +399,7 @@ function runGame() {
   // 难度定时器
   timer.difficulty = setTimeout(
     function levelsUp() {
-      clearTimeout(timer.difficulty);
+      clearTimeout(timer.difficulty as number);
       playSound({ src: audio.orb });
       // 淡入淡出效果
       $("#levels").fadeIn(500).delay(3000).fadeOut(500);
@@ -402,7 +408,7 @@ function runGame() {
         return "Lv." + ++levels.DIFFICULTY_LEVELS;
       });
       // 所有升级项目
-      const levelsUpList = [
+      const levelsUpList: LevelsUpList = [
         {
           chance: 29.5,
           title: '<b class="base-scores">基础得分</b>',
@@ -535,7 +541,12 @@ function runGame() {
       // 清空上一次的项目
       levelContainer.empty();
       // 格式模板
-      const elemTemplate = ({ title, data, symbol, change }) => {
+      const elemTemplate = ({
+        title,
+        data,
+        symbol,
+        change,
+      }: LevelsUpListObject) => {
         return `<p>${title}&nbsp;<i class="items-min-valid">${calcRepair({
           formula: data,
         })}${
@@ -550,8 +561,8 @@ function runGame() {
       );
       // 如果有升级项目的话就套用模板，没有升级项目则会随机获取一条。
       const getUpList = filterList.length && filterList.map(elemTemplate);
-      if (getUpList.length) {
-        levelContainer.html(getUpList);
+      if ((getUpList as string[]).length) {
+        levelContainer.html(getUpList as never);
       } else {
         levelContainer.html(elemTemplate(randArrItem(levelsUpList)[0]));
       }

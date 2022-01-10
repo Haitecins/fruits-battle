@@ -1,10 +1,10 @@
 import $ from "jquery";
 import { calcRepair } from "../index";
 
-function showDetails({ id, pos, before, after, extra, fixed } = {}) {
+function showDetails({ id, pos, before, after, extra, fixed }: ShowDetails) {
   const getPos = pos;
 
-  function send(className, text) {
+  function send(className: string, text: string | number) {
     $("<span/>")
       .appendTo($("#app"))
       .addClass(`pickup ${className}`)
@@ -17,8 +17,11 @@ function showDetails({ id, pos, before, after, extra, fixed } = {}) {
         left() {
           // 阻止拾取后显示的信息超出游戏区域
           if (getPos.x < 0) getPos.x = 0;
-          if (getPos.x > $("#app").width() - $(this).width()) {
-            getPos.x = $("#app").width() - $(this).width();
+          if (
+            getPos.x >
+            ($("#app") as any).width() - ($(this) as any).width()
+          ) {
+            getPos.x = ($("#app") as any).width() - ($(this) as any).width();
           }
 
           return getPos.x;
@@ -27,12 +30,14 @@ function showDetails({ id, pos, before, after, extra, fixed } = {}) {
           if (getPos.y < 0) getPos.y = 0;
           if (
             getPos.y >
-            $("#app").height() - $("#player-status").height() - $(this).height()
+            ($("#app") as any).height() -
+              ($("#player-status") as any).height() -
+              ($(this) as any).height()
           ) {
             getPos.y =
-              $("#app").height() -
-              $("#player-status").height() -
-              $(this).height();
+              ($("#app") as any).height() -
+              ($("#player-status") as any).height() -
+              ($(this) as any).height();
           }
 
           return getPos.y;

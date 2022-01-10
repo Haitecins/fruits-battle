@@ -1,4 +1,4 @@
-const player = {
+const player: Player = {
   // 剩余生命值，最大上限为10。
   health: 5,
   // 魔力值，初始为50，每3秒回复1点，最大上限为100。

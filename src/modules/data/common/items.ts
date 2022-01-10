@@ -2,7 +2,7 @@ import $ from "jquery";
 import { randomNumber, probability, showDetails } from "../../libs/index";
 import { player, verify } from "../index";
 
-const items = [
+const items: Items = [
   {
     id: "clock",
     type: "items",
@@ -32,8 +32,8 @@ const items = [
       showDetails({
         id,
         pos: {
-          x: obj.position().left,
-          y: obj.position().top,
+          x: (obj as JQuery<HTMLElement>).position().left,
+          y: (obj as JQuery<HTMLElement>).position().top,
         },
         before,
         after: player.countdown,
@@ -44,7 +44,7 @@ const items = [
       min: 1.25,
       max: 1.85,
     },
-    descriptions:
+    description:
       "增加小量游戏时间。有85%的概率增加5.4-11.2秒游戏时间；有15%的概率减少4.1-9.6秒游戏时间。",
   },
   {
@@ -58,7 +58,7 @@ const items = [
       timer: null,
     },
     effect() {
-      function attract(obj) {
+      function attract(obj: JQuery<HTMLElement>) {
         if (!(obj.prop("disX") && obj.prop("disY"))) {
           obj.prop({
             disX: obj.prop("xSpeed"),
@@ -74,12 +74,12 @@ const items = [
             {
               left:
                 $("#fruit-basket").position().left +
-                $("#fruit-basket").width() / 2 -
-                obj.width() / 2,
+                ($("#fruit-basket").width() as any) / 2 -
+                (obj as any).width() / 2,
               top:
                 $("#fruit-basket").position().top +
-                $("#fruit-basket").height() / 2 -
-                obj.height() / 2,
+                ($("#fruit-basket") as any).height() / 2 -
+                (obj as any).height() / 2,
             },
             400,
             "swing"
@@ -97,8 +97,8 @@ const items = [
       });
       // 防止短时间内多次拾取该道具引发的问题，每次拾取道具后，
       // 先清除原先的定时器，再开启一个新的定时器。
-      clearTimeout(this.custom.timer);
-      this.custom.timer = setTimeout(() => {
+      clearTimeout((this.custom as any).timer);
+      (this.custom as any).timer = setTimeout(() => {
         $(".fruits").each(function () {
           if ($(this).prop("disX") && $(this).prop("disX")) {
             $(this).prop({
@@ -114,7 +114,7 @@ const items = [
       min: 1.5,
       max: 2.28,
     },
-    descriptions:
+    description:
       "吸引所有新鲜水果至玩家的位置，有25%的概率额外吸引腐烂水果。如果吸引的水果正在移动中，玩家的位置发生变化，则将移动到上次移动的地点。水果在吸引后将停留0.5秒。",
   },
   {
@@ -133,10 +133,10 @@ const items = [
     },
     effect() {
       const _this = this;
-      const width = this.custom.attrs.width;
-      const height = this.custom.attrs.height;
+      const width = (this.custom as any).attrs.width;
+      const height = (this.custom as any).attrs.height;
 
-      function change(size) {
+      function change(size: number) {
         const changeWidth = Math.floor(width * size);
         const changeHeight = Math.floor(height * size);
 
@@ -152,17 +152,18 @@ const items = [
           function () {
             const player = $(this);
 
-            clearTimeout(_this.custom.timer);
+            clearTimeout((_this.custom as any).timer);
 
-            _this.custom.timer = setTimeout(() => {
+            (_this.custom as any).timer = setTimeout(() => {
               if (
                 player.position().top + height >
-                $("#app").height() - $("#player-status").height()
+                ($("#app") as any).height() -
+                  ($("#player-status") as any).height()
               ) {
                 player.css({ top: player.position().top - height });
               }
 
-              if (player.position().left + width > $("#app").width()) {
+              if (player.position().left + width > ($("#app") as any).width()) {
                 player.css({ left: player.position().left - width });
               }
 
@@ -204,7 +205,7 @@ const items = [
       min: 1.5,
       max: 2.5,
     },
-    descriptions:
+    description:
       "真·随地大小变。有55%的概率将玩家变大，有45%的概率变小。该效果持续10秒。重复拾取将覆盖上一次的效果。",
   },
   {
@@ -233,7 +234,7 @@ const items = [
       min: 1.15,
       max: 2.5,
     },
-    descriptions:
+    description:
       "将游戏区域内的水果反转。有65%的概率将所有腐烂水果转换为新鲜水果，有35%的概率相反。",
   },
   {
@@ -245,7 +246,7 @@ const items = [
     },
     effect(obj) {
       const before = player.countdown;
-      const { type, id } = this;
+      const { id } = this;
       const minTime = 1.5;
 
       if (probability(5)) {
@@ -259,8 +260,8 @@ const items = [
       showDetails({
         id,
         pos: {
-          x: obj.position().left,
-          y: obj.position().top,
+          x: (obj as JQuery<HTMLElement>).position().left,
+          y: (obj as JQuery<HTMLElement>).position().top,
         },
         before,
         after: player.countdown,
@@ -271,7 +272,7 @@ const items = [
       min: 1.21,
       max: 2.6,
     },
-    descriptions:
+    description:
       "增加大量游戏时间。有5%的概率获得当前50%的游戏时间。有10%的概率获得当前30%的游戏时间。有85%的概率获得当前10%的游戏时间。",
   },
 ];

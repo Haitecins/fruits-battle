@@ -19,7 +19,7 @@ import openFlip1 from "../../../assets/sounds/open_flip1.ogg";
 import openFlip2 from "../../../assets/sounds/open_flip2.ogg";
 import openFlip3 from "../../../assets/sounds/open_flip3.ogg";
 
-const audio = {
+const audio: Audio = {
   // 开始按钮点击音效
   click: new Audio(click),
   // 游戏结束后的音效

@@ -1,4 +1,4 @@
-const timer = {
+const timer: Timer = {
   // 主定时器，负责游戏的核心功能。
   main: null,
   // 难度定时器，负责处理游戏难度。

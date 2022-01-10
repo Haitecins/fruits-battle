@@ -1,6 +1,6 @@
 import { randomNumber } from "../index";
 
-function probability(chance, fixed = 0) {
+function probability(chance: number, fixed: number = 0) {
   // 返回1-100的百分比数值
   return (
     randomNumber({

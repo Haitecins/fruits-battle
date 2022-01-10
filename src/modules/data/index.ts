@@ -7,18 +7,18 @@ import STATISTICS from "./common/statistics";
 import TIMER from "./common/timer";
 import VERIFY from "./common/verity";
 
-export const audio = AUDIO;
+export const audio: Audio = AUDIO;
 
-export const fruits = FRUITS;
+export const fruits: Fruits = FRUITS;
 
-export const items = ITEMS;
+export const items: Items = ITEMS;
 
-export const levels = LEVELS;
+export const levels: Levels = LEVELS;
 
-export const player = PLAYER;
+export const player: Player = PLAYER;
 
-export const statistics = STATISTICS;
+export const statistics: Statistics = STATISTICS;
 
-export const timer = TIMER;
+export const timer: Timer = TIMER;
 
-export const verify = VERIFY;
+export const verify: Verity = VERIFY;

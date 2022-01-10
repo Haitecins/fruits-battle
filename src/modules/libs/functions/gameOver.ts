@@ -5,15 +5,15 @@ import { calcRepair, playSound, timeFormat } from "../index";
 function gameOver() {
   // 关闭所有定时器
   $.each(timer, function () {
-    clearInterval($(this)[0]);
+    clearInterval($(this as any)[0]);
   });
   // 停止所有正在播放的声音
   for (let item in audio) {
-    if (Array.isArray(audio[item])) {
-      const audioList = audio[item];
-      audioList.forEach((audio) => audio.pause());
+    if (Array.isArray((audio as any)[item])) {
+      const audioList: HTMLAudioElement[] = (audio as any)[item];
+      audioList.forEach((audio: HTMLAudioElement) => audio.pause());
     } else {
-      audio[item].pause();
+      (audio as any)[item].pause();
     }
   }
   $("#app > *:not(div)").remove();
@@ -208,7 +208,9 @@ function gameOver() {
       ])
     );
   } else {
-    const getHistory = JSON.parse(window.localStorage.getItem("app_history"));
+    const getHistory = JSON.parse(
+      window.localStorage.getItem("app_history") as string
+    );
     window.localStorage.setItem(
       "app_history",
       JSON.stringify([
@@ -230,7 +232,7 @@ function gameOver() {
   $("#over-achievements-length").text(fillItem.length);
   $("#over-total-fruits").text(TOTAL_FRUITS);
   $("#over-total-bad-frits").text(TOTAL_BAD_FRUITS);
-  fillContainer.html(fillItem);
+  fillContainer.html(fillItem as never);
   $("#over-scores").text(
     calcRepair({
       formula: SCORES,

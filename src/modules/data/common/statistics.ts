@@ -1,4 +1,4 @@
-const statistics = {
+const statistics: Statistics = {
   // 游戏分数
   SCORES: 0,
   // 游戏持续时间
@@ -22,12 +22,12 @@ const statistics = {
   // 开始游戏后从未发生过移动
   NEVER_MOVED: true,
   // 重置
-  reset() {
+  reset(): void {
     Object.keys(statistics).forEach((index) => {
       statistics[index] = statisticsCopy[index];
     });
   },
 };
-const statisticsCopy = { ...statistics, REWARD_SCORES_ARRAY: [] };
+const statisticsCopy: Statistics = { ...statistics, REWARD_SCORES_ARRAY: [] };
 
 export default statistics;

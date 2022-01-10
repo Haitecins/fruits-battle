@@ -4,18 +4,18 @@ import { randArrItem, playRandSound } from "../libs/index";
 
 // 获取索引值，没有则默认为0
 let getLocalIndex = window.localStorage.getItem("app_index")
-  ? window.localStorage.getItem("app_index") * 1
+  ? parseFloat(window.localStorage.getItem("app_index") as string)
   : 0;
 const menuItems = $("#readme-menu>ul>li>span");
 const menuContents = $("#readme>div:last-child>article");
 // 显示随机的一种水果图标
-const randomFruitIcon = (stopValue = false) => {
+const randomFruitIcon = (stopValue: boolean) => {
   return $("#fruit-icon")
     .stop(stopValue)
     .removeAttr("class")
     .addClass(randArrItem(fruits)[0].id);
 };
-const clickHandler = (index) => {
+const clickHandler = (index: number) => {
   if (getLocalIndex === index) return;
   getLocalIndex = index;
   window.localStorage.setItem("app_index", index.toString());
@@ -34,8 +34,8 @@ menuContents
   .eq(getLocalIndex)
   .addClass("readme-article-active readme-default-article");
 // 调整水果图标的位置
-randomFruitIcon().css({ top: 50 * getLocalIndex + 14 });
+randomFruitIcon(false).css({ top: 50 * getLocalIndex + 14 });
 // 点击事件
 menuItems.each(function (index) {
-  $(this).click(clickHandler.bind(this, index));
+  $(this).on("click", clickHandler.bind(this, index));
 });

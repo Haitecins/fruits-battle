@@ -1,4 +1,4 @@
-const levels = {
+const levels: Levels = {
   // 基础得分 (default: 1)
   BASE_SCORES: 1,
   // 基础得分倍率 (default: 0.25)
@@ -22,6 +22,6 @@ const levels = {
     });
   },
 };
-const levelsCopy = { ...levels };
+const levelsCopy: Levels = { ...levels };
 
 export default levels;

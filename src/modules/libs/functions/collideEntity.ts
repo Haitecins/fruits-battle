@@ -1,13 +1,17 @@
 import $ from "jquery";
 
-function collideEntity({ id, contrast, collided } = {}) {
+function collideEntity({ id, contrast, collided }: CollideEntity) {
   $(`.${id}`).each(function () {
     if (
       !(
-        contrast.position().top + contrast.height() < $(this).position().top ||
-        contrast.position().left > $(this).position().left + $(this).width() ||
-        contrast.position().top > $(this).position().top + $(this).height() ||
-        contrast.position().left + contrast.width() < $(this).position().left
+        contrast.position().top + (contrast as any).height() <
+          $(this).position().top ||
+        contrast.position().left >
+          $(this).position().left + ($(this) as any).width() ||
+        contrast.position().top >
+          $(this).position().top + ($(this) as any).height() ||
+        contrast.position().left + (contrast as any).width() <
+          $(this).position().left
       )
     ) {
       if (collided) collided($(this));

@@ -1,6 +1,6 @@
 import $ from "jquery";
 
-const verify = {
+const verify: Verity = {
   // Prevent elements from disappearing (delete elements).
   DELETE_PLAYER_ELEMENT: {
     enabled: true,
@@ -22,10 +22,8 @@ const verify = {
     },
     check() {
       return (
-        parseFloat($("#fruit-basket").width()) !==
-          parseFloat(this.custom.attrs.width) ||
-        parseFloat($("#fruit-basket").height()) !==
-          parseFloat(this.custom.attrs.height)
+        $("#fruit-basket").width() !== parseFloat(this.custom.attrs.width) ||
+        $("#fruit-basket").height() !== parseFloat(this.custom.attrs.height)
       );
     },
     actions() {
@@ -42,12 +40,12 @@ const verify = {
       return (
         $("#fruit-basket").position().left < 0 ||
         $("#fruit-basket").position().left >
-          $("#app").width() - $("#fruit-basket").width() ||
+          ($("#app") as any).width() - ($("#fruit-basket") as any).width() ||
         $("#fruit-basket").position().top < 0 ||
         $("#fruit-basket").position().top >
-          $("#app").height() -
-            $("#player-status").height() -
-            $("#fruit-basket").height()
+          ($("#app") as any).height() -
+            ($("#player-status") as any).height() -
+            ($("#fruit-basket") as any).height()
       );
     },
     actions() {
@@ -56,10 +54,11 @@ const verify = {
       }
       if (
         $("#fruit-basket").position().left >
-        $("#app").width() - $("#fruit-basket").width()
+        ($("#app") as any).width() - ($("#fruit-basket") as any).width()
       ) {
         $("#fruit-basket").css({
-          left: $("#app").width() - $("#fruit-basket").width(),
+          left:
+            ($("#app") as any).width() - ($("#fruit-basket") as any).width(),
         });
       }
       if ($("#fruit-basket").position().top < 0) {
@@ -67,15 +66,15 @@ const verify = {
       }
       if (
         $("#fruit-basket").position().top >
-        $("#app").height() -
-          $("#player-status").height() -
-          $("#fruit-basket").height()
+        ($("#app") as any).height() -
+          ($("#player-status") as any).height() -
+          ($("#fruit-basket") as any).height()
       ) {
         $("#fruit-basket").css({
           top:
-            $("#app").height() -
-            $("#player-status").height() -
-            $("#fruit-basket").height(),
+            ($("#app") as any).height() -
+            ($("#player-status") as any).height() -
+            ($("#fruit-basket") as any).height(),
         });
       }
     },
