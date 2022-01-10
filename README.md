@@ -37,7 +37,7 @@
 
 最后如下图所示，即在本地的8080端口中开启服务器。
 
-<img src="/Users/chiyukikana/GitProjects/fruitwars-app/docs/images/yarn_dev.png" style="zoom:100%;" />
+<img src="./docs/images/yarn_dev.png" style="zoom:100%;" />
 
 ## 游戏说明
 
