@@ -1,23 +1,29 @@
 # 水果大作战
+<p align="center">
+    <img width="180" src="./docs/images/cherry.svg" alt="Vite logo">
+</p>
+<br/>
+<p align="center">
+<img src="https://img.shields.io/badge/Node.js-v14.17.6-blue?logo=Node.js" />
+<img src="https://img.shields.io/badge/NPM-v8.1.3-blue?logo=NPM" />
+<img src="https://img.shields.io/badge/Webpack-v5.65.0-blue?logo=Webpack" />
+<img src="https://img.shields.io/badge/TypeScript-v4.5.4-blue?logo=TypeScript" />
+<img src="https://img.shields.io/badge/Vite.js-v2.7.10-blue?logo=Vite" />
+<img src="https://img.shields.io/badge/jQuery-v3.6.0-blue?logo=jQuery" />
+</p>
+<br/>
 
-<center><img src="./src/assets/images/fruits/cherry.svg" alt="cherry" style="zoom:150%;" /></center>
+## 技术栈
 
+注：本项目仅供学习使用！
 
-
-<center><b>注：本项目仅供学习使用！</b></center>
-
-
-
-| 技术栈     | 链接                            | 版本    |
+| 名称     | 链接                            | 版本    |
 | :--------- | ------------------------------- | ------- |
 | TypeScript | https://www.typescriptlang.org/ | 4.5.4   |
 | Webpack5   | https://webpack.docschina.org/  | 5.65.0  |
 | Vite.js    | https://vitejs.dev/             | 2.7.10  |
 | Node.js    | https://nodejs.org/en/          | 14.17.6 |
 | jQuery     | https://jquery.com/             | 3.6.0   |
-
-<img src="https://img.shields.io/badge/Node.js-v14.17.6-blue?logo=Node.js" /> <img src="https://img.shields.io/badge/NPM-v8.1.3-blue?logo=NPM" /> <img src="https://img.shields.io/badge/Webpack-v5.65.0-blue?logo=Webpack" /> <img src="https://img.shields.io/badge/TypeScript-v4.5.4-blue?logo=TypeScript" /> <img src="https://img.shields.io/badge/Vite.js-v2.7.10-blue?logo=Vite" /> <img src="https://img.shields.io/badge/jQuery-v3.6.0-blue?logo=jQuery" />
-
 
 
 ## 脚本命令
