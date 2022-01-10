@@ -1,7 +1,5 @@
 import { statistics, timer, audio, player, levels } from "../../data/index.js";
-import playSound from "./playSound.js";
-import timeFormat from "./timeFormat.js";
-import calcRepair from "./calcRepair.js";
+import { calcRepair, playSound, timeFormat } from "../index.js";
 
 function gameOver() {
   // 关闭所有定时器
@@ -12,7 +10,6 @@ function gameOver() {
   for (let item in audio) {
     if (Array.isArray(audio[item])) {
       const audioList = audio[item];
-
       audioList.forEach((audio) => audio.pause());
     } else {
       audio[item].pause();
@@ -156,14 +153,14 @@ function gameOver() {
     },
   ];
   // 显示本局的游戏数据
-  const fillContainer = $("#achievements > ul");
   const getCompletion = achievements.filter(({ cond }) => cond);
   statistics.TOTAL_ACHIEVEMENTS = getCompletion.length;
+  const fillContainer = $("#over-achievements>ul");
   const fillItem = getCompletion.map(({ title, description }) => {
     return `<li>
       <img src="./public/img/achievements_2.svg" alt="" />
       <div>
-      <span>${title}</span>
+      <p>${title}</p>
       <p>${description}</p>
       </div>
     </li>`;
@@ -179,8 +176,9 @@ function gameOver() {
     TOTAL_MEDALS,
   } = statistics;
   const { DIFFICULTY_LEVELS } = levels;
-  // 记录
-  const save = {
+  // 需要存储的项目
+  const savedItems = {
+    // 统计信息
     statistics: {
       SCORES,
       PLAYTIME,
@@ -191,6 +189,7 @@ function gameOver() {
       TOTAL_MEDALS,
       DIFFICULTY_LEVELS,
     },
+    // 成就列表
     achievements: getCompletion.map(({ title, description }) => ({
       title,
       description,
@@ -202,37 +201,41 @@ function gameOver() {
       "app_history",
       JSON.stringify([
         {
-          ...save,
+          ...savedItems,
           timestamp: new Date().getTime(),
         },
       ])
     );
   } else {
     const getHistory = JSON.parse(window.localStorage.getItem("app_history"));
-    getHistory.push({
-      ...save,
-      timestamp: new Date().getTime(),
-    });
-    const reversed = getHistory.reverse();
-    window.localStorage.setItem("app_history", JSON.stringify(reversed));
+    window.localStorage.setItem(
+      "app_history",
+      JSON.stringify([
+        {
+          ...savedItems,
+          timestamp: new Date().getTime(),
+        },
+        ...getHistory,
+      ])
+    );
   }
 
+  // 隐藏状态栏
   $("#player-status").animate({ height: 0 }, 300, "swing");
   // 显示结算界面
-  $("#gameover")
-    .show()
-    .animate({ opacity: 1 }, 300, "swing", () => {
-      $("#all-data").animate({ height: 252 }, 500, "swing", () => {
-        fillContainer.html(fillItem);
-        $("#get-playtime > i").text(
-          timeFormat(Math.floor(statistics.PLAYTIME))
-        );
-        $("#get-scores > i").text(calcRepair({ formula: statistics.SCORES }));
-        $("#get-total-fruits > i").text(statistics.TOTAL_FRUITS);
-        $("#get-total-achievements > i").text(statistics.TOTAL_ACHIEVEMENTS);
-        $("#get-total-medals > i").text(statistics.TOTAL_MEDALS);
-      });
-    });
+  $("#gameover").show().animate({ opacity: 1 }, 600, "swing");
+  $("#over-playtime").text(timeFormat(Math.floor(PLAYTIME)));
+  $("#over-levels").text(`Lv.${DIFFICULTY_LEVELS}`);
+  $("#over-achievements-length").text(fillItem.length);
+  $("#over-total-fruits").text(TOTAL_FRUITS);
+  $("#over-total-bad-frits").text(TOTAL_BAD_FRUITS);
+  fillContainer.html(fillItem);
+  $("#over-scores").text(
+    calcRepair({
+      formula: SCORES,
+    })
+  );
+  $("#over-details").animate({ height: 268 }, 800, () => {});
 }
 
 export default gameOver;

@@ -3,6 +3,7 @@
 @import url(./levels.css);
 @import url(./status.css);
 @import url(./history.css);
+@import url(./gameover.css);
 
 * {
   margin: 0;

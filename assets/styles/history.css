@@ -10,10 +10,7 @@
   display: inline-block;
   width: calc(100% / 3);
   vertical-align: top;
-  height: 100%;
 }
-#history > div > div:nth-child(2) {
-  height: auto;
-  border-left: 1px solid #0a1929;
-  border-right: 1px solid #0a1929;
+#history p {
+  line-height: 26px !important;
 }

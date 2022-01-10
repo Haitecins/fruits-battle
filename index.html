@@ -254,7 +254,36 @@
           <article id="history"></article>
         </div>
       </div>
-      <div id="gameover"></div>
+      <div id="gameover">
+        <h1>Game Over!</h1>
+        <div id="over-details">
+          <h2>
+            游戏时间
+            <span id="over-playtime" class="countdown-color"></span>
+          </h2>
+          <h3>最终得分 <span id="over-scores" class="base-scores"></span></h3>
+          <div id="over-achievements">
+            <ul></ul>
+          </div>
+          <div>
+            <p>
+              最高难度等级 <span id="over-levels" class="current-levels"></span>
+            </p>
+            <p>达成的成就数 <span id="over-achievements-length"></span></p>
+            <p>获得的奖牌数 <span>0</span></p>
+            <p>
+              总计拾取水果
+              <span id="over-total-fruits" class="healthy-fruits"></span>
+            </p>
+            <p>
+              总计拾取腐烂水果
+              <span id="over-total-bad-frits" class="bad-fruits"></span>
+            </p>
+          </div>
+          <div></div>
+        </div>
+        <button id="RESTART">继续游戏</button>
+      </div>
       <div id="levels">
         <h4>难度等级上升</h4>
         <p></p>
@@ -280,6 +309,6 @@
       </div>
       <div id="fruit-basket"></div>
     </div>
-    <script type="module" src="./src/modules/main.js"></script>
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>

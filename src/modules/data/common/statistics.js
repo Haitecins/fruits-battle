@@ -21,6 +21,13 @@ const statistics = {
   TOTAL_MEDALS: 0,
   // 开始游戏后从未发生过移动
   NEVER_MOVED: true,
+  // 重置
+  reset() {
+    Object.keys(statistics).forEach((index) => {
+      statistics[index] = statisticsCopy[index];
+    });
+  },
 };
+const statisticsCopy = { ...statistics, REWARD_SCORES_ARRAY: [] };
 
 export default statistics;
