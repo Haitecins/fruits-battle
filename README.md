@@ -32,10 +32,10 @@
 
 ```npm -g install yarn@latest``` 全局安装yarn
 
-* yarn dev - 启用本地开发环境服务
-* yarn build - 以生产环境构建
-* yarn serve - 启用本地生产环境服务
-* yarn format - 使用Prettier工具格式化代码
+* ```yarn dev``` - 启用本地开发环境服务
+* ```yarn build``` - 以生产环境构建
+* ```yarn serve``` - 启用本地生产环境服务
+* ```yarn format``` - 使用Prettier工具格式化代码
 
 ## 开启本地服务器
 
