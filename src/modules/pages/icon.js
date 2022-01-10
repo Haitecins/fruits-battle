@@ -20,7 +20,7 @@ const randomFruitIcon = (stopValue = false) => {
 const clickHandler = (index) => {
   if (getLocalIndex === index) return;
   getLocalIndex = index;
-  window.localStorage.setItem("app_index", index);
+  window.localStorage.setItem("app_index", index.toString());
 
   playRandSound({ audio: audio.open_flip, volume: 60, promise: true });
   randomFruitIcon(true).animate({ top: 50 * index + 14 }, 200);

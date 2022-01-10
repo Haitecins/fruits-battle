@@ -2,6 +2,23 @@
 # yarn lockfile v1
 
 
+"@types/jquery@^3.5.11":
+  version "3.5.11"
+  resolved "https://registry.npmmirror.com/@types/jquery/download/@types/jquery-3.5.11.tgz#fb2a255e8376779e89a10ddd04bfc1a93398f861"
+  integrity sha512-lYZGdfOtUa0XFjIATQgiogqeTY5PNNMOmp3Jq48ghmJALL8t/IqABRqlEwdHfuUdA8iIE1uGD1HoI4a7Tiy6OA==
+  dependencies:
+    "@types/sizzle" "*"
+
+"@types/node@^17.0.8":
+  version "17.0.8"
+  resolved "https://registry.npmmirror.com/@types/node/download/@types/node-17.0.8.tgz#50d680c8a8a78fe30abe6906453b21ad8ab0ad7b"
+  integrity sha512-YofkM6fGv4gDJq78g4j0mMuGMkZVxZDgtU0JRdx6FgiJDG+0fY0GKVolOV8WqVmEhLCXkQRjwDdKyPxJp/uucg==
+
+"@types/sizzle@*":
+  version "2.3.3"
+  resolved "https://registry.npmmirror.com/@types/sizzle/download/@types/sizzle-2.3.3.tgz#ff5e2f1902969d305225a047c8a0fd5c915cebef"
+  integrity sha1-/14vGQKWnTBSJaBHyKD9XJFc6+8=
+
 async@^2.6.2:
   version "2.6.3"
   resolved "https://registry.npmmirror.com/async/download/async-2.6.3.tgz#d72625e2344a3656e3a3ad4fa749fa83299d82ff"
@@ -210,6 +227,11 @@ side-channel@^1.0.4:
     call-bind "^1.0.0"
     get-intrinsic "^1.0.2"
     object-inspect "^1.9.0"
+
+typescript@^4.5.4:
+  version "4.5.4"
+  resolved "https://registry.npmmirror.com/typescript/download/typescript-4.5.4.tgz#a17d3a0263bf5c8723b9c52f43c5084edf13c2e8"
+  integrity sha512-VgYs2A2QIRuGphtzFV7aQJduJ2gyfTljngLzjpfW9FoYZF6xuw1W0vW9ghCKLfcWrCFxK81CSGRAvS1pn4fIUg==
 
 union@~0.5.0:
   version "0.5.0"
