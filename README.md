@@ -1,6 +1,6 @@
 # 水果大作战
 
-<img src="/Users/chiyukikana/GitProjects/fruitwars-app/src/assets/images/fruits/cherry.svg" alt="cherry" style="zoom:150%;" />
+<center><img src="./src/assets/images/fruits/cherry.svg" alt="cherry" style="zoom:150%;" /></center>
 
 <center><b>注：本项目仅供学习使用！</b></center>
 
@@ -14,12 +14,7 @@
 | jQuery     | https://jquery.com/             | 3.6.0   |
 
 <center>
-<img src="https://img.shields.io/badge/Node.js-v14.17.6-blue?logo=Node.js" />
-<img src="https://img.shields.io/badge/NPM-v8.1.3-blue?logo=NPM" />
-<img src="https://img.shields.io/badge/Webpack-v5.65.0-blue?logo=Webpack" />
-<img src="https://img.shields.io/badge/TypeScript-v4.5.4-blue?logo=TypeScript" />
-<img src="https://img.shields.io/badge/Vite.js-v2.7.10-blue?logo=Vite" />
-<img src="https://img.shields.io/badge/jQuery-v3.6.0-blue?logo=jQuery" />
+<img src="https://img.shields.io/badge/Node.js-v14.17.6-blue?logo=Node.js" /><img src="https://img.shields.io/badge/NPM-v8.1.3-blue?logo=NPM" /><img src="https://img.shields.io/badge/Webpack-v5.65.0-blue?logo=Webpack" /><img src="https://img.shields.io/badge/TypeScript-v4.5.4-blue?logo=TypeScript" /><img src="https://img.shields.io/badge/Vite.js-v2.7.10-blue?logo=Vite" /><img src="https://img.shields.io/badge/jQuery-v3.6.0-blue?logo=jQuery" />
 </center>
 
 
