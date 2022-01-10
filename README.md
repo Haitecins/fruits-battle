@@ -2,7 +2,10 @@
 
 <center><img src="./src/assets/images/fruits/cherry.svg" alt="cherry" style="zoom:150%;" /></center>
 
+
+
 <center><b>注：本项目仅供学习使用！</b></center>
+
 
 
 | 技术栈     | 链接                            | 版本    |
@@ -13,9 +16,7 @@
 | Node.js    | https://nodejs.org/en/          | 14.17.6 |
 | jQuery     | https://jquery.com/             | 3.6.0   |
 
-<center>
-<img src="https://img.shields.io/badge/Node.js-v14.17.6-blue?logo=Node.js" /><img src="https://img.shields.io/badge/NPM-v8.1.3-blue?logo=NPM" /><img src="https://img.shields.io/badge/Webpack-v5.65.0-blue?logo=Webpack" /><img src="https://img.shields.io/badge/TypeScript-v4.5.4-blue?logo=TypeScript" /><img src="https://img.shields.io/badge/Vite.js-v2.7.10-blue?logo=Vite" /><img src="https://img.shields.io/badge/jQuery-v3.6.0-blue?logo=jQuery" />
-</center>
+<img src="https://img.shields.io/badge/Node.js-v14.17.6-blue?logo=Node.js" /> <img src="https://img.shields.io/badge/NPM-v8.1.3-blue?logo=NPM" /> <img src="https://img.shields.io/badge/Webpack-v5.65.0-blue?logo=Webpack" /> <img src="https://img.shields.io/badge/TypeScript-v4.5.4-blue?logo=TypeScript" /> <img src="https://img.shields.io/badge/Vite.js-v2.7.10-blue?logo=Vite" /> <img src="https://img.shields.io/badge/jQuery-v3.6.0-blue?logo=jQuery" />
 
 
 
@@ -37,11 +38,11 @@
 
 最后如下图所示，即在本地的8080端口中开启服务器。
 
-<img src="./docs/images/yarn_dev.png" style="zoom:100%;" />
+![](./docs/images/yarn_dev.png)
 
 ## 游戏说明
 
-在该游戏中，玩家将需要使用鼠标拖动<img src="./src/assets/images/box.svg" alt="Box" style="zoom:15%;" />进行移动，目标是在有限的时间内拾取更多的水果，拿取更多的分数。当游戏的难度到达一定高度时，你的目标可能不再是拾取更多水果，而是躲避所有的水果。
+在该游戏中，玩家将需要使用鼠标拖动🧺进行移动，目标是在有限的时间内拾取更多的水果，拿取更多的分数。当游戏的难度到达一定高度时，你的目标可能不再是拾取更多水果，而是躲避所有的水果。
 
 玩家初始拥有 90 秒的游戏时间，在游戏中可以拾取道具来增加游戏时间。倒计时结束，游戏结束玩家初始拥有 5 点生命值，最大上限为 10 点。
 
