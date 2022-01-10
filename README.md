@@ -1,6 +1,9 @@
 # 水果大作战
 
-**本项目仅供学习使用**
+<img src="/Users/chiyukikana/GitProjects/fruitwars-app/src/assets/images/fruits/cherry.svg" alt="cherry" style="zoom:150%;" />
+
+<center><b>注：本项目仅供学习使用！</b></center>
+
 
 | 技术栈     | 链接                            | 版本    |
 | :--------- | ------------------------------- | ------- |
@@ -9,6 +12,37 @@
 | Vite.js    | https://vitejs.dev/             | 2.7.10  |
 | Node.js    | https://nodejs.org/en/          | 14.17.6 |
 | jQuery     | https://jquery.com/             | 3.6.0   |
+
+<center>
+<img src="https://img.shields.io/badge/Node.js-v14.17.6-blue?logo=Node.js" />
+<img src="https://img.shields.io/badge/NPM-v8.1.3-blue?logo=NPM" />
+<img src="https://img.shields.io/badge/Webpack-v5.65.0-blue?logo=Webpack" />
+<img src="https://img.shields.io/badge/TypeScript-v4.5.4-blue?logo=TypeScript" />
+<img src="https://img.shields.io/badge/Vite.js-v2.7.10-blue?logo=Vite" />
+<img src="https://img.shields.io/badge/jQuery-v3.6.0-blue?logo=jQuery" />
+</center>
+
+
+
+## 脚本命令
+
+本项目使用yarn作为包管理器，如果您还未安装yarn请先使用NPM进行安装。
+
+```npm -g install yarn@latest``` 全局安装yarn
+
+* yarn dev - 启用本地开发环境服务
+* yarn build - 以生产环境构建
+* yarn serve - 启用本地生产环境服务
+* yarn format - 使用Prettier工具格式化代码
+
+## 开启本地服务器
+
+1. 输入命令 ```yarn``` 安装本地依赖。
+2. 输入脚本 ```yarn dev``` 开启本地服务器。
+
+最后如下图所示，即在本地的8080端口中开启服务器。
+
+<img src="/Users/chiyukikana/GitProjects/fruitwars-app/docs/images/yarn_dev.png" style="zoom:100%;" />
 
 ## 游戏说明
 
@@ -38,3 +72,4 @@
 分数的 10%。
 腐烂水果在游戏中一般以灰色的样子出现。
 游戏每进行一段时间将会增加难度，初始难度为 1 级。
+
