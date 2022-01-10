@@ -1,4 +1,4 @@
-import genshinImpact2_4PV_BGM from "../../assets/sounds/bgm.8f10cfc7.mp3";
+import genshinImpact2_4PV_BGM from "../../assets/sounds/bgm1.mp3";
 
 const bgm = new Audio();
 bgm.src = genshinImpact2_4PV_BGM;

@@ -50,7 +50,7 @@ i {
 }
 
 body {
-  background: #fde275 url(../images/apples-5666483.svg) center center fixed;
+  background: #fde275 url(../images/apples-bg.svg) center center fixed;
   background-size: cover;
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
