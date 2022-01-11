@@ -1,21 +1,25 @@
 import $ from "jquery";
-import { audio, levels, player, statistics, verify } from "../data/index.js";
-import {
-  antiCheatVerification,
-  playSound,
-  refreshStatus,
-  runGame,
-} from "../libs/index.js";
-import bgm from "./bgm.js";
+import audio from "../data/common/audio";
+import elements from "../data/common/elements";
+import levels from "../data/common/levels";
+import player from "../data/common/player";
+import statistics from "../data/common/statistics";
+import verify from "../data/common/verity";
+import antiCheatVerification from "../libs/functions/antiCheatVerification";
+import playSound from "../libs/functions/playSound";
+import refreshStatus from "../libs/functions/refreshStatus";
+import runGame from "../libs/functions/runGame";
+import bgm from "./bgm";
 import "./icon";
 import "./detail";
 import "./history";
 
-$("#STARTGAME")
+const { nodes } = elements;
+nodes.readme.startButton
   .one("click", () => bgm.play())
   .on("click", () => {
     if (player.isRunning) return;
-    player.isRunning = !player.isStarted;
+    player.isRunning = !player.isRunning;
     // 刷新状态栏
     refreshStatus();
     // 暂时关闭游戏区域验证，等待其他项目验证完毕后再次打开。
@@ -25,20 +29,17 @@ $("#STARTGAME")
     // 打开游戏区域验证
     verify.LEAVING_THE_GAME_AREA.enabled = true;
     // 重置玩家的默认位置
-    $("#fruit-basket").css({
-      left:
-        ($("#app") as any).width() / 2 -
-        ($("#fruit-basket") as any).width() / 2,
-      top: $("#app").height,
+    nodes.player.css({
+      left: (nodes.app as any).width() / 2 - (nodes.player as any).width() / 2,
+      top: nodes.app.height,
     });
     playSound({ src: audio.click });
-    $("#readme").fadeOut(300, () => {
-      $("#player-status").animate({ height: 42 }, 300, "swing");
-      $("#fruit-basket").animate(
+    nodes.readme.element.fadeOut(300, () => {
+      nodes.statusbar.element.animate({ height: 42 }, 300, "swing");
+      nodes.player.animate(
         {
           top:
-            ($("#app") as any).height() / 2 -
-            ($("#fruit-basket") as any).width() / 2,
+            (nodes.app as any).height() / 2 - (nodes.player as any).width() / 2,
         },
         600,
         "swing",
@@ -47,7 +48,7 @@ $("#STARTGAME")
     });
   });
 
-$("#RESTART").on("click", () => {
+nodes.gameover.restart.on("click", () => {
   if (!player.isRunning) return;
   player.isRunning = !player.isRunning;
   $("*:not(#readme)").removeAttr("style");
@@ -59,5 +60,5 @@ $("#RESTART").on("click", () => {
     bubbles: true,
     cancelable: false,
   });
-  $("#STARTGAME")[0].dispatchEvent(ev);
+  nodes.readme.startButton[0].dispatchEvent(ev);
 });

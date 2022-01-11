@@ -5,7 +5,7 @@ interface ItemsObject {
     min: number;
     max: number;
   };
-  effect: (obj: HTMLElement | JQuery<HTMLElement>) => void;
+  effect: (element: HTMLElement | JQuery<HTMLElement>) => void;
   speed: {
     min: number;
     max: number;

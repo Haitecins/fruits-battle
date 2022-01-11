@@ -1,7 +1,10 @@
 import $ from "jquery";
-import { randomNumber, probability, showDetails } from "../../libs/index";
-import { player, verify } from "../index";
+import player from "./player";
+import elements from "./elements";
+import verify from "./verity";
+import { randomNumber, probability, showDetails } from "../../libs";
 
+const { nodes, entities } = elements;
 const items: Items = [
   {
     id: "clock",
@@ -11,7 +14,7 @@ const items: Items = [
       min: 21,
       max: 66,
     },
-    effect(obj) {
+    effect(element) {
       const before = player.countdown;
       const { id } = this;
 
@@ -32,8 +35,8 @@ const items: Items = [
       showDetails({
         id,
         pos: {
-          x: (obj as JQuery<HTMLElement>).position().left,
-          y: (obj as JQuery<HTMLElement>).position().top,
+          x: (element as JQuery<HTMLElement>).position().left,
+          y: (element as JQuery<HTMLElement>).position().top,
         },
         before,
         after: player.countdown,
@@ -58,14 +61,14 @@ const items: Items = [
       timer: null,
     },
     effect() {
-      function attract(obj: JQuery<HTMLElement>) {
-        if (!(obj.prop("disX") && obj.prop("disY"))) {
-          obj.prop({
-            disX: obj.prop("xSpeed"),
-            disY: obj.prop("ySpeed"),
+      function attract(element: JQuery<HTMLElement>) {
+        if (!(element.prop("disX") && element.prop("disY"))) {
+          element.prop({
+            disX: element.prop("xSpeed"),
+            disY: element.prop("ySpeed"),
           });
         }
-        obj
+        element
           .prop({
             xSpeed: "+=0",
             ySpeed: "+=0",
@@ -73,13 +76,13 @@ const items: Items = [
           .animate(
             {
               left:
-                $("#fruit-basket").position().left +
-                ($("#fruit-basket").width() as any) / 2 -
-                (obj as any).width() / 2,
+                nodes.player.position().left +
+                (nodes.player as any).width() / 2 -
+                (element as any).width() / 2,
               top:
-                $("#fruit-basket").position().top +
-                ($("#fruit-basket") as any).height() / 2 -
-                (obj as any).height() / 2,
+                nodes.player.position().top +
+                (nodes.player as any).height() / 2 -
+                (element as any).height() / 2,
             },
             400,
             "swing"
@@ -88,7 +91,7 @@ const items: Items = [
 
       const getChance = probability(75);
 
-      $(".fruits").each(function () {
+      entities.fruits().each(function () {
         if (getChance) {
           if (!$(this).hasClass("bad")) attract($(this));
         } else {
@@ -99,7 +102,7 @@ const items: Items = [
       // 先清除原先的定时器，再开启一个新的定时器。
       clearTimeout((this.custom as any).timer);
       (this.custom as any).timer = setTimeout(() => {
-        $(".fruits").each(function () {
+        entities.fruits().each(function () {
           if ($(this).prop("disX") && $(this).prop("disX")) {
             $(this).prop({
               xSpeed: $(this).prop("disX"),
@@ -127,8 +130,8 @@ const items: Items = [
     custom: {
       timer: null,
       attrs: {
-        width: $("#fruit-basket").width(),
-        height: $("#fruit-basket").height(),
+        width: nodes.player.width(),
+        height: nodes.player.height(),
       },
     },
     effect() {
@@ -143,7 +146,7 @@ const items: Items = [
         verify.PLAYER_EDIT_ARGUMENTS.custom.attrs.width = changeWidth;
         verify.PLAYER_EDIT_ARGUMENTS.custom.attrs.height = changeHeight;
 
-        $("#fruit-basket").animate(
+        nodes.player.animate(
           {
             width: changeWidth,
             height: changeHeight,
@@ -157,13 +160,12 @@ const items: Items = [
             (_this.custom as any).timer = setTimeout(() => {
               if (
                 player.position().top + height >
-                ($("#app") as any).height() -
-                  ($("#player-status") as any).height()
+                (nodes.app as any).height() - (status as any).height()
               ) {
                 player.css({ top: player.position().top - height });
               }
 
-              if (player.position().left + width > ($("#app") as any).width()) {
+              if (player.position().left + width > (nodes.app as any).width()) {
                 player.css({ left: player.position().left - width });
               }
 
@@ -218,7 +220,7 @@ const items: Items = [
     effect() {
       const getChance = probability(65);
 
-      $(".fruits").each(function () {
+      entities.fruits().each(function () {
         if (getChance) {
           if ($(this).hasClass("bad")) {
             $(this).removeClass("bad");
@@ -244,7 +246,7 @@ const items: Items = [
       min: 13,
       max: 44,
     },
-    effect(obj) {
+    effect(element) {
       const before = player.countdown;
       const { id } = this;
       const minTime = 1.5;
@@ -260,8 +262,8 @@ const items: Items = [
       showDetails({
         id,
         pos: {
-          x: (obj as JQuery<HTMLElement>).position().left,
-          y: (obj as JQuery<HTMLElement>).position().top,
+          x: (element as JQuery<HTMLElement>).position().left,
+          y: (element as JQuery<HTMLElement>).position().top,
         },
         before,
         after: player.countdown,

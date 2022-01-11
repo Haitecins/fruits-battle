@@ -1,12 +1,14 @@
 import $ from "jquery";
-import { calcRepair } from "../index";
+import elements from "../../data/common/elements";
+import calcRepair from "./calcRepair";
 
+const { nodes } = elements;
 function showDetails({ id, pos, before, after, extra, fixed }: ShowDetails) {
   const getPos = pos;
 
   function send(className: string, text: string | number) {
     $("<span/>")
-      .appendTo($("#app"))
+      .appendTo(nodes.app)
       .addClass(`pickup ${className}`)
       .html(() => {
         const extraClass = extra ? extra() : "";
@@ -19,9 +21,9 @@ function showDetails({ id, pos, before, after, extra, fixed }: ShowDetails) {
           if (getPos.x < 0) getPos.x = 0;
           if (
             getPos.x >
-            ($("#app") as any).width() - ($(this) as any).width()
+            (nodes.app as any).width() - ($(this) as any).width()
           ) {
-            getPos.x = ($("#app") as any).width() - ($(this) as any).width();
+            getPos.x = (nodes.app as any).width() - ($(this) as any).width();
           }
 
           return getPos.x;
@@ -30,13 +32,13 @@ function showDetails({ id, pos, before, after, extra, fixed }: ShowDetails) {
           if (getPos.y < 0) getPos.y = 0;
           if (
             getPos.y >
-            ($("#app") as any).height() -
-              ($("#player-status") as any).height() -
+            (nodes.app as any).height() -
+              (nodes.statusbar.element as any).height() -
               ($(this) as any).height()
           ) {
             getPos.y =
-              ($("#app") as any).height() -
-              ($("#player-status") as any).height() -
+              (nodes.app as any).height() -
+              (nodes.statusbar.element as any).height() -
               ($(this) as any).height();
           }
 

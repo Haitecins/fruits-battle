@@ -1,4 +1,4 @@
-import { verify } from "../../data/index";
+import verify from "../../data/common/verity";
 
 function antiCheatVerification() {
   for (let verifyKey in verify) {

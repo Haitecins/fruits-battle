@@ -4,5 +4,5 @@ interface BuiltEntity {
   y: () => number;
   xSpeed: () => string;
   ySpeed: () => string;
-  extra: (obj: JQuery<HTMLElement>) => void | any;
+  extra: (element: JQuery<HTMLElement>) => void | any;
 }

@@ -1,4 +1,5 @@
 import AUDIO from "./common/audio";
+import ELEMENTS from "./common/elements";
 import FRUITS from "./common/fruits";
 import ITEMS from "./common/items";
 import LEVELS from "./common/levels";
@@ -8,6 +9,8 @@ import TIMER from "./common/timer";
 import VERIFY from "./common/verity";
 
 export const audio: Audio = AUDIO;
+
+export const elements = ELEMENTS;
 
 export const fruits: Fruits = FRUITS;
 

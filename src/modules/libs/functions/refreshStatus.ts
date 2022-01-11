@@ -1,19 +1,24 @@
-import $ from "jquery";
-import { player, statistics } from "../../data/index";
-import { calcRepair, timeFormat } from "../index";
+import player from "../../data/common/player";
+import statistics from "../../data/common/statistics";
+import elements from "../../data/common/elements";
+import calcRepair from "./calcRepair";
+import timeFormat from "./timeFormat";
 
+const {
+  nodes: { statusbar },
+} = elements;
 function refreshStatus() {
-  $("#health > i").text(() => {
+  statusbar.health.text(() => {
     if (player.health > 10) player.health = 10;
     return player.health;
   });
-  $("#mana > i").text(() => {
+  statusbar.mana.text(() => {
     // 魔力值自动恢复
     player.mana > 100 ? (player.mana = 100) : (player.mana += 0.005);
     return calcRepair({ formula: player.mana, fixed: 0 });
   });
-  $("#current-scores > i").text(calcRepair({ formula: statistics.SCORES }));
-  $("#countdown > i").text(() => {
+  statusbar.scores.text(calcRepair({ formula: statistics.SCORES }));
+  statusbar.countdown.text(() => {
     statistics.PLAYTIME += 0.01;
     return timeFormat(Math.ceil((player.countdown -= 0.01)));
   });

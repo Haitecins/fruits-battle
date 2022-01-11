@@ -1,7 +1,13 @@
-import $ from "jquery";
-import { fruits, items } from "../data/index";
+import elements from "../data/common/elements";
+import fruits from "../data/common/fruits";
+import items from "../data/common/items";
 
-$("#total-fruits").html(
+const {
+  nodes: {
+    readme: { totalFruits, totalItems },
+  },
+} = elements;
+totalFruits.html(
   fruits.map(({ id, type, scores, speed }) => {
     return `<div>
     <i class="${type} picked-${id}"></i>
@@ -10,7 +16,7 @@ $("#total-fruits").html(
   </div>`;
   }) as never
 );
-$("#total-items").html(
+totalItems.html(
   items.map(({ id, type, valid, speed, description }) => {
     return `<div>
       <div>

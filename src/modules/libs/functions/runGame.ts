@@ -1,30 +1,28 @@
 import $ from "jquery";
-import {
-  audio,
-  fruits,
-  items,
-  levels,
-  player,
-  statistics,
-  timer,
-} from "../../data/index";
-import {
-  antiCheatVerification,
-  builtEntity,
-  calcRepair,
-  collideEntity,
-  gameOver,
-  playRandSound,
-  playSound,
-  probability,
-  randArrItem,
-  randomNumber,
-  refreshStatus,
-  showDetails,
-} from "../index";
+import audio from "../../data/common/audio";
+import fruits from "../../data/common/fruits";
+import items from "../../data/common/items";
+import levels from "../../data/common/levels";
+import player from "../../data/common/player";
+import statistics from "../../data/common/statistics";
+import timer from "../../data/common/timer";
+import elements from "../../data/common/elements";
+import antiCheatVerification from "./antiCheatVerification";
+import builtEntity from "./builtEntity";
+import calcRepair from "./calcRepair";
+import collideEntity from "./collideEntity";
+import gameOver from "./gameOver";
+import playRandSound from "./playRandSound";
+import playSound from "./playSound";
+import probability from "./probability";
+import randArrItem from "./randArrItem";
+import randomNumber from "./randomNumber";
+import refreshStatus from "./refreshStatus";
+import showDetails from "./showDetails";
 
+const { nodes, entities } = elements;
 function runGame() {
-  $("#fruit-basket").mousedown(function (e) {
+  nodes.player.mousedown(function (e) {
     // 获取鼠标的坐标与该对象的坐标之间的距离
     const x = e.clientX - $(this).position().left;
     const y = e.clientY - $(this).position().top;
@@ -40,27 +38,26 @@ function runGame() {
           if (top < 0) top = 0;
           if (
             left >
-            ($("#app") as any).width() - ($("#fruit-basket") as any).width()
+            (nodes.app as any).width() - (nodes.player as any).width()
           ) {
-            left =
-              ($("#app") as any).width() - ($("#fruit-basket") as any).width();
+            left = (nodes.app as any).width() - (nodes.player as any).width();
           }
           if (
             top >
-            ($("#app") as any).height() -
-              ($("#fruit-basket") as any).height() -
-              ($("#player-status") as any).height()
+            (nodes.app as any).height() -
+              (nodes.player as any).height() -
+              (nodes.statusbar.element as any).height()
           ) {
             top =
-              ($("#app") as any).height() -
-              ($("#fruit-basket") as any).height() -
-              ($("#player-status") as any).height();
+              (nodes.app as any).height() -
+              (nodes.player as any).height() -
+              (nodes.statusbar.element as any).height();
           }
 
           player.not_moving_ticks = 0;
           statistics.NEVER_MOVED = false;
 
-          $("#fruit-basket").css({ left, top });
+          nodes.player.css({ left, top });
         }
       },
       mouseup() {
@@ -97,7 +94,7 @@ function runGame() {
     // 刷新状态栏
     refreshStatus();
     // 操纵所有水果、道具的移动
-    $(".fruits, .items").each(function () {
+    entities.includes().each(function () {
       const left = $(this).prop("xSpeed");
       const top = $(this).prop("ySpeed");
 
@@ -108,8 +105,8 @@ function runGame() {
         if (
           $(this).position().left < -(($(this) as any).width() + limit) ||
           $(this).position().top < -(($(this) as any).height() + limit) ||
-          $(this).position().left > ($("#app") as any).width() + limit ||
-          $(this).position().top > ($("#app") as any).height() + limit
+          $(this).position().left > (nodes.app as any).width() + limit ||
+          $(this).position().top > (nodes.app as any).height() + limit
         ) {
           $(this).remove();
         }
@@ -123,7 +120,7 @@ function runGame() {
         // 对象
         id,
         // 比较对象
-        contrast: $("#fruit-basket"),
+        contrast: nodes.player,
         // 碰撞后发生的事件
         collided(entity) {
           // 获取该元素是不是一个腐烂水果
@@ -230,7 +227,7 @@ function runGame() {
 
       collideEntity({
         id,
-        contrast: $("#fruit-basket"),
+        contrast: nodes.player,
         collided(entity) {
           if (
             probability(
@@ -269,12 +266,12 @@ function runGame() {
               // 30% 的概率会生成在顶部
               return randomNumber({
                 min: 0,
-                max: ($("#app") as any).width() - ($(this) as any).width(),
+                max: (nodes.app as any).width() - ($(this) as any).width(),
               });
             } else {
               return randArrItem([
                 -($(this) as any).width(),
-                $("#app").width(),
+                nodes.app.width(),
               ])[0];
             }
           },
@@ -282,16 +279,16 @@ function runGame() {
             // 判断该元素的X轴是否在游戏区域可见范围内
             if (
               $(this).position().left >= 0 &&
-              $(this).position().left < ($("#app") as any).width()
+              $(this).position().left < (nodes.app as any).width()
             ) {
               return -($(this) as any).height();
             } else {
               return randomNumber({
                 min: 0,
                 max:
-                  ($("#app") as any).height() -
+                  (nodes.app as any).height() -
                   ($(this) as any).height() -
-                  ($("#player-status") as any).height(),
+                  (nodes.statusbar.element as any).height(),
               });
             }
           },
@@ -318,7 +315,7 @@ function runGame() {
 
             if ($(this).position().left < 0) {
               return "+=" + getXSpeed;
-            } else if ($(this).position().left >= ($("#app") as any).width()) {
+            } else if ($(this).position().left >= (nodes.app as any).width()) {
               return "-=" + getXSpeed;
             } else if ($(this).position().top < 0) {
               if (probability(25)) {
@@ -369,11 +366,11 @@ function runGame() {
               }
             }
           },
-          extra(obj) {
+          extra(element) {
             // 本次生成的水果是否变成腐烂水果
-            if (obj.hasClass("fruits")) {
+            if (element.hasClass("fruits")) {
               if (probability(levels.BAD_FRUITS_CHANCE, 2)) {
-                obj.addClass("bad");
+                element.addClass("bad");
               }
             }
           },
@@ -402,9 +399,9 @@ function runGame() {
       clearTimeout(timer.difficulty as number);
       playSound({ src: audio.orb });
       // 淡入淡出效果
-      $("#levels").fadeIn(500).delay(3000).fadeOut(500);
+      nodes.levels.element.fadeIn(500).delay(3000).fadeOut(500);
       // 等级提升
-      $("#levels > p").text(function () {
+      nodes.levels.value.text(function () {
         return "Lv." + ++levels.DIFFICULTY_LEVELS;
       });
       // 所有升级项目
@@ -536,10 +533,8 @@ function runGame() {
           },
         },
       ];
-      // 显示此次升级项目的容器
-      const levelContainer = $("#levels > div");
       // 清空上一次的项目
-      levelContainer.empty();
+      nodes.levels.container.empty();
       // 格式模板
       const elemTemplate = ({
         title,
@@ -562,21 +557,21 @@ function runGame() {
       // 如果有升级项目的话就套用模板，没有升级项目则会随机获取一条。
       const getUpList = filterList.length && filterList.map(elemTemplate);
       if ((getUpList as string[]).length) {
-        levelContainer.html(getUpList as never);
+        nodes.levels.container.html(getUpList as never);
       } else {
-        levelContainer.html(elemTemplate(randArrItem(levelsUpList)[0]));
+        nodes.levels.container.html(elemTemplate(randArrItem(levelsUpList)[0]));
       }
       timer.difficulty = setTimeout(
         levelsUp,
         randomNumber({
-          min: 5000,
-          max: 15000,
+          min: 0,
+          max: 0,
         })
       );
     },
     randomNumber({
-      min: 5000,
-      max: 15000,
+      min: 0,
+      max: 0,
     })
   );
 }

@@ -1,7 +1,15 @@
 import $ from "jquery";
-import { statistics, timer, audio, player, levels } from "../../data/index";
-import { calcRepair, playSound, timeFormat } from "../index";
+import statistics from "../../data/common/statistics";
+import timer from "../../data/common/timer";
+import audio from "../../data/common/audio";
+import player from "../../data/common/player";
+import levels from "../../data/common/levels";
+import elements from "../../data/common/elements";
+import calcRepair from "./calcRepair";
+import playSound from "./playSound";
+import timeFormat from "./timeFormat";
 
+const { nodes, totalEntities } = elements;
 function gameOver() {
   // 关闭所有定时器
   $.each(timer, function () {
@@ -16,9 +24,11 @@ function gameOver() {
       (audio as any)[item].pause();
     }
   }
-  $("#app > *:not(div)").remove();
-  $("#levels").stop(true).removeAttr("style");
-  $("#fruit-basket").removeAttr("style").hide();
+  totalEntities().remove();
+  nodes.levels.element.stop(true).removeAttr("style");
+  nodes.levels.value.empty();
+  nodes.levels.container.empty();
+  nodes.player.removeAttr("style").hide();
   // 结束时播放特定声音
   playSound({ src: audio.end });
   // 计算偏差，游戏数值在计算时可能会出现偏差，使用后可以避免偏差。
@@ -105,19 +115,19 @@ function gameOver() {
     },
     {
       id: "LEVELS_5_UP",
-      cond: statistics.DIFFICULTY_LEVELS >= 5,
+      cond: levels.DIFFICULTY_LEVELS >= 5,
       title: "就这？",
       description: "游戏难度到达5级以上。",
     },
     {
       id: "LEVELS_15_UP",
-      cond: statistics.DIFFICULTY_LEVELS >= 25,
+      cond: levels.DIFFICULTY_LEVELS >= 25,
       title: "就这就这？",
       description: "游戏难度到达25级以上。",
     },
     {
       id: "LEVELS_40_UP",
-      cond: statistics.DIFFICULTY_LEVELS >= 45,
+      cond: levels.DIFFICULTY_LEVELS >= 45,
       title: "就...这...",
       description: "游戏难度到达45级以上。",
     },
@@ -156,7 +166,6 @@ function gameOver() {
   // 显示本局的游戏数据
   const getCompletion = achievements.filter(({ cond }) => cond);
   statistics.TOTAL_ACHIEVEMENTS = getCompletion.length;
-  const fillContainer = $("#over-achievements>ul");
   const fillItem = getCompletion.map(({ title, description }) => {
     return `<li>
       <img src="./public/img/achievements_2.svg" alt="" />
@@ -224,21 +233,21 @@ function gameOver() {
   }
 
   // 隐藏状态栏
-  $("#player-status").animate({ height: 0 }, 300, "swing");
+  nodes.statusbar.element.animate({ height: 0 }, 300, "swing");
   // 显示结算界面
-  $("#gameover").show().animate({ opacity: 1 }, 600, "swing");
-  $("#over-playtime").text(timeFormat(Math.floor(PLAYTIME)));
-  $("#over-levels").text(`Lv.${DIFFICULTY_LEVELS}`);
-  $("#over-achievements-length").text(fillItem.length);
-  $("#over-total-fruits").text(TOTAL_FRUITS);
-  $("#over-total-bad-frits").text(TOTAL_BAD_FRUITS);
-  fillContainer.html(fillItem as never);
-  $("#over-scores").text(
+  nodes.gameover.element.show().animate({ opacity: 1 }, 600, "swing");
+  nodes.gameover.playtime.text(timeFormat(Math.floor(PLAYTIME)));
+  nodes.gameover.levels.text(`Lv.${DIFFICULTY_LEVELS}`);
+  nodes.gameover.achievementsLength.text(fillItem.length);
+  nodes.gameover.totals.fruits.text(TOTAL_FRUITS);
+  nodes.gameover.totals.badFruits.text(TOTAL_BAD_FRUITS);
+  nodes.gameover.achievements.html(fillItem as never);
+  nodes.gameover.scores.text(
     calcRepair({
       formula: SCORES,
     })
   );
-  $("#over-details").animate({ height: 268 }, 800, () => {});
+  nodes.gameover.details.animate({ height: 268 }, 800, () => {});
 }
 
 export default gameOver;
