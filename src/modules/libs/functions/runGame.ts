@@ -564,14 +564,14 @@ function runGame() {
       timer.difficulty = setTimeout(
         levelsUp,
         randomNumber({
-          min: 0,
-          max: 0,
+          min: 5000,
+          max: 14000,
         })
       );
     },
     randomNumber({
-      min: 0,
-      max: 0,
+      min: 5000,
+      max: 14000,
     })
   );
 }
