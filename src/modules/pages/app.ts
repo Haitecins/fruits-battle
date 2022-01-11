@@ -1,4 +1,3 @@
-import $ from "jquery";
 import audio from "../data/common/audio";
 import elements from "../data/common/elements";
 import levels from "../data/common/levels";
@@ -14,7 +13,7 @@ import "./icon";
 import "./detail";
 import "./history";
 
-const { nodes } = elements;
+const { nodes, resetStyles } = elements;
 nodes.readme.startButton
   .one("click", () => bgm.play())
   .on("click", () => {
@@ -51,7 +50,7 @@ nodes.readme.startButton
 nodes.gameover.restart.on("click", () => {
   if (!player.isRunning) return;
   player.isRunning = !player.isRunning;
-  $("*:not(#readme)").removeAttr("style");
+  resetStyles().removeAttr("style");
   levels.reset();
   player.reset();
   statistics.reset();

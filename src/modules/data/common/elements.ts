@@ -51,6 +51,7 @@ const elements = {
     items: () => $(".items"),
   },
   totalEntities: () => $("#app>*:not(div)"),
+  resetStyles: () => $("*:not(#readme)"),
 };
 
 export default elements;

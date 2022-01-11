@@ -160,7 +160,8 @@ const items: Items = [
             (_this.custom as any).timer = setTimeout(() => {
               if (
                 player.position().top + height >
-                (nodes.app as any).height() - (nodes.statusbar.element as any).height()
+                (nodes.app as any).height() -
+                  (nodes.statusbar.element as any).height()
               ) {
                 player.css({ top: player.position().top - height });
               }
