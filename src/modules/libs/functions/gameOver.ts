@@ -230,6 +230,16 @@ function gameOver() {
         ...getHistory,
       ])
     );
+    if (
+      JSON.parse(window.localStorage.getItem("app_history") as string).length >
+      50
+    ) {
+      const totals = JSON.parse(
+        window.localStorage.getItem("app_history") as string
+      );
+      totals.length = 50;
+      window.localStorage.setItem("app_history", JSON.stringify(totals));
+    }
   }
 
   // 隐藏状态栏
