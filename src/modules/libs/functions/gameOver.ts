@@ -168,7 +168,7 @@ function gameOver() {
   statistics.TOTAL_ACHIEVEMENTS = getCompletion.length;
   const fillItem = getCompletion.map(({ title, description }) => {
     return `<li>
-      <img src="./public/img/achievements_2.svg" alt="" />
+      <i class="achievements-icon"></i>
       <div>
       <p>${title}</p>
       <p>${description}</p>

@@ -68,10 +68,12 @@
   padding-top: 4px;
   border-top: 1px solid #91b4ff;
 }
-#gameover > div > div > ul > li > img {
+#gameover > div > div > ul > li > i {
   width: 40px;
   height: 40px;
   position: absolute;
+  background: url(../images/achievements_2.svg) center no-repeat;
+  background-size: 100%;
 }
 #gameover > button {
   width: 100px;

@@ -68,7 +68,7 @@ const verify: Verity = {
       if (
         nodes.player.position().top >
         (nodes.app as any).height() -
-          (status as any).height() -
+          (nodes.statusbar.element as any).height() -
           (nodes.player as any).height()
       ) {
         nodes.player.css({
