@@ -7,4 +7,4 @@ interface FruitsObject {
     max: number;
   };
 }
-type Fruits = FruitsObject[];
+type FruitProps = FruitsObject[];

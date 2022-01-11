@@ -1,4 +1,4 @@
-interface Player {
+interface PlayerProps {
   health: number;
   mana: number;
   not_moving_ticks: number;

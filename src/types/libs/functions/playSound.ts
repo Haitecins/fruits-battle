@@ -1,4 +1,4 @@
-interface PlaySound {
+interface PlaySoundProps {
   src: HTMLAudioElement;
   volume?: number;
   loop?: boolean;

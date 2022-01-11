@@ -405,7 +405,7 @@ function runGame() {
         return "Lv." + ++levels.DIFFICULTY_LEVELS;
       });
       // 所有升级项目
-      const levelsUpList: LevelsUpList = [
+      const levelsUpList: LevelsUpListProps = [
         {
           chance: 29.5,
           title: '<b class="base-scores">基础得分</b>',

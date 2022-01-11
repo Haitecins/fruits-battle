@@ -13,7 +13,7 @@ if (!window.localStorage.getItem("app_history")) {
   );
   const elWrapper = getHistory.map(
     (history: {
-      statistics: Statistics & { DIFFICULTY_LEVELS?: [] };
+      statistics: StatisticProps & { DIFFICULTY_LEVELS?: [] };
       timestamp: number;
     }) => {
       const { statistics, timestamp } = history;

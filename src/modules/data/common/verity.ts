@@ -2,7 +2,7 @@ import $ from "jquery";
 import elements from "./elements";
 
 const { nodes } = elements;
-const verify: Verity = {
+const verify: VerityProps = {
   // Prevent elements from disappearing (delete elements).
   DELETE_PLAYER_ELEMENT: {
     enabled: true,

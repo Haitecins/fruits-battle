@@ -1,4 +1,4 @@
-interface BuiltEntity {
+interface BuiltEntityProps {
   className: string;
   x: () => number;
   y: () => number;

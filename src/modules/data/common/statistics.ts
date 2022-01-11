@@ -1,4 +1,4 @@
-const statistics: Statistics = {
+const statistics: StatisticProps = {
   // 游戏分数
   SCORES: 0,
   // 游戏持续时间
@@ -28,6 +28,9 @@ const statistics: Statistics = {
     });
   },
 };
-const statisticsCopy: Statistics = { ...statistics, REWARD_SCORES_ARRAY: [] };
+const statisticsCopy: StatisticProps = {
+  ...statistics,
+  REWARD_SCORES_ARRAY: [],
+};
 
 export default statistics;

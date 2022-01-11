@@ -1,4 +1,4 @@
-const fruits: Fruits = [
+const fruits: FruitProps = [
   {
     id: "apple",
     type: "fruits",

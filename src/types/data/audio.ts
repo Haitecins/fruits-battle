@@ -1,4 +1,4 @@
-interface Audio {
+interface AudioProps {
   click: HTMLAudioElement;
   end: HTMLAudioElement;
   eat: HTMLAudioElement[];

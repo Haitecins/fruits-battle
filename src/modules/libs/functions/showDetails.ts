@@ -3,7 +3,14 @@ import elements from "../../data/common/elements";
 import calcRepair from "./calcRepair";
 
 const { nodes } = elements;
-function showDetails({ id, pos, before, after, extra, fixed }: ShowDetails) {
+function showDetails({
+  id,
+  pos,
+  before,
+  after,
+  extra,
+  fixed,
+}: ShowDetailProps) {
   const getPos = pos;
 
   function send(className: string, text: string | number) {

@@ -1,5 +1,5 @@
 <p align="center">
-    <img width="180" src="./docs/images/cherry.svg" alt="Vite logo">
+    <img width="180" src="./docs/images/cherry.svg">
 </p>
 <br/>
 <p align="center">
@@ -13,7 +13,7 @@
 
 # 水果大作战
 
-⚠️注：本项目仅供学习使用！
+注：本项目仅供学习使用！
 
 ## 技术栈
 

@@ -4,6 +4,6 @@ interface VerityObject {
   actions: () => void;
   [propName: string]: any;
 }
-interface Verity {
+interface VerityProps {
   [propName: string]: VerityObject;
 }

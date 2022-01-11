@@ -1,4 +1,4 @@
-interface Statistics {
+interface StatisticProps {
   SCORES: number;
   PLAYTIME: number;
   USE_SKILLS: number;
