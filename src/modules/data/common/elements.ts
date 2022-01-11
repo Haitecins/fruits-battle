@@ -37,7 +37,7 @@ const elements = {
       achievementsLength: $("#over-achievements-length"),
       totals: {
         fruits: $("#over-total-fruits"),
-        badFruits: $("#over-total-bad-frits"),
+        badFruits: $("#over-total-bad-fruits"),
       },
       scores: $("#over-scores"),
       details: $("#over-details"),
