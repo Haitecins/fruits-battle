@@ -34,7 +34,7 @@ const elements = {
       playtime: $("#over-playtime"),
       levels: $("#over-levels"),
       achievements: $("#over-achievements>ul"),
-      achievementsLength: $("#over-achievements-lexngth"),
+      achievementsLength: $("#over-achievements-length"),
       totals: {
         fruits: $("#over-total-fruits"),
         badFruits: $("#over-total-bad-frits"),
