@@ -1,7 +1,7 @@
 // CSS文件必须在JS文件之前加载，否则会导致DOM节点无法获取。
 import "./assets/main.css";
-import { elements } from "./modules/data";
 import "./modules/pages/app";
+import elements from "./modules/data/common/elements";
 
 const { nodes } = elements;
 window.navigator.userAgent.match(
