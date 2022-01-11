@@ -1,5 +1,3 @@
-# 水果大作战
-
 <p align="center">
     <img width="180" src="./docs/images/cherry.svg" alt="Vite logo">
 </p>
@@ -12,11 +10,12 @@
 <img src="https://img.shields.io/badge/Vite.js-v2.7.10-blue?logo=Vite" />
 <img src="https://img.shields.io/badge/jQuery-v3.6.0-blue?logo=jQuery" />
 </p>
-<br/>
 
-## 技术栈
+# 水果大作战
 
 ⚠️注：本项目仅供学习使用！
+
+## 技术栈
 
 | 名称       | 链接                            | 版本    |
 | :--------- | ------------------------------- | ------- |
