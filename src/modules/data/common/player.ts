@@ -1,4 +1,4 @@
-const player: Player = {
+const player: PlayerProps = {
   // 剩余生命值，最大上限为10。
   health: 5,
   // 魔力值，初始为50，每3秒回复1点，最大上限为100。
@@ -15,6 +15,6 @@ const player: Player = {
     });
   },
 };
-const playerCopy = { ...player };
+const playerCopy: PlayerProps = { ...player };
 
 export default player;

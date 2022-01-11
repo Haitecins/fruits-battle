@@ -5,7 +5,7 @@ import verify from "./verity";
 import { randomNumber, probability, showDetails } from "../../libs";
 
 const { nodes, entities } = elements;
-const items: Items = [
+const items: ItemProps = [
   {
     id: "clock",
     type: "items",

@@ -1,4 +1,4 @@
-interface PlayRandSound {
+interface PlayRandSoundProps {
   audio: HTMLAudioElement[];
   volume?: number;
   loop?: boolean;

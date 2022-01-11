@@ -1,4 +1,4 @@
-interface Levels {
+interface LevelProps {
   BASE_SCORES: number;
   BASE_SCORES_MULTIPLE: number;
   BASE_MOVE_SPEED: number;

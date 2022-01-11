@@ -5,4 +5,4 @@ interface LevelsUpListObject {
   change: () => number;
   symbol?: string;
 }
-type LevelsUpList = LevelsUpListObject[];
+type LevelsUpListProps = LevelsUpListObject[];

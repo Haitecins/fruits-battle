@@ -1,4 +1,4 @@
-interface ShowDetails {
+interface ShowDetailProps {
   id: string;
   pos: {
     x: number;

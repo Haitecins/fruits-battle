@@ -13,4 +13,4 @@ interface ItemsObject {
   description: string;
   custom?: object;
 }
-type Items = ItemsObject[];
+type ItemProps = ItemsObject[];
