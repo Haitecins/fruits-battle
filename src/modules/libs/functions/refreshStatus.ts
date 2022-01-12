@@ -7,7 +7,7 @@ import timeFormat from "./timeFormat";
 const {
   nodes: { statusbar },
 } = elements;
-function refreshStatus() {
+const refreshStatus = () => {
   statusbar.health.text(() => {
     if (player.health > 10) player.health = 10;
     return player.health;
@@ -22,6 +22,6 @@ function refreshStatus() {
     statistics.PLAYTIME += 0.01;
     return timeFormat(Math.ceil((player.countdown -= 0.01)));
   });
-}
+};
 
 export default refreshStatus;

@@ -61,7 +61,7 @@ const items: ItemProps = [
       timer: null,
     },
     effect() {
-      function attract(element: JQuery<HTMLElement>) {
+      const attract = (element: JQuery<HTMLElement>) => {
         if (!(element.prop("disX") && element.prop("disY"))) {
           element.prop({
             disX: element.prop("xSpeed"),
@@ -87,10 +87,8 @@ const items: ItemProps = [
             400,
             "swing"
           );
-      }
-
+      };
       const getChance = probability(75);
-
       entities.fruits().each(function () {
         if (getChance) {
           if (!$(this).hasClass("bad")) attract($(this));
@@ -138,14 +136,11 @@ const items: ItemProps = [
       const _this = this;
       const width = (this.custom as any).attrs.width;
       const height = (this.custom as any).attrs.height;
-
-      function change(size: number) {
+      const change = (size: number) => {
         const changeWidth = Math.floor(width * size);
         const changeHeight = Math.floor(height * size);
-
         verify.PLAYER_EDIT_ARGUMENTS.custom.attrs.width = changeWidth;
         verify.PLAYER_EDIT_ARGUMENTS.custom.attrs.height = changeHeight;
-
         nodes.player.animate(
           {
             width: changeWidth,
@@ -184,7 +179,7 @@ const items: ItemProps = [
             }, 10000);
           }
         );
-      }
+      };
 
       if (probability(55)) {
         change(
