@@ -52,8 +52,9 @@ const elements = {
     items: () => $(".items"),
   },
   totalEntities: () => $("#app>*:not(div)"),
-  resetStyles: () => $("*:not(#readme)"),
-  allElements: () => $("*"),
+  resetContinueStyles: () =>
+    $("*:not(#readme):not(#fruit-icon)").removeAttr("style"),
+  resetIndexStyles: () => $("*:not(#fruit-icon)").removeAttr("style"),
 };
 
 export default elements;
