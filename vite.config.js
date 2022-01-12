@@ -13,6 +13,5 @@ export default defineConfig({
   build: {
     outDir: "out",
     assetsDir: "static",
-    sourcemap: true,
   },
 });
