@@ -63,4 +63,7 @@ nodes.gameover.backhome.on("click", () => {
   // 刷新历史记录
   refreshHistory();
   playSound({ src: audio.click });
+  levels.reset();
+  player.reset();
+  statistics.reset();
 });
