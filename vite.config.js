@@ -11,7 +11,6 @@ export default defineConfig({
     port: 8080,
   },
   build: {
-    manifest: true,
     outDir: "out",
     assetsDir: "static",
     sourcemap: true,
