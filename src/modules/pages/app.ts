@@ -6,6 +6,7 @@ import statistics from "@/data/common/statistics";
 import verify from "@/data/common/verity";
 import antiCheatVerification from "@/libs/functions/antiCheatVerification";
 import playSound from "@/libs/functions/playSound";
+import refreshHistory from "@/libs/functions/refreshHistory";
 import refreshStatus from "@/libs/functions/refreshStatus";
 import runGame from "@/libs/functions/runGame";
 import bgm from "./bgm";
@@ -13,7 +14,7 @@ import "./icon";
 import "./detail";
 import "./history";
 
-const { nodes, resetStyles } = elements;
+const { nodes, resetStyles, allElements } = elements;
 nodes.readme.startButton
   .one("click", () => bgm.play())
   .on("click", () => {
@@ -46,7 +47,6 @@ nodes.readme.startButton
       );
     });
   });
-
 nodes.gameover.restart.on("click", () => {
   if (!player.isRunning) return;
   player.isRunning = !player.isRunning;
@@ -60,4 +60,11 @@ nodes.gameover.restart.on("click", () => {
     cancelable: false,
   });
   nodes.readme.startButton[0].dispatchEvent(ev);
+});
+nodes.gameover.backhome.on("click", () => {
+  if (!player.isRunning) return;
+  player.isRunning = !player.isRunning;
+  allElements().removeAttr("style");
+  // 刷新历史记录
+  refreshHistory();
 });
