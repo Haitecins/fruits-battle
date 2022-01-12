@@ -1,6 +1,6 @@
 import verify from "@/data/common/verity";
 
-const antiCheatVerification = () => {
+const verifications = () => {
   for (let verifyKey in verify) {
     const currentItem = verify[verifyKey];
     if (currentItem.enabled) {
@@ -11,4 +11,4 @@ const antiCheatVerification = () => {
   }
 };
 
-export default antiCheatVerification;
+export default verifications;
