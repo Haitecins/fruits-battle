@@ -14,7 +14,7 @@ import "./icon";
 import "./detail";
 import "./history";
 
-const { nodes, resetStyles, allElements } = elements;
+const { nodes, resetContinueStyles, resetIndexStyles } = elements;
 nodes.readme.startButton
   .one("click", () => bgm.play())
   .on("click", () => {
@@ -50,10 +50,11 @@ nodes.readme.startButton
 nodes.gameover.restart.on("click", () => {
   if (!player.isRunning) return;
   player.isRunning = !player.isRunning;
-  resetStyles().removeAttr("style");
+  resetContinueStyles();
   levels.reset();
   player.reset();
   statistics.reset();
+  playSound({ src: audio.click });
   const ev = new MouseEvent("click", {
     view: window,
     bubbles: true,
@@ -64,7 +65,8 @@ nodes.gameover.restart.on("click", () => {
 nodes.gameover.backhome.on("click", () => {
   if (!player.isRunning) return;
   player.isRunning = !player.isRunning;
-  allElements().removeAttr("style");
+  resetIndexStyles();
   // 刷新历史记录
   refreshHistory();
+  playSound({ src: audio.click });
 });
