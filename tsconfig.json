@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
+    "baseUrl": "./",
     "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["ESNext", "DOM"],
@@ -13,7 +14,15 @@
     "noEmit": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "paths": {
+      "@/assets/*": ["./src/assets/*"],
+      "@/modules/*": ["./src/modules/*"],
+      "@/data/*": ["./src/modules/data/*"],
+      "@/libs/*": ["./src/modules/libs/*"],
+      "@/pages/*": ["./src/modules/pages/*"],
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["./src"],
   "exclude": ["node_modules"]

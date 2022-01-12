@@ -1,6 +1,6 @@
-import elements from "../data/common/elements";
-import calcRepair from "../libs/functions/calcRepair";
-import timeFormat from "../libs/functions/timeFormat";
+import elements from "@/data/common/elements";
+import calcRepair from "@/libs/functions/calcRepair";
+import timeFormat from "@/libs/functions/timeFormat";
 
 const { nodes } = elements;
 if (!window.localStorage.getItem("app_history")) {

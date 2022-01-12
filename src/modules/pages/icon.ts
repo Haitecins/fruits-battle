@@ -1,9 +1,9 @@
 import $ from "jquery";
-import fruits from "../data/common/fruits";
-import audio from "../data/common/audio";
-import elements from "../data/common/elements";
-import randArrItem from "../libs/functions/randArrItem";
-import playRandSound from "../libs/functions/playRandSound";
+import fruits from "@/data/common/fruits";
+import audio from "@/data/common/audio";
+import elements from "@/data/common/elements";
+import randArrItem from "@/libs/functions/randArrItem";
+import playRandSound from "@/libs/functions/playRandSound";
 
 const { nodes } = elements;
 // 获取索引值，没有则默认为0

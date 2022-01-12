@@ -11,6 +11,7 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
+    "@rollup/plugin-alias": "^3.1.9",
     "@types/jquery": "^3.5.11",
     "@types/node": "^17.0.8",
     "@vitejs/plugin-legacy": "^1.6.4",

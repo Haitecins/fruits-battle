@@ -1,6 +1,6 @@
-import elements from "../data/common/elements";
-import fruits from "../data/common/fruits";
-import items from "../data/common/items";
+import elements from "@/data/common/elements";
+import fruits from "@/data/common/fruits";
+import items from "@/data/common/items";
 
 const {
   nodes: {

@@ -1,5 +1,5 @@
 import $ from "jquery";
-import elements from "../../data/common/elements";
+import elements from "@/data/common/elements";
 
 const { nodes } = elements;
 const builtEntity = ({
