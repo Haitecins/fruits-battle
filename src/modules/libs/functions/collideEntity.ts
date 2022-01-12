@@ -1,6 +1,6 @@
 import $ from "jquery";
 
-function collideEntity({ id, contrast, collided }: CollideEntityProps) {
+const collideEntity = ({ id, contrast, collided }: CollideEntityProps) => {
   $(`.${id}`).each(function () {
     if (
       !(
@@ -17,6 +17,6 @@ function collideEntity({ id, contrast, collided }: CollideEntityProps) {
       if (collided) collided($(this));
     }
   });
-}
+};
 
 export default collideEntity;

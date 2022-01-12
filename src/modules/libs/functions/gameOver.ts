@@ -10,7 +10,7 @@ import playSound from "./playSound";
 import timeFormat from "./timeFormat";
 
 const { nodes, totalEntities } = elements;
-function gameOver() {
+const gameOver = () => {
   // 关闭所有定时器
   $.each(timer, function () {
     clearInterval($(this as any)[0]);
@@ -258,6 +258,6 @@ function gameOver() {
     })
   );
   nodes.gameover.details.animate({ height: 268 }, 800, () => {});
-}
+};
 
 export default gameOver;

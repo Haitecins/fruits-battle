@@ -3,17 +3,16 @@ import elements from "../../data/common/elements";
 import calcRepair from "./calcRepair";
 
 const { nodes } = elements;
-function showDetails({
+const showDetails = ({
   id,
   pos,
   before,
   after,
   extra,
   fixed,
-}: ShowDetailProps) {
+}: ShowDetailProps) => {
   const getPos = pos;
-
-  function send(className: string, text: string | number) {
+  const send = (className: string, text: string | number) => {
     $("<span/>")
       .appendTo(nodes.app)
       .addClass(`pickup ${className}`)
@@ -25,18 +24,19 @@ function showDetails({
       .css({
         left() {
           // 阻止拾取后显示的信息超出游戏区域
-          if (getPos.x < 0) getPos.x = 0;
+          if (getPos.x < 0) getPos.x = 10;
           if (
             getPos.x >
             (nodes.app as any).width() - ($(this) as any).width()
           ) {
-            getPos.x = (nodes.app as any).width() - ($(this) as any).width();
+            getPos.x =
+              (nodes.app as any).width() - ($(this) as any).width() - 10;
           }
 
           return getPos.x;
         },
         top() {
-          if (getPos.y < 0) getPos.y = 0;
+          if (getPos.y < 0) getPos.y = 10;
           if (
             getPos.y >
             (nodes.app as any).height() -
@@ -46,7 +46,8 @@ function showDetails({
             getPos.y =
               (nodes.app as any).height() -
               (nodes.statusbar.element as any).height() -
-              ($(this) as any).height();
+              ($(this) as any).height() -
+              10;
           }
 
           return getPos.y;
@@ -55,8 +56,7 @@ function showDetails({
       .fadeOut(1500, function () {
         $(this).remove();
       });
-  }
-
+  };
   if (after > before) {
     send(
       "get",
@@ -77,6 +77,6 @@ function showDetails({
       })
     );
   }
-}
+};
 
 export default showDetails;

@@ -21,7 +21,7 @@ import refreshStatus from "./refreshStatus";
 import showDetails from "./showDetails";
 
 const { nodes, entities } = elements;
-function runGame() {
+const runGame = () => {
   nodes.player.mousedown(function (e) {
     // 获取鼠标的坐标与该对象的坐标之间的距离
     const x = e.clientX - $(this).position().left;
@@ -256,7 +256,7 @@ function runGame() {
     // 满足结束游戏的条件
     if (player.countdown < 0 || player.health <= 0) gameOver();
 
-    function built(callback: () => void) {
+    const built = (callback: () => void) => {
       // 创建实体函数
       const summon = () =>
         builtEntity({
@@ -387,193 +387,194 @@ function runGame() {
         probability(levels.ITEMS_SPAWN_CHANCE) &&
         summon();
       callback && callback();
-    }
+    };
     // 执行实体生成函数
     ++container.cd >=
       9 - (10 * Math.abs(100 - levels.ENTITY_SPAWN_SPEED + 1)) / 100 &&
       built(() => (container.cd = 0));
   }, 10);
   // 难度定时器
-  timer.difficulty = setTimeout(
-    function levelsUp() {
-      clearTimeout(timer.difficulty as number);
-      playSound({ src: audio.orb });
-      // 淡入淡出效果
-      nodes.levels.element.fadeIn(500).delay(3000).fadeOut(500);
-      // 等级提升
-      nodes.levels.value.text(function () {
-        return "Lv." + ++levels.DIFFICULTY_LEVELS;
-      });
-      // 所有升级项目
-      const levelsUpList: LevelsUpListProps = [
-        {
-          chance: 29.5,
-          title: '<b class="base-scores">基础得分</b>',
-          data: levels.BASE_SCORES,
-          change() {
-            return (levels.BASE_SCORES += randomNumber({
-              min: 0.01,
-              max: 0.1,
-              fixed: 2,
-            }));
-          },
+  const levelsUp = () => {
+    clearTimeout(timer.difficulty as number);
+    playSound({ src: audio.orb });
+    // 淡入淡出效果
+    nodes.levels.element.fadeIn(500).delay(3000).fadeOut(500);
+    // 等级提升
+    nodes.levels.value.text(function () {
+      return "Lv." + ++levels.DIFFICULTY_LEVELS;
+    });
+    // 所有升级项目
+    const levelsUpList: LevelsUpListProps = [
+      {
+        chance: 29.5,
+        title: '<b class="base-scores">基础得分</b>',
+        data: levels.BASE_SCORES,
+        change() {
+          return (levels.BASE_SCORES += randomNumber({
+            min: 0.01,
+            max: 0.1,
+            fixed: 2,
+          }));
         },
-        {
-          chance: 26.2,
-          title: '<b class="base-multiple">基础得分倍率</b>',
-          data: levels.BASE_SCORES_MULTIPLE,
-          symbol: levels.BASE_SCORES_MULTIPLE < 1.25 ? "x" : "x (Max)",
-          change() {
-            levels.BASE_SCORES_MULTIPLE += randomNumber({
-              min: 0.01,
-              max: 0.02,
-              fixed: 2,
-            });
+      },
+      {
+        chance: 26.2,
+        title: '<b class="base-multiple">基础得分倍率</b>',
+        data: levels.BASE_SCORES_MULTIPLE,
+        symbol: levels.BASE_SCORES_MULTIPLE < 1.25 ? "x" : "x (Max)",
+        change() {
+          levels.BASE_SCORES_MULTIPLE += randomNumber({
+            min: 0.01,
+            max: 0.02,
+            fixed: 2,
+          });
 
-            if (levels.BASE_SCORES_MULTIPLE > 1.25) {
-              levels.BASE_SCORES_MULTIPLE = 1.25;
-              return levels.BASE_SCORES_MULTIPLE;
-            }
+          if (levels.BASE_SCORES_MULTIPLE > 1.25) {
+            levels.BASE_SCORES_MULTIPLE = 1.25;
             return levels.BASE_SCORES_MULTIPLE;
-          },
+          }
+          return levels.BASE_SCORES_MULTIPLE;
         },
-        {
-          chance: 31.3,
-          title: '<b class="base-speed">基础移动速度</b>',
-          data: levels.BASE_MOVE_SPEED,
-          symbol: levels.BASE_MOVE_SPEED < 10.5 ? "" : " (Max)",
-          change() {
-            levels.BASE_MOVE_SPEED += randomNumber({
-              min: 0.01,
-              max: 0.1,
-              fixed: 2,
-            });
+      },
+      {
+        chance: 31.3,
+        title: '<b class="base-speed">基础移动速度</b>',
+        data: levels.BASE_MOVE_SPEED,
+        symbol: levels.BASE_MOVE_SPEED < 10.5 ? "" : " (Max)",
+        change() {
+          levels.BASE_MOVE_SPEED += randomNumber({
+            min: 0.01,
+            max: 0.1,
+            fixed: 2,
+          });
 
-            if (levels.BASE_MOVE_SPEED > 10.5) {
-              levels.BASE_MOVE_SPEED = 10.5;
-              return levels.BASE_MOVE_SPEED;
-            }
+          if (levels.BASE_MOVE_SPEED > 10.5) {
+            levels.BASE_MOVE_SPEED = 10.5;
             return levels.BASE_MOVE_SPEED;
-          },
+          }
+          return levels.BASE_MOVE_SPEED;
         },
-        {
-          chance: 33.3,
-          title: '<b class="entity-spawn-speed">实体</b> 生成速度',
-          data: levels.ENTITY_SPAWN_SPEED,
-          symbol: levels.ENTITY_SPAWN_SPEED < 150 ? "%" : "% (Max)",
-          change() {
-            levels.ENTITY_SPAWN_SPEED += randomNumber({
-              min: 0.2,
-              max: 1.4,
-              fixed: 2,
-            });
+      },
+      {
+        chance: 33.3,
+        title: '<b class="entity-spawn-speed">实体</b> 生成速度',
+        data: levels.ENTITY_SPAWN_SPEED,
+        symbol: levels.ENTITY_SPAWN_SPEED < 150 ? "%" : "% (Max)",
+        change() {
+          levels.ENTITY_SPAWN_SPEED += randomNumber({
+            min: 0.2,
+            max: 1.4,
+            fixed: 2,
+          });
 
-            if (levels.ENTITY_SPAWN_SPEED > 150) {
-              levels.ENTITY_SPAWN_SPEED = 150;
-              return levels.ENTITY_SPAWN_SPEED;
-            }
+          if (levels.ENTITY_SPAWN_SPEED > 150) {
+            levels.ENTITY_SPAWN_SPEED = 150;
             return levels.ENTITY_SPAWN_SPEED;
-          },
+          }
+          return levels.ENTITY_SPAWN_SPEED;
         },
-        {
-          chance: 36.4,
-          title: '<b class="items-des-chance">游戏道具</b> 生成概率',
-          data: levels.ITEMS_SPAWN_CHANCE,
-          symbol: levels.ITEMS_SPAWN_CHANCE < 28 ? "%" : "% (Max)",
-          change() {
-            levels.ITEMS_SPAWN_CHANCE += randomNumber({
-              min: 0.1,
-              max: 1.6,
-              fixed: 2,
-            });
+      },
+      {
+        chance: 36.4,
+        title: '<b class="items-des-chance">游戏道具</b> 生成概率',
+        data: levels.ITEMS_SPAWN_CHANCE,
+        symbol: levels.ITEMS_SPAWN_CHANCE < 28 ? "%" : "% (Max)",
+        change() {
+          levels.ITEMS_SPAWN_CHANCE += randomNumber({
+            min: 0.1,
+            max: 1.6,
+            fixed: 2,
+          });
 
-            if (levels.ITEMS_SPAWN_CHANCE > 28) {
-              levels.ITEMS_SPAWN_CHANCE = 28;
-              return levels.ITEMS_SPAWN_CHANCE;
-            }
+          if (levels.ITEMS_SPAWN_CHANCE > 28) {
+            levels.ITEMS_SPAWN_CHANCE = 28;
             return levels.ITEMS_SPAWN_CHANCE;
-          },
+          }
+          return levels.ITEMS_SPAWN_CHANCE;
         },
-        {
-          chance: 37.1,
-          title: '<b class="healthy-fruits">新鲜水果</b> 生成概率',
-          data: levels.HEALTHY_FRUITS_SPAWN_CHANCE,
-          symbol: levels.HEALTHY_FRUITS_SPAWN_CHANCE < 70 ? "%" : "% (Max)",
-          change() {
-            levels.HEALTHY_FRUITS_SPAWN_CHANCE += randomNumber({
-              min: 0.1,
-              max: 1.6,
-              fixed: 2,
-            });
+      },
+      {
+        chance: 37.1,
+        title: '<b class="healthy-fruits">新鲜水果</b> 生成概率',
+        data: levels.HEALTHY_FRUITS_SPAWN_CHANCE,
+        symbol: levels.HEALTHY_FRUITS_SPAWN_CHANCE < 70 ? "%" : "% (Max)",
+        change() {
+          levels.HEALTHY_FRUITS_SPAWN_CHANCE += randomNumber({
+            min: 0.1,
+            max: 1.6,
+            fixed: 2,
+          });
 
-            if (levels.HEALTHY_FRUITS_SPAWN_CHANCE > 70) {
-              levels.HEALTHY_FRUITS_SPAWN_CHANCE = 70;
-              return levels.HEALTHY_FRUITS_SPAWN_CHANCE;
-            }
+          if (levels.HEALTHY_FRUITS_SPAWN_CHANCE > 70) {
+            levels.HEALTHY_FRUITS_SPAWN_CHANCE = 70;
             return levels.HEALTHY_FRUITS_SPAWN_CHANCE;
-          },
+          }
+          return levels.HEALTHY_FRUITS_SPAWN_CHANCE;
         },
-        {
-          chance: 39.8,
-          title: '<b class="bad-fruits">腐烂水果</b> 生成概率',
-          data: levels.BAD_FRUITS_CHANCE,
-          symbol: levels.BAD_FRUITS_CHANCE < 50 ? "%" : "% (Max)",
-          change() {
-            levels.BAD_FRUITS_CHANCE += randomNumber({
-              min: 1,
-              max: 3.2,
-              fixed: 2,
-            });
+      },
+      {
+        chance: 39.8,
+        title: '<b class="bad-fruits">腐烂水果</b> 生成概率',
+        data: levels.BAD_FRUITS_CHANCE,
+        symbol: levels.BAD_FRUITS_CHANCE < 50 ? "%" : "% (Max)",
+        change() {
+          levels.BAD_FRUITS_CHANCE += randomNumber({
+            min: 1,
+            max: 3.2,
+            fixed: 2,
+          });
 
-            if (levels.BAD_FRUITS_CHANCE > 50) {
-              levels.BAD_FRUITS_CHANCE = 50;
-              return levels.BAD_FRUITS_CHANCE;
-            }
+          if (levels.BAD_FRUITS_CHANCE > 50) {
+            levels.BAD_FRUITS_CHANCE = 50;
             return levels.BAD_FRUITS_CHANCE;
-          },
+          }
+          return levels.BAD_FRUITS_CHANCE;
         },
-      ];
-      // 清空上一次的项目
-      nodes.levels.container.empty();
-      // 格式模板
-      const elemTemplate = ({
-        title,
-        data,
-        symbol,
-        change,
-      }: LevelsUpListObject) => {
-        return `<p>${title}&nbsp;<i class="items-min-valid">${calcRepair({
-          formula: data,
-        })}${
-          symbol || ""
-        }</i>&nbsp;to&nbsp;<i class="healthy-fruits">${calcRepair({
-          formula: change(),
-        })}${symbol || ""}</i></p>`;
-      };
-      // 过滤掉未达成条件的项目
-      const filterList = levelsUpList.filter(({ chance }) =>
-        probability(chance, 2)
-      );
-      // 如果有升级项目的话就套用模板，没有升级项目则会随机获取一条。
-      const getUpList = filterList.length && filterList.map(elemTemplate);
-      if ((getUpList as string[]).length) {
-        nodes.levels.container.html(getUpList as never);
-      } else {
-        nodes.levels.container.html(elemTemplate(randArrItem(levelsUpList)[0]));
-      }
-      timer.difficulty = setTimeout(
-        levelsUp,
-        randomNumber({
-          min: 5000,
-          max: 14000,
-        })
-      );
-    },
+      },
+    ];
+    // 清空上一次的项目
+    nodes.levels.container.empty();
+    // 格式模板
+    const elemTemplate = ({
+      title,
+      data,
+      symbol,
+      change,
+    }: LevelsUpListObject) => {
+      return `<p>${title}&nbsp;<i class="items-min-valid">${calcRepair({
+        formula: data,
+      })}${
+        symbol || ""
+      }</i>&nbsp;to&nbsp;<i class="healthy-fruits">${calcRepair({
+        formula: change(),
+      })}${symbol || ""}</i></p>`;
+    };
+    // 过滤掉未达成条件的项目
+    const filterList = levelsUpList.filter(({ chance }) =>
+      probability(chance, 2)
+    );
+    // 如果有升级项目的话就套用模板，没有升级项目则会随机获取一条。
+    const getUpList = filterList.length && filterList.map(elemTemplate);
+    if ((getUpList as string[]).length) {
+      nodes.levels.container.html(getUpList as never);
+    } else {
+      nodes.levels.container.html(elemTemplate(randArrItem(levelsUpList)[0]));
+    }
+    timer.difficulty = setTimeout(
+      levelsUp,
+      randomNumber({
+        min: 5000,
+        max: 14000,
+      })
+    );
+  };
+  timer.difficulty = setTimeout(
+    levelsUp,
     randomNumber({
       min: 5000,
       max: 14000,
     })
   );
-}
+};
 
 export default runGame;

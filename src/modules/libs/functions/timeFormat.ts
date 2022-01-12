@@ -1,4 +1,4 @@
-function timeFormat(num: number) {
+const timeFormat = (num: number) => {
   let m: string | number = Math.floor(num / 60);
   let s: string | number = num % 60;
 
@@ -6,6 +6,6 @@ function timeFormat(num: number) {
   s = s < 10 ? "0" + s : s;
 
   return m + ":" + s;
-}
+};
 
 export default timeFormat;
