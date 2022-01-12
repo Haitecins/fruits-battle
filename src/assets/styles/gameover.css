@@ -19,24 +19,24 @@
   padding-bottom: 10px;
   margin: 0 100px 10px;
 }
-#gameover > div {
+#gameover > div:first-of-type {
   height: 0;
   text-align: center;
   font-size: 0;
   overflow: hidden;
   line-height: 24px;
 }
-#gameover > div > h2 {
+#gameover > div:first-of-type > h2 {
   font-size: 24px;
   font-weight: normal;
   line-height: 40px;
 }
-#gameover > div > h3 {
+#gameover > div:first-of-type > h3 {
   font-size: 18px;
   font-weight: normal;
   line-height: 40px;
 }
-#gameover > div > div {
+#gameover > div:first-of-type > div {
   width: calc(100% / 3);
   height: 154px;
   font-size: 14px;
@@ -47,13 +47,13 @@
   overflow-x: hidden;
   text-align: left;
 }
-#gameover > div > div > ul > li {
+#gameover > div:first-of-type > div > ul > li {
   position: relative;
 }
-#gameover > div > div > ul > li:not(:last-of-type) {
+#gameover > div:first-of-type > div > ul > li:not(:last-of-type) {
   margin-bottom: 14px;
 }
-#gameover > div > div > ul > li > div > p:first-of-type {
+#gameover > div:first-of-type > div > ul > li > div > p:first-of-type {
   height: 40px;
   line-height: 40px;
   text-indent: 48px;
@@ -61,7 +61,7 @@
   font-weight: bold;
   color: #3778fe;
 }
-#gameover > div > div > ul > li > div > p:last-of-type {
+#gameover > div:first-of-type > div > ul > li > div > p:last-of-type {
   text-indent: 10px;
   font-size: 12px;
   line-height: 14px;
@@ -69,21 +69,36 @@
   padding-top: 4px;
   border-top: 1px solid #91b4ff;
 }
-#gameover > div > div > ul > li > i {
+#gameover > div:first-of-type > div > ul > li > i {
   width: 40px;
   height: 40px;
   position: absolute;
   background: url(../images/achievements_2.svg) center no-repeat;
   background-size: 100%;
 }
-#gameover > button {
-  width: 100px;
-  height: 32px;
-  line-height: 30px;
+#gameover > div:last-of-type {
   position: absolute;
-  left: calc(50% - 100px / 2);
+  left: 0;
+  right: 0;
   bottom: 0;
+  font-size: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#gameover > div:last-of-type > button {
+  width: 120px;
+  height: 38px;
+  line-height: 38px;
+  border: 1px solid transparent;
+  color: #fff;
+  font-size: 14px;
   cursor: pointer;
-  background-color: transparent;
-  border: 1px solid rgba(244, 67, 54, 0.78);
+  background-color: #238636;
+  margin: 0 10px;
+  border-radius: 6px;
+  transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+}
+#gameover > div:last-of-type > button:hover {
+  background-color: #2ea043;
 }

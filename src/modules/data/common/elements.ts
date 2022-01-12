@@ -42,6 +42,7 @@ const elements = {
       scores: $("#over-scores"),
       details: $("#over-details"),
       restart: $("#RESTART"),
+      backhome: $("#BACKHOME"),
     },
   },
   entities: {
@@ -52,6 +53,7 @@ const elements = {
   },
   totalEntities: () => $("#app>*:not(div)"),
   resetStyles: () => $("*:not(#readme)"),
+  allElements: () => $("*"),
 };
 
 export default elements;

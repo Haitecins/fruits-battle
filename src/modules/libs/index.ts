@@ -8,6 +8,7 @@ import playSound from "./functions/playSound";
 import probability from "./functions/probability";
 import randArrItem from "./functions/randArrItem";
 import randomNumber from "./functions/randomNumber";
+import refreshHistory from "./functions/refreshHistory";
 import refreshStatus from "./functions/refreshStatus";
 import runGame from "./functions/runGame";
 import showDetails from "./functions/showDetails";
@@ -24,6 +25,7 @@ export {
   probability,
   randArrItem,
   randomNumber,
+  refreshHistory,
   refreshStatus,
   runGame,
   showDetails,
