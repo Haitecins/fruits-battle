@@ -1,8 +1,8 @@
-import antiCheatVerification from "./functions/antiCheatVerification";
+import verifications from "./functions/verifications";
 import builtEntity from "./functions/builtEntity";
 import calcRepair from "./functions/calcRepair";
 import collideEntity from "./functions/collideEntity";
-import gameOver from "./functions/gameOver";
+import ended from "./functions/ended";
 import playRandSound from "./functions/playRandSound";
 import playSound from "./functions/playSound";
 import probability from "./functions/probability";
@@ -10,16 +10,16 @@ import randArrItem from "./functions/randArrItem";
 import randomNumber from "./functions/randomNumber";
 import refreshHistory from "./functions/refreshHistory";
 import refreshStatus from "./functions/refreshStatus";
-import runGame from "./functions/runGame";
+import launcher from "./functions/launcher";
 import showDetails from "./functions/showDetails";
 import timeFormat from "./functions/timeFormat";
 
 export {
-  antiCheatVerification,
+  verifications,
   builtEntity,
   calcRepair,
   collideEntity,
-  gameOver,
+  ended,
   playRandSound,
   playSound,
   probability,
@@ -27,7 +27,7 @@ export {
   randomNumber,
   refreshHistory,
   refreshStatus,
-  runGame,
+  launcher,
   showDetails,
   timeFormat,
 };

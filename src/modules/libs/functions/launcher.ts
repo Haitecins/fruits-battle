@@ -7,11 +7,11 @@ import player from "@/data/common/player";
 import statistics from "@/data/common/statistics";
 import timer from "@/data/common/timer";
 import elements from "@/data/common/elements";
-import antiCheatVerification from "./antiCheatVerification";
+import verifications from "./verifications";
 import builtEntity from "./builtEntity";
 import calcRepair from "./calcRepair";
 import collideEntity from "./collideEntity";
-import gameOver from "./gameOver";
+import ended from "./ended";
 import playRandSound from "./playRandSound";
 import playSound from "./playSound";
 import probability from "./probability";
@@ -21,7 +21,7 @@ import refreshStatus from "./refreshStatus";
 import showDetails from "./showDetails";
 
 const { nodes, entities } = elements;
-const runGame = () => {
+const launcher = () => {
   nodes.player.mousedown(function (e) {
     // 获取鼠标的坐标与该对象的坐标之间的距离
     const x = e.clientX - $(this).position().left;
@@ -76,7 +76,7 @@ const runGame = () => {
   // 主定时器
   timer.main = setInterval(() => {
     // 反作弊验证
-    antiCheatVerification();
+    verifications();
     // 玩家未进行移动行为的惩罚
     player.not_moving_ticks++;
     // 500=5秒
@@ -254,7 +254,7 @@ const runGame = () => {
       });
     });
     // 满足结束游戏的条件
-    if (player.countdown < 0 || player.health <= 0) gameOver();
+    if (player.countdown < 0 || player.health <= 0) ended();
 
     const built = (callback: () => void) => {
       // 创建实体函数
@@ -577,4 +577,4 @@ const runGame = () => {
   );
 };
 
-export default runGame;
+export default launcher;

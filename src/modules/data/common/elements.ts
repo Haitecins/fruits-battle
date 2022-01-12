@@ -2,6 +2,7 @@ import $ from "jquery";
 
 const elements = {
   nodes: {
+    document: $(document),
     body: $("body"),
     app: $("#app"),
     player: $("#fruit-basket"),
