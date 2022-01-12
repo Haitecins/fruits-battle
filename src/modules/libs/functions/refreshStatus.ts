@@ -1,6 +1,6 @@
-import player from "../../data/common/player";
-import statistics from "../../data/common/statistics";
-import elements from "../../data/common/elements";
+import player from "@/data/common/player";
+import statistics from "@/data/common/statistics";
+import elements from "@/data/common/elements";
 import calcRepair from "./calcRepair";
 import timeFormat from "./timeFormat";
 

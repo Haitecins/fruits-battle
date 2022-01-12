@@ -1,5 +1,5 @@
 import $ from "jquery";
-import elements from "../../data/common/elements";
+import elements from "@/data/common/elements";
 import calcRepair from "./calcRepair";
 
 const { nodes } = elements;

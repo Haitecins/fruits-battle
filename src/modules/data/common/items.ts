@@ -2,7 +2,9 @@ import $ from "jquery";
 import player from "./player";
 import elements from "./elements";
 import verify from "./verity";
-import { randomNumber, probability, showDetails } from "../../libs";
+import randomNumber from "@/libs/functions/randomNumber";
+import probability from "@/libs/functions/probability";
+import showDetails from "@/libs/functions/showDetails";
 
 const { nodes, entities } = elements;
 const items: ItemProps = [
