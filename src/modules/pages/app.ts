@@ -1,21 +1,20 @@
 import audio from "@/data/common/audio";
 import elements from "@/data/common/elements";
-import levels from "@/data/common/levels";
 import player from "@/data/common/player";
-import statistics from "@/data/common/statistics";
 import verify from "@/data/common/verity";
 import verifications from "@/libs/functions/verifications";
 import playSound from "@/libs/functions/playSound";
+import resetData from "@/libs/functions/resetData";
 import refreshHistory from "@/libs/functions/refreshHistory";
 import refreshStatus from "@/libs/functions/refreshStatus";
 import launcher from "@/libs/functions/launcher";
-import bgm from "./bgm";
-import "./icon";
-import "./detail";
+import music from "./music";
+import "./detailed";
 import "./history";
+import "./navigation";
 
 const { nodes, resetContinueStyles, resetIndexStyles } = elements;
-const run = () => {
+const run = (): void => {
   if (player.isRunning) return;
   player.isRunning = !player.isRunning;
   // 刷新状态栏
@@ -45,14 +44,12 @@ const run = () => {
     );
   });
 };
-nodes.readme.startButton.one("click", () => bgm.play()).on("click", run);
+nodes.readme.startButton.one("click", () => music.play()).on("click", run);
 nodes.gameover.restart.on("click", () => {
   if (!player.isRunning) return;
   player.isRunning = !player.isRunning;
   resetContinueStyles();
-  levels.reset();
-  player.reset();
-  statistics.reset();
+  resetData();
   playSound({ src: audio.click });
   run();
 });
@@ -62,8 +59,6 @@ nodes.gameover.backhome.on("click", () => {
   resetIndexStyles();
   // 刷新历史记录
   refreshHistory();
+  resetData();
   playSound({ src: audio.click });
-  levels.reset();
-  player.reset();
-  statistics.reset();
 });

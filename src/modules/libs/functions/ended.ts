@@ -10,7 +10,7 @@ import playSound from "./playSound";
 import timeFormat from "./timeFormat";
 
 const { nodes, totalEntities } = elements;
-const ended = () => {
+const ended = (): void => {
   // 关闭所有定时器
   $.each(timer, function () {
     clearInterval($(this as any)[0]);

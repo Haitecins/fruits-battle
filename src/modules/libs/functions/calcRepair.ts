@@ -1,4 +1,8 @@
-const calcRepair = ({ formula, ceil = false, fixed = 2 }: CalcRepairProps) => {
+const calcRepair = ({
+  formula,
+  ceil = false,
+  fixed = 2,
+}: CalcRepairProps): number => {
   let int: string | number = "1";
   for (let i = 0; i < fixed; i++) {
     int += "0";

@@ -1,4 +1,3 @@
-// CSS文件必须在JS文件之前加载，否则会导致DOM节点无法获取。
 import "@/assets/main.css";
 import "@/pages/app";
 import elements from "@/data/common/elements";

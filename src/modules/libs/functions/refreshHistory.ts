@@ -3,7 +3,7 @@ import calcRepair from "./calcRepair";
 import timeFormat from "./timeFormat";
 
 const { nodes } = elements;
-const refreshStatus = () => {
+const refreshStatus = (): void => {
   const getHistory = JSON.parse(
     window.localStorage.getItem("app_history") as string
   );

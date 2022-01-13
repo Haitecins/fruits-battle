@@ -21,7 +21,7 @@ import refreshStatus from "./refreshStatus";
 import showDetails from "./showDetails";
 
 const { nodes, entities } = elements;
-const launcher = () => {
+const launcher = (): void => {
   nodes.player.mousedown(function (e) {
     // 获取鼠标的坐标与该对象的坐标之间的距离
     const x = e.clientX - $(this).position().left;
@@ -394,7 +394,7 @@ const launcher = () => {
       built(() => (container.cd = 0));
   }, 10);
   // 难度定时器
-  const levelsUp = () => {
+  const levelsUp = (): void => {
     clearTimeout(timer.difficulty as number);
     playSound({ src: audio.orb });
     // 淡入淡出效果

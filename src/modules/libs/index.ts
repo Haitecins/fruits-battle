@@ -3,6 +3,7 @@ import builtEntity from "./functions/builtEntity";
 import calcRepair from "./functions/calcRepair";
 import collideEntity from "./functions/collideEntity";
 import ended from "./functions/ended";
+import launcher from "./functions/launcher";
 import playRandSound from "./functions/playRandSound";
 import playSound from "./functions/playSound";
 import probability from "./functions/probability";
@@ -10,7 +11,7 @@ import randArrItem from "./functions/randArrItem";
 import randomNumber from "./functions/randomNumber";
 import refreshHistory from "./functions/refreshHistory";
 import refreshStatus from "./functions/refreshStatus";
-import launcher from "./functions/launcher";
+import resetData from "./functions/resetData";
 import showDetails from "./functions/showDetails";
 import timeFormat from "./functions/timeFormat";
 
@@ -20,6 +21,7 @@ export {
   calcRepair,
   collideEntity,
   ended,
+  launcher,
   playRandSound,
   playSound,
   probability,
@@ -27,7 +29,7 @@ export {
   randomNumber,
   refreshHistory,
   refreshStatus,
-  launcher,
+  resetData,
   showDetails,
   timeFormat,
 };
