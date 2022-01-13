@@ -1,6 +1,10 @@
 import $ from "jquery";
 
-const collideEntity = ({ id, contrast, collided }: CollideEntityProps) => {
+const collideEntity = ({
+  id,
+  contrast,
+  collided,
+}: CollideEntityProps): void => {
   $(`.${id}`).each(function () {
     if (
       !(

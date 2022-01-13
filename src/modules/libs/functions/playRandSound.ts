@@ -6,7 +6,7 @@ const playRandSound = ({
   volume,
   loop,
   promise,
-}: PlayRandSoundProps) => {
+}: PlayRandSoundProps): void => {
   // 播放列表中随机一种声音
   playSound({
     src: randArrItem(audio)[0],

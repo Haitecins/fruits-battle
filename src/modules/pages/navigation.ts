@@ -12,13 +12,13 @@ let getLocalIndex = window.localStorage.getItem("app_index")
   : 0;
 const contents = nodes.readme.icons.contents;
 // 显示随机的一种水果图标
-const randomFruitIcon = (stopped: boolean) => {
+const randomFruitIcon = (stopped: boolean): JQuery<HTMLElement> => {
   return nodes.readme.icons.element
     .stop(stopped)
     .removeAttr("class")
     .addClass(randArrItem(fruits)[0].id);
 };
-const clickHandler = (index: number) => {
+const clickHandler = (index: number): void => {
   if (getLocalIndex === index) return;
   getLocalIndex = index;
   window.localStorage.setItem("app_index", index.toString());

@@ -1,6 +1,6 @@
 import randomNumber from "./randomNumber";
 
-const randArrItem = (arr: any[]) => {
+const randArrItem = (arr: any[]): any[] => {
   // 从自定义数组中随机获取其中一项
   let index = randomNumber({
     min: 0,

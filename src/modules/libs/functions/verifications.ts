@@ -1,6 +1,6 @@
 import verify from "@/data/common/verity";
 
-const verifications = () => {
+const verifications = (): void => {
   for (let verifyKey in verify) {
     const currentItem = verify[verifyKey];
     if (currentItem.enabled) {

@@ -1,6 +1,6 @@
 import randomNumber from "./randomNumber";
 
-const probability = (chance: number, fixed: number = 0) => {
+const probability = (chance: number, fixed: number = 0): boolean => {
   // 返回1-100的百分比数值
   return (
     randomNumber({

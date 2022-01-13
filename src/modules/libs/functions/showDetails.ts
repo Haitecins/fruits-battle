@@ -10,7 +10,7 @@ const showDetails = ({
   after,
   extra,
   fixed,
-}: ShowDetailProps) => {
+}: ShowDetailProps): void => {
   const getPos = pos;
   const send = (className: string, text: string | number) => {
     $("<span/>")

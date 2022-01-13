@@ -7,7 +7,7 @@ import timeFormat from "./timeFormat";
 const {
   nodes: { statusbar },
 } = elements;
-const refreshStatus = () => {
+const refreshStatus = (): void => {
   statusbar.health.text(() => {
     if (player.health > 10) player.health = 10;
     return player.health;
