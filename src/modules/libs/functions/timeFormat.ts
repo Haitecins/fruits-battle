@@ -3,7 +3,7 @@ const timeFormat = (num: number): string => {
   let s: string | number = num % 60;
 
   m = m < 10 ? `0${m}` : m;
-  s = s < 10 ? `0${s}` + s : s;
+  s = s < 10 ? `0${s}` : s;
 
   return `${m}:${s}`;
 };
