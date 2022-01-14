@@ -22,7 +22,7 @@ import showDetails from "./showDetails";
 
 const { nodes, entities } = elements;
 const launcher = (): void => {
-  nodes.player.mousedown(function (e) {
+  nodes.player.on("mousedown", function (e) {
     // 获取鼠标的坐标与该对象的坐标之间的距离
     const x = e.clientX - $(this).position().left;
     const y = e.clientY - $(this).position().top;

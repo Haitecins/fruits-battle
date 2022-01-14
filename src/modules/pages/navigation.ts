@@ -16,7 +16,7 @@ const randomFruitIcon = (stopped: boolean): JQuery<HTMLElement> => {
   return nodes.readme.icons.element
     .stop(stopped)
     .removeAttr("class")
-    .addClass(randArrItem(fruits)[0].id);
+    .addClass(`picked-${randArrItem(fruits)[0].id}`);
 };
 const clickHandler = (index: number): void => {
   if (getLocalIndex === index) return;
