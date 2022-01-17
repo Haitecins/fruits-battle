@@ -46,16 +46,14 @@ const run = (): void => {
 };
 nodes.readme.startButton.one("click", () => music.play()).on("click", run);
 nodes.gameover.restart.on("click", () => {
-  if (!player.isRunning) return;
-  player.isRunning = !player.isRunning;
+  if (!player.isEnded) return;
   resetContinueStyles();
   resetData();
   playSound({ src: audio.click });
   run();
 });
 nodes.gameover.backhome.on("click", () => {
-  if (!player.isRunning) return;
-  player.isRunning = !player.isRunning;
+  if (!player.isEnded) return;
   resetIndexStyles();
   // 刷新历史记录
   refreshHistory();
