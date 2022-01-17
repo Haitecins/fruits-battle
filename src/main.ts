@@ -1,4 +1,4 @@
-import "@/assets/main.css";
+import "@/assets/main.less";
 import "@/pages/app";
 import elements from "@/data/common/elements";
 
