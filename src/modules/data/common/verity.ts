@@ -7,7 +7,7 @@ const verify: VerityProps = {
   DELETE_PLAYER_ELEMENT: {
     enabled: true,
     check() {
-      return nodes.player[0] == null;
+      return $("#fruit-basket")[0] == null;
     },
     actions() {
       $(location).attr("href", "about:blank");

@@ -7,4 +7,9 @@ window.navigator.userAgent.match(
 )
   ? elements.nodes.body.empty().html('<p id="isMobile">暂不支持移动端运行</p>')
   : elements.nodes.app.removeAttr("style");
+window.oncontextmenu = (ev) => {
+  ev.preventDefault();
+  ev.stopPropagation();
+  return false;
+};
 console.log(import.meta.env.MODE);
