@@ -1,7 +1,6 @@
 import $ from "jquery";
 import Entity from "../classes/Entity";
 import audio from "@/data/common/audio";
-import items from "@/data/common/items";
 import levels from "@/data/common/levels";
 import player from "@/data/common/player";
 import statistics from "@/data/common/statistics";
