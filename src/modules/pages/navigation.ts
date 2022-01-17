@@ -16,7 +16,7 @@ const randomFruitIcon = (stopped: boolean): JQuery<HTMLElement> => {
   return nodes.readme.icons.element
     .stop(stopped)
     .removeAttr("class")
-    .addClass(`${randArrItem(fruits)[0].id}`);
+    .addClass(randArrItem(fruits)[0].id);
 };
 const clickHandler = (index: number): void => {
   if (getLocalIndex === index) return;
@@ -35,7 +35,8 @@ const clickHandler = (index: number): void => {
 // 页面刷新后更改到对应的界面
 contents
   .eq(getLocalIndex)
-  .addClass("readme-article-active readme-default-article");
+  .addClass("readme-article-active")
+  .addClass("readme-default-article");
 // 调整水果图标的位置
 randomFruitIcon(false).css({ top: 50 * getLocalIndex + 14 });
 // 点击事件

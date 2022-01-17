@@ -15,7 +15,8 @@ const showDetails = ({
   const send = (className: string, text: string | number) => {
     $("<span/>")
       .appendTo(nodes.app)
-      .addClass(`pickup ${className}`)
+      .addClass("pickup")
+      .addClass(className)
       .html(() => {
         const extraClass = extra ? extra() : "";
 
@@ -60,12 +61,11 @@ const showDetails = ({
   if (after > before) {
     send(
       "get",
-      "+" +
-        calcRepair({
-          formula: after - before,
-          ceil: false,
-          fixed,
-        })
+      `+${calcRepair({
+        formula: after - before,
+        ceil: false,
+        fixed,
+      })}`
     );
   } else {
     send(

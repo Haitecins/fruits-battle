@@ -1,5 +1,5 @@
 import $ from "jquery";
-import Entity from "../classes/Entity";
+import Entity from "@/libs/classes/Entity";
 import audio from "@/data/common/audio";
 import levels from "@/data/common/levels";
 import player from "@/data/common/player";
@@ -118,7 +118,7 @@ const launcher = (): void => {
       ) {
         if ((this as any).data.type === "fruits") {
           // 获取该元素是不是一个腐烂水果
-          const isBad = $(this).hasClass("bad");
+          const isBadFruit = $(this).hasClass("bad");
           // 获取目前的总分数
           const before = statistics.SCORES;
           // 计算最终的分数结果
@@ -128,7 +128,7 @@ const launcher = (): void => {
             (levels.BASE_SCORES + (this as any).data.scores) *
               levels.BASE_SCORES_MULTIPLE;
           statistics.TOTAL_FRUITS++;
-          if (isBad) {
+          if (isBadFruit) {
             // 清空健康水果拾取计数奖励
             statistics.HEALTHY_FRUIT_COUNTS = 0;
             // 清空奖励分数序列
@@ -207,7 +207,7 @@ const launcher = (): void => {
             after: statistics.SCORES,
             // 额外的函数，常用于添加额外样式。
             extra() {
-              return isBad ? "bad" : "";
+              return isBadFruit ? "bad" : "";
             },
           });
         }

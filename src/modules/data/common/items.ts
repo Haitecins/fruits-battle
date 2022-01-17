@@ -216,10 +216,8 @@ const items: ItemProps = [
       max: 70,
     },
     effect() {
-      const getChance = probability(65);
-
       entities.fruits().each(function () {
-        if (getChance) {
+        if (probability(65)) {
           if ($(this).hasClass("bad")) {
             $(this).removeClass("bad");
           }

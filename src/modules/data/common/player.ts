@@ -6,9 +6,11 @@ const player: PlayerProps = {
   // 玩家未进行移动行为的计时
   not_moving_ticks: 0,
   // 游戏倒计时。
-  countdown: 90,
+  countdown: 0,
   // 游戏运行状态
   isRunning: false,
+  // 游戏结束状态
+  isEnded: false,
   reset() {
     Object.keys(player).forEach((index) => {
       player[index] = playerCopy[index];

@@ -24,6 +24,7 @@ const ended = (): void => {
       (audio as any)[item].pause();
     }
   }
+  player.isEnded = !player.isEnded;
   totalEntities().remove();
   nodes.levels.element.stop(true).removeAttr("style");
   nodes.levels.value.empty();
