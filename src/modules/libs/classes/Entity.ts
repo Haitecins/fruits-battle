@@ -4,10 +4,10 @@ import items from "@/modules/data/common/items";
 import statistics from "@/modules/data/common/statistics";
 import levels from "@/modules/data/common/levels";
 import elements from "@/data/common/elements";
-import probability from "../functions/probability";
-import randomNumber from "../functions/randomNumber";
-import randArrItem from "../functions/randArrItem";
-import calcRepair from "../functions/calcRepair";
+import probability from "@/libs/functions/probability";
+import randomNumber from "@/libs/functions/randomNumber";
+import randArrItem from "@/libs/functions/randArrItem";
+import calcRepair from "@/libs/functions/calcRepair";
 
 const { nodes } = elements;
 class Entity {
@@ -31,7 +31,8 @@ class Entity {
       entity.appendTo(nodes.app);
     }
     // 添加实体的类名
-    entity.addClass(`${entities[0].type} ${entities[0].id}`);
+    entity.addClass(entities[0].type);
+    entity.addClass(entities[0].id);
     // 当实体是新鲜水果(fruits)时，有概率变成腐烂水果(bad)。
     if (
       this.element.hasClass("fruits") &&
