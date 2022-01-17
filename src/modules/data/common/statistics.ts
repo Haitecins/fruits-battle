@@ -21,6 +21,8 @@ const statistics: StatisticProps = {
   TOTAL_MEDALS: 0,
   // 开始游戏后从未发生过移动
   NEVER_MOVED: true,
+  // 实体生成冷却时间
+  SUMMON_CD: 0,
   // 重置
   reset(): void {
     Object.keys(statistics).forEach((index) => {

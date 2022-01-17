@@ -10,6 +10,7 @@ interface StatisticProps {
   TOTAL_ACHIEVEMENTS: number;
   TOTAL_MEDALS: number;
   NEVER_MOVED: boolean;
+  SUMMON_CD: number;
   reset: () => void;
   [propName: string]: number | string | boolean | number[] | Function;
 }

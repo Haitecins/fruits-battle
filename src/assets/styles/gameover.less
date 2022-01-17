@@ -1,0 +1,91 @@
+#gameover {
+  width: 800px;
+  max-height: 500px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: none;
+  opacity: 0;
+  > h1 {
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: normal;
+    text-align: center;
+    border-bottom: 1px solid #0a1929;
+    padding-bottom: 10px;
+    margin: 0 100px 10px;
+  }
+  > div:first-of-type {
+    height: 0;
+    text-align: center;
+    font-size: 0;
+    overflow: hidden;
+    line-height: 24px;
+    > h2 {
+      font-size: 24px;
+      font-weight: normal;
+      line-height: 40px;
+    }
+    > h3 {
+      font-size: 18px;
+      font-weight: normal;
+      line-height: 40px;
+    }
+    > div {
+      width: calc(100% / 3);
+      height: 154px;
+      font-size: 14px;
+      line-height: 25px;
+      display: inline-block;
+      padding: 0 10px;
+      overflow: auto;
+      overflow-x: hidden;
+      text-align: left;
+    }
+    > div > ul > li {
+      position: relative;
+      > div > p:first-of-type {
+        height: 40px;
+        line-height: 40px;
+        text-indent: 48px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #3778fe;
+      }
+      > div > p:last-of-type {
+        text-indent: 10px;
+        font-size: 12px;
+        line-height: 14px;
+        margin-top: 4px;
+        padding-top: 4px;
+        border-top: 1px solid #91b4ff;
+      }
+      > i {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        background: url(../images/achievements_2.svg) center no-repeat;
+        background-size: 100%;
+      }
+    }
+    > div > ul > li:not(:last-of-type) {
+      margin-bottom: 14px;
+    }
+  }
+  > div:last-of-type {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > button {
+      margin: 0 10px;
+    }
+  }
+}

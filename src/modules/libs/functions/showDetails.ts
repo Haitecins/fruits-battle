@@ -19,7 +19,7 @@ const showDetails = ({
       .html(() => {
         const extraClass = extra ? extra() : "";
 
-        return `<span class="picked-icon picked-${id} ${extraClass}"></span> ${text}`;
+        return `<span class="picked-icon ${id} ${extraClass}"></span> ${text}`;
       })
       .css({
         left() {

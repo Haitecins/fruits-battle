@@ -8,28 +8,47 @@
   top: 0;
   bottom: 0;
   margin: auto;
-}
-#readme > div {
-  height: 100%;
-  text-align: center;
-}
-#readme > div:first-child {
-  width: 25%;
-}
-#readme > div:first-child > h1 {
-  height: 32px;
-  line-height: 32px;
-  font-size: 20px;
-  font-weight: normal;
-  margin-top: 10px;
-}
-#readme > div:first-child > h1 > img {
-  width: 32px;
-  margin: 0 8px;
-  animation: FloatEffect 2s ease-in-out infinite;
-}
-#readme > div:first-child > h1 > img:last-of-type {
-  animation-delay: 200ms;
+  > div {
+    height: 100%;
+    text-align: center;
+  }
+  > div:first-child {
+    width: 25%;
+    > h1 {
+      height: 32px;
+      line-height: 32px;
+      font-size: 20px;
+      font-weight: normal;
+      margin-top: 10px;
+    }
+    > h1 > img {
+      width: 32px;
+      margin: 0 8px;
+      animation: FloatEffect 2s ease-in-out infinite;
+    }
+    > h1 > img:last-of-type {
+      animation-delay: 200ms;
+    }
+  }
+  > div:last-child {
+    width: 75%;
+    padding: 0 10px;
+    overflow: scroll;
+    overflow-x: hidden;
+    text-align: left;
+    > article {
+      display: none;
+      opacity: 0;
+    }
+    > article p {
+      font-size: 14px;
+      line-height: 24px;
+    }
+    > article img {
+      width: 23px;
+      height: 23px;
+    }
+  }
 }
 #fruit-icon {
   width: 22px;
@@ -46,33 +65,14 @@
   overflow: scroll;
   overflow-x: hidden;
   margin: 10px 0;
-}
-#readme-menu > ul > li {
-  width: calc(100% + 6px);
-  height: 50px;
-  line-height: 50px;
-}
-#readme-menu > ul > li > span {
-  cursor: pointer;
-}
-#readme > div:last-child {
-  width: 75%;
-  padding: 0 10px;
-  overflow: scroll;
-  overflow-x: hidden;
-  text-align: left;
-}
-#readme > div:last-child > article {
-  display: none;
-  opacity: 0;
-}
-#readme > div:last-child > article p {
-  font-size: 14px;
-  line-height: 24px;
-}
-#readme > div:last-child > article img {
-  width: 23px;
-  height: 23px;
+  > ul > li {
+    width: calc(100% + 6px);
+    height: 50px;
+    line-height: 50px;
+  }
+  > ul > li > span {
+    cursor: pointer;
+  }
 }
 .readme-article-active {
   display: block !important;
