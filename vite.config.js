@@ -20,6 +20,7 @@ export default defineConfig({
         resolve("@/data", "src/modules/data"),
         resolve("@/libs", "src/modules/libs"),
         resolve("@/pages", "src/modules/pages"),
+        resolve("@/test", "src/test"),
         resolve("@", "src"),
       ],
     }),
