@@ -1,7 +1,6 @@
 import $ from "jquery";
 import Entity from "../classes/Entity";
 import audio from "@/data/common/audio";
-import items from "@/data/common/items";
 import levels from "@/data/common/levels";
 import player from "@/data/common/player";
 import statistics from "@/data/common/statistics";
@@ -9,7 +8,6 @@ import timer from "@/data/common/timer";
 import elements from "@/data/common/elements";
 import verifications from "./verifications";
 import calcRepair from "./calcRepair";
-import collideEntity from "./collideEntity";
 import ended from "./ended";
 import playRandSound from "./playRandSound";
 import playSound from "./playSound";
@@ -238,39 +236,6 @@ const launcher = (): void => {
         // 删除元素
         $(this).remove();
       }
-    });
-    // 玩家与道具之间发生的碰撞
-    $.each(items, function (index) {
-      const { id } = $(this)[0];
-      const { min, max } = items[index].valid;
-
-      collideEntity({
-        id,
-        contrast: nodes.player,
-        collided(entity) {
-          if (
-            probability(
-              randomNumber({
-                min,
-                max,
-              })
-            )
-          ) {
-            items[index].effect(entity);
-
-            playRandSound({
-              audio: audio.equip_chain,
-              promise: true,
-            });
-          } else {
-            playRandSound({
-              audio: audio.eat,
-              promise: true,
-            });
-          }
-          entity.remove();
-        },
-      });
     });
     // 满足结束游戏的条件
     if (player.countdown < 0 || player.health <= 0) ended();
