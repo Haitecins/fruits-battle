@@ -1,6 +1,6 @@
 import $ from "jquery";
+import Entity from "../classes/Entity";
 import audio from "@/data/common/audio";
-import fruits from "@/data/common/fruits";
 import items from "@/data/common/items";
 import levels from "@/data/common/levels";
 import player from "@/data/common/player";
@@ -8,7 +8,6 @@ import statistics from "@/data/common/statistics";
 import timer from "@/data/common/timer";
 import elements from "@/data/common/elements";
 import verifications from "./verifications";
-import builtEntity from "./builtEntity";
 import calcRepair from "./calcRepair";
 import collideEntity from "./collideEntity";
 import ended from "./ended";
@@ -22,65 +21,57 @@ import showDetails from "./showDetails";
 
 const { nodes, entities } = elements;
 const launcher = (): void => {
-  nodes.player.on("mousedown", function (e) {
-    // 获取鼠标的坐标与该对象的坐标之间的距离
-    const x = e.clientX - $(this).position().left;
-    const y = e.clientY - $(this).position().top;
-    $(document).on({
-      mousemove(e) {
-        if (player.countdown > 0 && player.health > 0) {
-          // 获取鼠标的坐标减去对象之间坐标的位置
-          let left = e.clientX - x;
-          let top = e.clientY - y;
+  nodes.player.on({
+    mousedown(e) {
+      // 获取鼠标的坐标与该对象的坐标之间的距离
+      const x = e.clientX - $(this).position().left;
+      const y = e.clientY - $(this).position().top;
+      $(document).on({
+        mousemove(e) {
+          if (player.countdown > 0 && player.health > 0) {
+            // 获取鼠标的坐标减去对象之间坐标的位置
+            let left = e.clientX - x;
+            let top = e.clientY - y;
 
-          // 阻止超出游戏区域
-          if (left < 0) left = 0;
-          if (top < 0) top = 0;
-          if (
-            left >
-            (nodes.app as any).width() - (nodes.player as any).width()
-          ) {
-            left = (nodes.app as any).width() - (nodes.player as any).width();
-          }
-          if (
-            top >
-            (nodes.app as any).height() -
-              (nodes.player as any).height() -
-              (nodes.statusbar.element as any).height()
-          ) {
-            top =
+            // 阻止超出游戏区域
+            if (left < 0) left = 0;
+            if (top < 0) top = 0;
+            if (
+              left >
+              (nodes.app as any).width() - (nodes.player as any).width()
+            ) {
+              left = (nodes.app as any).width() - (nodes.player as any).width();
+            }
+            if (
+              top >
               (nodes.app as any).height() -
-              (nodes.player as any).height() -
-              (nodes.statusbar.element as any).height();
+                (nodes.player as any).height() -
+                (nodes.statusbar.element as any).height()
+            ) {
+              top =
+                (nodes.app as any).height() -
+                (nodes.player as any).height() -
+                (nodes.statusbar.element as any).height();
+            }
+
+            player.not_moving_ticks = 0;
+            statistics.NEVER_MOVED = false;
+
+            nodes.player.css({ left, top });
           }
-
-          player.not_moving_ticks = 0;
-          statistics.NEVER_MOVED = false;
-
-          nodes.player.css({ left, top });
-        }
-      },
-      mouseup() {
-        $(this).off("mousemove");
-      },
-    });
+        },
+        mouseup() {
+          $(this).off("mousemove");
+        },
+      });
+    },
   });
-  const container = {
-    // 需要生成的实体列表
-    entities: [...fruits, ...items],
-    // 实体生成冷却时间
-    cd: 0,
-    // 腐烂水果生成计数
-    badCounts: 0,
-  };
   // 主定时器
   timer.main = setInterval(() => {
     // 反作弊验证
     verifications();
     // 玩家未进行移动行为的惩罚
-    player.not_moving_ticks++;
-    // 500=5秒
-    if (player.not_moving_ticks >= 500) {
+    if (++player.not_moving_ticks >= 500) {
       // 减少生命值
       player.health--;
       // 当前分数大于0时
@@ -93,45 +84,51 @@ const launcher = (): void => {
     }
     // 刷新状态栏
     refreshStatus();
-    // 操纵所有水果、道具的移动
+    // 实体处理程序
     entities.includes().each(function () {
-      const left = $(this).prop("xSpeed");
-      const top = $(this).prop("ySpeed");
-
-      $(this).animate({ left, top }, 0, "swing", function () {
-        const limit = 4;
-
-        // 超出一定距离时删除元素
-        if (
-          $(this).position().left < -(($(this) as any).width() + limit) ||
-          $(this).position().top < -(($(this) as any).height() + limit) ||
-          $(this).position().left > (nodes.app as any).width() + limit ||
-          $(this).position().top > (nodes.app as any).height() + limit
-        ) {
-          $(this).remove();
+      // 实体的移动
+      $(this).animate(
+        {
+          left: $(this).prop("xSpeed"),
+          top: $(this).prop("ySpeed"),
+        },
+        0,
+        "swing",
+        function () {
+          // 超出游戏区域的阈值
+          const maxDis = 8;
+          // 超出一定距离时删除元素
+          ($(this).position().left < -(($(this) as any).width() + maxDis) ||
+            $(this).position().top < -(($(this) as any).height() + maxDis) ||
+            $(this).position().left > (nodes.app as any).width() + maxDis ||
+            $(this).position().top > (nodes.app as any).height() + maxDis) &&
+            $(this).remove();
         }
-      });
-    });
-    // 玩家与水果之间发生的碰撞
-    $.each(fruits, function () {
-      const { scores, id } = $(this)[0];
-
-      collideEntity({
-        // 对象
-        id,
-        // 比较对象
-        contrast: nodes.player,
-        // 碰撞后发生的事件
-        collided(entity) {
+      );
+      // 碰撞事件
+      if (
+        !(
+          nodes.player.position().top + (nodes.player as any).height() <
+            $(this).position().top ||
+          nodes.player.position().left >
+            $(this).position().left + ($(this) as any).width() ||
+          nodes.player.position().top >
+            $(this).position().top + ($(this) as any).height() ||
+          nodes.player.position().left + (nodes.player as any).width() <
+            $(this).position().left
+        )
+      ) {
+        if ((this as any).data.type === "fruits") {
           // 获取该元素是不是一个腐烂水果
-          const isBad = entity.hasClass("bad");
+          const isBad = $(this).hasClass("bad");
           // 获取目前的总分数
           const before = statistics.SCORES;
           // 计算最终的分数结果
           const result =
             levels.BASE_SCORES +
-            scores +
-            (levels.BASE_SCORES + scores) * levels.BASE_SCORES_MULTIPLE;
+            (this as any).data.scores +
+            (levels.BASE_SCORES + (this as any).data.scores) *
+              levels.BASE_SCORES_MULTIPLE;
           statistics.TOTAL_FRUITS++;
           if (isBad) {
             // 清空健康水果拾取计数奖励
@@ -180,7 +177,6 @@ const launcher = (): void => {
             statistics.REWARD_SCORES_ARRAY.push(result);
             if (statistics.REWARD_SCORES_ARRAY.length >= 15) {
               let rewardScores = 0;
-
               statistics.REWARD_SCORES_ARRAY.forEach((value) => {
                 rewardScores += value;
               });
@@ -202,10 +198,10 @@ const launcher = (): void => {
           }
           // 显示分数细节
           showDetails({
-            id,
+            id: (this as any).data.id,
             pos: {
-              x: entity.position().left,
-              y: entity.position().top,
+              x: $(this).position().left,
+              y: $(this).position().top,
             },
             // 获取之前的数值
             before: before,
@@ -216,9 +212,32 @@ const launcher = (): void => {
               return isBad ? "bad" : "";
             },
           });
-          entity.remove();
-        },
-      });
+        }
+        if ((this as any).data.type === "items") {
+          if (
+            probability(
+              randomNumber({
+                min: (this as any).data.valid.min,
+                max: (this as any).data.valid.max,
+              })
+            )
+          ) {
+            (this as any).data.effect($(this));
+
+            playRandSound({
+              audio: audio.equip_chain,
+              promise: true,
+            });
+          } else {
+            playRandSound({
+              audio: audio.eat,
+              promise: true,
+            });
+          }
+        }
+        // 删除元素
+        $(this).remove();
+      }
     });
     // 玩家与道具之间发生的碰撞
     $.each(items, function (index) {
@@ -255,143 +274,20 @@ const launcher = (): void => {
     });
     // 满足结束游戏的条件
     if (player.countdown < 0 || player.health <= 0) ended();
-
-    const built = (callback: () => void) => {
-      // 创建实体函数
-      const summon = () =>
-        builtEntity({
-          className: type + " " + id,
-          x() {
-            if (probability(30)) {
-              // 30% 的概率会生成在顶部
-              return randomNumber({
-                min: 0,
-                max: (nodes.app as any).width() - ($(this) as any).width(),
-              });
-            } else {
-              return randArrItem([
-                -($(this) as any).width(),
-                nodes.app.width(),
-              ])[0];
-            }
-          },
-          y() {
-            // 判断该元素的X轴是否在游戏区域可见范围内
-            if (
-              $(this).position().left >= 0 &&
-              $(this).position().left < (nodes.app as any).width()
-            ) {
-              return -($(this) as any).height();
-            } else {
-              return randomNumber({
-                min: 0,
-                max:
-                  (nodes.app as any).height() -
-                  ($(this) as any).height() -
-                  (nodes.statusbar.element as any).height(),
-              });
-            }
-          },
-          xSpeed() {
-            const getXSpeed = randomNumber({
-              min:
-                levels.BASE_MOVE_SPEED *
-                speed.min *
-                randomNumber({
-                  min: 0.7,
-                  max: 1.4,
-                  fixed: 2,
-                }),
-              max:
-                levels.BASE_MOVE_SPEED *
-                speed.max *
-                randomNumber({
-                  min: 0.7,
-                  max: 1.4,
-                  fixed: 2,
-                }),
-              fixed: 1,
-            });
-
-            if ($(this).position().left < 0) {
-              return "+=" + getXSpeed;
-            } else if ($(this).position().left >= (nodes.app as any).width()) {
-              return "-=" + getXSpeed;
-            } else if ($(this).position().top < 0) {
-              if (probability(25)) {
-                // 25% 的概率X轴不会偏移
-                return "+=0";
-              } else {
-                return (
-                  randArrItem(["+=", "-="])[0] +
-                  calcRepair({
-                    formula:
-                      getXSpeed *
-                      randomNumber({
-                        min: 0.5,
-                        max: 1.75,
-                        fixed: 1,
-                      }),
-                  })
-                );
-              }
-            }
-          },
-          ySpeed() {
-            const getYSpeed = randomNumber({
-              min: levels.BASE_MOVE_SPEED * speed.min,
-              max: levels.BASE_MOVE_SPEED * speed.max,
-              fixed: 1,
-            });
-
-            if ($(this).position().top < 0) {
-              return "+=" + getYSpeed;
-            } else {
-              if (probability(25)) {
-                // 25% 的概率Y轴不会偏移
-                return "+=0";
-              } else {
-                return (
-                  randArrItem(["+=", "-="])[0] +
-                  calcRepair({
-                    formula:
-                      getYSpeed *
-                      randomNumber({
-                        min: 0.75,
-                        max: 1.25,
-                        fixed: 1,
-                      }),
-                  })
-                );
-              }
-            }
-          },
-          extra(element) {
-            // 本次生成的水果是否变成腐烂水果
-            if (element.hasClass("fruits")) {
-              if (probability(levels.BAD_FRUITS_CHANCE, 2)) {
-                element.addClass("bad");
-              }
-            }
-          },
-        });
-      // 获取实体
-      const { type, id, speed } = randArrItem(container.entities)[0];
-
-      type === "fruits" &&
-        probability(levels.HEALTHY_FRUITS_SPAWN_CHANCE) &&
-        summon();
-
-      type === "items" &&
-        statistics.PLAYTIME > 10 &&
-        probability(levels.ITEMS_SPAWN_CHANCE) &&
-        summon();
-      callback && callback();
-    };
-    // 执行实体生成函数
-    ++container.cd >=
-      9 - (10 * Math.abs(100 - levels.ENTITY_SPAWN_SPEED + 1)) / 100 &&
-      built(() => (container.cd = 0));
+    // 实体生成
+    if (
+      ++statistics.SUMMON_CD >=
+      9 - (10 * Math.abs(100 - levels.ENTITY_SPAWN_SPEED + 1)) / 100
+    ) {
+      const entity = new Entity();
+      const element = entity.element;
+      entity.location(Entity.random.x(element), Entity.random.y(element));
+      entity.speed(
+        Entity.random.speed.x(element),
+        Entity.random.speed.y(element)
+      );
+      statistics.SUMMON_CD = 0;
+    }
   }, 10);
   // 难度定时器
   const levelsUp = (): void => {

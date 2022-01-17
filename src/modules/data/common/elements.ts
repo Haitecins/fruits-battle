@@ -48,9 +48,9 @@ const elements = {
   },
   entities: {
     // 因为实体在游戏中是不确定的，所以需要变为函数让定时器调用
-    includes: () => $(".fruits, .items"),
-    fruits: () => $(".fruits"),
-    items: () => $(".items"),
+    includes: () => $("#app>.fruits,#app>.items"),
+    fruits: () => $("#app>.fruits"),
+    items: () => $("#app>.items"),
   },
   totalEntities: () => $("#app>*:not(div)"),
   resetContinueStyles: () =>
