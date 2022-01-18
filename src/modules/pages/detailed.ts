@@ -8,23 +8,28 @@ const {
   },
 } = elements;
 totalFruits.html(
-  fruits.map(({ id, type, scores, speed }) => {
-    return `<div>
-    <i class="${type} ${id}"></i>
-    <p>分数 ${scores * 100}</p>
-    <p>移动速度 ${speed.min}-${speed.max}</p>
-  </div>`;
-  }) as never
-);
-totalItems.html(
-  items.map(({ id, type, valid, speed, description }) => {
-    return `<div>
-      <div>
+  fruits
+    .sort((fruit1, fruit2) => fruit1.scores - fruit2.scores)
+    .map(({ id, type, scores, speed }) => {
+      return `<div>
         <i class="${type} ${id}"></i>
-        <p>有效概率 ${valid.min}%-${valid.max}%</p>
+        <p>分数 ${scores * 100}</p>
         <p>移动速度 ${speed.min}-${speed.max}</p>
-      </div>
-      <p>${description}</p>
-    </div>`;
-  }) as never
+      </div>`;
+    }) as never
+);
+
+totalItems.html(
+  items
+    .sort((item1, item2) => item1.valid.min - item2.valid.min)
+    .map(({ id, type, valid, speed, description }) => {
+      return `<div>
+        <div>
+          <i class="${type} ${id}"></i>
+          <p>有效概率 ${valid.min}%-${valid.max}%</p>
+          <p>移动速度 ${speed.min}-${speed.max}</p>
+        </div>
+        <p>${description}</p>
+      </div>`;
+    }) as never
 );

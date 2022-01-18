@@ -11,6 +11,7 @@ const items: ItemProps = [
   {
     id: "clock",
     type: "items",
+    priority: 0,
     // 有效概率
     valid: {
       min: 21,
@@ -55,6 +56,7 @@ const items: ItemProps = [
   {
     id: "magnet",
     type: "items",
+    priority: 0,
     valid: {
       min: 11,
       max: 49,
@@ -123,6 +125,7 @@ const items: ItemProps = [
   {
     id: "cake",
     type: "items",
+    priority: 0,
     valid: {
       min: 7,
       max: 81,
@@ -211,22 +214,27 @@ const items: ItemProps = [
   {
     id: "book",
     type: "items",
+    priority: 0,
     valid: {
       min: 41,
       max: 70,
     },
     effect() {
-      entities.fruits().each(function () {
-        if (setChance(65)) {
+      if (setChance(65)) {
+        // 将腐烂水果变为健康水果
+        entities.fruits().each(function () {
           if ($(this).hasClass("bad")) {
             $(this).removeClass("bad");
           }
-        } else {
+        });
+      } else {
+        // 将健康水果变为腐烂水果
+        entities.fruits().each(function () {
           if (!$(this).hasClass("bad")) {
             $(this).addClass("bad");
           }
-        }
-      });
+        });
+      }
     },
     speed: {
       min: 1.15,
@@ -238,6 +246,7 @@ const items: ItemProps = [
   {
     id: "hourglass",
     type: "items",
+    priority: 0,
     valid: {
       min: 13,
       max: 44,
@@ -274,5 +283,13 @@ const items: ItemProps = [
       "增加大量游戏时间。有5%的概率获得当前50%的游戏时间。有10%的概率获得当前30%的游戏时间。有85%的概率获得当前10%的游戏时间。",
   },
 ];
+
+items
+  .sort((item1, item2) => item1.valid.min - item2.valid.min)
+  .forEach((item, index) => {
+    item.priority = 100 + index;
+  });
+
+console.log(items);
 
 export default items;

@@ -13,7 +13,7 @@ const { nodes } = elements;
 class Entity {
   public element: JQuery<HTMLElement>;
   public constructor() {
-    const entities: FruitProps | ItemProps = randArrItem([...fruits, ...items]);
+    const entities: FruitProps & ItemProps = randArrItem([...fruits, ...items]);
     const entity = $("<i/>");
     this.element = entity;
     // 根据难度等级概率生成实体
@@ -33,6 +33,7 @@ class Entity {
     // 添加实体的类名
     entity.addClass(entities[0].type);
     entity.addClass(entities[0].id);
+    entity.css({ zIndex: entities[0].priority });
     // 当实体是新鲜水果(fruits)时，有概率变成腐烂水果(bad)。
     if (
       this.element.hasClass("fruits") &&

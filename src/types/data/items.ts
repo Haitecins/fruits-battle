@@ -1,6 +1,7 @@
 interface ItemsObject {
   id: string;
   type: string;
+  priority: number;
   valid: {
     min: number;
     max: number;
