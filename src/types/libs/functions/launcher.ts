@@ -3,6 +3,6 @@ interface LevelsUpListObject {
   title: string;
   data: number;
   change: () => number;
-  symbol?: string;
+  suffixes?: () => string;
 }
 type LevelsUpListProps = LevelsUpListObject[];
