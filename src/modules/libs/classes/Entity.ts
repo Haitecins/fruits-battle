@@ -13,27 +13,35 @@ const { nodes } = elements;
 class Entity {
   public element: JQuery<HTMLElement>;
   public constructor() {
-    const entities: FruitProps & ItemProps = randArrItem([...fruits, ...items]);
-    const entity = $("<i/>");
-    this.element = entity;
+    let getEntityObject = randArrItem([
+      ...fruits,
+      ...items,
+    ])[0] as FruitsObject & FruitsObject;
+    if (statistics.SUMMONED_FRUIT_COUNTS >= 5) {
+      getEntityObject = randArrItem([...items])[0];
+      statistics.SUMMONED_FRUIT_COUNTS = 0;
+    }
+    this.element = $("<i/>");
     // 根据难度等级概率生成实体
     if (
-      entities[0].type === "fruits" &&
+      getEntityObject.type === "fruits" &&
       setChance(levels.HEALTHY_FRUITS_SPAWN_CHANCE)
     ) {
-      entity.appendTo(nodes.app);
+      $(this.element).appendTo(nodes.app);
+      // 增加生成的水果的计数
+      statistics.PLAYTIME > 10 && statistics.SUMMONED_FRUIT_COUNTS++;
     }
     if (
-      entities[0].type === "items" &&
+      getEntityObject.type === "items" &&
       statistics.PLAYTIME > 10 &&
       setChance(levels.ITEMS_SPAWN_CHANCE)
     ) {
-      entity.appendTo(nodes.app);
+      $(this.element).appendTo(nodes.app);
     }
     // 添加实体的类名
-    entity.addClass(entities[0].type);
-    entity.addClass(entities[0].id);
-    entity.css({ zIndex: entities[0].priority });
+    $(this.element).addClass(getEntityObject.type);
+    $(this.element).addClass(getEntityObject.id);
+    $(this.element).css({ zIndex: getEntityObject.priority });
     // 当实体是新鲜水果(fruits)时，有概率变成腐烂水果(bad)。
     if (
       this.element.hasClass("fruits") &&
@@ -42,7 +50,7 @@ class Entity {
       this.element.addClass("bad");
     }
     // 添加实体数据
-    entity.prop({ data: entities[0] });
+    $(this.element).prop({ data: getEntityObject });
   }
   static random = {
     x(entity: JQuery<HTMLElement>): number {

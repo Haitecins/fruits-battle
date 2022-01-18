@@ -1,5 +1,6 @@
 import $ from "jquery";
 import player from "./player";
+import statistics from "./statistics";
 import elements from "./elements";
 import verify from "./verity";
 import randomNumber from "@/libs/functions/randomNumber";
@@ -141,11 +142,13 @@ const items: ItemProps = [
       const _this = this;
       const width = (this.custom as any).attrs.width;
       const height = (this.custom as any).attrs.height;
-      const change = (size: number) => {
+      const change = (size: number): void => {
         const changeWidth = Math.floor(width * size);
         const changeHeight = Math.floor(height * size);
         verify.PLAYER_EDIT_ARGUMENTS.custom.attrs.width = changeWidth;
         verify.PLAYER_EDIT_ARGUMENTS.custom.attrs.height = changeHeight;
+        statistics.CAKE_ITEM_INFLUENCE_VALUE =
+          1 + ((changeWidth - width) / width) * 1;
         nodes.player.animate(
           {
             width: changeWidth,
@@ -158,6 +161,8 @@ const items: ItemProps = [
             clearTimeout((_this.custom as any).timer);
 
             (_this.custom as any).timer = setTimeout(() => {
+              // 重置最终分数
+              statistics.CAKE_ITEM_INFLUENCE_VALUE = 1;
               if (
                 player.position().top + height >
                 (nodes.app as any).height() -
@@ -209,7 +214,7 @@ const items: ItemProps = [
       max: 2.5,
     },
     description:
-      "真·随地大小变。有55%的概率将玩家变大，有45%的概率变小。该效果持续10秒。重复拾取将覆盖上一次的效果。",
+      "随地大小变(bushi。有55%的概率将玩家变大，有45%的概率变小。该效果持续10秒。重复拾取将覆盖上一次的效果。根据变化的大小，会影响拾取新鲜水果的最终分数，玩家越大分数越高，反之分数越低。",
   },
   {
     id: "book",
@@ -289,7 +294,5 @@ items
   .forEach((item, index) => {
     item.priority = 100 + index;
   });
-
-console.log(items);
 
 export default items;
