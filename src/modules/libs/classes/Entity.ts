@@ -4,7 +4,7 @@ import items from "@/modules/data/common/items";
 import statistics from "@/modules/data/common/statistics";
 import levels from "@/modules/data/common/levels";
 import elements from "@/data/common/elements";
-import probability from "@/libs/functions/probability";
+import setChance from "@/libs/functions/setChance";
 import randomNumber from "@/libs/functions/randomNumber";
 import randArrItem from "@/libs/functions/randArrItem";
 import calcRepair from "@/libs/functions/calcRepair";
@@ -19,14 +19,14 @@ class Entity {
     // 根据难度等级概率生成实体
     if (
       entities[0].type === "fruits" &&
-      probability(levels.HEALTHY_FRUITS_SPAWN_CHANCE)
+      setChance(levels.HEALTHY_FRUITS_SPAWN_CHANCE)
     ) {
       entity.appendTo(nodes.app);
     }
     if (
       entities[0].type === "items" &&
       statistics.PLAYTIME > 10 &&
-      probability(levels.ITEMS_SPAWN_CHANCE)
+      setChance(levels.ITEMS_SPAWN_CHANCE)
     ) {
       entity.appendTo(nodes.app);
     }
@@ -36,7 +36,7 @@ class Entity {
     // 当实体是新鲜水果(fruits)时，有概率变成腐烂水果(bad)。
     if (
       this.element.hasClass("fruits") &&
-      probability(levels.BAD_FRUITS_CHANCE, 2)
+      setChance(levels.BAD_FRUITS_CHANCE, 2)
     ) {
       this.element.addClass("bad");
     }
@@ -45,7 +45,7 @@ class Entity {
   }
   static random = {
     x(entity: JQuery<HTMLElement>): number {
-      return probability(40)
+      return setChance(40)
         ? randomNumber({
             min: 0,
             max: (nodes.app as any).width() - (entity as any).width(),
@@ -89,7 +89,7 @@ class Entity {
         } else if (entity.position().left >= (nodes.app as any).width()) {
           return "-=" + movingSpeed;
         } else if (entity.position().top < 0) {
-          if (probability(25)) {
+          if (setChance(25)) {
             // 25% 的概率X轴不会偏移
             return "+=0";
           } else {
@@ -120,7 +120,7 @@ class Entity {
         if (entity.position().top < 0) {
           return "+=" + movingSpeed;
         } else {
-          if (probability(25)) {
+          if (setChance(25)) {
             // 25% 的概率Y轴不会偏移
             return "+=0";
           } else {

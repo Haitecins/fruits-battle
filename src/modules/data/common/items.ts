@@ -3,7 +3,7 @@ import player from "./player";
 import elements from "./elements";
 import verify from "./verity";
 import randomNumber from "@/libs/functions/randomNumber";
-import probability from "@/libs/functions/probability";
+import setChance from "@/libs/functions/setChance";
 import showDetails from "@/libs/functions/showDetails";
 
 const { nodes, entities } = elements;
@@ -20,7 +20,7 @@ const items: ItemProps = [
       const before = player.countdown;
       const { id } = this;
 
-      if (probability(85)) {
+      if (setChance(85)) {
         player.countdown += randomNumber({
           min: 5.4,
           max: 11.2,
@@ -90,7 +90,7 @@ const items: ItemProps = [
             "swing"
           );
       };
-      const getChance = probability(75);
+      const getChance = setChance(75);
       entities.fruits().each(function () {
         if (getChance) {
           if (!$(this).hasClass("bad")) attract($(this));
@@ -183,7 +183,7 @@ const items: ItemProps = [
         );
       };
 
-      if (probability(55)) {
+      if (setChance(55)) {
         change(
           randomNumber({
             min: 1.5,
@@ -217,7 +217,7 @@ const items: ItemProps = [
     },
     effect() {
       entities.fruits().each(function () {
-        if (probability(65)) {
+        if (setChance(65)) {
           if ($(this).hasClass("bad")) {
             $(this).removeClass("bad");
           }
@@ -247,9 +247,9 @@ const items: ItemProps = [
       const { id } = this;
       const minTime = 1.5;
 
-      if (probability(5)) {
+      if (setChance(5)) {
         player.countdown += minTime + player.countdown * 0.5;
-      } else if (probability(10)) {
+      } else if (setChance(10)) {
         player.countdown += minTime + player.countdown * 0.3;
       } else {
         player.countdown += minTime + player.countdown * 0.1;
