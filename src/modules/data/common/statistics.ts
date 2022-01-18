@@ -15,6 +15,10 @@ const statistics: StatisticProps = {
   HEALTHY_FRUIT_COUNTS: 0,
   // 拾取腐烂水果计数
   BAD_FRUIT_COUNTS: 0,
+  // 道具CAKE影响玩家最终分数的变量
+  CAKE_ITEM_INFLUENCE_VALUE: 1,
+  // 生成的水果的计数
+  SUMMONED_FRUIT_COUNTS: 0,
   // 总计达成的成就个数
   TOTAL_ACHIEVEMENTS: 0,
   // 总计获得的奖章个数

@@ -4,6 +4,7 @@ import audio from "@/data/common/audio";
 import levels from "@/data/common/levels";
 import player from "@/data/common/player";
 import statistics from "@/data/common/statistics";
+import levelsUpList from "@/data/events/levelsUp";
 import timer from "@/data/common/timer";
 import elements from "@/data/common/elements";
 import verifications from "./verifications";
@@ -16,7 +17,6 @@ import randArrItem from "./randArrItem";
 import randomNumber from "./randomNumber";
 import refreshStatus from "./refreshStatus";
 import showDetails from "./showDetails";
-import levelsUpList from "@/data/events/levelsUp";
 
 const { nodes, entities } = elements;
 const launcher = (): void => {
@@ -52,10 +52,8 @@ const launcher = (): void => {
                 (nodes.player as any).height() -
                 (nodes.statusbar.element as any).height();
             }
-
             player.not_moving_ticks = 0;
             statistics.NEVER_MOVED = false;
-
             nodes.player.css({ left, top });
           }
         },
@@ -128,6 +126,8 @@ const launcher = (): void => {
             levels.BASE_SCORES +
             data.scores +
             (levels.BASE_SCORES + data.scores) * levels.BASE_SCORES_MULTIPLE;
+          // 受道具CAKE影响的分数结果
+          const cakeItemResult = result * statistics.CAKE_ITEM_INFLUENCE_VALUE;
           statistics.TOTAL_FRUITS++;
           if (isBadFruit) {
             // 清空健康水果拾取计数奖励
@@ -166,7 +166,7 @@ const launcher = (): void => {
               statistics.HEALTHY_FRUIT_COUNTS = 0;
             }
             // 添加拾取的水果的分数到奖励分数序列
-            statistics.REWARD_SCORES_ARRAY.push(result);
+            statistics.REWARD_SCORES_ARRAY.push(cakeItemResult);
             if (statistics.REWARD_SCORES_ARRAY.length >= 15) {
               const totals = statistics.REWARD_SCORES_ARRAY.reduce(
                 (previousValue, currentValue) => previousValue + currentValue,
@@ -187,7 +187,7 @@ const launcher = (): void => {
                 promise: true,
               });
             }
-            statistics.SCORES += result;
+            statistics.SCORES += cakeItemResult;
           }
           // 显示分数细节
           showDetails({
@@ -237,7 +237,7 @@ const launcher = (): void => {
     // 实体生成
     if (
       ++statistics.SUMMON_CD >=
-      9 - (10 * Math.abs(100 - levels.ENTITY_SPAWN_SPEED + 1)) / 100
+      8 - (10 * Math.abs(100 - levels.ENTITY_SPAWN_SPEED + 1)) / 100
     ) {
       const entity = new Entity();
       const { element } = entity;

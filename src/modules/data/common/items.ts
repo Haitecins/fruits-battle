@@ -1,5 +1,6 @@
 import $ from "jquery";
 import player from "./player";
+import statistics from "./statistics";
 import elements from "./elements";
 import verify from "./verity";
 import randomNumber from "@/libs/functions/randomNumber";
@@ -11,6 +12,7 @@ const items: ItemProps = [
   {
     id: "clock",
     type: "items",
+    priority: 0,
     // 有效概率
     valid: {
       min: 21,
@@ -55,6 +57,7 @@ const items: ItemProps = [
   {
     id: "magnet",
     type: "items",
+    priority: 0,
     valid: {
       min: 11,
       max: 49,
@@ -123,6 +126,7 @@ const items: ItemProps = [
   {
     id: "cake",
     type: "items",
+    priority: 0,
     valid: {
       min: 7,
       max: 81,
@@ -138,11 +142,13 @@ const items: ItemProps = [
       const _this = this;
       const width = (this.custom as any).attrs.width;
       const height = (this.custom as any).attrs.height;
-      const change = (size: number) => {
+      const change = (size: number): void => {
         const changeWidth = Math.floor(width * size);
         const changeHeight = Math.floor(height * size);
         verify.PLAYER_EDIT_ARGUMENTS.custom.attrs.width = changeWidth;
         verify.PLAYER_EDIT_ARGUMENTS.custom.attrs.height = changeHeight;
+        statistics.CAKE_ITEM_INFLUENCE_VALUE =
+          1 + ((changeWidth - width) / width) * 1;
         nodes.player.animate(
           {
             width: changeWidth,
@@ -155,6 +161,8 @@ const items: ItemProps = [
             clearTimeout((_this.custom as any).timer);
 
             (_this.custom as any).timer = setTimeout(() => {
+              // 重置最终分数
+              statistics.CAKE_ITEM_INFLUENCE_VALUE = 1;
               if (
                 player.position().top + height >
                 (nodes.app as any).height() -
@@ -206,27 +214,32 @@ const items: ItemProps = [
       max: 2.5,
     },
     description:
-      "真·随地大小变。有55%的概率将玩家变大，有45%的概率变小。该效果持续10秒。重复拾取将覆盖上一次的效果。",
+      "随地大小变(bushi。有55%的概率将玩家变大，有45%的概率变小。该效果持续10秒。重复拾取将覆盖上一次的效果。根据变化的大小，会影响拾取新鲜水果的最终分数，玩家越大分数越高，反之分数越低。",
   },
   {
     id: "book",
     type: "items",
+    priority: 0,
     valid: {
       min: 41,
       max: 70,
     },
     effect() {
-      entities.fruits().each(function () {
-        if (setChance(65)) {
+      if (setChance(65)) {
+        // 将腐烂水果变为健康水果
+        entities.fruits().each(function () {
           if ($(this).hasClass("bad")) {
             $(this).removeClass("bad");
           }
-        } else {
+        });
+      } else {
+        // 将健康水果变为腐烂水果
+        entities.fruits().each(function () {
           if (!$(this).hasClass("bad")) {
             $(this).addClass("bad");
           }
-        }
-      });
+        });
+      }
     },
     speed: {
       min: 1.15,
@@ -238,6 +251,7 @@ const items: ItemProps = [
   {
     id: "hourglass",
     type: "items",
+    priority: 0,
     valid: {
       min: 13,
       max: 44,
@@ -274,5 +288,11 @@ const items: ItemProps = [
       "增加大量游戏时间。有5%的概率获得当前50%的游戏时间。有10%的概率获得当前30%的游戏时间。有85%的概率获得当前10%的游戏时间。",
   },
 ];
+
+items
+  .sort((item1, item2) => item1.valid.min - item2.valid.min)
+  .forEach((item, index) => {
+    item.priority = 100 + index;
+  });
 
 export default items;
