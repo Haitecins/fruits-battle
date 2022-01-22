@@ -1,14 +1,14 @@
 import $ from "jquery";
-import achievements from "@/data/events/achievements";
-import statistics from "@/data/common/statistics";
-import timer from "@/data/common/timer";
-import audio from "@/data/common/audio";
-import player from "@/data/common/player";
-import levels from "@/data/common/levels";
-import elements from "@/data/common/elements";
-import calcRepair from "./calcRepair";
-import playSound from "./playSound";
-import timeFormat from "./timeFormat";
+import achievements from "@/configs/events/achievements";
+import statistics from "@/configs/common/statistics";
+import timer from "@/configs/common/timer";
+import audio from "@/configs/common/audio";
+import player from "@/configs/common/player";
+import levels from "@/configs/common/levels";
+import elements from "@/configs/common/elements";
+import calcRepair from "@/libs/functions/calcRepair";
+import playSound from "@/libs/functions/playSound";
+import timeFormat from "@/libs/functions/timeFormat";
 
 const { nodes, totalEntities } = elements;
 const ended = (): void => {

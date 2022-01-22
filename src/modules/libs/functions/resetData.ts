@@ -1,6 +1,6 @@
-import levels from "@/data/common/levels";
-import player from "@/data/common/player";
-import statistics from "@/data/common/statistics";
+import levels from "@/configs/common/levels";
+import player from "@/configs/common/player";
+import statistics from "@/configs/common/statistics";
 
 const resetData = (): void => {
   levels.reset();

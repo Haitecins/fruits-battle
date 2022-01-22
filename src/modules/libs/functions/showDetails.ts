@@ -1,6 +1,6 @@
 import $ from "jquery";
-import elements from "@/data/common/elements";
-import calcRepair from "./calcRepair";
+import elements from "@/configs/common/elements";
+import calcRepair from "@/libs/functions/calcRepair";
 
 const { nodes } = elements;
 const showDetails = ({
@@ -13,14 +13,14 @@ const showDetails = ({
 }: ShowDetailProps): void => {
   const getPos = pos;
   const send = (className: string, text: string | number) => {
-    $("<span/>")
+    $("<i/>")
       .appendTo(nodes.app)
       .addClass("pickup")
       .addClass(className)
       .html(() => {
-        const extraClass = extra ? extra() : "";
+        const extraClass = extra ? ` ${extra()}` : "";
 
-        return `<span class="picked-icon ${id} ${extraClass}"></span> ${text}`;
+        return `<span class="picked-icon ${id}${extraClass}"></span> ${text}`;
       })
       .css({
         left() {

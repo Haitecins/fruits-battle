@@ -1,11 +1,16 @@
 import $ from "jquery";
-import fruits from "@/data/common/fruits";
-import audio from "@/data/common/audio";
-import elements from "@/data/common/elements";
-import randArrItem from "@/libs/functions/randArrItem";
+import Random from "@/libs/classes/Random";
+import fruits from "@/configs/common/fruits";
+import audio from "@/configs/common/audio";
+import elements from "@/configs/common/elements";
 import playRandSound from "@/libs/functions/playRandSound";
 
 const { nodes } = elements;
+$(".random-fruit").each(function () {
+  $(this).addClass(
+    new Random(0, fruits.length - 1).getItem<FruitsObject>(fruits).id
+  );
+});
 // 获取索引值，没有则默认为0
 let getLocalIndex = window.localStorage.getItem("app_index")
   ? parseFloat(window.localStorage.getItem("app_index") as string)
@@ -16,7 +21,7 @@ const randomFruitIcon = (stopped: boolean): JQuery<HTMLElement> => {
   return nodes.readme.icons.element
     .stop(stopped)
     .removeAttr("class")
-    .addClass(randArrItem(fruits)[0].id);
+    .addClass(new Random().getItem<FruitsObject>(fruits).id);
 };
 const clickHandler = (index: number): void => {
   if (getLocalIndex === index) return;
@@ -40,6 +45,6 @@ contents
 // 调整水果图标的位置
 randomFruitIcon(false).css({ top: 50 * getLocalIndex + 14 });
 // 点击事件
-nodes.readme.icons.items.each(function (index) {
-  $(this).on("click", clickHandler.bind(this, index));
+nodes.readme.icons.items.each((index, item) => {
+  $(item).on("click", clickHandler.bind(this, index));
 });

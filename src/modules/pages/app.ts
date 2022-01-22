@@ -1,17 +1,17 @@
-import audio from "@/data/common/audio";
-import elements from "@/data/common/elements";
-import player from "@/data/common/player";
-import verify from "@/data/common/verity";
+import audio from "@/configs/common/audio";
+import elements from "@/configs/common/elements";
+import player from "@/configs/common/player";
+import verify from "@/configs/common/verity";
 import verifications from "@/libs/functions/verifications";
 import playSound from "@/libs/functions/playSound";
 import resetData from "@/libs/functions/resetData";
 import refreshHistory from "@/libs/functions/refreshHistory";
 import refreshStatus from "@/libs/functions/refreshStatus";
 import launcher from "@/libs/functions/launcher";
-import music from "./music";
-import "./detailed";
-import "./history";
-import "./navigation";
+import music from "@/modules/pages/music";
+import "@/modules/pages/detailed";
+import "@/modules/pages/history";
+import "@/modules/pages/navigation";
 
 const { nodes, resetContinueStyles, resetIndexStyles } = elements;
 const run = (): void => {

@@ -1,4 +1,4 @@
-import verify from "@/data/common/verity";
+import verify from "@/configs/common/verity";
 
 const verifications = (): void => {
   for (let verifyKey in verify) {

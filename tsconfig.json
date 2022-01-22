@@ -17,10 +17,11 @@
     "noImplicitReturns": true,
     "paths": {
       "@/assets/*": ["./src/assets/*"],
+      "@/containers/*": ["./src/containers/*"],
       "@/modules/*": ["./src/modules/*"],
-      "@/data/*": ["./src/modules/data/*"],
+      "@/configs/*": ["./src/modules/configs/*"],
       "@/libs/*": ["./src/modules/libs/*"],
-      "@/pages/*": ["./src/modules/pages/*"],
+      "@/pages/*": ["src/modules/pages/*"],
       "@/*": ["./src/*"]
     }
   },

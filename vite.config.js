@@ -17,7 +17,7 @@ export default defineConfig({
       entries: [
         resolve("@/assets", "src/assets"),
         resolve("@/modules", "src/modules"),
-        resolve("@/data", "src/modules/data"),
+        resolve("@/configs", "src/modules/configs"),
         resolve("@/libs", "src/modules/libs"),
         resolve("@/pages", "src/modules/pages"),
         resolve("@/test", "src/test"),

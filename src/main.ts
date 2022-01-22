@@ -1,6 +1,6 @@
 import "@/assets/main.less";
-import "@/pages/app";
-import elements from "@/data/common/elements";
+import "@/modules/pages/app";
+import elements from "@/configs/common/elements";
 
 window.navigator.userAgent.match(
   /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
