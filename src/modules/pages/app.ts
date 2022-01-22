@@ -4,7 +4,7 @@ import player from "@/configs/common/player";
 import verify from "@/configs/common/verity";
 import verifications from "@/libs/functions/verifications";
 import playSound from "@/libs/functions/playSound";
-import resetData from "@/libs/functions/resetData";
+import resetConfig from "@/libs/functions/resetConfig";
 import refreshHistory from "@/libs/functions/refreshHistory";
 import refreshStatus from "@/libs/functions/refreshStatus";
 import launcher from "@/libs/functions/launcher";
@@ -48,7 +48,7 @@ nodes.readme.startButton.one("click", () => music.play()).on("click", run);
 nodes.gameover.restart.on("click", () => {
   if (!player.isEnded) return;
   resetContinueStyles();
-  resetData();
+  resetConfig();
   playSound({ src: audio.click });
   run();
 });
@@ -57,6 +57,6 @@ nodes.gameover.backhome.on("click", () => {
   resetIndexStyles();
   // 刷新历史记录
   refreshHistory();
-  resetData();
+  resetConfig();
   playSound({ src: audio.click });
 });

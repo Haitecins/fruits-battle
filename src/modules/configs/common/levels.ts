@@ -15,13 +15,8 @@ const levels: LevelProps = {
   BAD_FRUITS_CHANCE: 15,
   // 难度等级 (default: 1)
   DIFFICULTY_LEVELS: 1,
-  // 重置
-  reset() {
-    Object.keys(levels).forEach((index) => {
-      levels[index] = levelsCopy[index];
-    });
-  },
 };
-const levelsCopy: LevelProps = { ...levels };
+const levelsCopied: LevelProps = { ...levels };
 
 export default levels;
+export { levelsCopied };

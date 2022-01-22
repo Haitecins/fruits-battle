@@ -13,12 +13,8 @@ const player: PlayerProps = {
   isRunning: false,
   // 游戏结束状态
   isEnded: false,
-  reset() {
-    Object.keys(player).forEach((index) => {
-      player[index] = playerCopy[index];
-    });
-  },
 };
-const playerCopy: PlayerProps = { ...player };
+const playerCopied: PlayerProps = { ...player };
 
 export default player;
+export { playerCopied };

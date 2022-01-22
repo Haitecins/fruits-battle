@@ -27,16 +27,11 @@ const statistics: StatisticProps = {
   NEVER_MOVED: true,
   // 实体生成冷却时间
   SUMMON_CD: 0,
-  // 重置
-  reset(): void {
-    Object.keys(statistics).forEach((index) => {
-      statistics[index] = statisticsCopy[index];
-    });
-  },
 };
-const statisticsCopy: StatisticProps = {
+const statisticsCopied: StatisticProps = {
   ...statistics,
   REWARD_SCORES_ARRAY: [],
 };
 
 export default statistics;
+export { statisticsCopied };

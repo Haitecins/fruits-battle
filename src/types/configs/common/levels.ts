@@ -7,6 +7,4 @@ interface LevelProps {
   HEALTHY_FRUITS_SPAWN_CHANCE: number;
   BAD_FRUITS_CHANCE: number;
   DIFFICULTY_LEVELS: number;
-  reset: () => void;
-  [propName: string]: number | string | Function;
 }
