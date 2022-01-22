@@ -1,6 +1,6 @@
 const countdown_test = {
   // 是否启用测试
-  enabled: true,
+  enabled: false,
   // 测试的值
   value: 5,
 };
