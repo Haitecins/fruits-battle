@@ -5,6 +5,4 @@ interface PlayerProps {
   countdown: number;
   isRunning: boolean;
   isEnded: boolean;
-  reset: () => void;
-  [propName: string]: number | string | boolean | Function;
 }
