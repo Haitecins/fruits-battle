@@ -1,8 +1,8 @@
-import player from "@/data/common/player";
-import statistics from "@/data/common/statistics";
-import elements from "@/data/common/elements";
-import calcRepair from "./calcRepair";
-import timeFormat from "./timeFormat";
+import player from "@/configs/common/player";
+import statistics from "@/configs/common/statistics";
+import elements from "@/configs/common/elements";
+import calcRepair from "@/libs/functions/calcRepair";
+import timeFormat from "@/libs/functions/timeFormat";
 
 const {
   nodes: { statusbar },

@@ -1,24 +1,23 @@
 import $ from "jquery";
-import fruits from "@/modules/data/common/fruits";
-import items from "@/modules/data/common/items";
-import statistics from "@/modules/data/common/statistics";
-import levels from "@/modules/data/common/levels";
-import elements from "@/data/common/elements";
+import fruits from "@/modules/configs/common/fruits";
+import items from "@/modules/configs/common/items";
+import statistics from "@/modules/configs/common/statistics";
+import levels from "@/modules/configs/common/levels";
+import elements from "@/configs/common/elements";
 import setChance from "@/libs/functions/setChance";
-import randomNumber from "@/libs/functions/randomNumber";
-import randArrItem from "@/libs/functions/randArrItem";
+import Random from "@/libs/classes/Random";
 import calcRepair from "@/libs/functions/calcRepair";
 
 const { nodes } = elements;
 class Entity {
   public element: JQuery<HTMLElement>;
   public constructor() {
-    let getEntityObject = randArrItem([
+    let getEntityObject = new Random().getItem<FruitsObject | ItemsObject>([
       ...fruits,
       ...items,
-    ])[0] as FruitsObject & FruitsObject;
+    ]);
     if (statistics.SUMMONED_FRUIT_COUNTS >= 5) {
-      getEntityObject = randArrItem([...items])[0];
+      getEntityObject = new Random().getItem<ItemsObject>([...items]);
       statistics.SUMMONED_FRUIT_COUNTS = 0;
     }
     this.element = $("<i/>");
@@ -52,46 +51,42 @@ class Entity {
     // 添加实体数据
     $(this.element).prop({ data: getEntityObject });
   }
+  static directions(): string {
+    const dis = ["+=", "-="];
+    return new Random().getItem<string>(dis);
+  }
   static random = {
     x(entity: JQuery<HTMLElement>): number {
       return setChance(40)
-        ? randomNumber({
-            min: 0,
-            max: (nodes.app as any).width() - (entity as any).width(),
-          })
-        : randArrItem([-(entity as any).width(), nodes.app.width()])[0];
+        ? new Random(
+            0,
+            (nodes.app as any).width() - (entity as any).width()
+          ).getNumber()
+        : new Random().getItem<any | number>([
+            -(entity as any).width(),
+            nodes.app.width(),
+          ]);
     },
     y(entity: JQuery<HTMLElement>): number {
-      return randomNumber({
-        min: 0,
-        max:
-          (nodes.app as any).height() -
+      return new Random(
+        0,
+        (nodes.app as any).height() -
           (entity as any).height() -
-          (nodes.statusbar.element as any).height(),
-      });
+          (nodes.statusbar.element as any).height()
+      ).getNumber();
     },
     speed: {
       x(entity: JQuery<HTMLElement>): string {
         const { data } = entity[0] as any;
-        const movingSpeed = randomNumber({
-          min:
-            levels.BASE_MOVE_SPEED *
+        const movingSpeed = new Random(
+          levels.BASE_MOVE_SPEED *
             data.speed.min *
-            randomNumber({
-              min: 0.7,
-              max: 1.4,
-              fixed: 2,
-            }),
-          max:
-            levels.BASE_MOVE_SPEED *
+            new Random(0.7, 1.4, 2).getNumber(),
+          levels.BASE_MOVE_SPEED *
             data.speed.max *
-            randomNumber({
-              min: 0.7,
-              max: 1.4,
-              fixed: 2,
-            }),
-          fixed: 1,
-        });
+            new Random(0.7, 1.4, 2).getNumber(),
+          1
+        ).getNumber();
 
         if (entity.position().left < 0) {
           return "+=" + movingSpeed;
@@ -103,15 +98,9 @@ class Entity {
             return "+=0";
           } else {
             return (
-              randArrItem(["+=", "-="])[0] +
+              new Random().getItem<string>(["+=", "-="]) +
               calcRepair({
-                formula:
-                  movingSpeed *
-                  randomNumber({
-                    min: 0.5,
-                    max: 1.75,
-                    fixed: 1,
-                  }),
+                formula: movingSpeed * new Random(0.5, 1.75, 1).getNumber(),
               })
             );
           }
@@ -120,11 +109,11 @@ class Entity {
       },
       y(entity: JQuery<HTMLElement>): string {
         const { data } = entity[0] as any;
-        const movingSpeed = randomNumber({
-          min: levels.BASE_MOVE_SPEED * data.speed.min,
-          max: levels.BASE_MOVE_SPEED * data.speed.max,
-          fixed: 1,
-        });
+        const movingSpeed = new Random(
+          levels.BASE_MOVE_SPEED * data.speed.min,
+          levels.BASE_MOVE_SPEED * data.speed.max,
+          1
+        ).getNumber();
 
         if (entity.position().top < 0) {
           return "+=" + movingSpeed;
@@ -134,15 +123,9 @@ class Entity {
             return "+=0";
           } else {
             return (
-              randArrItem(["+=", "-="])[0] +
+              new Random().getItem<string>(["+=", "-="]) +
               calcRepair({
-                formula:
-                  movingSpeed *
-                  randomNumber({
-                    min: 0.75,
-                    max: 1.25,
-                    fixed: 1,
-                  }),
+                formula: movingSpeed * new Random(0.75, 1.25, 1).getNumber(),
               })
             );
           }
@@ -160,13 +143,12 @@ class Entity {
       this.element.css({ top: -(this.element as any).height() });
     } else {
       this.element.css({
-        top: randomNumber({
-          min: 0,
-          max:
-            (nodes.app as any).height() -
+        top: new Random(
+          0,
+          (nodes.app as any).height() -
             (this.element as any).height() -
-            (nodes.statusbar.element as any).height(),
-        }),
+            (nodes.statusbar.element as any).height()
+        ).getNumber(),
       });
     }
   }

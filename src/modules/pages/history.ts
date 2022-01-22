@@ -1,4 +1,4 @@
-import elements from "@/data/common/elements";
+import elements from "@/configs/common/elements";
 import refreshHistory from "@/libs/functions/refreshHistory";
 
 const { nodes } = elements;

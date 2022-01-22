@@ -1,22 +1,21 @@
 import $ from "jquery";
 import Entity from "@/libs/classes/Entity";
-import audio from "@/data/common/audio";
-import levels from "@/data/common/levels";
-import player from "@/data/common/player";
-import statistics from "@/data/common/statistics";
-import levelsUpList from "@/data/events/levelsUp";
-import timer from "@/data/common/timer";
-import elements from "@/data/common/elements";
-import verifications from "./verifications";
-import calcRepair from "./calcRepair";
-import ended from "./ended";
-import playRandSound from "./playRandSound";
-import playSound from "./playSound";
-import setChance from "./setChance";
-import randArrItem from "./randArrItem";
-import randomNumber from "./randomNumber";
-import refreshStatus from "./refreshStatus";
-import showDetails from "./showDetails";
+import audio from "@/configs/common/audio";
+import levels from "@/configs/common/levels";
+import player from "@/configs/common/player";
+import statistics from "@/configs/common/statistics";
+import levelsUpList from "@/configs/events/levelsUp";
+import timer from "@/configs/common/timer";
+import elements from "@/configs/common/elements";
+import verifications from "@/libs/functions/verifications";
+import calcRepair from "@/libs/functions/calcRepair";
+import ended from "@/libs/functions/ended";
+import playRandSound from "@/libs/functions/playRandSound";
+import playSound from "@/libs/functions/playSound";
+import setChance from "@/libs/functions/setChance";
+import refreshStatus from "@/libs/functions/refreshStatus";
+import showDetails from "@/libs/functions/showDetails";
+import Random from "@/libs/classes/Random";
 
 const { nodes, entities } = elements;
 const launcher = (): void => {
@@ -208,12 +207,7 @@ const launcher = (): void => {
         }
         if (data.type === "items") {
           if (
-            setChance(
-              randomNumber({
-                min: data.valid.min,
-                max: data.valid.max,
-              })
-            )
+            setChance(new Random(data.valid.min, data.valid.max).getNumber())
           ) {
             // 执行道具的效果函数
             data.effect($(this));
@@ -282,23 +276,16 @@ const launcher = (): void => {
     if ((getUpList as string[]).length) {
       nodes.levels.container.html(getUpList as never);
     } else {
-      nodes.levels.container.html(levelsUpItems(randArrItem(levelsUpList)[0]));
+      nodes.levels.container.html(
+        levelsUpItems(new Random().getItem<LevelsUpListObject>(levelsUpList))
+      );
     }
     timer.difficulty = setTimeout(
       levelsUp,
-      randomNumber({
-        min: 5000,
-        max: 14000,
-      })
+      new Random(5000, 14000).getNumber()
     );
   };
-  timer.difficulty = setTimeout(
-    levelsUp,
-    randomNumber({
-      min: 5000,
-      max: 14000,
-    })
-  );
+  timer.difficulty = setTimeout(levelsUp, new Random(5000, 14000).getNumber());
 };
 
 export default launcher;

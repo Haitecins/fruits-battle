@@ -1,5 +1,5 @@
-import playSound from "./playSound";
-import randArrItem from "./randArrItem";
+import playSound from "@/libs/functions/playSound";
+import Random from "@/libs/classes/Random";
 
 const playRandSound = ({
   audio,
@@ -9,7 +9,7 @@ const playRandSound = ({
 }: PlayRandSoundProps): void => {
   // 播放列表中随机一种声音
   playSound({
-    src: randArrItem(audio)[0],
+    src: new Random().getItem<HTMLAudioElement>(audio),
     volume,
     loop,
     promise,
