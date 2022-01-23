@@ -1,7 +1,7 @@
 interface LevelsUpListObject {
   chance: number;
   title: string;
-  data: number;
+  data: () => string | number | boolean;
   change: () => number;
   suffixes?: () => string;
 }

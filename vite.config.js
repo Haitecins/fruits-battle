@@ -3,9 +3,9 @@ import legacy from "@vitejs/plugin-legacy";
 import alias from "@rollup/plugin-alias";
 const path = require("path");
 
-const resolve = (alias, src) => ({
+const resolve = (alias, replaced) => ({
   find: alias,
-  replacement: path.resolve(__dirname, src),
+  replacement: path.resolve(__dirname, replaced),
 });
 
 export default defineConfig({
@@ -17,10 +17,10 @@ export default defineConfig({
       entries: [
         resolve("@/assets", "src/assets"),
         resolve("@/containers", "src/containers"),
-        resolve("@/modules", "src/modules"),
         resolve("@/configs", "src/modules/configs"),
         resolve("@/libs", "src/modules/libs"),
         resolve("@/pages", "src/modules/pages"),
+        resolve("@/modules", "src/modules"),
         resolve("@/test", "src/test"),
         resolve("@", "src"),
       ],

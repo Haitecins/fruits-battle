@@ -13,3 +13,4 @@ window.oncontextmenu = (ev) => {
   return false;
 };
 console.log(import.meta.env.MODE);
+console.log("Legacy", import.meta.env.LEGACY);

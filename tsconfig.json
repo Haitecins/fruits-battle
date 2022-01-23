@@ -18,10 +18,10 @@
     "paths": {
       "@/assets/*": ["./src/assets/*"],
       "@/containers/*": ["./src/containers/*"],
-      "@/modules/*": ["./src/modules/*"],
       "@/configs/*": ["./src/modules/configs/*"],
       "@/libs/*": ["./src/modules/libs/*"],
       "@/pages/*": ["src/modules/pages/*"],
+      "@/modules/*": ["./src/modules/*"],
       "@/*": ["./src/*"]
     }
   },
