@@ -48,12 +48,12 @@ const elements = {
   },
   entities: {
     // 因为实体在游戏中是不确定的，所以需要变为函数让定时器调用
-    includes: () => $("#app>.fruits,#app>.items"),
+    totals: () => $("#app>.fruits,#app>.items"),
     fruits: () => $("#app>.fruits"),
     items: () => $("#app>.items"),
   },
-  totalEntities: () => $("#app>*:not(div)"),
-  resetContinueStyles: () =>
+  clearEntities: () => $("#app>*:not(div)").remove(),
+  resetPageStyles: () =>
     $("*:not(#readme):not(#readme *)").removeAttr("style"),
   resetIndexStyles: () => $("*:not(#readme *)").removeAttr("style"),
 };

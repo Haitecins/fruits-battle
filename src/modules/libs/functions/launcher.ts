@@ -81,7 +81,7 @@ const launcher = (): void => {
     // 刷新状态栏
     refreshStatus();
     // 实体处理程序
-    entities.includes().each(function () {
+    entities.totals().each(function () {
       // 实体的移动
       $(this).animate(
         {

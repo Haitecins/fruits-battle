@@ -24,7 +24,7 @@ const resetConfig = (): void => {
     },
     {
       original: statistics,
-      replaced: statisticsCopied,
+      replaced: { ...statisticsCopied, REWARD_SCORES_ARRAY: [] },
     },
   ]);
 };

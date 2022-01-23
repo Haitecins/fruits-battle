@@ -1,5 +1,5 @@
 import "@/assets/main.less";
-import "@/modules/pages/app";
+import "@/pages/app";
 import elements from "@/configs/common/elements";
 
 window.navigator.userAgent.match(

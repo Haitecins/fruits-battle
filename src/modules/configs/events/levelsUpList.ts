@@ -3,7 +3,7 @@ import Random from "@/libs/classes/Random";
 
 const levelsUpList: LevelsUpListProps = [
   {
-    chance: 29.5,
+    chance: 39.5,
     title: '<span class="base-scores">基础得分</span>',
     data: () => levels.BASE_SCORES,
     change() {
@@ -11,7 +11,7 @@ const levelsUpList: LevelsUpListProps = [
     },
   },
   {
-    chance: 26.2,
+    chance: 36.2,
     title: '<span class="base-multiple">基础得分倍率</span>',
     data: () => levels.BASE_SCORES_MULTIPLE,
     suffixes: () => (levels.BASE_SCORES_MULTIPLE < 1.25 ? "x" : "x (Max)"),
@@ -26,7 +26,7 @@ const levelsUpList: LevelsUpListProps = [
     },
   },
   {
-    chance: 31.3,
+    chance: 41.3,
     title: '<span class="base-speed">基础移动速度</span>',
     data: () => levels.BASE_MOVE_SPEED,
     suffixes: () => (levels.BASE_MOVE_SPEED < 6.85 ? "" : " (Max)"),
@@ -41,7 +41,7 @@ const levelsUpList: LevelsUpListProps = [
     },
   },
   {
-    chance: 33.3,
+    chance: 43.3,
     title: '<span class="entity-spawn-speed">实体</span> 生成速度',
     data: () => levels.ENTITY_SPAWN_SPEED,
     suffixes: () => (levels.ENTITY_SPAWN_SPEED < 150 ? "%" : "% (Max)"),
@@ -56,7 +56,7 @@ const levelsUpList: LevelsUpListProps = [
     },
   },
   {
-    chance: 36.4,
+    chance: 46.4,
     title: '<span class="items-des-chance">游戏道具</span> 生成概率',
     data: () => levels.ITEMS_SPAWN_CHANCE,
     suffixes: () => (levels.ITEMS_SPAWN_CHANCE < 28 ? "%" : "% (Max)"),
@@ -71,7 +71,7 @@ const levelsUpList: LevelsUpListProps = [
     },
   },
   {
-    chance: 37.1,
+    chance: 47.1,
     title: '<span class="healthy-fruits">新鲜水果</span> 生成概率',
     data: () => levels.HEALTHY_FRUITS_SPAWN_CHANCE,
     suffixes: () => (levels.HEALTHY_FRUITS_SPAWN_CHANCE < 70 ? "%" : "% (Max)"),
@@ -86,7 +86,7 @@ const levelsUpList: LevelsUpListProps = [
     },
   },
   {
-    chance: 39.8,
+    chance: 49.8,
     title: '<span class="bad-fruits">腐烂水果</span> 生成概率',
     data: () => levels.BAD_FRUITS_CHANCE,
     suffixes: () => (levels.BAD_FRUITS_CHANCE < 50 ? "%" : "% (Max)"),
