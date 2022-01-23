@@ -10,7 +10,7 @@ import calcRepair from "@/libs/functions/calcRepair";
 import playSound from "@/libs/functions/playSound";
 import timeFormat from "@/libs/functions/timeFormat";
 
-const { nodes, totalEntities } = elements;
+const { nodes, clearEntities } = elements;
 const ended = (): void => {
   // 关闭所有定时器
   $.each(timer, function () {
@@ -26,7 +26,7 @@ const ended = (): void => {
     }
   }
   player.isEnded = !player.isEnded;
-  totalEntities().remove();
+  clearEntities();
   nodes.levels.element.stop(true).removeAttr("style");
   nodes.levels.value.empty();
   nodes.levels.container.empty();

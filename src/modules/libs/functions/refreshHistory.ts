@@ -1,4 +1,4 @@
-import elements from "@/modules/configs/common/elements";
+import elements from "@/configs/common/elements";
 import calcRepair from "@/libs/functions/calcRepair";
 import timeFormat from "@/libs/functions/timeFormat";
 

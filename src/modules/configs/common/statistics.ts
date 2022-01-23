@@ -28,10 +28,7 @@ const statistics: StatisticProps = {
   // 实体生成冷却时间
   SUMMON_CD: 0,
 };
-const statisticsCopied: StatisticProps = {
-  ...statistics,
-  REWARD_SCORES_ARRAY: [],
-};
+const statisticsCopied: StatisticProps = { ...statistics };
 
 export default statistics;
 export { statisticsCopied };

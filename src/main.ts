@@ -1,5 +1,5 @@
 import "@/assets/main.less";
-import "@/modules/pages/app";
+import "@/pages/app";
 import elements from "@/configs/common/elements";
 
 window.navigator.userAgent.match(
@@ -13,3 +13,4 @@ window.oncontextmenu = (ev) => {
   return false;
 };
 console.log(import.meta.env.MODE);
+console.log("Legacy", import.meta.env.LEGACY);

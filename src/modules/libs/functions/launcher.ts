@@ -4,7 +4,7 @@ import audio from "@/configs/common/audio";
 import levels from "@/configs/common/levels";
 import player from "@/configs/common/player";
 import statistics from "@/configs/common/statistics";
-import levelsUpList from "@/configs/events/levelsUp";
+import levelsUpList from "@/configs/events/levelsUpList";
 import timer from "@/configs/common/timer";
 import elements from "@/configs/common/elements";
 import verifications from "@/libs/functions/verifications";
@@ -81,7 +81,7 @@ const launcher = (): void => {
     // 刷新状态栏
     refreshStatus();
     // 实体处理程序
-    entities.includes().each(function () {
+    entities.totals().each(function () {
       // 实体的移动
       $(this).animate(
         {
@@ -260,7 +260,7 @@ const launcher = (): void => {
       change,
     }: LevelsUpListObject) => {
       return `<p>${title}&nbsp;<i class="items-min-valid">${calcRepair({
-        formula: data,
+        formula: data() as number,
       })}${
         (suffixes && suffixes()) || ""
       }</i>&nbsp;to&nbsp;<i class="healthy-fruits">${calcRepair({

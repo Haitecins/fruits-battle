@@ -8,12 +8,12 @@ import resetConfig from "@/libs/functions/resetConfig";
 import refreshHistory from "@/libs/functions/refreshHistory";
 import refreshStatus from "@/libs/functions/refreshStatus";
 import launcher from "@/libs/functions/launcher";
-import music from "@/modules/pages/music";
-import "@/modules/pages/detailed";
-import "@/modules/pages/history";
-import "@/modules/pages/navigation";
+import music from "@/pages/music";
+import "@/pages/detailed";
+import "@/pages/history";
+import "@/pages/navigation";
 
-const { nodes, resetContinueStyles, resetIndexStyles } = elements;
+const { nodes, resetPageStyles, resetIndexStyles } = elements;
 const run = (): void => {
   if (player.isRunning) return;
   player.isRunning = !player.isRunning;
@@ -47,7 +47,7 @@ const run = (): void => {
 nodes.readme.startButton.one("click", () => music.play()).on("click", run);
 nodes.gameover.restart.on("click", () => {
   if (!player.isEnded) return;
-  resetContinueStyles();
+  resetPageStyles();
   resetConfig();
   playSound({ src: audio.click });
   run();
