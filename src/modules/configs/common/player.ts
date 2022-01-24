@@ -1,3 +1,4 @@
+import PlayerProps from "@/types/configs/common/player";
 import countdown_test from "@/test/countdown.test";
 
 const player: PlayerProps = {

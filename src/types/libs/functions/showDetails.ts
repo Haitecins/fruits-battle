@@ -9,3 +9,5 @@ interface ShowDetailProps {
   extra?: () => any;
   fixed?: number;
 }
+
+export default ShowDetailProps;

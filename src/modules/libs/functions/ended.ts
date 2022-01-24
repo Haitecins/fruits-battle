@@ -14,17 +14,19 @@ const { nodes, clearEntities } = elements;
 const ended = (): void => {
   // 关闭所有定时器
   $.each(timer, function () {
-    clearInterval($(this as any)[0]);
+    clearInterval($(this as never)[0] as unknown as NodeJS.Timeout);
   });
   // 停止所有正在播放的声音
-  for (let item in audio) {
-    if (Array.isArray((audio as any)[item])) {
-      const audioList: HTMLAudioElement[] = (audio as any)[item];
-      audioList.forEach((audio: HTMLAudioElement) => audio.pause());
+  Object.keys(audio).forEach((key) => {
+    const thisAudio = (audio as never)[key] as HTMLAudioElement;
+
+    if (Array.isArray(thisAudio)) {
+      const audioList: HTMLAudioElement[] = thisAudio;
+      audioList.forEach((audioItem: HTMLAudioElement) => audioItem.pause());
     } else {
-      (audio as any)[item].pause();
+      thisAudio.pause();
     }
-  }
+  });
   player.isEnded = !player.isEnded;
   clearEntities();
   nodes.levels.element.stop(true).removeAttr("style");
@@ -89,7 +91,7 @@ const ended = (): void => {
   } else {
     const getHistory = JSON.parse(
       window.localStorage.getItem("app_history") as string
-    );
+    ) as object;
     window.localStorage.setItem(
       "app_history",
       JSON.stringify([
@@ -97,16 +99,19 @@ const ended = (): void => {
           ...savedItems,
           timestamp: new Date().getTime(),
         },
-        ...getHistory,
+        ...(getHistory as never),
       ])
     );
     if (
-      JSON.parse(window.localStorage.getItem("app_history") as string).length >
-      50
+      (
+        JSON.parse(
+          window.localStorage.getItem("app_history") as string
+        ) as never[]
+      ).length > 50
     ) {
       const totals = JSON.parse(
         window.localStorage.getItem("app_history") as string
-      );
+      ) as never[];
       totals.length = 50;
       window.localStorage.setItem("app_history", JSON.stringify(totals));
     }

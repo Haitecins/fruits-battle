@@ -1,3 +1,5 @@
+import CalcRepairProps from "@/types/libs/functions/calcRepair";
+
 const calcRepair = ({
   formula,
   ceil = false,
@@ -10,9 +12,8 @@ const calcRepair = ({
   int = parseFloat(int);
   if (ceil) {
     return Math.ceil(formula * int) / int;
-  } else {
-    return Math.floor(formula * int) / int;
   }
+  return Math.floor(formula * int) / int;
 };
 
 export default calcRepair;

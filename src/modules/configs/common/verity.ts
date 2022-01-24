@@ -1,5 +1,6 @@
 import $ from "jquery";
 import elements from "@/configs/common/elements";
+import VerityProps from "@/types/configs/common/verity";
 
 const { nodes } = elements;
 const verify: VerityProps = {
@@ -10,7 +11,7 @@ const verify: VerityProps = {
       return $("#fruit-basket")[0] == null;
     },
     actions() {
-      $(location).attr("href", "about:blank");
+      $(window.location).attr("href", "about:blank");
     },
   },
   // Players modify CSS property parameters.
@@ -23,15 +24,17 @@ const verify: VerityProps = {
       },
     },
     check() {
+      type ThisCustomProps = { attrs: { width: number; height: number } };
       return (
-        nodes.player.width() !== parseFloat(this.custom.attrs.width) ||
-        nodes.player.height() !== parseFloat(this.custom.attrs.height)
+        nodes.player.width() !== (this.custom as ThisCustomProps).attrs.width ||
+        nodes.player.height() !== (this.custom as ThisCustomProps).attrs.height
       );
     },
     actions() {
+      type ThisCustomProps = { attrs: { width: number; height: number } };
       nodes.player.css({
-        width: this.custom.attrs.width,
-        height: this.custom.attrs.height,
+        width: (this.custom as ThisCustomProps).attrs.width,
+        height: (this.custom as ThisCustomProps).attrs.height,
       });
     },
   },
@@ -42,12 +45,12 @@ const verify: VerityProps = {
       return (
         nodes.player.position().left < 0 ||
         nodes.player.position().left >
-          (nodes.app as any).width() - (nodes.player as any).width() ||
+          (nodes.app.width() as number) - (nodes.player.width() as number) ||
         nodes.player.position().top < 0 ||
         nodes.player.position().top >
-          (nodes.app as any).height() -
-            (nodes.statusbar.element as any).height() -
-            (nodes.player as any).height()
+          (nodes.app.height() as number) -
+            (nodes.statusbar.element.height() as number) -
+            (nodes.player.height() as number)
       );
     },
     actions() {
@@ -56,10 +59,11 @@ const verify: VerityProps = {
       }
       if (
         nodes.player.position().left >
-        (nodes.app as any).width() - (nodes.player as any).width()
+        (nodes.app.width() as number) - (nodes.player.width() as number)
       ) {
         nodes.player.css({
-          left: (nodes.app as any).width() - (nodes.player as any).width(),
+          left:
+            (nodes.app.width() as number) - (nodes.player.width() as number),
         });
       }
       if (nodes.player.position().top < 0) {
@@ -67,15 +71,15 @@ const verify: VerityProps = {
       }
       if (
         nodes.player.position().top >
-        (nodes.app as any).height() -
-          (nodes.statusbar.element as any).height() -
-          (nodes.player as any).height()
+        (nodes.app.height() as number) -
+          (nodes.statusbar.element.height() as number) -
+          (nodes.player.height() as number)
       ) {
         nodes.player.css({
           top:
-            (nodes.app as any).height() -
-            (nodes.statusbar.element as any).height() -
-            (nodes.player as any).height(),
+            (nodes.app.height() as number) -
+            (nodes.statusbar.element.height() as number) -
+            (nodes.player.height() as number),
         });
       }
     },

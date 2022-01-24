@@ -5,3 +5,6 @@ interface AchievementsObject {
   description: string;
 }
 type AchievementProps = AchievementsObject[];
+
+export default AchievementProps;
+export { AchievementsObject };

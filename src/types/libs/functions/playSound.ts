@@ -4,3 +4,5 @@ interface PlaySoundProps {
   loop?: boolean;
   promise?: boolean;
 }
+
+export default PlaySoundProps;

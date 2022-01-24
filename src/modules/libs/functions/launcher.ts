@@ -16,40 +16,45 @@ import setChance from "@/libs/functions/setChance";
 import refreshStatus from "@/libs/functions/refreshStatus";
 import showDetails from "@/libs/functions/showDetails";
 import Random from "@/libs/classes/Random";
+import { FruitsObject } from "@/types/configs/common/fruits";
+import { ItemsObject } from "@/types/configs/common/items";
+import { LevelsUpListObject } from "@/types/configs/events/levelsUp";
 
 const { nodes, entities } = elements;
 const launcher = (): void => {
   nodes.player.on({
-    mousedown(e) {
+    mousedown(downEvent) {
       // 获取鼠标的坐标与该对象的坐标之间的距离
-      const x = e.clientX - $(this).position().left;
-      const y = e.clientY - $(this).position().top;
+      const x = downEvent.clientX - $(this).position().left;
+      const y = downEvent.clientY - $(this).position().top;
       $(document).on({
-        mousemove(e) {
+        mousemove(moveEvent) {
           if (player.countdown > 0 && player.health > 0) {
             // 获取鼠标的坐标减去对象之间坐标的位置
-            let left = e.clientX - x;
-            let top = e.clientY - y;
+            let left = moveEvent.clientX - x;
+            let top = moveEvent.clientY - y;
 
             // 阻止超出游戏区域
             if (left < 0) left = 0;
             if (top < 0) top = 0;
             if (
               left >
-              (nodes.app as any).width() - (nodes.player as any).width()
+              (nodes.app.width() as number) - (nodes.player.width() as number)
             ) {
-              left = (nodes.app as any).width() - (nodes.player as any).width();
+              left =
+                (nodes.app.width() as number) -
+                (nodes.player.width() as number);
             }
             if (
               top >
-              (nodes.app as any).height() -
-                (nodes.player as any).height() -
-                (nodes.statusbar.element as any).height()
+              (nodes.app.height() as number) -
+                (nodes.player.height() as number) -
+                (nodes.statusbar.element.height() as number)
             ) {
               top =
-                (nodes.app as any).height() -
-                (nodes.player as any).height() -
-                (nodes.statusbar.element as any).height();
+                (nodes.app.height() as number) -
+                (nodes.player.height() as number) -
+                (nodes.statusbar.element.height() as number);
             }
             player.not_moving_ticks = 0;
             statistics.NEVER_MOVED = false;
@@ -73,7 +78,7 @@ const launcher = (): void => {
       // 当前分数大于0时
       if (statistics.SCORES > 0) {
         // 扣除当前游戏得分的 10%
-        statistics.SCORES = statistics.SCORES - statistics.SCORES * 0.1;
+        statistics.SCORES -= statistics.SCORES * 0.1;
         playRandSound({ audio: audio.hit, promise: true });
       }
       player.not_moving_ticks = 0;
@@ -85,8 +90,8 @@ const launcher = (): void => {
       // 实体的移动
       $(this).animate(
         {
-          left: $(this).prop("xSpeed"),
-          top: $(this).prop("ySpeed"),
+          left: $(this).prop("xSpeed") as string,
+          top: $(this).prop("ySpeed") as string,
         },
         0,
         "swing",
@@ -94,27 +99,27 @@ const launcher = (): void => {
           // 超出游戏区域的阈值
           const maxDis = 8;
           // 超出一定距离时删除元素
-          ($(this).position().left < -(($(this) as any).width() + maxDis) ||
-            $(this).position().top < -(($(this) as any).height() + maxDis) ||
-            $(this).position().left > (nodes.app as any).width() + maxDis ||
-            $(this).position().top > (nodes.app as any).height() + maxDis) &&
+          ($(this).position().left < -(($(this).width() as number) + maxDis) ||
+            $(this).position().top < -(($(this).height() as number) + maxDis) ||
+            $(this).position().left > (nodes.app.width() as number) + maxDis ||
+            $(this).position().top > (nodes.app.height() as number) + maxDis) &&
             $(this).remove();
         }
       );
       // 碰撞事件
       if (
         !(
-          nodes.player.position().top + (nodes.player as any).height() <
+          nodes.player.position().top + (nodes.player.height() as number) <
             $(this).position().top ||
           nodes.player.position().left >
-            $(this).position().left + ($(this) as any).width() ||
+            $(this).position().left + ($(this).width() as number) ||
           nodes.player.position().top >
-            $(this).position().top + ($(this) as any).height() ||
-          nodes.player.position().left + (nodes.player as any).width() <
+            $(this).position().top + ($(this).height() as number) ||
+          nodes.player.position().left + (nodes.player.width() as number) <
             $(this).position().left
         )
       ) {
-        const data: FruitsObject & ItemsObject = (this as any).data;
+        const { data } = this as never as { data: FruitsObject & ItemsObject };
         if (data.type === "fruits") {
           // 获取该元素是不是一个腐烂水果
           const isBadFruit = $(this).hasClass("bad");
@@ -196,7 +201,7 @@ const launcher = (): void => {
               y: $(this).position().top,
             },
             // 获取之前的数值
-            before: before,
+            before,
             // 与当前数值进行比较
             after: statistics.SCORES,
             // 额外的函数，常用于添加额外样式。
@@ -250,7 +255,7 @@ const launcher = (): void => {
     // 淡入淡出效果
     nodes.levels.element.fadeIn(500).delay(4000).fadeOut(500);
     // 等级提升
-    nodes.levels.value.text(() => "Lv." + ++levels.DIFFICULTY_LEVELS);
+    nodes.levels.value.text(() => `Lv.${++levels.DIFFICULTY_LEVELS}`);
     // 清空上一次的项目
     nodes.levels.container.empty();
     const levelsUpItems = ({

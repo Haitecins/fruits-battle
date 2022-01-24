@@ -8,3 +8,5 @@ interface LevelProps {
   BAD_FRUITS_CHANCE: number;
   DIFFICULTY_LEVELS: number;
 }
+
+export default LevelProps;

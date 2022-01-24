@@ -1,3 +1,5 @@
+import LevelProps from "@/types/configs/common/levels";
+
 const levels: LevelProps = {
   // 基础得分 (default: 1)
   BASE_SCORES: 1,

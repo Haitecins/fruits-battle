@@ -1,5 +1,6 @@
 import levels from "@/configs/common/levels";
 import Random from "@/libs/classes/Random";
+import LevelsUpListProps from "@/types/configs/events/levelsUp";
 
 const levelsUpList: LevelsUpListProps = [
   {
@@ -7,7 +8,8 @@ const levelsUpList: LevelsUpListProps = [
     title: '<span class="base-scores">基础得分</span>',
     data: () => levels.BASE_SCORES,
     change() {
-      return (levels.BASE_SCORES += new Random(0.01, 0.1, 2).getNumber());
+      levels.BASE_SCORES += new Random(0.01, 0.1, 2).getNumber();
+      return levels.BASE_SCORES;
     },
   },
   {

@@ -9,3 +9,5 @@ interface AudioProps {
   hit: HTMLAudioElement[];
   open_flip: HTMLAudioElement[];
 }
+
+export default AudioProps;

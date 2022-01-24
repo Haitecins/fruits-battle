@@ -9,3 +9,6 @@ interface FruitsObject {
   };
 }
 type FruitProps = FruitsObject[];
+
+export default FruitProps;
+export { FruitsObject };
