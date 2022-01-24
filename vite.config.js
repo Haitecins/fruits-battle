@@ -9,6 +9,7 @@ const resolve = (alias, replaced) => ({
 });
 
 export default defineConfig({
+  root: "src",
   plugins: [
     legacy({
       targets: ["defaults", "not IE 11"],
