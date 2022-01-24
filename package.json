@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && yarn format && vite build",
+    "build": "tsc && yarn format && yarn lint && vite build",
     "preview": "vite preview",
     "serve": "serve ./out -l 80",
     "format": "prettier --write .",
