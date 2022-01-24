@@ -18,7 +18,7 @@ import showDetails from "@/libs/functions/showDetails";
 import Random from "@/libs/classes/Random";
 import { FruitsObject } from "@/types/configs/common/fruits";
 import { ItemsObject } from "@/types/configs/common/items";
-import { LevelsUpListObject } from "@/types/configs/events/levelsUp";
+import { LevelsUpListObject } from "@/types/configs/events/levelsUpList";
 
 const { nodes, entities } = elements;
 const launcher = (): void => {

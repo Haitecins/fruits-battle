@@ -1,6 +1,6 @@
 import levels from "@/configs/common/levels";
 import Random from "@/libs/classes/Random";
-import LevelsUpListProps from "@/types/configs/events/levelsUp";
+import LevelsUpListProps from "@/types/configs/events/levelsUpList";
 
 const levelsUpList: LevelsUpListProps = [
   {
