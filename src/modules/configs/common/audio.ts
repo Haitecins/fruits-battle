@@ -18,6 +18,7 @@ import hit3 from "@/assets/sounds/hit3.ogg";
 import openFlip1 from "@/assets/sounds/open_flip1.ogg";
 import openFlip2 from "@/assets/sounds/open_flip2.ogg";
 import openFlip3 from "@/assets/sounds/open_flip3.ogg";
+import AudioProps from "@/types/configs/common/audio";
 
 const audio: AudioProps = {
   // 开始按钮点击音效

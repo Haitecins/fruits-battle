@@ -7,10 +7,13 @@ import elements from "@/configs/common/elements";
 import setChance from "@/libs/functions/setChance";
 import Random from "@/libs/classes/Random";
 import calcRepair from "@/libs/functions/calcRepair";
+import { FruitsObject } from "@/types/configs/common/fruits";
+import { ItemsObject } from "@/types/configs/common/items";
 
 const { nodes } = elements;
 class Entity {
   public element: JQuery<HTMLElement>;
+
   public constructor() {
     let getEntityObject = new Random().getItem<FruitsObject | ItemsObject>([
       ...fruits,
@@ -28,7 +31,7 @@ class Entity {
     ) {
       $(this.element).appendTo(nodes.app);
       // 增加生成的水果的计数
-      statistics.PLAYTIME > 10 && statistics.SUMMONED_FRUIT_COUNTS++;
+      if (statistics.PLAYTIME > 10) statistics.SUMMONED_FRUIT_COUNTS += 1;
     }
     if (
       getEntityObject.type === "items" &&
@@ -51,33 +54,37 @@ class Entity {
     // 添加实体数据
     $(this.element).prop({ data: getEntityObject });
   }
+
   static directions(): string {
     const dis = ["+=", "-="];
     return new Random().getItem<string>(dis);
   }
+
   static random = {
     x(entity: JQuery<HTMLElement>): number {
       return setChance(40)
         ? new Random(
             0,
-            (nodes.app as any).width() - (entity as any).width()
+            (nodes.app.width() as number) - (entity.width() as number)
           ).getNumber()
-        : new Random().getItem<any | number>([
-            -(entity as any).width(),
-            nodes.app.width(),
+        : new Random().getItem<number>([
+            -(entity.width() as number),
+            nodes.app.width() as number,
           ]);
     },
     y(entity: JQuery<HTMLElement>): number {
       return new Random(
         0,
-        (nodes.app as any).height() -
-          (entity as any).height() -
-          (nodes.statusbar.element as any).height()
+        (nodes.app.height() as number) -
+          (entity.height() as number) -
+          (nodes.statusbar.element.height() as number)
       ).getNumber();
     },
     speed: {
       x(entity: JQuery<HTMLElement>): string {
-        const { data } = entity[0] as any;
+        const { data } = entity[0] as unknown as {
+          data: FruitsObject | ItemsObject;
+        };
         const movingSpeed = new Random(
           levels.BASE_MOVE_SPEED *
             data.speed.min *
@@ -89,26 +96,26 @@ class Entity {
         ).getNumber();
 
         if (entity.position().left < 0) {
-          return "+=" + movingSpeed;
-        } else if (entity.position().left >= (nodes.app as any).width()) {
-          return "-=" + movingSpeed;
-        } else if (entity.position().top < 0) {
+          return `+=${movingSpeed}`;
+        }
+        if (entity.position().left >= (nodes.app.width() as number)) {
+          return `-=${movingSpeed}`;
+        }
+        if (entity.position().top < 0) {
           if (setChance(25)) {
             // 25% 的概率X轴不会偏移
             return "+=0";
-          } else {
-            return (
-              new Random().getItem<string>(["+=", "-="]) +
-              calcRepair({
-                formula: movingSpeed * new Random(0.5, 1.75, 1).getNumber(),
-              })
-            );
           }
+          return `${new Random().getItem<string>(["+=", "-="])}${calcRepair({
+            formula: movingSpeed * new Random(0.5, 1.75, 1).getNumber(),
+          })}`;
         }
         return "";
       },
       y(entity: JQuery<HTMLElement>): string {
-        const { data } = entity[0] as any;
+        const { data } = entity[0] as unknown as {
+          data: FruitsObject | ItemsObject;
+        };
         const movingSpeed = new Random(
           levels.BASE_MOVE_SPEED * data.speed.min,
           levels.BASE_MOVE_SPEED * data.speed.max,
@@ -116,45 +123,43 @@ class Entity {
         ).getNumber();
 
         if (entity.position().top < 0) {
-          return "+=" + movingSpeed;
-        } else {
-          if (setChance(25)) {
-            // 25% 的概率Y轴不会偏移
-            return "+=0";
-          } else {
-            return (
-              new Random().getItem<string>(["+=", "-="]) +
-              calcRepair({
-                formula: movingSpeed * new Random(0.75, 1.25, 1).getNumber(),
-              })
-            );
-          }
+          return `+=${movingSpeed}`;
         }
+        if (setChance(25)) {
+          // 25% 的概率Y轴不会偏移
+          return "+=0";
+        }
+        return `${new Random().getItem<string>(["+=", "-="])}${calcRepair({
+          formula: movingSpeed * new Random(0.75, 1.25, 1).getNumber(),
+        })}`;
       },
     },
   };
+
   public location(x: number, y: number): void {
     this.element.css({ left: x, top: y });
     // 检测位置是否正确
     if (
       this.element.position().left >= 0 &&
-      this.element.position().left < (nodes.app as any).width()
+      this.element.position().left < (nodes.app.width() as number)
     ) {
-      this.element.css({ top: -(this.element as any).height() });
+      this.element.css({ top: -(this.element.height() as number) });
     } else {
       this.element.css({
         top: new Random(
           0,
-          (nodes.app as any).height() -
-            (this.element as any).height() -
-            (nodes.statusbar.element as any).height()
+          (nodes.app.height() as number) -
+            (this.element.height() as number) -
+            (nodes.statusbar.element.height() as number)
         ).getNumber(),
       });
     }
   }
-  public speed(x: any, y: any): void {
+
+  public speed(x: string, y: string): void {
     this.element.prop({ xSpeed: x, ySpeed: y });
   }
+
   public additionals(handler: (entity: JQuery<HTMLElement>) => void): void {
     handler && handler(this.element);
   }

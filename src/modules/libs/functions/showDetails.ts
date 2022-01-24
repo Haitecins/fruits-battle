@@ -1,6 +1,7 @@
 import $ from "jquery";
 import elements from "@/configs/common/elements";
 import calcRepair from "@/libs/functions/calcRepair";
+import ShowDetailProps from "@/types/libs/functions/showDetails";
 
 const { nodes } = elements;
 const showDetails = ({
@@ -18,7 +19,7 @@ const showDetails = ({
       .addClass("pickup")
       .addClass(className)
       .html(() => {
-        const extraClass = extra ? ` ${extra()}` : "";
+        const extraClass = extra ? ` ${extra() as string}` : "";
 
         return `<span class="picked-icon ${id}${extraClass}"></span> ${text}`;
       })
@@ -28,10 +29,10 @@ const showDetails = ({
           if (getPos.x < 0) getPos.x = 10;
           if (
             getPos.x >
-            (nodes.app as any).width() - ($(this) as any).width()
+            (nodes.app.width() as number) - ($(this).width() as number)
           ) {
             getPos.x =
-              (nodes.app as any).width() - ($(this) as any).width() - 10;
+              (nodes.app.width() as number) - ($(this).width() as number) - 10;
           }
 
           return getPos.x;
@@ -40,14 +41,14 @@ const showDetails = ({
           if (getPos.y < 0) getPos.y = 10;
           if (
             getPos.y >
-            (nodes.app as any).height() -
-              (nodes.statusbar.element as any).height() -
-              ($(this) as any).height()
+            (nodes.app.height() as number) -
+              (nodes.statusbar.element.height() as number) -
+              ($(this).height() as number)
           ) {
             getPos.y =
-              (nodes.app as any).height() -
-              (nodes.statusbar.element as any).height() -
-              ($(this) as any).height() -
+              (nodes.app.height() as number) -
+              (nodes.statusbar.element.height() as number) -
+              ($(this).height() as number) -
               10;
           }
 

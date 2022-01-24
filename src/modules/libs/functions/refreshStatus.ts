@@ -20,7 +20,8 @@ const refreshStatus = (): void => {
   statusbar.scores.text(calcRepair({ formula: statistics.SCORES }));
   statusbar.countdown.text(() => {
     statistics.PLAYTIME += 0.01;
-    return timeFormat(Math.ceil((player.countdown -= 0.01)));
+    const formated = timeFormat(Math.ceil((player.countdown -= 0.01)));
+    return formated;
   });
 };
 

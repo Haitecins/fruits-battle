@@ -1,25 +1,35 @@
 {
   "name": "fruit-wars",
-  "version": "3.2",
+  "version": "3.3",
   "author": "chiyukikana",
   "private": "true",
   "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc && yarn format && vite build",
+    "preview": "vite preview",
     "serve": "serve ./out -l 80",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "lint": "eslint --ext .ts,.js src/"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.1.9",
     "@types/jquery": "^3.5.11",
     "@types/node": "^17.0.8",
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
     "@vitejs/plugin-legacy": "^1.6.4",
+    "eslint": "8.2.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-airbnb-typescript": "^16.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "2.25.2",
+    "eslint-plugin-prettier": "^4.0.0",
     "less": "^4.1.2",
     "prettier": "^2.5.1",
     "serve": "^13.0.2",
     "typescript": "^4.4.4",
-    "vite": "^2.7.2"
+    "vite": "^2.7.13"
   },
   "dependencies": {
     "jquery": "^3.6.0"

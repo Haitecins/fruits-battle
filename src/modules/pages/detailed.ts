@@ -11,11 +11,9 @@ totalFruits.html(
   fruits
     .sort((fruit1, fruit2) => fruit1.scores - fruit2.scores)
     .map(({ id, type, scores, speed }) => {
-      return `<div>
-        <i class="${type} ${id}"></i>
-        <p>分数 ${scores * 100}</p>
-        <p>移动速度 ${speed.min}-${speed.max}</p>
-      </div>`;
+      return `<div><i class="${type} ${id}"></i><p>分数 ${
+        scores * 100
+      }</p><p>移动速度 ${speed.min}-${speed.max}</p></div>`;
     }) as never
 );
 

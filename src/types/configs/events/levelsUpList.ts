@@ -6,3 +6,6 @@ interface LevelsUpListObject {
   suffixes?: () => string;
 }
 type LevelsUpListProps = LevelsUpListObject[];
+
+export default LevelsUpListProps;
+export { LevelsUpListObject };

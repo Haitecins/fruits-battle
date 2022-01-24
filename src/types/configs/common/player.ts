@@ -6,3 +6,5 @@ interface PlayerProps {
   isRunning: boolean;
   isEnded: boolean;
 }
+
+export default PlayerProps;

@@ -14,3 +14,5 @@ interface StatisticProps {
   NEVER_MOVED: boolean;
   SUMMON_CD: number;
 }
+
+export default StatisticProps;

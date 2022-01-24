@@ -27,8 +27,9 @@ const run = (): void => {
   verify.LEAVING_THE_GAME_AREA.enabled = true;
   // 重置玩家的默认位置
   nodes.player.css({
-    left: (nodes.app as any).width() / 2 - (nodes.player as any).width() / 2,
-    top: nodes.app.height,
+    left:
+      (nodes.app.width() as number) / 2 - (nodes.player.width() as number) / 2,
+    top: () => nodes.app.height() as number,
   });
   playSound({ src: audio.click });
   nodes.readme.element.fadeOut(300, () => {
@@ -36,7 +37,8 @@ const run = (): void => {
     nodes.player.animate(
       {
         top:
-          (nodes.app as any).height() / 2 - (nodes.player as any).width() / 2,
+          (nodes.app.height() as number) / 2 -
+          (nodes.player.width() as number) / 2,
       },
       600,
       "swing",

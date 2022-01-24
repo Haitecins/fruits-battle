@@ -1,3 +1,5 @@
+import StatisticProps from "@/types/configs/common/statistics";
+
 const statistics: StatisticProps = {
   // 游戏分数
   SCORES: 0,

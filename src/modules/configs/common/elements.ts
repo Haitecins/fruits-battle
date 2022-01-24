@@ -53,8 +53,7 @@ const elements = {
     items: () => $("#app>.items"),
   },
   clearEntities: () => $("#app>*:not(div)").remove(),
-  resetPageStyles: () =>
-    $("*:not(#readme):not(#readme *)").removeAttr("style"),
+  resetPageStyles: () => $("*:not(#readme):not(#readme *)").removeAttr("style"),
   resetIndexStyles: () => $("*:not(#readme *)").removeAttr("style"),
 };
 

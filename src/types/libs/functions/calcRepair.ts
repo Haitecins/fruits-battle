@@ -3,3 +3,5 @@ interface CalcRepairProps {
   ceil?: boolean;
   fixed?: number;
 }
+
+export default CalcRepairProps;

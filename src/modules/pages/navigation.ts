@@ -4,18 +4,19 @@ import fruits from "@/configs/common/fruits";
 import audio from "@/configs/common/audio";
 import elements from "@/configs/common/elements";
 import playRandSound from "@/libs/functions/playRandSound";
+import { FruitsObject } from "@/types/configs/common/fruits";
 
-const { nodes } = elements;
 $(".random-fruit").each(function () {
   $(this).addClass(
     new Random(0, fruits.length - 1).getItem<FruitsObject>(fruits).id
   );
 });
+const { nodes } = elements;
 // 获取索引值，没有则默认为0
 let getLocalIndex = window.localStorage.getItem("app_index")
   ? parseFloat(window.localStorage.getItem("app_index") as string)
   : 0;
-const contents = nodes.readme.icons.contents;
+const { contents } = nodes.readme.icons;
 // 显示随机的一种水果图标
 const randomFruitIcon = (stopped: boolean): JQuery<HTMLElement> => {
   return nodes.readme.icons.element

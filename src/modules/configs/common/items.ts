@@ -6,6 +6,7 @@ import verify from "@/configs/common/verity";
 import Random from "@/libs/classes/Random";
 import setChance from "@/libs/functions/setChance";
 import showDetails from "@/libs/functions/showDetails";
+import ItemProps from "@/types/configs/common/items";
 
 const { nodes, entities } = elements;
 const items: ItemProps = [
@@ -20,7 +21,6 @@ const items: ItemProps = [
     },
     effect(element) {
       const before = player.countdown;
-      const { id } = this;
 
       if (setChance(85)) {
         player.countdown += new Random(5.4, 11.2, 1).getNumber();
@@ -29,7 +29,7 @@ const items: ItemProps = [
       }
 
       showDetails({
-        id,
+        id: this.id,
         pos: {
           x: (element as JQuery<HTMLElement>).position().left,
           y: (element as JQuery<HTMLElement>).position().top,
@@ -58,11 +58,12 @@ const items: ItemProps = [
       timer: null,
     },
     effect() {
+      type CustomProps = { timer: NodeJS.Timeout };
       const attract = (element: JQuery<HTMLElement>) => {
         if (!(element.prop("disX") && element.prop("disY"))) {
           element.prop({
-            disX: element.prop("xSpeed"),
-            disY: element.prop("ySpeed"),
+            disX: element.prop("xSpeed") as string,
+            disY: element.prop("ySpeed") as string,
           });
         }
         element
@@ -74,12 +75,12 @@ const items: ItemProps = [
             {
               left:
                 nodes.player.position().left +
-                (nodes.player as any).width() / 2 -
-                (element as any).width() / 2,
+                (nodes.player.width() as number) / 2 -
+                (element.width() as number) / 2,
               top:
                 nodes.player.position().top +
-                (nodes.player as any).height() / 2 -
-                (element as any).height() / 2,
+                (nodes.player.height() as number) / 2 -
+                (element.height() as number) / 2,
             },
             400,
             "swing"
@@ -95,13 +96,13 @@ const items: ItemProps = [
       });
       // 防止短时间内多次拾取该道具引发的问题，每次拾取道具后，
       // 先清除原先的定时器，再开启一个新的定时器。
-      clearTimeout((this.custom as any).timer);
-      (this.custom as any).timer = setTimeout(() => {
+      clearTimeout((this.custom as CustomProps).timer);
+      (this.custom as CustomProps).timer = setTimeout(() => {
         entities.fruits().each(function () {
           if ($(this).prop("disX") && $(this).prop("disX")) {
             $(this).prop({
-              xSpeed: $(this).prop("disX"),
-              ySpeed: $(this).prop("disY"),
+              xSpeed: $(this).prop("disX") as string,
+              ySpeed: $(this).prop("disY") as string,
             });
           }
         });
@@ -131,14 +132,23 @@ const items: ItemProps = [
       },
     },
     effect() {
-      const _this = this;
-      const width = (this.custom as any).attrs.width;
-      const height = (this.custom as any).attrs.height;
+      type CustomProps = {
+        timer: NodeJS.Timeout;
+        attrs: { width: number; height: number };
+      };
+      type VerifyCustomProps = { attrs: { width: number; height: number } };
+
+      const thisRoot = this;
+      const { width } = (this.custom as CustomProps).attrs;
+      const { height } = (this.custom as CustomProps).attrs;
       const change = (size: number): void => {
         const changeWidth = Math.floor(width * size);
         const changeHeight = Math.floor(height * size);
-        verify.PLAYER_EDIT_ARGUMENTS.custom.attrs.width = changeWidth;
-        verify.PLAYER_EDIT_ARGUMENTS.custom.attrs.height = changeHeight;
+        (verify.PLAYER_EDIT_ARGUMENTS.custom as VerifyCustomProps).attrs.width =
+          changeWidth;
+        (
+          verify.PLAYER_EDIT_ARGUMENTS.custom as VerifyCustomProps
+        ).attrs.height = changeHeight;
         statistics.CAKE_ITEM_INFLUENCE_VALUE =
           1 + ((changeWidth - width) / width) * 1;
         nodes.player.animate(
@@ -148,34 +158,41 @@ const items: ItemProps = [
           },
           250,
           function () {
-            const player = $(this);
+            const thisPlayer = $(this);
 
-            clearTimeout((_this.custom as any).timer);
+            clearTimeout((thisRoot.custom as CustomProps).timer);
 
-            (_this.custom as any).timer = setTimeout(() => {
+            (thisRoot.custom as CustomProps).timer = setTimeout(() => {
               // 重置最终分数
               statistics.CAKE_ITEM_INFLUENCE_VALUE = 1;
               if (
-                player.position().top + height >
-                (nodes.app as any).height() -
-                  (nodes.statusbar.element as any).height()
+                thisPlayer.position().top + height >
+                (nodes.app.height() as number) -
+                  (nodes.statusbar.element.height() as number)
               ) {
-                player.css({ top: player.position().top - height });
+                thisPlayer.css({ top: thisPlayer.position().top - height });
               }
 
-              if (player.position().left + width > (nodes.app as any).width()) {
-                player.css({ left: player.position().left - width });
+              if (
+                thisPlayer.position().left + width >
+                (nodes.app.width() as number)
+              ) {
+                thisPlayer.css({ left: thisPlayer.position().left - width });
               }
 
-              player.animate(
+              thisPlayer.animate(
                 {
                   width,
                   height,
                 },
                 250,
                 () => {
-                  verify.PLAYER_EDIT_ARGUMENTS.custom.attrs.width = width;
-                  verify.PLAYER_EDIT_ARGUMENTS.custom.attrs.height = height;
+                  (
+                    verify.PLAYER_EDIT_ARGUMENTS.custom as VerifyCustomProps
+                  ).attrs.width = width;
+                  (
+                    verify.PLAYER_EDIT_ARGUMENTS.custom as VerifyCustomProps
+                  ).attrs.height = height;
                 }
               );
             }, 10000);
@@ -238,7 +255,6 @@ const items: ItemProps = [
     },
     effect(element) {
       const before = player.countdown;
-      const { id } = this;
       const minTime = 1.5;
 
       if (setChance(5)) {
@@ -250,7 +266,7 @@ const items: ItemProps = [
       }
 
       showDetails({
-        id,
+        id: this.id,
         pos: {
           x: (element as JQuery<HTMLElement>).position().left,
           y: (element as JQuery<HTMLElement>).position().top,
@@ -269,6 +285,7 @@ const items: ItemProps = [
   },
 ];
 
+// 对道具根据最低概率进行升序排序
 items
   .sort((item1, item2) => item1.valid.min - item2.valid.min)
   .forEach((item, index) => {

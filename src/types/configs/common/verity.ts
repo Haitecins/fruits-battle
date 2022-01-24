@@ -7,3 +7,6 @@ interface VerityObject {
 interface VerityProps {
   [propName: string]: VerityObject;
 }
+
+export default VerityProps;
+export { VerityObject };

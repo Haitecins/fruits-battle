@@ -1,14 +1,14 @@
 import verify from "@/configs/common/verity";
 
 const verifications = (): void => {
-  for (let verifyKey in verify) {
-    const currentItem = verify[verifyKey];
+  Object.keys(verify).forEach((key) => {
+    const currentItem = verify[key];
     if (currentItem.enabled) {
       if (currentItem.check()) {
         currentItem.actions();
       }
     }
-  }
+  });
 };
 
 export default verifications;

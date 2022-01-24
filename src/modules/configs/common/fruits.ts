@@ -1,3 +1,5 @@
+import FruitProps from "@/types/configs/common/fruits";
+
 const fruits: FruitProps = [
   {
     id: "apple",

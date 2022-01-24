@@ -15,3 +15,6 @@ interface ItemsObject {
   custom?: object;
 }
 type ItemProps = ItemsObject[];
+
+export default ItemProps;
+export { ItemsObject };

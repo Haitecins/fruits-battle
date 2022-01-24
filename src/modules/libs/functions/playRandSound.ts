@@ -1,5 +1,6 @@
 import playSound from "@/libs/functions/playSound";
 import Random from "@/libs/classes/Random";
+import PlayRandSoundProps from "@/types/libs/functions/playRandSound";
 
 const playRandSound = ({
   audio,
