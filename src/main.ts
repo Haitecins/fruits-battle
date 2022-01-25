@@ -1,7 +1,6 @@
 import "@/assets/styles/index.less";
 import "@/pages/app";
 import "@/pages/detailed";
-import "@/pages/history";
 import "@/pages/navigation";
 import elements from "@/configs/common/elements";
 
