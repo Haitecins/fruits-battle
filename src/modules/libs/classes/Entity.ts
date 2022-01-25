@@ -29,6 +29,8 @@ class Entity {
       getEntityObject.type === "fruits" &&
       setChance(levels.HEALTHY_FRUITS_SPAWN_CHANCE)
     ) {
+      // 在生成前添加实体的类名，减少网络请求的次数。
+      $(this.element).addClass(getEntityObject.id);
       $(this.element).appendTo(nodes.app);
       // 增加生成的水果的计数
       if (statistics.PLAYTIME > 10) statistics.SUMMONED_FRUIT_COUNTS += 1;
@@ -42,7 +44,6 @@ class Entity {
     }
     // 添加实体的类名
     $(this.element).addClass(getEntityObject.type);
-    $(this.element).addClass(getEntityObject.id);
     $(this.element).css({ zIndex: getEntityObject.priority });
     // 当实体是新鲜水果(fruits)时，有概率变成腐烂水果(bad)。
     if (
