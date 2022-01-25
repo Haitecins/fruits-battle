@@ -33,9 +33,9 @@ const refreshHistory = (): void => {
             : historyDate.getMinutes()
         }</p><p>游戏时间 <span class="countdown-color">${timeFormat(
           Math.floor(PLAYTIME)
-        )}</span></p><p>最终得分 <span class="base-scores">${calcRepair({
-          formula: SCORES,
-        })}</span></p></div>`;
+        )}</span></p><p>最终得分 <span class="base-scores">${calcRepair(
+          SCORES
+        )}</span></p></div>`;
       };
       const detailChunk = () =>
         `<div><p>最高难度等级 <span class="current-levels">Lv.${DIFFICULTY_LEVELS}</p><p>达成的成就数 ${TOTAL_ACHIEVEMENTS}</p><p>获得的奖牌数 ${TOTAL_MEDALS}</p></div>`;

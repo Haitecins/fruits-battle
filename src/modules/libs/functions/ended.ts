@@ -115,11 +115,7 @@ const ended = (): void => {
   nodes.gameover.totals.fruits.text(TOTAL_FRUITS);
   nodes.gameover.totals.badFruits.text(TOTAL_BAD_FRUITS);
   nodes.gameover.achievements.html(fillItem as never);
-  nodes.gameover.scores.text(
-    calcRepair({
-      formula: SCORES,
-    })
-  );
+  nodes.gameover.scores.text(calcRepair(SCORES));
   nodes.gameover.details.animate({ height: 268 }, 800, () => {});
 };
 

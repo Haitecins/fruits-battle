@@ -15,9 +15,9 @@ const refreshStatus = (): void => {
   statusbar.mana.text(() => {
     // 魔力值自动恢复
     player.mana > 100 ? (player.mana = 100) : (player.mana += 0.005);
-    return calcRepair({ formula: player.mana, fixed: 0 });
+    return calcRepair(player.mana, false, 0);
   });
-  statusbar.scores.text(calcRepair({ formula: statistics.SCORES }));
+  statusbar.scores.text(calcRepair(statistics.SCORES));
   statusbar.countdown.text(() => {
     statistics.PLAYTIME += 0.01;
     const formated = timeFormat(Math.ceil((player.countdown -= 0.01)));

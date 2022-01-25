@@ -109,9 +109,9 @@ class Entity {
             // 25% 的概率X轴不会偏移
             return "+=0";
           }
-          return `${new Random().getItem<string>(["+=", "-="])}${calcRepair({
-            formula: movingSpeed * new Random(0.5, 1.75, 1).getNumber(),
-          })}`;
+          return `${new Random().getItem<string>(["+=", "-="])}${calcRepair(
+            movingSpeed * new Random(0.5, 1.75, 1).getNumber()
+          )}`;
         }
         return "";
       },
@@ -132,9 +132,9 @@ class Entity {
           // 25% 的概率Y轴不会偏移
           return "+=0";
         }
-        return `${new Random().getItem<string>(["+=", "-="])}${calcRepair({
-          formula: movingSpeed * new Random(0.75, 1.25, 1).getNumber(),
-        })}`;
+        return `${new Random().getItem<string>(["+=", "-="])}${calcRepair(
+          movingSpeed * new Random(0.75, 1.25, 1).getNumber()
+        )}`;
       },
     },
   };

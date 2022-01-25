@@ -27,7 +27,7 @@ const clickHandler = (index: number): void => {
   if (getLocalIndex === index) return;
   getLocalIndex = index;
   window.localStorage.setItem("app_index", index.toString());
-  new Random().getItem(audio.open_flip).play();
+  audio.random(audio.open_flip).play();
   randomFruitIcon(true).animate({ top: 50 * index + 14 }, 200);
   contents
     .stop(true)

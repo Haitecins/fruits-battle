@@ -1,8 +1,8 @@
 interface VerityObject {
   enabled: boolean;
+  custom?: object;
   check: () => boolean;
   actions: () => void;
-  [propName: string]: any;
 }
 interface VerityProps {
   [propName: string]: VerityObject;

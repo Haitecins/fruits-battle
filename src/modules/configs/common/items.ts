@@ -5,7 +5,7 @@ import elements from "@/configs/common/elements";
 import verify from "@/configs/common/verity";
 import Random from "@/libs/classes/Random";
 import setChance from "@/libs/functions/setChance";
-import showDetails from "@/libs/functions/showDetails";
+import detailBlocks from "@/libs/functions/detailBlocks";
 import ItemProps from "@/types/configs/common/items";
 
 const { nodes, entities } = elements;
@@ -28,14 +28,16 @@ const items: ItemProps = [
         player.countdown -= new Random(4.1, 9.6, 1).getNumber();
       }
 
-      showDetails({
+      detailBlocks({
         id: this.id,
-        pos: {
+        location: {
           x: (element as JQuery<HTMLElement>).position().left,
           y: (element as JQuery<HTMLElement>).position().top,
         },
-        before,
-        after: player.countdown,
+        value: {
+          before,
+          after: player.countdown,
+        },
         fixed: 1,
       });
     },
@@ -265,14 +267,16 @@ const items: ItemProps = [
         player.countdown += minTime + player.countdown * 0.1;
       }
 
-      showDetails({
+      detailBlocks({
         id: this.id,
-        pos: {
+        location: {
           x: (element as JQuery<HTMLElement>).position().left,
           y: (element as JQuery<HTMLElement>).position().top,
         },
-        before,
-        after: player.countdown,
+        value: {
+          before,
+          after: player.countdown,
+        },
         fixed: 1,
       });
     },

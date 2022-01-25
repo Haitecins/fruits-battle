@@ -11,6 +11,7 @@ interface AudioProps {
   hit: Howl[];
   open_flip: Howl[];
   bgm: Howl[] | Howl;
+  random: (audios: Howl[]) => Howl;
 }
 
 export default AudioProps;
