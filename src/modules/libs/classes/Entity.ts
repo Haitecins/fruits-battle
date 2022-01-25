@@ -40,6 +40,8 @@ class Entity {
       statistics.PLAYTIME > 10 &&
       setChance(levels.ITEMS_SPAWN_CHANCE)
     ) {
+      // 在生成前添加实体的类名，减少网络请求的次数。
+      $(this.element).addClass(getEntityObject.id);
       $(this.element).appendTo(nodes.app);
     }
     // 添加实体的类名
