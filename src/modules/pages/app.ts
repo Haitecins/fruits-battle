@@ -41,6 +41,8 @@ const run = (): void => {
     );
   });
 };
+// 刷新历史记录
+refreshHistory();
 nodes.readme.startButton.on("click", run);
 nodes.gameover.restart.on("click", () => {
   if (!player.isEnded) return;
@@ -49,10 +51,9 @@ nodes.gameover.restart.on("click", () => {
   run();
   audio.click.play();
 });
-nodes.gameover.backhome.on("click", () => {
+nodes.gameover.spawnpoint.on("click", () => {
   if (!player.isEnded) return;
   resetIndexStyles();
-  // 刷新历史记录
   refreshHistory();
   resetConfig();
   audio.click.play();

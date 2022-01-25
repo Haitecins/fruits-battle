@@ -43,7 +43,7 @@ const elements = {
       scores: $("#over-scores"),
       details: $("#over-details"),
       restart: $("#RESTART"),
-      backhome: $("#BACKHOME"),
+      spawnpoint: $("#SPAWNPOINT"),
     },
   },
   entities: {

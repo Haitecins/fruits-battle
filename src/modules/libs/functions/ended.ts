@@ -1,5 +1,4 @@
 import $ from "jquery";
-import { Howler } from "howler";
 import achievements from "@/configs/events/achievements";
 import statistics from "@/configs/common/statistics";
 import timer from "@/configs/common/timer";
