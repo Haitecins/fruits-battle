@@ -1,4 +1,5 @@
 import $ from "jquery";
+import { Howler } from "howler";
 import achievements from "@/configs/events/achievements";
 import statistics from "@/configs/common/statistics";
 import timer from "@/configs/common/timer";
@@ -7,7 +8,6 @@ import player from "@/configs/common/player";
 import levels from "@/configs/common/levels";
 import elements from "@/configs/common/elements";
 import calcRepair from "@/libs/functions/calcRepair";
-import playSound from "@/libs/functions/playSound";
 import timeFormat from "@/libs/functions/timeFormat";
 
 const { nodes, clearEntities } = elements;
@@ -16,25 +16,14 @@ const ended = (): void => {
   $.each(timer, function () {
     clearInterval($(this as never)[0] as unknown as NodeJS.Timeout);
   });
-  // 停止所有正在播放的声音
-  Object.keys(audio).forEach((key) => {
-    const thisAudio = (audio as never)[key] as HTMLAudioElement;
-
-    if (Array.isArray(thisAudio)) {
-      const audioList: HTMLAudioElement[] = thisAudio;
-      audioList.forEach((audioItem: HTMLAudioElement) => audioItem.pause());
-    } else {
-      thisAudio.pause();
-    }
-  });
+  // 结束时播放特定声音
+  audio.end.play();
   player.isEnded = !player.isEnded;
   clearEntities();
   nodes.levels.element.stop(true).removeAttr("style");
   nodes.levels.value.empty();
   nodes.levels.container.empty();
   nodes.player.removeAttr("style").hide();
-  // 结束时播放特定声音
-  playSound({ src: audio.end });
   // 显示本局的游戏数据
   const getCompletion = achievements.filter(({ cond }) => cond());
   const fillItem = getCompletion.map(({ title, description }) => {
