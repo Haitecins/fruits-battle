@@ -12,6 +12,8 @@ const { nodes, resetPageStyles, resetIndexStyles } = elements;
 const run = (): void => {
   if (player.isRunning) return;
   player.isRunning = !player.isRunning;
+  // 播放点击音效
+  audio.click.play();
   // 刷新状态栏
   refreshStatus();
   // 暂时关闭游戏区域验证，等待其他项目验证完毕后再次打开。
@@ -26,7 +28,6 @@ const run = (): void => {
       (nodes.app.width() as number) / 2 - (nodes.player.width() as number) / 2,
     top: () => nodes.app.height() as number,
   });
-  audio.click.play();
   nodes.readme.element.fadeOut(300, () => {
     nodes.statusbar.element.animate({ height: 42 }, 300, "swing");
     nodes.player.animate(
@@ -49,7 +50,6 @@ nodes.gameover.restart.on("click", () => {
   resetPageStyles();
   resetConfig();
   run();
-  audio.click.play();
 });
 nodes.gameover.spawnpoint.on("click", () => {
   if (!player.isEnded) return;
