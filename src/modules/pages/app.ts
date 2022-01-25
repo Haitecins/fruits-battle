@@ -1,6 +1,8 @@
+import $ from "jquery";
 import audio from "@/configs/common/audio";
 import elements from "@/configs/common/elements";
 import player from "@/configs/common/player";
+import statistics from "@/configs/common/statistics";
 import verify from "@/configs/common/verity";
 import verifications from "@/libs/functions/verifications";
 import resetConfig from "@/libs/functions/resetConfig";
@@ -44,7 +46,55 @@ const run = (): void => {
 };
 // 刷新历史记录
 refreshHistory();
-nodes.readme.startButton.on("click", run);
+nodes.readme.startButton
+  .one("click", () => {
+    nodes.player.on({
+      mousedown(downEvent) {
+        // 获取鼠标的坐标与该对象的坐标之间的距离
+        const x = downEvent.clientX - $(this).position().left;
+        const y = downEvent.clientY - $(this).position().top;
+        $(document).on({
+          mousemove(moveEvent) {
+            if (player.countdown > 0 && player.health > 0) {
+              // 获取鼠标的坐标减去对象之间坐标的位置
+              let left = moveEvent.clientX - x;
+              let top = moveEvent.clientY - y;
+
+              // 阻止超出游戏区域
+              if (left < 0) left = 0;
+              if (top < 0) top = 0;
+              if (
+                left >
+                (nodes.app.width() as number) - (nodes.player.width() as number)
+              ) {
+                left =
+                  (nodes.app.width() as number) -
+                  (nodes.player.width() as number);
+              }
+              if (
+                top >
+                (nodes.app.height() as number) -
+                  (nodes.player.height() as number) -
+                  (nodes.statusbar.element.height() as number)
+              ) {
+                top =
+                  (nodes.app.height() as number) -
+                  (nodes.player.height() as number) -
+                  (nodes.statusbar.element.height() as number);
+              }
+              player.not_moving_ticks = 0;
+              statistics.NEVER_MOVED = false;
+              nodes.player.css({ left, top });
+            }
+          },
+          mouseup() {
+            $(this).off("mousemove");
+          },
+        });
+      },
+    });
+  })
+  .on("click", run);
 nodes.gameover.restart.on("click", () => {
   if (!player.isEnded) return;
   resetPageStyles();

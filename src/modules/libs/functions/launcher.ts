@@ -8,11 +8,13 @@ import levelsUpList from "@/configs/events/levelsUpList";
 import timer from "@/configs/common/timer";
 import elements from "@/configs/common/elements";
 import verifications from "@/libs/functions/verifications";
+import hasCollide from "@/libs/functions/hasCollide";
+import hasOutArea from "@/libs/functions/hasOutArea";
 import calcRepair from "@/libs/functions/calcRepair";
 import ended from "@/libs/functions/ended";
 import setChance from "@/libs/functions/setChance";
 import refreshStatus from "@/libs/functions/refreshStatus";
-import showDetails from "@/libs/functions/showDetails";
+import detailBlocks from "@/libs/functions/detailBlocks";
 import Random from "@/libs/classes/Random";
 import { FruitsObject } from "@/types/configs/common/fruits";
 import { ItemsObject } from "@/types/configs/common/items";
@@ -21,55 +23,12 @@ import levels_test from "@/test/levels.test";
 
 const { nodes, entities } = elements;
 const launcher = (): void => {
-  nodes.player.on({
-    mousedown(downEvent) {
-      // 获取鼠标的坐标与该对象的坐标之间的距离
-      const x = downEvent.clientX - $(this).position().left;
-      const y = downEvent.clientY - $(this).position().top;
-      $(document).on({
-        mousemove(moveEvent) {
-          if (player.countdown > 0 && player.health > 0) {
-            // 获取鼠标的坐标减去对象之间坐标的位置
-            let left = moveEvent.clientX - x;
-            let top = moveEvent.clientY - y;
-
-            // 阻止超出游戏区域
-            if (left < 0) left = 0;
-            if (top < 0) top = 0;
-            if (
-              left >
-              (nodes.app.width() as number) - (nodes.player.width() as number)
-            ) {
-              left =
-                (nodes.app.width() as number) -
-                (nodes.player.width() as number);
-            }
-            if (
-              top >
-              (nodes.app.height() as number) -
-                (nodes.player.height() as number) -
-                (nodes.statusbar.element.height() as number)
-            ) {
-              top =
-                (nodes.app.height() as number) -
-                (nodes.player.height() as number) -
-                (nodes.statusbar.element.height() as number);
-            }
-            player.not_moving_ticks = 0;
-            statistics.NEVER_MOVED = false;
-            nodes.player.css({ left, top });
-          }
-        },
-        mouseup() {
-          $(this).off("mousemove");
-        },
-      });
-    },
-  });
   // 主定时器
   timer.main = setInterval(() => {
     // 反作弊验证
     verifications();
+    // 刷新状态栏
+    refreshStatus();
     // 玩家未进行移动行为的惩罚
     if (++player.not_moving_ticks >= 500) {
       // 减少生命值
@@ -78,12 +37,10 @@ const launcher = (): void => {
       if (statistics.SCORES > 0) {
         // 扣除当前游戏得分的 10%
         statistics.SCORES -= statistics.SCORES * 0.1;
-        new Random().getItem(audio.hit).play();
+        audio.random(audio.hit).play();
       }
       player.not_moving_ticks = 0;
     }
-    // 刷新状态栏
-    refreshStatus();
     // 实体处理程序
     entities.totals().each(function () {
       // 实体的移动
@@ -94,30 +51,10 @@ const launcher = (): void => {
         },
         0,
         "swing",
-        function () {
-          // 超出游戏区域的阈值
-          const maxDis = 8;
-          // 超出一定距离时删除元素
-          ($(this).position().left < -(($(this).width() as number) + maxDis) ||
-            $(this).position().top < -(($(this).height() as number) + maxDis) ||
-            $(this).position().left > (nodes.app.width() as number) + maxDis ||
-            $(this).position().top > (nodes.app.height() as number) + maxDis) &&
-            $(this).remove();
-        }
+        hasOutArea.bind(this, $(this))
       );
       // 碰撞事件
-      if (
-        !(
-          nodes.player.position().top + (nodes.player.height() as number) <
-            $(this).position().top ||
-          nodes.player.position().left >
-            $(this).position().left + ($(this).width() as number) ||
-          nodes.player.position().top >
-            $(this).position().top + ($(this).height() as number) ||
-          nodes.player.position().left + (nodes.player.width() as number) <
-            $(this).position().left
-        )
-      ) {
+      if (hasCollide($(this))) {
         const { data } = this as never as { data: FruitsObject & ItemsObject };
         if (data.type === "fruits") {
           // 获取该元素是不是一个腐烂水果
@@ -142,17 +79,17 @@ const launcher = (): void => {
             // 增加腐烂水果的拾取计数
             if (++statistics.BAD_FRUIT_COUNTS >= 5) {
               player.health--;
-              new Random().getItem(audio.hit).play();
+              audio.random(audio.hit).play();
               statistics.BAD_FRUIT_COUNTS = 0;
             }
             // 当玩家的游戏分数处于负数时，
             // 每次拾取腐烂水果都将减少1点生命值。
             if (statistics.SCORES < 0) {
               player.health--;
-              new Random().getItem(audio.hit).play();
+              audio.random(audio.hit).play();
             }
             statistics.SCORES -= result / 0.35;
-            new Random().getItem(audio.eat).play();
+            audio.random(audio.eat).play();
           } else {
             // 增加健康水果的拾取计数
             if (++statistics.HEALTHY_FRUIT_COUNTS >= 10) {
@@ -173,25 +110,25 @@ const launcher = (): void => {
               // 播放特殊的声音
               audio.burp.play();
             } else {
-              new Random().getItem(audio.eat).play();
+              audio.random(audio.eat).play();
             }
             statistics.SCORES += cakeItemResult;
           }
           // 显示分数细节
-          showDetails({
+          detailBlocks({
             id: data.id,
-            pos: {
+            location: {
               x: $(this).position().left,
               y: $(this).position().top,
             },
-            // 获取之前的数值
-            before,
-            // 与当前数值进行比较
-            after: statistics.SCORES,
-            // 额外的函数，常用于添加额外样式。
-            extra() {
-              return isBadFruit ? "bad" : "";
+            value: {
+              // 获取之前的数值
+              before,
+              // 与当前数值进行比较
+              after: statistics.SCORES,
             },
+            // 额外的函数，常用于添加额外样式。
+            extra: (): string => (isBadFruit ? "bad" : ""),
           });
         }
         if (data.type === "items") {
@@ -200,9 +137,9 @@ const launcher = (): void => {
           ) {
             // 执行道具的效果函数
             data.effect($(this));
-            new Random().getItem(audio.equip_chain).play();
+            audio.random(audio.equip_chain).play();
           } else {
-            new Random().getItem(audio.eat).play();
+            audio.random(audio.eat).play();
           }
         }
         // 删除元素
@@ -246,13 +183,13 @@ const launcher = (): void => {
       suffixes,
       change,
     }: LevelsUpListObject) => {
-      return `<p>${title}&nbsp;<i class="items-min-valid">${calcRepair({
-        formula: data() as number,
-      })}${
+      return `<p>${title}&nbsp;<i class="items-min-valid">${calcRepair(
+        data() as number
+      )}${
         (suffixes && suffixes()) || ""
-      }</i>&nbsp;to&nbsp;<i class="healthy-fruits">${calcRepair({
-        formula: change(),
-      })}${(suffixes && suffixes()) || ""}</i></p>`;
+      }</i>&nbsp;to&nbsp;<i class="healthy-fruits">${calcRepair(change())}${
+        (suffixes && suffixes()) || ""
+      }</i></p>`;
     };
     // 过滤掉未达成条件的项目
     const filterList = levelsUpList.filter(({ chance }) =>

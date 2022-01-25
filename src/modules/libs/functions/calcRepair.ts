@@ -1,10 +1,4 @@
-import CalcRepairProps from "@/types/libs/functions/calcRepair";
-
-const calcRepair = ({
-  formula,
-  ceil = false,
-  fixed = 2,
-}: CalcRepairProps): number => {
+const calcRepair = (formula: number, ceil = false, fixed = 2): number => {
   let int: string | number = "1";
   for (let i = 0; i < fixed; i++) {
     int += "0";

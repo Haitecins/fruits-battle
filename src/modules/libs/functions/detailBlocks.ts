@@ -1,18 +1,16 @@
 import $ from "jquery";
 import elements from "@/configs/common/elements";
 import calcRepair from "@/libs/functions/calcRepair";
-import ShowDetailProps from "@/types/libs/functions/showDetails";
+import DetailBlockProps from "@/types/libs/functions/detailBlock";
 
 const { nodes } = elements;
-const showDetails = ({
+const detailBlocks = ({
   id,
-  pos,
-  before,
-  after,
+  location,
+  value,
   extra,
   fixed,
-}: ShowDetailProps): void => {
-  const getPos = pos;
+}: DetailBlockProps): void => {
   const send = (className: string, text: string | number) => {
     $("<i/>")
       .appendTo(nodes.app)
@@ -26,58 +24,45 @@ const showDetails = ({
       .css({
         left() {
           // 阻止拾取后显示的信息超出游戏区域
-          if (getPos.x < 0) getPos.x = 10;
+          if (location.x < 0) location.x = 10;
           if (
-            getPos.x >
+            location.x >
             (nodes.app.width() as number) - ($(this).width() as number)
           ) {
-            getPos.x =
+            location.x =
               (nodes.app.width() as number) - ($(this).width() as number) - 10;
           }
 
-          return getPos.x;
+          return location.x;
         },
         top() {
-          if (getPos.y < 0) getPos.y = 10;
+          if (location.y < 0) location.y = 10;
           if (
-            getPos.y >
+            location.y >
             (nodes.app.height() as number) -
               (nodes.statusbar.element.height() as number) -
               ($(this).height() as number)
           ) {
-            getPos.y =
+            location.y =
               (nodes.app.height() as number) -
               (nodes.statusbar.element.height() as number) -
               ($(this).height() as number) -
               10;
           }
 
-          return getPos.y;
+          return location.y;
         },
       })
       .fadeOut(1500, function () {
         $(this).remove();
       });
   };
+  const { after, before } = value;
   if (after > before) {
-    send(
-      "get",
-      `+${calcRepair({
-        formula: after - before,
-        ceil: false,
-        fixed,
-      })}`
-    );
+    send("get", `+${calcRepair(after - before, false, fixed)}`);
   } else {
-    send(
-      "lose",
-      calcRepair({
-        formula: after - before,
-        ceil: true,
-        fixed,
-      })
-    );
+    send("lose", calcRepair(after - before, true, fixed));
   }
 };
 
-export default showDetails;
+export default detailBlocks;

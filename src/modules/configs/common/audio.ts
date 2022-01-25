@@ -1,6 +1,7 @@
 import { Howl, Howler, HowlOptions } from "howler";
 import AudioProps from "@/types/configs/common/audio";
 import GenshinImpact_2_4_PVMusic from "@/assets/sounds/bgm1.mp3";
+import Random from "@/libs/classes/Random";
 import click from "@/assets/sounds/click.ogg";
 import end from "@/assets/sounds/end.ogg";
 import eat1 from "@/assets/sounds/eat1.ogg";
@@ -72,6 +73,9 @@ const audio: AudioProps = {
     loop: true,
     volume: 0.5,
   }),
+  random(audios: Howl[]) {
+    return new Random().getItem<Howl>(audios);
+  },
 };
 
 export default audio;
