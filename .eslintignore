@@ -1,3 +1,4 @@
 **/node_modules/**
 **/out/**
 **/test/**
+vite.config.js

@@ -3,7 +3,6 @@ import Random from "@/libs/classes/Random";
 import fruits from "@/configs/common/fruits";
 import audio from "@/configs/common/audio";
 import elements from "@/configs/common/elements";
-import playRandSound from "@/libs/functions/playRandSound";
 import { FruitsObject } from "@/types/configs/common/fruits";
 
 $(".random-fruit").each(function () {
@@ -28,8 +27,7 @@ const clickHandler = (index: number): void => {
   if (getLocalIndex === index) return;
   getLocalIndex = index;
   window.localStorage.setItem("app_index", index.toString());
-
-  playRandSound({ audio: audio.open_flip, volume: 60, promise: true });
+  new Random().getItem(audio.open_flip).play();
   randomFruitIcon(true).animate({ top: 50 * index + 14 }, 200);
   contents
     .stop(true)

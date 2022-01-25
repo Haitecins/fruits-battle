@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import legacy from "@vitejs/plugin-legacy";
 import alias from "@rollup/plugin-alias";
+
 const path = require("path");
 
 const resolve = (alias, replaced) => ({

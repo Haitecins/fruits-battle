@@ -10,8 +10,6 @@ import elements from "@/configs/common/elements";
 import verifications from "@/libs/functions/verifications";
 import calcRepair from "@/libs/functions/calcRepair";
 import ended from "@/libs/functions/ended";
-import playRandSound from "@/libs/functions/playRandSound";
-import playSound from "@/libs/functions/playSound";
 import setChance from "@/libs/functions/setChance";
 import refreshStatus from "@/libs/functions/refreshStatus";
 import showDetails from "@/libs/functions/showDetails";
@@ -19,6 +17,7 @@ import Random from "@/libs/classes/Random";
 import { FruitsObject } from "@/types/configs/common/fruits";
 import { ItemsObject } from "@/types/configs/common/items";
 import { LevelsUpListObject } from "@/types/configs/events/levelsUpList";
+import levels_test from "@/test/levels.test";
 
 const { nodes, entities } = elements;
 const launcher = (): void => {
@@ -79,7 +78,7 @@ const launcher = (): void => {
       if (statistics.SCORES > 0) {
         // 扣除当前游戏得分的 10%
         statistics.SCORES -= statistics.SCORES * 0.1;
-        playRandSound({ audio: audio.hit, promise: true });
+        new Random().getItem(audio.hit).play();
       }
       player.not_moving_ticks = 0;
     }
@@ -143,30 +142,21 @@ const launcher = (): void => {
             // 增加腐烂水果的拾取计数
             if (++statistics.BAD_FRUIT_COUNTS >= 5) {
               player.health--;
-              playRandSound({
-                audio: audio.hit,
-                promise: true,
-              });
+              new Random().getItem(audio.hit).play();
               statistics.BAD_FRUIT_COUNTS = 0;
             }
             // 当玩家的游戏分数处于负数时，
             // 每次拾取腐烂水果都将减少1点生命值。
             if (statistics.SCORES < 0) {
               player.health--;
-              playRandSound({
-                audio: audio.hit,
-                promise: true,
-              });
+              new Random().getItem(audio.hit).play();
             }
             statistics.SCORES -= result / 0.35;
-            playRandSound({
-              audio: audio.eat,
-              promise: true,
-            });
+            new Random().getItem(audio.eat).play();
           } else {
             // 增加健康水果的拾取计数
             if (++statistics.HEALTHY_FRUIT_COUNTS >= 10) {
-              ++player.health < 10 && playSound({ src: audio.pop });
+              ++player.health < 10 && audio.pop.play();
               statistics.HEALTHY_FRUIT_COUNTS = 0;
             }
             // 添加拾取的水果的分数到奖励分数序列
@@ -181,15 +171,9 @@ const launcher = (): void => {
               // 清空数组
               statistics.REWARD_SCORES_ARRAY.length = 0;
               // 播放特殊的声音
-              playSound({
-                src: audio.burp,
-                promise: true,
-              });
+              audio.burp.play();
             } else {
-              playRandSound({
-                audio: audio.eat,
-                promise: true,
-              });
+              new Random().getItem(audio.eat).play();
             }
             statistics.SCORES += cakeItemResult;
           }
@@ -216,15 +200,9 @@ const launcher = (): void => {
           ) {
             // 执行道具的效果函数
             data.effect($(this));
-            playRandSound({
-              audio: audio.equip_chain,
-              promise: true,
-            });
+            new Random().getItem(audio.equip_chain).play();
           } else {
-            playRandSound({
-              audio: audio.eat,
-              promise: true,
-            });
+            new Random().getItem(audio.eat).play();
           }
         }
         // 删除元素
@@ -248,10 +226,14 @@ const launcher = (): void => {
       statistics.SUMMON_CD = 0;
     }
   }, 10);
+  const levelsUpTicks = {
+    min: levels_test.enabled ? levels_test.value[0] : 5000,
+    max: levels_test.enabled ? levels_test.value[1] : 14000,
+  };
   // 难度定时器
   const levelsUp = (): void => {
     clearTimeout(timer.difficulty as number);
-    playSound({ src: audio.orb });
+    audio.orb.play();
     // 淡入淡出效果
     nodes.levels.element.fadeIn(500).delay(4000).fadeOut(500);
     // 等级提升
@@ -287,10 +269,13 @@ const launcher = (): void => {
     }
     timer.difficulty = setTimeout(
       levelsUp,
-      new Random(5000, 14000).getNumber()
+      new Random(levelsUpTicks.min, levelsUpTicks.max).getNumber()
     );
   };
-  timer.difficulty = setTimeout(levelsUp, new Random(5000, 14000).getNumber());
+  timer.difficulty = setTimeout(
+    levelsUp,
+    new Random(levelsUpTicks.min, levelsUpTicks.max).getNumber()
+  );
 };
 
 export default launcher;

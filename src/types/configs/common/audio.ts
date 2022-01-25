@@ -1,13 +1,16 @@
+import { Howl } from "howler";
+
 interface AudioProps {
-  click: HTMLAudioElement;
-  end: HTMLAudioElement;
-  eat: HTMLAudioElement[];
-  orb: HTMLAudioElement;
-  equip_chain: HTMLAudioElement[];
-  burp: HTMLAudioElement;
-  pop: HTMLAudioElement;
-  hit: HTMLAudioElement[];
-  open_flip: HTMLAudioElement[];
+  click: Howl;
+  end: Howl;
+  eat: Howl[];
+  orb: Howl;
+  equip_chain: Howl[];
+  burp: Howl;
+  pop: Howl;
+  hit: Howl[];
+  open_flip: Howl[];
+  bgm: Howl[] | Howl;
 }
 
 export default AudioProps;

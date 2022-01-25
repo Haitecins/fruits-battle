@@ -1,3 +1,6 @@
+import { Howl, Howler, HowlOptions } from "howler";
+import AudioProps from "@/types/configs/common/audio";
+import GenshinImpact_2_4_PVMusic from "@/assets/sounds/bgm1.mp3";
 import click from "@/assets/sounds/click.ogg";
 import end from "@/assets/sounds/end.ogg";
 import eat1 from "@/assets/sounds/eat1.ogg";
@@ -18,34 +21,57 @@ import hit3 from "@/assets/sounds/hit3.ogg";
 import openFlip1 from "@/assets/sounds/open_flip1.ogg";
 import openFlip2 from "@/assets/sounds/open_flip2.ogg";
 import openFlip3 from "@/assets/sounds/open_flip3.ogg";
-import AudioProps from "@/types/configs/common/audio";
 
+Howler.volume(0.5);
+const options: HowlOptions = {
+  preload: true,
+  volume: 1,
+};
 const audio: AudioProps = {
   // 开始按钮点击音效
-  click: new Audio(click),
+  click: new Howl({ ...options, src: click }),
   // 游戏结束后的音效
-  end: new Audio(end),
+  end: new Howl({ ...options, src: end }),
   // 拾取水果的音效
-  eat: [new Audio(eat1), new Audio(eat2), new Audio(eat3)],
+  eat: [
+    new Howl({ ...options, src: eat1 }),
+    new Howl({ ...options, src: eat2 }),
+    new Howl({ ...options, src: eat3 }),
+  ],
   // 难度提高时的音效
-  orb: new Audio(orb),
+  orb: new Howl({ ...options, src: orb }),
   // 拾取有效道具时的音效
   equip_chain: [
-    new Audio(equipChain1),
-    new Audio(equipChain2),
-    new Audio(equipChain3),
-    new Audio(equipChain4),
-    new Audio(equipChain5),
-    new Audio(equipChain6),
+    new Howl({ ...options, src: equipChain1 }),
+    new Howl({ ...options, src: equipChain2 }),
+    new Howl({ ...options, src: equipChain3 }),
+    new Howl({ ...options, src: equipChain4 }),
+    new Howl({ ...options, src: equipChain5 }),
+    new Howl({ ...options, src: equipChain6 }),
   ],
   // 获取奖励分数时的音效
-  burp: new Audio(brup),
+  burp: new Howl({ ...options, src: brup }),
   // 玩家的生命值增加时的音效
-  pop: new Audio(pop),
+  pop: new Howl({ ...options, src: pop }),
   // 玩家失去生命值时的音效
-  hit: [new Audio(hit1), new Audio(hit2), new Audio(hit3)],
+  hit: [
+    new Howl({ ...options, src: hit1 }),
+    new Howl({ ...options, src: hit2 }),
+    new Howl({ ...options, src: hit3 }),
+  ],
   // 开始界面列表点击的音效
-  open_flip: [new Audio(openFlip1), new Audio(openFlip2), new Audio(openFlip3)],
+  open_flip: [
+    new Howl({ ...options, src: openFlip1 }),
+    new Howl({ ...options, src: openFlip2 }),
+    new Howl({ ...options, src: openFlip3 }),
+  ],
+  bgm: new Howl({
+    ...options,
+    src: GenshinImpact_2_4_PVMusic,
+    autoplay: true,
+    loop: true,
+    volume: 0.5,
+  }),
 };
 
 export default audio;

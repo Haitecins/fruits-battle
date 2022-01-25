@@ -3,15 +3,10 @@ import elements from "@/configs/common/elements";
 import player from "@/configs/common/player";
 import verify from "@/configs/common/verity";
 import verifications from "@/libs/functions/verifications";
-import playSound from "@/libs/functions/playSound";
 import resetConfig from "@/libs/functions/resetConfig";
 import refreshHistory from "@/libs/functions/refreshHistory";
 import refreshStatus from "@/libs/functions/refreshStatus";
 import launcher from "@/libs/functions/launcher";
-import music from "@/pages/music";
-import "@/pages/detailed";
-import "@/pages/history";
-import "@/pages/navigation";
 
 const { nodes, resetPageStyles, resetIndexStyles } = elements;
 const run = (): void => {
@@ -31,7 +26,7 @@ const run = (): void => {
       (nodes.app.width() as number) / 2 - (nodes.player.width() as number) / 2,
     top: () => nodes.app.height() as number,
   });
-  playSound({ src: audio.click });
+  audio.click.play();
   nodes.readme.element.fadeOut(300, () => {
     nodes.statusbar.element.animate({ height: 42 }, 300, "swing");
     nodes.player.animate(
@@ -46,13 +41,13 @@ const run = (): void => {
     );
   });
 };
-nodes.readme.startButton.one("click", () => music.play()).on("click", run);
+nodes.readme.startButton.on("click", run);
 nodes.gameover.restart.on("click", () => {
   if (!player.isEnded) return;
   resetPageStyles();
   resetConfig();
-  playSound({ src: audio.click });
   run();
+  audio.click.play();
 });
 nodes.gameover.backhome.on("click", () => {
   if (!player.isEnded) return;
@@ -60,5 +55,5 @@ nodes.gameover.backhome.on("click", () => {
   // 刷新历史记录
   refreshHistory();
   resetConfig();
-  playSound({ src: audio.click });
+  audio.click.play();
 });

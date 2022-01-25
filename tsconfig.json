@@ -22,9 +22,10 @@
       "@/libs/*": ["./src/modules/libs/*"],
       "@/pages/*": ["src/modules/pages/*"],
       "@/modules/*": ["./src/modules/*"],
+      "@/test/*": ["./src/test/*"],
       "@/*": ["./src/*"]
     }
   },
   "include": ["./src"],
-  "exclude": ["node_modules"]
+  "exclude": ["./node_modules"]
 }
