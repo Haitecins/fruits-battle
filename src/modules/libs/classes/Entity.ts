@@ -24,6 +24,18 @@ class Entity {
       statistics.SUMMONED_FRUIT_COUNTS = 0;
     }
     this.element = $("<i/>");
+    // 添加实体的类名
+    this.element.addClass(getEntityObject.type);
+    this.element.css({ zIndex: getEntityObject.priority });
+    // 当实体是新鲜水果(fruits)时，有概率变成腐烂水果(bad)。
+    if (
+      this.element.hasClass("fruits") &&
+      setChance(levels.BAD_FRUITS_CHANCE, 2)
+    ) {
+      this.element.addClass("bad");
+    }
+    // 添加实体数据
+    this.element.prop({ data: getEntityObject });
     // 根据难度等级概率生成实体
     if (
       getEntityObject.type === "fruits" &&
@@ -44,18 +56,6 @@ class Entity {
       $(this.element).addClass(getEntityObject.id);
       $(this.element).appendTo(nodes.app);
     }
-    // 添加实体的类名
-    $(this.element).addClass(getEntityObject.type);
-    $(this.element).css({ zIndex: getEntityObject.priority });
-    // 当实体是新鲜水果(fruits)时，有概率变成腐烂水果(bad)。
-    if (
-      this.element.hasClass("fruits") &&
-      setChance(levels.BAD_FRUITS_CHANCE, 2)
-    ) {
-      this.element.addClass("bad");
-    }
-    // 添加实体数据
-    $(this.element).prop({ data: getEntityObject });
   }
 
   static directions(): string {
