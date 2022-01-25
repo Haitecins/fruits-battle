@@ -14,6 +14,7 @@ const { nodes, resetPageStyles, resetIndexStyles } = elements;
 const run = (): void => {
   if (player.isRunning) return;
   player.isRunning = !player.isRunning;
+  nodes.player.removeAttr("style");
   // 播放点击音效
   audio.click.play();
   // 刷新状态栏
