@@ -1,4 +1,3 @@
-import $ from "jquery";
 import achievements from "@/configs/events/achievements";
 import statistics from "@/configs/common/statistics";
 import timer from "@/configs/common/timer";
@@ -12,9 +11,9 @@ import timeFormat from "@/libs/functions/timeFormat";
 const { nodes, clearEntities } = elements;
 const ended = (): void => {
   // 关闭所有定时器
-  $.each(timer, function () {
-    clearInterval($(this as never)[0] as unknown as NodeJS.Timeout);
-  });
+  Object.keys(timer).forEach((key) =>
+    clearInterval((timer as never)[key] as NodeJS.Timeout)
+  );
   // 结束时播放特定声音
   audio.end.play();
   player.isEnded = !player.isEnded;
