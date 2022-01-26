@@ -14,18 +14,52 @@ const items: ItemProps = [
     id: "clock",
     type: "items",
     priority: 0,
+    speed: {
+      min: 1.25,
+      max: 1.85,
+    },
     // 有效概率
     valid: {
       min: 21,
       max: 66,
     },
+    custom: {
+      chance: 85,
+      playtime: {
+        added: [5.4, 11.2],
+        removed: [4.1, 9.6],
+      },
+    },
+    description() {
+      const { chance, playtime } = this.custom as {
+        chance: number;
+        playtime: { added: number[]; removed: number[] };
+      };
+      return `增加小量游戏时间。有${chance}%的概率增加${playtime.added[0]}-${
+        playtime.added[1]
+      }秒游戏时间；有${100 - chance}%的概率减少${playtime.removed[0]}-${
+        playtime.removed[1]
+      }秒游戏时间。`;
+    },
     effect(element) {
+      const { chance, playtime } = this.custom as {
+        chance: number;
+        playtime: { added: number[]; removed: number[] };
+      };
       const before = player.countdown;
 
-      if (setChance(85)) {
-        player.countdown += new Random(5.4, 11.2, 1).getNumber();
+      if (setChance(chance)) {
+        player.countdown += new Random(
+          playtime.added[0],
+          playtime.added[1],
+          1
+        ).getNumber();
       } else {
-        player.countdown -= new Random(4.1, 9.6, 1).getNumber();
+        player.countdown -= new Random(
+          playtime.removed[0],
+          playtime.removed[1],
+          1
+        ).getNumber();
       }
 
       detailBlocks({
@@ -41,26 +75,38 @@ const items: ItemProps = [
         fixed: 1,
       });
     },
-    speed: {
-      min: 1.25,
-      max: 1.85,
-    },
-    description:
-      "增加小量游戏时间。有85%的概率增加5.4-11.2秒游戏时间；有15%的概率减少4.1-9.6秒游戏时间。",
   },
   {
     id: "magnet",
     type: "items",
     priority: 0,
+    speed: {
+      min: 1.5,
+      max: 2.28,
+    },
     valid: {
       min: 11,
       max: 49,
     },
     custom: {
       timer: null,
+      chance: 75,
+      delays: 500,
+    },
+    description() {
+      const { chance, delays } = this.custom as {
+        chance: number;
+        delays: number;
+      };
+      return `吸引所有新鲜水果至玩家的位置，有${
+        100 - chance
+      }%的概率额外吸引腐烂水果。如果吸引的水果正在移动中，玩家的位置发生变化，则将移动到上次移动的地点。水果在吸引后将停留${
+        delays / 1000
+      }秒。`;
     },
     effect() {
       type CustomProps = { timer: NodeJS.Timeout };
+      const getPlayer = nodes.player;
       const attract = (element: JQuery<HTMLElement>) => {
         if (!(element.prop("disX") && element.prop("disY"))) {
           element.prop({
@@ -76,21 +122,25 @@ const items: ItemProps = [
           .animate(
             {
               left:
-                nodes.player.position().left +
-                (nodes.player.width() as number) / 2 -
+                getPlayer.position().left +
+                (getPlayer.width() as number) / 2 -
                 (element.width() as number) / 2,
               top:
-                nodes.player.position().top +
-                (nodes.player.height() as number) / 2 -
+                getPlayer.position().top +
+                (getPlayer.height() as number) / 2 -
                 (element.height() as number) / 2,
             },
             400,
             "swing"
           );
       };
-      const getChance = setChance(75);
+      const { chance, delays } = this.custom as {
+        chance: number;
+        delays: number;
+      };
+      const getGlobalChance = setChance(chance);
       entities.fruits().each(function () {
-        if (getChance) {
+        if (getGlobalChance) {
           if (!$(this).hasClass("bad")) attract($(this));
         } else {
           attract($(this));
@@ -109,19 +159,17 @@ const items: ItemProps = [
           }
         });
         // 900毫秒的由来：500毫秒的等待时间 + 400毫秒实体从自身位置移动到玩家位置所需的时间
-      }, 900);
+      }, delays + 400);
     },
-    speed: {
-      min: 1.5,
-      max: 2.28,
-    },
-    description:
-      "吸引所有新鲜水果至玩家的位置，有25%的概率额外吸引腐烂水果。如果吸引的水果正在移动中，玩家的位置发生变化，则将移动到上次移动的地点。水果在吸引后将停留0.5秒。",
   },
   {
     id: "cake",
     type: "items",
     priority: 0,
+    speed: {
+      min: 1.5,
+      max: 2.5,
+    },
     valid: {
       min: 7,
       max: 81,
@@ -132,57 +180,71 @@ const items: ItemProps = [
         width: nodes.player.width(),
         height: nodes.player.height(),
       },
+      chance: 55,
+      duration: 10000,
+    },
+    description() {
+      const { chance, duration } = this.custom as {
+        chance: number;
+        duration: number;
+      };
+      return `随地大小变(bushi。有${chance}%的概率将玩家变大，有${
+        100 - chance
+      }%的概率变小。该效果持续${
+        duration / 1000
+      }秒。重复拾取将覆盖上一次的效果。根据变化的大小，会影响拾取新鲜水果的最终分数，玩家越大分数越高，反之分数越低。`;
     },
     effect() {
       type CustomProps = {
         timer: NodeJS.Timeout;
         attrs: { width: number; height: number };
+        chance: number;
+        duration: number;
       };
       type VerifyCustomProps = { attrs: { width: number; height: number } };
 
-      const thisRoot = this;
-      const { width } = (this.custom as CustomProps).attrs;
-      const { height } = (this.custom as CustomProps).attrs;
+      const {
+        attrs: { width, height },
+        chance,
+        duration,
+      } = this.custom as CustomProps;
       const change = (size: number): void => {
-        const changeWidth = Math.floor(width * size);
-        const changeHeight = Math.floor(height * size);
+        const widthChanged = Math.floor(width * size);
+        const heightChanged = Math.floor(height * size);
         (verify.PLAYER_EDIT_ARGUMENTS.custom as VerifyCustomProps).attrs.width =
-          changeWidth;
+          widthChanged;
         (
           verify.PLAYER_EDIT_ARGUMENTS.custom as VerifyCustomProps
-        ).attrs.height = changeHeight;
+        ).attrs.height = heightChanged;
         statistics.CAKE_ITEM_INFLUENCE_VALUE =
-          1 + ((changeWidth - width) / width) * 1;
+          1 + ((widthChanged - width) / width) * 1;
         nodes.player.animate(
           {
-            width: changeWidth,
-            height: changeHeight,
+            width: widthChanged,
+            height: heightChanged,
           },
           250,
-          function () {
-            const thisPlayer = $(this);
-
-            clearTimeout((thisRoot.custom as CustomProps).timer);
-
-            (thisRoot.custom as CustomProps).timer = setTimeout(() => {
+          () => {
+            clearTimeout((this.custom as CustomProps).timer);
+            (this.custom as CustomProps).timer = setTimeout(() => {
               // 重置最终分数
               statistics.CAKE_ITEM_INFLUENCE_VALUE = 1;
               if (
-                thisPlayer.position().top + height >
+                nodes.player.position().top + height >
                 (nodes.app.height() as number) -
                   (nodes.statusbar.element.height() as number)
               ) {
-                thisPlayer.css({ top: thisPlayer.position().top - height });
+                nodes.player.css({ top: nodes.player.position().top - height });
               }
-
               if (
-                thisPlayer.position().left + width >
+                nodes.player.position().left + width >
                 (nodes.app.width() as number)
               ) {
-                thisPlayer.css({ left: thisPlayer.position().left - width });
+                nodes.player.css({
+                  left: nodes.player.position().left - width,
+                });
               }
-
-              thisPlayer.animate(
+              nodes.player.animate(
                 {
                   width,
                   height,
@@ -197,34 +259,46 @@ const items: ItemProps = [
                   ).attrs.height = height;
                 }
               );
-            }, 10000);
+            }, duration);
           }
         );
       };
 
-      if (setChance(55)) {
+      if (setChance(chance)) {
         change(new Random(1.5, 5.1, 2).getNumber());
       } else {
         change(new Random(0.1, 0.5, 2).getNumber());
       }
     },
-    speed: {
-      min: 1.5,
-      max: 2.5,
-    },
-    description:
-      "随地大小变(bushi。有55%的概率将玩家变大，有45%的概率变小。该效果持续10秒。重复拾取将覆盖上一次的效果。根据变化的大小，会影响拾取新鲜水果的最终分数，玩家越大分数越高，反之分数越低。",
   },
   {
     id: "book",
     type: "items",
     priority: 0,
+    speed: {
+      min: 1.15,
+      max: 2.5,
+    },
     valid: {
       min: 41,
       max: 70,
     },
+    custom: {
+      chance: 65,
+    },
+    description() {
+      const { chance } = this.custom as {
+        chance: number;
+      };
+      return `将游戏区域内的水果反转。有${chance}%的概率将所有腐烂水果转换为新鲜水果，有${
+        100 - chance
+      }%的概率相反。`;
+    },
     effect() {
-      if (setChance(65)) {
+      const { chance } = this.custom as {
+        chance: number;
+      };
+      if (setChance(chance)) {
         // 将腐烂水果变为健康水果
         entities.fruits().each(function () {
           if ($(this).hasClass("bad")) {
@@ -240,31 +314,51 @@ const items: ItemProps = [
         });
       }
     },
-    speed: {
-      min: 1.15,
-      max: 2.5,
-    },
-    description:
-      "将游戏区域内的水果反转。有65%的概率将所有腐烂水果转换为新鲜水果，有35%的概率相反。",
   },
   {
     id: "hourglass",
     type: "items",
     priority: 0,
+    speed: {
+      min: 1.21,
+      max: 2.6,
+    },
     valid: {
       min: 13,
       max: 44,
     },
+    custom: {
+      high: [5, 0.5],
+      medium: [10, 0.3],
+      low: [85, 0.1],
+    },
+    description() {
+      const { high, medium, low } = this.custom as {
+        high: number[];
+        medium: number[];
+        low: number[];
+      };
+      return `增加大量游戏时间。有${high[0]}%的概率获得当前${
+        high[1] * 100
+      }%的游戏时间。有${medium[0]}%的概率获得当前${
+        medium[1] * 100
+      }%的游戏时间。有${low[0]}%的概率获得当前${low[1] * 100}%的游戏时间。`;
+    },
     effect(element) {
+      const { high, medium, low } = this.custom as {
+        high: number[];
+        medium: number[];
+        low: number[];
+      };
       const before = player.countdown;
       const minTime = 1.5;
 
-      if (setChance(5)) {
-        player.countdown += minTime + player.countdown * 0.5;
-      } else if (setChance(10)) {
-        player.countdown += minTime + player.countdown * 0.3;
+      if (setChance(high[0])) {
+        player.countdown += minTime + player.countdown * high[1];
+      } else if (setChance(medium[0])) {
+        player.countdown += minTime + player.countdown * medium[1];
       } else {
-        player.countdown += minTime + player.countdown * 0.1;
+        player.countdown += minTime + player.countdown * low[1];
       }
 
       detailBlocks({
@@ -280,12 +374,6 @@ const items: ItemProps = [
         fixed: 1,
       });
     },
-    speed: {
-      min: 1.21,
-      max: 2.6,
-    },
-    description:
-      "增加大量游戏时间。有5%的概率获得当前50%的游戏时间。有10%的概率获得当前30%的游戏时间。有85%的概率获得当前10%的游戏时间。",
   },
 ];
 
@@ -293,6 +381,8 @@ const items: ItemProps = [
 items
   .sort((item1, item2) => item1.valid.min - item2.valid.min)
   .forEach((item, index) => {
+    item.valid.min += 100;
+    item.valid.max += 100;
     item.priority = 100 + index;
   });
 

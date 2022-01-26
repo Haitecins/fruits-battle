@@ -23,13 +23,14 @@ const ended = (): void => {
   nodes.levels.container.empty();
   nodes.player.removeAttr("style").hide();
   // 显示本局的游戏数据
-  const getCompletion = achievements.filter(({ cond }) => cond());
-  const fillItem = getCompletion.map(({ title, description }) => {
+  const getCompletion = achievements.filter((item) => item.cond());
+  const fillItem = getCompletion.map((item) => {
+    const { title } = item;
     return `<li>
       <i class="achievements-icon"></i>
       <div>
       <p>${title}</p>
-      <p>${description}</p>
+      <p>${item.description()}</p>
       </div>
     </li>`;
   });
