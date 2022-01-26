@@ -59,9 +59,19 @@ const detailBlocks = ({
   };
   const { after, before } = value;
   if (after > before) {
-    send("get", `+${calcRepair(after - before, false, fixed)}`);
+    send(
+      "get",
+      `+${calcRepair(after - before, false, fixed)}${
+        value.suffix ? value.suffix : ""
+      }`
+    );
   } else {
-    send("lose", calcRepair(after - before, true, fixed));
+    send(
+      "lose",
+      `${calcRepair(after - before, true, fixed)}${
+        value.suffix ? value.suffix : ""
+      }`
+    );
   }
 };
 

@@ -1,8 +1,9 @@
 interface AchievementsObject {
   id: string;
+  required?: object;
   cond: () => boolean;
   title: string;
-  description: string;
+  description: () => string;
 }
 type AchievementProps = AchievementsObject[];
 

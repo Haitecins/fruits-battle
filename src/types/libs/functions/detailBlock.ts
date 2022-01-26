@@ -7,6 +7,7 @@ interface DetailBlockProps {
   value: {
     before: number;
     after: number;
+    suffix?: string;
   };
   extra?: () => unknown;
   fixed?: number;

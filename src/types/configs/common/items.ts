@@ -2,17 +2,17 @@ interface ItemsObject {
   id: string;
   type: string;
   priority: number;
-  valid: {
-    min: number;
-    max: number;
-  };
-  effect: (element: HTMLElement | JQuery<HTMLElement>) => void;
   speed: {
     min: number;
     max: number;
   };
-  description: string;
+  valid: {
+    min: number;
+    max: number;
+  };
   custom?: object;
+  description: () => string;
+  effect: (element: HTMLElement | JQuery<HTMLElement>) => void;
 }
 type ItemProps = ItemsObject[];
 
