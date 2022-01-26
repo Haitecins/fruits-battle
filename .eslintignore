@@ -1,4 +1,6 @@
 **/node_modules/**
 **/out/**
 **/test/**
+.eslintrc.js
+.prettierrc.js
 vite.config.js

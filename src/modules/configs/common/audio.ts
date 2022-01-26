@@ -71,7 +71,7 @@ const audio: AudioProps = {
     src: GenshinImpact_2_4_PVMusic,
     autoplay: true,
     loop: true,
-    volume: 0.5,
+    volume: 0.1,
   }),
   random(audios: Howl[]) {
     return new Random().getItem<Howl>(audios);
