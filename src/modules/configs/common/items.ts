@@ -16,12 +16,12 @@ const items: ItemProps = [
     priority: 0,
     speed: {
       min: 1.25,
-      max: 1.85,
+      max: 3.5,
     },
     // 有效概率
     valid: {
-      min: 21,
-      max: 66,
+      min: 25,
+      max: 42,
     },
     custom: {
       chance: 85,
@@ -35,9 +35,9 @@ const items: ItemProps = [
         chance: number;
         playtime: { added: number[]; removed: number[] };
       };
-      return `增加小量游戏时间。有${chance}%的概率增加${playtime.added[0]}-${
+      return `THE WORLD<br/>有${chance}%的概率增加${playtime.added[0]}-${
         playtime.added[1]
-      }秒游戏时间；有${100 - chance}%的概率减少${playtime.removed[0]}-${
+      }秒游戏时间；<br/>${100 - chance}%的概率减少${playtime.removed[0]}-${
         playtime.removed[1]
       }秒游戏时间。`;
     },
@@ -82,11 +82,11 @@ const items: ItemProps = [
     priority: 0,
     speed: {
       min: 1.5,
-      max: 2.28,
+      max: 2.25,
     },
     valid: {
-      min: 11,
-      max: 49,
+      min: 30,
+      max: 60,
     },
     custom: {
       timer: null,
@@ -168,11 +168,11 @@ const items: ItemProps = [
     priority: 0,
     speed: {
       min: 1.5,
-      max: 2.5,
+      max: 3.25,
     },
     valid: {
-      min: 7,
-      max: 81,
+      min: 20,
+      max: 55,
     },
     custom: {
       timer: null,
@@ -188,11 +188,11 @@ const items: ItemProps = [
         chance: number;
         duration: number;
       };
-      return `随地大小变(bushi。有${chance}%的概率将玩家变大，有${
+      return `随地大小变(bushi<br/>有${chance}%的概率将玩家变大，${
         100 - chance
-      }%的概率变小。该效果持续${
+      }%的概率变小。<br/>该效果持续${
         duration / 1000
-      }秒。重复拾取将覆盖上一次的效果。根据变化的大小，会影响拾取新鲜水果的最终分数，玩家越大分数越高，反之分数越低。`;
+      }秒。<br/>重复拾取将覆盖上一次的效果。根据变化的大小，会影响拾取新鲜水果的最终分数，体型越大分数越高，反之分数越低。`;
     },
     effect() {
       type CustomProps = {
@@ -277,10 +277,10 @@ const items: ItemProps = [
     priority: 0,
     speed: {
       min: 1.15,
-      max: 2.5,
+      max: 2.25,
     },
     valid: {
-      min: 41,
+      min: 40,
       max: 70,
     },
     custom: {
@@ -290,7 +290,7 @@ const items: ItemProps = [
       const { chance } = this.custom as {
         chance: number;
       };
-      return `将游戏区域内的水果反转。有${chance}%的概率将所有腐烂水果转换为新鲜水果，有${
+      return `《白夜国馆藏》<br/>有${chance}%的概率将所有腐烂水果转换为新鲜水果，${
         100 - chance
       }%的概率相反。`;
     },
@@ -320,12 +320,12 @@ const items: ItemProps = [
     type: "items",
     priority: 0,
     speed: {
-      min: 1.21,
-      max: 2.6,
+      min: 1.75,
+      max: 3.25,
     },
     valid: {
-      min: 13,
-      max: 44,
+      min: 15,
+      max: 40,
     },
     custom: {
       high: [5, 0.5],
@@ -338,11 +338,11 @@ const items: ItemProps = [
         medium: number[];
         low: number[];
       };
-      return `增加大量游戏时间。有${high[0]}%的概率获得当前${
+      return `神舆之辔<br/>${high[0]}%的概率获得当前${
         high[1] * 100
-      }%的游戏时间。有${medium[0]}%的概率获得当前${
+      }%的游戏时间；<br/>${medium[0]}%的概率获得当前${
         medium[1] * 100
-      }%的游戏时间。有${low[0]}%的概率获得当前${low[1] * 100}%的游戏时间。`;
+      }%的游戏时间；<br/>${low[0]}%的概率获得当前${low[1] * 100}%的游戏时间。`;
     },
     effect(element) {
       const { high, medium, low } = this.custom as {
@@ -378,12 +378,8 @@ const items: ItemProps = [
 ];
 
 // 对道具根据最低概率进行升序排序
-items
-  .sort((item1, item2) => item1.valid.min - item2.valid.min)
-  .forEach((item, index) => {
-    item.valid.min += 100;
-    item.valid.max += 100;
-    item.priority = 100 + index;
-  });
+items.forEach((item, index) => {
+  item.priority = 100 + index;
+});
 
 export default items;

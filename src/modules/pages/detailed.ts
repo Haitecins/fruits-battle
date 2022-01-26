@@ -19,7 +19,7 @@ totalFruits.html(
 
 totalItems.html(
   items
-    .sort((item1, item2) => item1.valid.min - item2.valid.min)
+    .sort((item1, item2) => item1.speed.min - item2.speed.min)
     .map((item) => {
       const { id, type, valid, speed } = item;
       return `<div>

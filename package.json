@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "tsc && yarn format && yarn lint && vite build",
     "preview": "vite preview",
-    "serve": "serve ./out -l 80",
+    "serve": "http-server ./out -p 80 -d false -g true -c-1 --log-ip",
     "format": "prettier --write .",
     "lint": "eslint --ext .ts,.js src/"
   },
@@ -26,9 +26,9 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "2.25.2",
     "eslint-plugin-prettier": "^4.0.0",
+    "http-server": "^14.1.0",
     "less": "^4.1.2",
     "prettier": "^2.5.1",
-    "serve": "^13.0.2",
     "typescript": "^4.4.4",
     "vite": "^2.7.13"
   },
