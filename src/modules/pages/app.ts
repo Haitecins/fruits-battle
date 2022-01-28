@@ -11,7 +11,7 @@ import refreshStatus from "@/libs/functions/refreshStatus";
 import launcher from "@/libs/functions/launcher";
 
 const { nodes, resetPageStyles, resetIndexStyles } = elements;
-const run = (): void => {
+const startup = (): void => {
   if (player.isRunning) return;
   player.isRunning = !player.isRunning;
   nodes.player.removeAttr("style");
@@ -95,12 +95,12 @@ nodes.readme.startButton
       },
     });
   })
-  .on("click", run);
+  .on("click", startup);
 nodes.gameover.restart.on("click", () => {
   if (!player.isEnded) return;
   resetPageStyles();
   resetConfig();
-  run();
+  startup();
 });
 nodes.gameover.spawnpoint.on("click", () => {
   if (!player.isEnded) return;
