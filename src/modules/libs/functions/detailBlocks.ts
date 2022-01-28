@@ -1,7 +1,7 @@
 import $ from "jquery";
 import elements from "@/configs/common/elements";
 import calcRepair from "@/libs/functions/calcRepair";
-import DetailBlockProps from "@/types/libs/functions/detailBlock";
+import DetailBlockProps from "@/types/libs/functions/detailBlocks";
 
 const { nodes } = elements;
 const detailBlocks = ({
