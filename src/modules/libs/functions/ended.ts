@@ -26,13 +26,7 @@ const ended = (): void => {
   const getCompletion = achievements.filter((item) => item.cond());
   const fillItem = getCompletion.map((item) => {
     const { title } = item;
-    return `<li>
-      <i class="achievements-icon"></i>
-      <div>
-      <p>${title}</p>
-      <p>${item.description()}</p>
-      </div>
-    </li>`;
+    return `<li><i class="achievements-icon"></i><div><p>${title}</p><p>${item.description()}</p></div></li>`;
   });
   statistics.TOTAL_ACHIEVEMENTS = getCompletion.length;
   // 解构赋值，需要保存的数据。
