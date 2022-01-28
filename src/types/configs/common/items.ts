@@ -10,7 +10,10 @@ interface ItemsObject {
     min: number;
     max: number;
   };
-  custom?: object;
+  custom?: {
+    timer?: NodeJS.Timeout | null | number | undefined;
+    [propName: string]: unknown;
+  };
   description: () => string;
   effect: (element: HTMLElement | JQuery<HTMLElement>) => void;
 }

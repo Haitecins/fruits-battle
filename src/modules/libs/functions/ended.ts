@@ -2,6 +2,7 @@ import achievements from "@/configs/events/achievements";
 import statistics from "@/configs/common/statistics";
 import timer from "@/configs/common/timer";
 import audio from "@/configs/common/audio";
+import items from "@/configs/common/items";
 import player from "@/configs/common/player";
 import levels from "@/configs/common/levels";
 import elements from "@/configs/common/elements";
@@ -18,9 +19,19 @@ const ended = (): void => {
   audio.end.play();
   player.isEnded = !player.isEnded;
   clearEntities();
+  // 清除遗留下来的难度提升日志
   nodes.levels.element.stop(true).removeAttr("style");
   nodes.levels.value.empty();
   nodes.levels.container.empty();
+  // 清除道具中所有用到定时器的项目
+  items
+    .filter(
+      (item) => (item.custom as { timer: NodeJS.Timeout }).timer !== undefined
+    )
+    .forEach((item) => {
+      clearTimeout((item.custom as { timer: NodeJS.Timeout }).timer);
+    });
+  // 重置玩家位置
   nodes.player.removeAttr("style").hide();
   // 显示本局的游戏数据
   const getCompletion = achievements.filter((item) => item.cond());
