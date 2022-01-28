@@ -1,4 +1,5 @@
 import $ from "jquery";
+import { isMobile, useDeviceEvents } from "@/configs/common/mobile";
 import audio from "@/configs/common/audio";
 import elements from "@/configs/common/elements";
 import player from "@/configs/common/player";
@@ -52,52 +53,18 @@ window.onload = () => {
   nodes.readme.startButton
     .removeClass("hidden")
     .one("click", () => {
-      const isMobile = !!window.navigator.userAgent.match(
-        /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
-      );
-      const getDeviceEvents = (
-        hasMobile: boolean,
-        event:
-          | JQuery.TriggeredEvent<
-              HTMLElement,
-              undefined,
-              HTMLElement,
-              HTMLElement
-            >
-          | JQuery.TriggeredEvent<Document, undefined, Document, Document>
-      ): {
-        clientX: number;
-        clientY: number;
-      } => {
-        if (hasMobile) {
-          // 获取触摸的事件
-          return (
-            event as unknown as {
-              changedTouches: object[];
-            }
-          ).changedTouches[0] as {
-            clientX: number;
-            clientY: number;
-          };
-        }
-        // 获取鼠标的事件
-        return event as never;
-      };
       nodes.player.on({
         [isMobile ? "touchstart" : "mousedown"](downEvent) {
           // 获取鼠标/触摸的坐标与该对象的坐标之间的距离
           const x =
-            getDeviceEvents(isMobile, downEvent).clientX -
-            $(this).position().left;
-          const y =
-            getDeviceEvents(isMobile, downEvent).clientY -
-            $(this).position().top;
+            useDeviceEvents(downEvent).clientX - $(this).position().left;
+          const y = useDeviceEvents(downEvent).clientY - $(this).position().top;
           $(document).on({
             [isMobile ? "touchmove" : "mousemove"](moveEvent) {
               if (player.countdown > 0 && player.health > 0) {
                 // 获取鼠标的坐标减去对象之间坐标的位置
-                let left = getDeviceEvents(isMobile, moveEvent).clientX - x;
-                let top = getDeviceEvents(isMobile, moveEvent).clientY - y;
+                let left = useDeviceEvents(moveEvent).clientX - x;
+                let top = useDeviceEvents(moveEvent).clientY - y;
 
                 // 阻止超出游戏区域
                 if (left < 0) left = 0;
