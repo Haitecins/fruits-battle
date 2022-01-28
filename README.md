@@ -15,6 +15,8 @@
 
 注：本项目仅供学习使用！
 
+在线游玩地址：[Github Pages](https://chiyukikana.github.io)
+
 ## 技术栈
 
 | 名称       | 链接                            | 版本    |
