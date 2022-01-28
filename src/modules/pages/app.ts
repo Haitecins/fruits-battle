@@ -1,4 +1,5 @@
 import $ from "jquery";
+import { isMobile, useDeviceEvents } from "@/configs/common/mobile";
 import audio from "@/configs/common/audio";
 import elements from "@/configs/common/elements";
 import player from "@/configs/common/player";
@@ -53,16 +54,17 @@ window.onload = () => {
     .removeClass("hidden")
     .one("click", () => {
       nodes.player.on({
-        mousedown(downEvent) {
-          // 获取鼠标的坐标与该对象的坐标之间的距离
-          const x = downEvent.clientX - $(this).position().left;
-          const y = downEvent.clientY - $(this).position().top;
+        [isMobile ? "touchstart" : "mousedown"](downEvent) {
+          // 获取鼠标/触摸的坐标与该对象的坐标之间的距离
+          const x =
+            useDeviceEvents(downEvent).clientX - $(this).position().left;
+          const y = useDeviceEvents(downEvent).clientY - $(this).position().top;
           $(document).on({
-            mousemove(moveEvent) {
+            [isMobile ? "touchmove" : "mousemove"](moveEvent) {
               if (player.countdown > 0 && player.health > 0) {
                 // 获取鼠标的坐标减去对象之间坐标的位置
-                let left = moveEvent.clientX - x;
-                let top = moveEvent.clientY - y;
+                let left = useDeviceEvents(moveEvent).clientX - x;
+                let top = useDeviceEvents(moveEvent).clientY - y;
 
                 // 阻止超出游戏区域
                 if (left < 0) left = 0;
@@ -92,7 +94,8 @@ window.onload = () => {
                 nodes.player.css({ left, top });
               }
             },
-            mouseup() {
+            [isMobile ? "touchend" : "mouseup"]() {
+              $(this).off("touchmove");
               $(this).off("mousemove");
             },
           });
