@@ -21,16 +21,26 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "import"],
   rules: {
     "@typescript-eslint/no-unused-expressions": [
       ERROR,
       { allowTernary: true, allowShortCircuit: true },
     ],
-    "import/extensions": OFF,
+    "import/no-unresolved": ERROR,
     "func-names": [ERROR, "never"],
     "no-console": OFF,
     "no-plusplus": OFF,
     "no-param-reassign": OFF,
+  },
+  settings: {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"],
+    },
+    "import/resolver": {
+      typescript: {
+        alwaysTryTypes: true,
+      },
+    },
   },
 };
