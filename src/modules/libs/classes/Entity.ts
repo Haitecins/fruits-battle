@@ -1,4 +1,4 @@
-import $ from "jquery";
+import jQuery from "jquery";
 import fruits from "@/configs/common/fruits";
 import items from "@/configs/common/items";
 import statistics from "@/configs/common/statistics";
@@ -23,7 +23,7 @@ class Entity {
       getEntityObject = new Random().getItem<ItemsObject>([...items]);
       statistics.SUMMONED_FRUIT_COUNTS = 0;
     }
-    this.element = $("<i/>");
+    this.element = jQuery("<i/>");
     // 添加实体的类名
     this.element.addClass(getEntityObject.type);
     this.element.css({ zIndex: getEntityObject.priority });
@@ -42,8 +42,8 @@ class Entity {
       setChance(levels.HEALTHY_FRUITS_SPAWN_CHANCE)
     ) {
       // 在生成前添加实体的类名，减少网络请求的次数。
-      $(this.element).addClass(getEntityObject.id);
-      $(this.element).appendTo(nodes.app);
+      jQuery(this.element).addClass(getEntityObject.id);
+      jQuery(this.element).appendTo(nodes.app);
       // 增加生成的水果的计数
       if (statistics.PLAYTIME > 10) statistics.SUMMONED_FRUIT_COUNTS += 1;
     }
@@ -53,8 +53,8 @@ class Entity {
       setChance(levels.ITEMS_SPAWN_CHANCE)
     ) {
       // 在生成前添加实体的类名，减少网络请求的次数。
-      $(this.element).addClass(getEntityObject.id);
-      $(this.element).appendTo(nodes.app);
+      jQuery(this.element).addClass(getEntityObject.id);
+      jQuery(this.element).appendTo(nodes.app);
     }
   }
 

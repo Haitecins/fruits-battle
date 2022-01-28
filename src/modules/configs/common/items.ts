@@ -1,4 +1,4 @@
-import $ from "jquery";
+import jQuery from "jquery";
 import player from "@/configs/common/player";
 import statistics from "@/configs/common/statistics";
 import elements from "@/configs/common/elements";
@@ -141,9 +141,9 @@ const items: ItemProps = [
       const getGlobalChance = setChance(chance);
       entities.fruits().each(function () {
         if (getGlobalChance) {
-          if (!$(this).hasClass("bad")) attract($(this));
+          if (!jQuery(this).hasClass("bad")) attract(jQuery(this));
         } else {
-          attract($(this));
+          attract(jQuery(this));
         }
       });
       // 防止短时间内多次拾取该道具引发的问题，每次拾取道具后，
@@ -151,10 +151,10 @@ const items: ItemProps = [
       clearTimeout((this.custom as CustomProps).timer);
       (this.custom as CustomProps).timer = setTimeout(() => {
         entities.fruits().each(function () {
-          if ($(this).prop("disX") && $(this).prop("disX")) {
-            $(this).prop({
-              xSpeed: $(this).prop("disX") as string,
-              ySpeed: $(this).prop("disY") as string,
+          if (jQuery(this).prop("disX") && jQuery(this).prop("disX")) {
+            jQuery(this).prop({
+              xSpeed: jQuery(this).prop("disX") as string,
+              ySpeed: jQuery(this).prop("disY") as string,
             });
           }
         });
@@ -301,15 +301,15 @@ const items: ItemProps = [
       if (setChance(chance)) {
         // 将腐烂水果变为健康水果
         entities.fruits().each(function () {
-          if ($(this).hasClass("bad")) {
-            $(this).removeClass("bad");
+          if (jQuery(this).hasClass("bad")) {
+            jQuery(this).removeClass("bad");
           }
         });
       } else {
         // 将健康水果变为腐烂水果
         entities.fruits().each(function () {
-          if (!$(this).hasClass("bad")) {
-            $(this).addClass("bad");
+          if (!jQuery(this).hasClass("bad")) {
+            jQuery(this).addClass("bad");
           }
         });
       }

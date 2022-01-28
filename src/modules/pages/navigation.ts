@@ -1,12 +1,12 @@
-import $ from "jquery";
+import jQuery from "jquery";
 import Random from "@/libs/classes/Random";
 import fruits from "@/configs/common/fruits";
 import audio from "@/configs/common/audio";
 import elements from "@/configs/common/elements";
 import { FruitsObject } from "@/types/configs/common/fruits";
 
-$(".random-fruit").each(function () {
-  $(this).addClass(
+jQuery(".random-fruit").each(function () {
+  jQuery(this).addClass(
     new Random(0, fruits.length - 1).getItem<FruitsObject>(fruits).id
   );
 });
@@ -45,5 +45,5 @@ contents
 randomFruitIcon(false).css({ top: 50 * getLocalIndex + 14 });
 // 点击事件
 nodes.readme.icons.items.each((index, item) => {
-  $(item).on("click", clickHandler.bind(this, index));
+  jQuery(item).on("click", clickHandler.bind(this, index));
 });

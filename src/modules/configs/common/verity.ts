@@ -1,4 +1,4 @@
-import $ from "jquery";
+import jQuery from "jquery";
 import elements from "@/configs/common/elements";
 import VerityProps from "@/types/configs/common/verity";
 
@@ -8,10 +8,10 @@ const verify: VerityProps = {
   DELETE_PLAYER_ELEMENT: {
     enabled: true,
     check() {
-      return $("#fruit-basket")[0] == null;
+      return jQuery("#fruit-basket")[0] == null;
     },
     actions() {
-      $(window.location).attr("href", "about:blank");
+      jQuery(window.location).attr("href", "about:blank");
     },
   },
   // Players modify CSS property parameters.
