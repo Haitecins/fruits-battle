@@ -1,4 +1,4 @@
-import $ from "jquery";
+import jQuery from "jquery";
 import Entity from "@/libs/classes/Entity";
 import audio from "@/configs/common/audio";
 import levels from "@/configs/common/levels";
@@ -44,21 +44,21 @@ const launcher = (): void => {
     // 实体处理程序
     entities.totals().each(function () {
       // 实体的移动
-      $(this).animate(
+      jQuery(this).animate(
         {
-          left: $(this).prop("xSpeed") as string,
-          top: $(this).prop("ySpeed") as string,
+          left: jQuery(this).prop("xSpeed") as string,
+          top: jQuery(this).prop("ySpeed") as string,
         },
         0,
         "swing",
-        hasOutArea.bind(this, $(this))
+        hasOutArea.bind(this, jQuery(this))
       );
       // 碰撞事件
-      if (hasCollide($(this))) {
+      if (hasCollide(jQuery(this))) {
         const { data } = this as never as { data: FruitsObject & ItemsObject };
         if (data.type === "fruits") {
           // 获取该元素是不是一个腐烂水果
-          const isBadFruit = $(this).hasClass("bad");
+          const isBadFruit = jQuery(this).hasClass("bad");
           // 获取目前的总分数
           const before = statistics.SCORES;
           // 计算最终的分数结果
@@ -118,8 +118,8 @@ const launcher = (): void => {
           detailBlocks({
             id: data.id,
             location: {
-              x: $(this).position().left,
-              y: $(this).position().top,
+              x: jQuery(this).position().left,
+              y: jQuery(this).position().top,
             },
             value: {
               // 获取之前的数值
@@ -136,14 +136,14 @@ const launcher = (): void => {
             setChance(new Random(data.valid.min, data.valid.max).getNumber())
           ) {
             // 执行道具的效果函数
-            data.effect($(this));
+            data.effect(jQuery(this));
             audio.random(audio.equip_chain).play();
           } else {
             audio.random(audio.eat).play();
           }
         }
         // 删除元素
-        $(this).remove();
+        jQuery(this).remove();
       }
     });
     // 满足结束游戏的条件

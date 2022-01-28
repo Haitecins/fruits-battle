@@ -1,4 +1,4 @@
-import $ from "jquery";
+import jQuery from "jquery";
 import { isMobile, useDeviceEvents } from "@/configs/common/mobile";
 import audio from "@/configs/common/audio";
 import elements from "@/configs/common/elements";
@@ -49,20 +49,22 @@ const startup = (): void => {
 };
 // 刷新历史记录
 refreshHistory();
-window.onload = () => {
+// 当资源加载完毕后可开始游戏
+jQuery(window).on("load", () => {
+  nodes.app.removeAttr("style");
   nodes.readme.startButton
-    .removeClass("hidden")
     .one("click", () => {
       nodes.player.on({
         [isMobile ? "touchstart" : "mousedown"](downEvent) {
-          // 获取鼠标/触摸的坐标与该对象的坐标之间的距离
+          // 获取设备的坐标与该对象的坐标之间的距离
           const x =
-            useDeviceEvents(downEvent).clientX - $(this).position().left;
-          const y = useDeviceEvents(downEvent).clientY - $(this).position().top;
-          $(document).on({
+            useDeviceEvents(downEvent).clientX - jQuery(this).position().left;
+          const y =
+            useDeviceEvents(downEvent).clientY - jQuery(this).position().top;
+          jQuery(document).on({
             [isMobile ? "touchmove" : "mousemove"](moveEvent) {
               if (player.countdown > 0 && player.health > 0) {
-                // 获取鼠标的坐标减去对象之间坐标的位置
+                // 获取设备的坐标减去对象之间坐标的位置
                 let left = useDeviceEvents(moveEvent).clientX - x;
                 let top = useDeviceEvents(moveEvent).clientY - y;
 
@@ -95,15 +97,15 @@ window.onload = () => {
               }
             },
             [isMobile ? "touchend" : "mouseup"]() {
-              $(this).off("touchmove");
-              $(this).off("mousemove");
+              jQuery(this).off("touchmove");
+              jQuery(this).off("mousemove");
             },
           });
         },
       });
     })
     .on("click", startup);
-};
+});
 nodes.gameover.restart.on("click", () => {
   if (!player.isEnded) return;
   resetPageStyles();

@@ -1,4 +1,4 @@
-import $ from "jquery";
+import jQuery from "jquery";
 import elements from "@/configs/common/elements";
 import calcRepair from "@/libs/functions/calcRepair";
 import DetailBlockProps from "@/types/libs/functions/detailBlocks";
@@ -12,7 +12,7 @@ const detailBlocks = ({
   fixed,
 }: DetailBlockProps): void => {
   const send = (className: string, text: string | number) => {
-    $("<i/>")
+    jQuery("<i/>")
       .appendTo(nodes.app)
       .addClass("pickup")
       .addClass(className)
@@ -27,10 +27,12 @@ const detailBlocks = ({
           if (location.x < 0) location.x = 10;
           if (
             location.x >
-            (nodes.app.width() as number) - ($(this).width() as number)
+            (nodes.app.width() as number) - (jQuery(this).width() as number)
           ) {
             location.x =
-              (nodes.app.width() as number) - ($(this).width() as number) - 10;
+              (nodes.app.width() as number) -
+              (jQuery(this).width() as number) -
+              10;
           }
 
           return location.x;
@@ -41,12 +43,12 @@ const detailBlocks = ({
             location.y >
             (nodes.app.height() as number) -
               (nodes.statusbar.element.height() as number) -
-              ($(this).height() as number)
+              (jQuery(this).height() as number)
           ) {
             location.y =
               (nodes.app.height() as number) -
               (nodes.statusbar.element.height() as number) -
-              ($(this).height() as number) -
+              (jQuery(this).height() as number) -
               10;
           }
 
@@ -54,7 +56,7 @@ const detailBlocks = ({
         },
       })
       .fadeOut(1500, function () {
-        $(this).remove();
+        jQuery(this).remove();
       });
   };
   const { after, before } = value;
