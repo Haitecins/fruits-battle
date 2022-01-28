@@ -378,8 +378,10 @@ const items: ItemProps = [
 ];
 
 // 对道具根据最低概率进行升序排序
-items.forEach((item, index) => {
-  item.priority = 100 + index;
-});
+items
+  .sort((item1, item2) => item1.valid.min - item2.valid.min)
+  .forEach((item, index) => {
+    item.priority = 100 + index;
+  });
 
 export default items;
