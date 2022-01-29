@@ -38,13 +38,19 @@
   }
   > div:last-child {
     width: 75%;
-    padding: 0 10px;
-    overflow: scroll;
-    overflow-x: hidden;
     text-align: left;
+    position: relative;
     > article {
-      display: none;
+      padding: 0 10px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      visibility: hidden;
       opacity: 0;
+      overflow-y: scroll;
+      overflow-x: hidden;
     }
     > article p {
       font-size: 14px;
@@ -81,7 +87,7 @@
   }
 }
 .readme-article-active {
-  display: block !important;
+  visibility: visible !important;
 }
 .readme-default-article {
   opacity: 1 !important;
