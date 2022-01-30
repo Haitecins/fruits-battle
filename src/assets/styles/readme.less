@@ -1,8 +1,12 @@
 #readme {
-  width: 800px;
+  max-width: 800px;
   max-height: 500px;
   display: flex;
   position: absolute;
+  padding: constant(safe-area-inset-top) constant(safe-area-inset-right)
+    constant(safe-area-inset-bottom) constant(safe-area-inset-left);
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
   left: 0;
   right: 0;
   top: 0;
