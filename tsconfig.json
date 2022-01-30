@@ -23,6 +23,8 @@
       "@/pages/*": ["src/modules/pages/*"],
       "@/modules/*": ["./src/modules/*"],
       "@/test/*": ["./src/test/*"],
+      "@/types/*": ["./src/types/*"],
+      "@/utils/*": ["./src/utils/*"],
       "@/*": ["./src/*"]
     }
   },
