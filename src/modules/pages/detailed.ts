@@ -22,13 +22,10 @@ totalItems.html(
     .sort((item1, item2) => item1.speed.min - item2.speed.min)
     .map((item) => {
       const { id, type, valid, speed } = item;
-      return `<div>
-        <div>
-          <i class="${type} ${id}"></i>
-          <p>有效概率 ${valid.min}%-${valid.max}%</p>
-          <p>移动速度 ${speed.min}-${speed.max}</p>
-        </div>
-        <p>${item.description()}</p>
-      </div>`;
+      return `<div><div><i class="${type} ${id}"></i><p>有效概率 ${
+        valid.min
+      }%-${valid.max}%</p><p>移动速度 ${speed.min}-${
+        speed.max
+      }</p></div><p>${item.description()}</p></div>`;
     }) as never
 );
