@@ -4,6 +4,10 @@
   "author": "chiyukikana",
   "private": "true",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chiyukikana/fruit-wars.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && yarn format && yarn lint && vite build",
