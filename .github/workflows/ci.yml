@@ -4,8 +4,8 @@ on:
     branches:
       - master
 jobs:
-  dependencies:
-    name: Install Dependencies
+  build:
+    name: Release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,27 +15,12 @@ jobs:
       - uses: borales/actions-yarn@v2.3.0
         with:
           cmd: build
-  release:
-    name: Release
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 5.0.x
-      - name: Build
-        shell: pwsh
-        run: .\build.ps1 --stable=true
-      - name: Get Release Version
-        shell: pwsh
-        run: .\build\getReleaseVersion.ps1
-      - name: Create GitHub release
-        uses: marvinpinto/action-automatic-releases@latest
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: ${{ env.ReleaseVersion }}
-          title: ${{ env.ReleaseVersion }}
-          prerelease: false
-          files: |
-            out/*
+      - uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            tag_name: test
+            release_name: release
+            body: content
+            draft: false
+            prerelease: false
