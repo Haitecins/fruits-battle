@@ -47,65 +47,61 @@ const startup = (): void => {
     );
   });
 };
+nodes.app.removeAttr("style");
 // 刷新历史记录
 refreshHistory();
-// 当资源加载完毕后可开始游戏
-jQuery(window).on("load", () => {
-  nodes.app.removeAttr("style");
-  nodes.readme.startButton
-    .one("click", () => {
-      nodes.player.on({
-        [isMobile ? "touchstart" : "mousedown"](downEvent) {
-          // 获取设备的坐标与该对象的坐标之间的距离
-          const x =
-            useDeviceEvents(downEvent).clientX - jQuery(this).position().left;
-          const y =
-            useDeviceEvents(downEvent).clientY - jQuery(this).position().top;
-          jQuery(document).on({
-            [isMobile ? "touchmove" : "mousemove"](moveEvent) {
-              if (player.countdown > 0 && player.health > 0) {
-                // 获取设备的坐标减去对象之间坐标的位置
-                let left = useDeviceEvents(moveEvent).clientX - x;
-                let top = useDeviceEvents(moveEvent).clientY - y;
+nodes.readme.startButton
+  .one("click", () => {
+    nodes.player.on({
+      [isMobile ? "touchstart" : "mousedown"](downEvent) {
+        // 获取设备的坐标与该对象的坐标之间的距离
+        const x =
+          useDeviceEvents(downEvent).clientX - jQuery(this).position().left;
+        const y =
+          useDeviceEvents(downEvent).clientY - jQuery(this).position().top;
+        jQuery(document).on({
+          [isMobile ? "touchmove" : "mousemove"](moveEvent) {
+            if (player.countdown > 0 && player.health > 0) {
+              // 获取设备的坐标减去对象之间坐标的位置
+              let left = useDeviceEvents(moveEvent).clientX - x;
+              let top = useDeviceEvents(moveEvent).clientY - y;
 
-                // 阻止超出游戏区域
-                if (left < 0) left = 0;
-                if (top < 0) top = 0;
-                if (
-                  left >
+              // 阻止超出游戏区域
+              if (left < 0) left = 0;
+              if (top < 0) top = 0;
+              if (
+                left >
+                (nodes.app.width() as number) - (nodes.player.width() as number)
+              ) {
+                left =
                   (nodes.app.width() as number) -
-                    (nodes.player.width() as number)
-                ) {
-                  left =
-                    (nodes.app.width() as number) -
-                    (nodes.player.width() as number);
-                }
-                if (
-                  top >
-                  (nodes.app.height() as number) -
-                    (nodes.player.height() as number) -
-                    (nodes.statusbar.element.height() as number)
-                ) {
-                  top =
-                    (nodes.app.height() as number) -
-                    (nodes.player.height() as number) -
-                    (nodes.statusbar.element.height() as number);
-                }
-                player.not_moving_ticks = 0;
-                statistics.NEVER_MOVED = false;
-                nodes.player.css({ left, top });
+                  (nodes.player.width() as number);
               }
-            },
-            [isMobile ? "touchend" : "mouseup"]() {
-              jQuery(this).off("touchmove");
-              jQuery(this).off("mousemove");
-            },
-          });
-        },
-      });
-    })
-    .on("click", startup);
-});
+              if (
+                top >
+                (nodes.app.height() as number) -
+                  (nodes.player.height() as number) -
+                  (nodes.statusbar.element.height() as number)
+              ) {
+                top =
+                  (nodes.app.height() as number) -
+                  (nodes.player.height() as number) -
+                  (nodes.statusbar.element.height() as number);
+              }
+              player.not_moving_ticks = 0;
+              statistics.NEVER_MOVED = false;
+              nodes.player.css({ left, top });
+            }
+          },
+          [isMobile ? "touchend" : "mouseup"]() {
+            jQuery(this).off("touchmove");
+            jQuery(this).off("mousemove");
+          },
+        });
+      },
+    });
+  })
+  .on("click", startup);
 nodes.gameover.restart.on("click", () => {
   if (!player.isEnded) return;
   resetPageStyles();
