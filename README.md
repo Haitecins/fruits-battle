@@ -21,11 +21,11 @@
 
 | 名称       | 链接                            | 版本    |
 | :--------- | ------------------------------- | ------- |
-| TypeScript | https://www.typescriptlang.org/ | 4.5.4   |
-| Webpack5   | https://webpack.docschina.org/  | 5.65.0  |
-| Vite.js    | https://vitejs.dev/             | 2.7.10  |
-| Node.js    | https://nodejs.org/en/          | 14.17.6 |
-| jQuery     | https://jquery.com/             | 3.6.0   |
+| TypeScript | <https://www.typescriptlang.org/> | 4.5.4   |
+| Webpack5   | <https://webpack.docschina.org/>  | 5.65.0  |
+| Vite.js    | <https://vitejs.dev/>             | 2.7.10  |
+| Node.js    | <https://nodejs.org/en/>          | 14.17.6 |
+| jQuery     | <https://jquery.com/>             | 3.6.0   |
 
 ## 脚本命令
 
@@ -55,16 +55,16 @@
 
 玩家初始拥有5点生命值，最大上限为10点。
 
-#### 生命值增加有以下条件：
+#### 生命值增加有以下条件
 
 1. 每次累计拾取10次新鲜水果可以增加1点生命值，过程中如果拾取到腐烂水果将重新累计
 
-#### 生命值减少有以下条件：
+#### 生命值减少有以下条件
 
 1. 当玩家的分数在负数以下，每次拾取腐烂水果将减少生命值。
 2. 每次累计拾取5次腐烂水果，将减少1点生命值。
 
-#### 游戏分数增加有以下条件：
+#### 游戏分数增加有以下条件
 
 1. 拾取新鲜水果可以增加游戏分数
 2. 每次累计拾取15个新鲜水果必定奖动15个水果总和的35%分数。如果途中拾取到腐烂水果，将重新累计。当获得奖励分数的时候会播放特殊的音效。
