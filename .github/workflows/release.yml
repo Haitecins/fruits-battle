@@ -15,8 +15,8 @@ jobs:
       - uses: borales/actions-yarn@v2.3.0
         with:
           cmd: build
-      - uses: elgohr/Github-Release-Action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      - uses: actions/upload-artifact@v2.3.1
         with:
-          args: MyReleaseMessage
+          name: artifact
+          path: out/*
+          
