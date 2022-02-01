@@ -20,10 +20,10 @@
       "@/configs/*": ["./src/modules/configs/*"],
       "@/libs/*": ["./src/modules/libs/*"],
       "@/pages/*": ["src/modules/pages/*"],
+      "@/utils/*": ["./src/modules/utils/*"],
       "@/modules/*": ["./src/modules/*"],
       "@/test/*": ["./src/test/*"],
       "@/types/*": ["./src/types/*"],
-      "@/utils/*": ["./src/utils/*"],
       "@/*": ["./src/*"]
     }
   },
