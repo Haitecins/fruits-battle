@@ -8,14 +8,11 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
-
 # production
 /build
 /dist
-/tsconfig.tsbuildinfo
+/out
+tsconfig.tsbuildinfo
 
 # misc
 .DS_Store
