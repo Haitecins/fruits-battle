@@ -17,7 +17,6 @@
     "noImplicitReturns": true,
     "paths": {
       "@/assets/*": ["./src/assets/*"],
-      "@/containers/*": ["./src/containers/*"],
       "@/configs/*": ["./src/modules/configs/*"],
       "@/libs/*": ["./src/modules/libs/*"],
       "@/pages/*": ["src/modules/pages/*"],
