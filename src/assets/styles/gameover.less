@@ -18,6 +18,21 @@
     margin: 0 100px 22px;
   }
 
+  > div:last-of-type {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > button {
+      margin: 0 10px;
+    }
+  }
+
   > div:first-of-type {
     height: 0;
     text-align: center;
@@ -71,28 +86,13 @@
         width: 40px;
         height: 40px;
         position: absolute;
-        background: url(../images/achievement_icon.svg) center no-repeat;
+        background: url("../images/achievement_icon.svg") center no-repeat;
         background-size: 100%;
       }
     }
 
     > div > ul > li:not(:last-of-type) {
       margin-bottom: 14px;
-    }
-  }
-
-  > div:last-of-type {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    font-size: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    > button {
-      margin: 0 10px;
     }
   }
 }

@@ -3,9 +3,11 @@
   max-height: 500px;
   display: flex;
   position: absolute;
-  padding: constant(safe-area-inset-top) constant(safe-area-inset-right)
+  padding:
+    constant(safe-area-inset-top) constant(safe-area-inset-right)
     constant(safe-area-inset-bottom) constant(safe-area-inset-left);
-  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+  padding:
+    env(safe-area-inset-top) env(safe-area-inset-right)
     env(safe-area-inset-bottom) env(safe-area-inset-left);
   left: 0;
   right: 0;
@@ -73,6 +75,23 @@
       width: 23px;
       height: 23px;
     }
+
+    #total-fruits i,
+    #total-items i {
+      width: 40px !important;
+      height: 50px !important;
+      position: absolute;
+    }
+
+    #total-fruits > div > p,
+    #total-items > div > div > p {
+      text-indent: 50px;
+      font-size: 12px !important;
+    }
+
+    #total-items > div > div {
+      margin-bottom: 13px;
+    }
   }
 }
 
@@ -134,25 +153,4 @@
 
 .article-row-4 > * {
   width: calc(100% / 4);
-}
-
-#total-fruits > div > i,
-#total-items > div > div > i {
-  width: 40px !important;
-  height: 50px !important;
-  position: absolute;
-}
-
-#total-fruits > div > p,
-#total-items > div > div > p {
-  text-indent: 50px;
-}
-
-#total-items > div > div {
-  margin-bottom: 13px;
-}
-
-#total-fruits > div > p,
-#total-items > div > div > p {
-  font-size: 12px !important;
 }
