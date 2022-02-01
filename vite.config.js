@@ -17,7 +17,6 @@ export default defineConfig({
     alias({
       entries: [
         resolve("@/assets", "src/assets"),
-        resolve("@/containers", "src/containers"),
         resolve("@/configs", "src/modules/configs"),
         resolve("@/libs", "src/modules/libs"),
         resolve("@/pages", "src/modules/pages"),

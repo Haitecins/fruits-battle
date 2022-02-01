@@ -1,5 +1,5 @@
 <p align="center">
-    <img width="180" src="./docs/images/cherry.svg">
+    <img width="180" src="./docs/images/icon.svg">
 </p>
 <br/>
 <p align="center">
@@ -45,7 +45,7 @@
 
 最后如下图所示，即在本地的 8080 端口中开启服务器。
 
-![](./docs/images/yarn_dev.png)
+![](./docs/images/dev_server.png)
 
 ## 游戏说明
 
