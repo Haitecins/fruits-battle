@@ -1,8 +1,7 @@
-const OFF = 0;
-const WARN = 1;
-const ERROR = 2;
+// @ts-check
+const { defineConfig } = require("eslint-define-config");
 
-module.exports = {
+module.exports = defineConfig({
   env: {
     browser: true,
     es2021: true,
@@ -24,14 +23,14 @@ module.exports = {
   plugins: ["@typescript-eslint", "import"],
   rules: {
     "@typescript-eslint/no-unused-expressions": [
-      ERROR,
+      "error",
       { allowTernary: true, allowShortCircuit: true },
     ],
-    "import/no-unresolved": ERROR,
-    "func-names": [ERROR, "never"],
-    "no-console": OFF,
-    "no-plusplus": OFF,
-    "no-param-reassign": OFF,
+    "import/no-unresolved": "error",
+    "func-names": ["error", "never"],
+    "no-console": "off",
+    "no-plusplus": "off",
+    "no-param-reassign": "off",
   },
   settings: {
     "import/parsers": {
@@ -43,4 +42,4 @@ module.exports = {
       },
     },
   },
-};
+});

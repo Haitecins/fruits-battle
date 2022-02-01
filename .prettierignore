@@ -1,5 +1,6 @@
 node_modules
 out
+**/*.less
 yarn.lock
 package-lock.json
 README.md

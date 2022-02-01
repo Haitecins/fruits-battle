@@ -52,7 +52,7 @@ const fruits: FruitProps = [
     },
   },
   {
-    id: "hami_melon",
+    id: "hami-melon",
     type: "fruits",
     priority: 0,
     scores: 0.15,
@@ -172,7 +172,7 @@ const fruits: FruitProps = [
     },
   },
   {
-    id: "kiwi_fruit",
+    id: "kiwi-fruit",
     type: "fruits",
     priority: 0,
     scores: 0.15,
