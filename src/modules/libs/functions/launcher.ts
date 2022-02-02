@@ -8,12 +8,12 @@ import levelsUpList from "@/configs/events/levelsUpList";
 import timer from "@/configs/common/timer";
 import elements from "@/configs/common/elements";
 import verifications from "@/libs/functions/verifications";
-import hasCollide from "@/libs/functions/hasCollide";
+import isCollide from "@/libs/functions/isCollide";
 import hasOutArea from "@/libs/functions/hasOutArea";
 import calcRepair from "@/libs/functions/calcRepair";
 import ended from "@/libs/functions/ended";
 import setChance from "@/libs/functions/setChance";
-import refreshStatus from "@/libs/functions/refreshStatus";
+import updateStatusbar from "@/libs/functions/updateStatusbar";
 import detailBlocks from "@/libs/functions/detailBlocks";
 import Random from "@/libs/classes/Random";
 import { FruitsObject } from "@/types/configs/common/fruits";
@@ -28,7 +28,7 @@ const launcher = (): void => {
     // 反作弊验证
     verifications();
     // 刷新状态栏
-    refreshStatus();
+    updateStatusbar();
     // 玩家未进行移动行为的惩罚
     if (++player.not_moving_ticks >= 500) {
       // 减少生命值
@@ -54,7 +54,7 @@ const launcher = (): void => {
         hasOutArea.bind(this, jQuery(this))
       );
       // 碰撞事件
-      if (hasCollide(jQuery(this))) {
+      if (isCollide(jQuery(this))) {
         const { data } = this as never as { data: FruitsObject & ItemsObject };
         if (data.type === "fruits") {
           // 获取该元素是不是一个腐烂水果
