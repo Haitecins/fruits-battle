@@ -8,7 +8,7 @@ import verify from "@/configs/common/verity";
 import verifications from "@/libs/functions/verifications";
 import resetConfig from "@/libs/functions/resetConfig";
 import refreshHistory from "@/libs/functions/refreshHistory";
-import refreshStatus from "@/libs/functions/refreshStatus";
+import updateStatusbar from "@/libs/functions/updateStatusbar";
 import launcher from "@/libs/functions/launcher";
 
 const { nodes, resetPageStyles, resetIndexStyles } = elements;
@@ -20,7 +20,7 @@ const startup = (): void => {
   // 播放点击音效
   audio.click.play();
   // 刷新状态栏
-  refreshStatus();
+  updateStatusbar();
   // 暂时关闭游戏区域验证，等待其他项目验证完毕后再次打开。
   verify.LEAVING_THE_GAME_AREA.enabled = false;
   // 反作弊验证
