@@ -10,9 +10,20 @@ const resolve = (alias, replaced) => ({
 });
 
 export default defineConfig({
+  css: {
+    postcss: {
+      plugins: [
+        require("autoprefixer")({
+          grid: true,
+        }),
+        require("postcss-flexbugs-fixes"),
+      ],
+    },
+  },
   plugins: [
     legacy({
-      targets: ["defaults", "not IE 11"],
+      // 自动获取.browserslistrc文件中的参数
+      targets: "defaults",
     }),
     alias({
       entries: [

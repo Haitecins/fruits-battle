@@ -6,5 +6,6 @@
       "files": ["**/*.less"],
       "customSyntax": "postcss-less"
     }
-  ]
+  ],
+  "ignoreFiles": ["**/node_modules/**", "**/out/**"]
 }

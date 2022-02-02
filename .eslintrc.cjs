@@ -14,6 +14,13 @@ module.exports = defineConfig({
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:prettier/recommended",
   ],
+  ignorePatterns: [
+    "**/node_modules/**",
+    "**/out/**",
+    "**/test/**",
+    ".eslintrc.cjs",
+    "vite.config.js",
+  ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     project: "./tsconfig.json",

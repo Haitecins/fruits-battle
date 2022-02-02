@@ -1,5 +1,0 @@
-**/node_modules/**
-**/out/**
-**/test/**
-.eslintrc.cjs
-vite.config.js
