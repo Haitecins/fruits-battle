@@ -22,7 +22,7 @@ export default defineConfig({
   },
   plugins: [
     legacy({
-      // 自动获取.browserslistrc文件中的参数
+      // <rootPath>/.browserslistrc
       targets: "defaults",
     }),
     alias({
