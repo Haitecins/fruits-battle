@@ -18,7 +18,10 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,less,json}": [
+    "*.less": [
+      "stylelint **/*.less --fix"
+    ],
+    "*.{js,json}": [
       "prettier --write"
     ],
     "*.ts": [
