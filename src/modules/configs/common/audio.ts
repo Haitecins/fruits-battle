@@ -26,7 +26,7 @@ import openFlip3 from "@/assets/sounds/open_flip3.ogg";
 Howler.volume(0.5);
 const options: HowlOptions = {
   preload: true,
-  volume: 1,
+  volume: 0.5,
 };
 const audio: AudioProps = {
   // 开始按钮点击音效
