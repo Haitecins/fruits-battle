@@ -4,6 +4,10 @@ import calcRepair from "@/libs/functions/calcRepair";
 import DetailBlockProps from "@/types/libs/functions/detailBlocks";
 
 const { nodes } = elements;
+/**
+ * 实体在拾取后显示的细节
+ * @param DetailBlockProps 参数列表
+ */
 const detailBlocks = ({
   id,
   location,
