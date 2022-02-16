@@ -2,7 +2,7 @@ import jQuery from "jquery";
 import player from "@/configs/common/player";
 import statistics from "@/configs/common/statistics";
 import elements from "@/configs/common/elements";
-import verify from "@/configs/common/verity";
+import cheatList from "@/configs/common/cheatList";
 import Random from "@/libs/classes/Random";
 import setChance from "@/libs/functions/setChance";
 import detailBlocks from "@/libs/functions/detailBlocks";
@@ -201,7 +201,6 @@ const items: ItemProps = [
         chance: number;
         duration: number;
       };
-      type VerifyCustomProps = { attrs: { width: number; height: number } };
 
       const {
         attrs: { width, height },
@@ -211,11 +210,10 @@ const items: ItemProps = [
       const change = (size: number): void => {
         const widthChanged = Math.floor(width * size);
         const heightChanged = Math.floor(height * size);
-        (verify.PLAYER_EDIT_ARGUMENTS.custom as VerifyCustomProps).attrs.width =
+        (cheatList.PLAYER_EDIT_ARGUMENTS.custom as CustomProps).attrs.width =
           widthChanged;
-        (
-          verify.PLAYER_EDIT_ARGUMENTS.custom as VerifyCustomProps
-        ).attrs.height = heightChanged;
+        (cheatList.PLAYER_EDIT_ARGUMENTS.custom as CustomProps).attrs.height =
+          heightChanged;
         statistics.CAKE_ITEM_INFLUENCE_VALUE =
           1 + ((widthChanged - width) / width) * 1;
         nodes.player.animate(
@@ -252,10 +250,10 @@ const items: ItemProps = [
                 250,
                 () => {
                   (
-                    verify.PLAYER_EDIT_ARGUMENTS.custom as VerifyCustomProps
+                    cheatList.PLAYER_EDIT_ARGUMENTS.custom as CustomProps
                   ).attrs.width = width;
                   (
-                    verify.PLAYER_EDIT_ARGUMENTS.custom as VerifyCustomProps
+                    cheatList.PLAYER_EDIT_ARGUMENTS.custom as CustomProps
                   ).attrs.height = height;
                 }
               );

@@ -1,9 +1,9 @@
 import jQuery from "jquery";
 import elements from "@/configs/common/elements";
-import VerityProps from "@/types/configs/common/verity";
+import CheatListProps from "@/types/configs/common/cheatList";
 
 const { nodes } = elements;
-const verify: VerityProps = {
+const cheatList: CheatListProps = {
   // Prevent elements from disappearing (delete elements).
   DELETE_PLAYER_ELEMENT: {
     enabled: true,
@@ -86,4 +86,4 @@ const verify: VerityProps = {
   },
 };
 
-export default verify;
+export default cheatList;

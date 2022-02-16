@@ -4,8 +4,8 @@ import audio from "@/configs/common/audio";
 import elements from "@/configs/common/elements";
 import player from "@/configs/common/player";
 import statistics from "@/configs/common/statistics";
-import verify from "@/configs/common/verity";
-import verifications from "@/libs/functions/verifications";
+import cheatList from "@/configs/common/cheatList";
+import antiCheat from "@/libs/functions/antiCheat";
 import resetConfig from "@/libs/functions/resetConfig";
 import refreshHistory from "@/libs/functions/refreshHistory";
 import updateStatusbar from "@/libs/functions/updateStatusbar";
@@ -22,11 +22,11 @@ const startup = (): void => {
   // 刷新状态栏
   updateStatusbar();
   // 暂时关闭游戏区域验证，等待其他项目验证完毕后再次打开。
-  verify.LEAVING_THE_GAME_AREA.enabled = false;
+  cheatList.LEAVING_THE_GAME_AREA.enabled = false;
   // 反作弊验证
-  verifications();
+  antiCheat();
   // 打开游戏区域验证
-  verify.LEAVING_THE_GAME_AREA.enabled = true;
+  cheatList.LEAVING_THE_GAME_AREA.enabled = true;
   // 重置玩家的默认位置
   nodes.player.css({
     left:

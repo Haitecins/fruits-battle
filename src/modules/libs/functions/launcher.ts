@@ -4,10 +4,10 @@ import audio from "@/configs/common/audio";
 import levels from "@/configs/common/levels";
 import player from "@/configs/common/player";
 import statistics from "@/configs/common/statistics";
-import levelsUpList from "@/configs/events/levelsUpList";
+import difficulty from "@/configs/events/difficulty";
 import timer from "@/configs/common/timer";
 import elements from "@/configs/common/elements";
-import verifications from "@/libs/functions/verifications";
+import antiCheat from "@/libs/functions/antiCheat";
 import isCollide from "@/libs/functions/isCollide";
 import hasOutArea from "@/libs/functions/hasOutArea";
 import calcRepair from "@/libs/functions/calcRepair";
@@ -18,7 +18,7 @@ import detailBlocks from "@/libs/functions/detailBlocks";
 import Random from "@/libs/classes/Random";
 import { FruitsObject } from "@/types/configs/common/fruits";
 import { ItemsObject } from "@/types/configs/common/items";
-import { LevelsUpListObject } from "@/types/configs/events/levelsUpList";
+import { DifficultyObject } from "@/types/configs/events/difficulty";
 import levels_test from "@/test/levels.test";
 
 const { nodes, entities } = elements;
@@ -26,7 +26,7 @@ const launcher = (): void => {
   // 主定时器
   timer.main = setInterval(() => {
     // 反作弊验证
-    verifications();
+    antiCheat();
     // 刷新状态栏
     updateStatusbar();
     // 玩家未进行移动行为的惩罚
@@ -163,12 +163,12 @@ const launcher = (): void => {
       statistics.SUMMON_CD = 0;
     }
   }, 10);
-  const levelsUpTicks = {
+  const defineTicks = {
     min: levels_test.enabled ? levels_test.value[0] : 5000,
     max: levels_test.enabled ? levels_test.value[1] : 14000,
   };
   // 难度定时器
-  const levelsUp = (): void => {
+  const levelsUpTimer = (): void => {
     clearTimeout(timer.difficulty as number);
     audio.orb.play();
     // 淡入淡出效果
@@ -177,12 +177,7 @@ const launcher = (): void => {
     nodes.levels.value.text(() => `Lv.${++levels.DIFFICULTY_LEVELS}`);
     // 清空上一次的项目
     nodes.levels.container.empty();
-    const levelsUpItems = ({
-      title,
-      data,
-      suffixes,
-      change,
-    }: LevelsUpListObject) => {
+    const fillItem = ({ title, data, suffixes, change }: DifficultyObject) => {
       return `<p>${title}&nbsp;<i class="items-min-valid">${calcRepair(
         data() as number
       )}${
@@ -192,26 +187,24 @@ const launcher = (): void => {
       }</i></p>`;
     };
     // 过滤掉未达成条件的项目
-    const filterList = levelsUpList.filter(({ chance }) =>
-      setChance(chance, 2)
-    );
+    const filterList = difficulty.filter(({ chance }) => setChance(chance, 2));
     // 如果有升级项目的话就套用模板，没有升级项目则会随机获取一条。
-    const getUpList = filterList.length && filterList.map(levelsUpItems);
+    const getUpList = filterList.length && filterList.map(fillItem);
     if ((getUpList as string[]).length) {
       nodes.levels.container.html(getUpList as never);
     } else {
       nodes.levels.container.html(
-        levelsUpItems(new Random().getItem<LevelsUpListObject>(levelsUpList))
+        fillItem(new Random().getItem<DifficultyObject>(difficulty))
       );
     }
     timer.difficulty = setTimeout(
-      levelsUp,
-      new Random(levelsUpTicks.min, levelsUpTicks.max).getNumber()
+      levelsUpTimer,
+      new Random(defineTicks.min, defineTicks.max).getNumber()
     );
   };
   timer.difficulty = setTimeout(
-    levelsUp,
-    new Random(levelsUpTicks.min, levelsUpTicks.max).getNumber()
+    levelsUpTimer,
+    new Random(defineTicks.min, defineTicks.max).getNumber()
   );
 };
 
