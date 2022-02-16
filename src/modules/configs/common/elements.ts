@@ -34,8 +34,10 @@ const elements = {
       element: jQuery("#gameover"),
       playtime: jQuery("#over-playtime"),
       levels: jQuery("#over-levels"),
-      achievements: jQuery("#over-achievements>ul"),
-      achievementsLength: jQuery("#over-achievements-length"),
+      achievements: {
+        element: jQuery("#over-achievements>ul"),
+        totals: jQuery("#over-achievements-length"),
+      },
       totals: {
         fruits: jQuery("#over-total-fruits"),
         badFruits: jQuery("#over-total-bad-fruits"),
