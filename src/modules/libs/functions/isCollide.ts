@@ -1,6 +1,11 @@
 import elements from "@/configs/common/elements";
 
 const { nodes } = elements;
+/**
+ * 检测是否与玩家发生碰撞
+ * @param compare 与玩家节点进行比较的对象
+ * @returns 是否发生碰撞
+ */
 const isCollide = (compare: JQuery<HTMLElement>): boolean => {
   return !(
     nodes.player.position().top + (nodes.player.height() as number) <
