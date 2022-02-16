@@ -1,8 +1,8 @@
 import levels from "@/configs/common/levels";
 import Random from "@/libs/classes/Random";
-import LevelsUpListProps from "@/types/configs/events/levelsUpList";
+import DifficultyProps from "@/types/configs/events/difficulty";
 
-const levelsUpList: LevelsUpListProps = [
+const difficulty: DifficultyProps = [
   {
     chance: 39.5,
     title: '<span class="base-scores">基础得分</span>',
@@ -104,4 +104,4 @@ const levelsUpList: LevelsUpListProps = [
   },
 ];
 
-export default levelsUpList;
+export default difficulty;

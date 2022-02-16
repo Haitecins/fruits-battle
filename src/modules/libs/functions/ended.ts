@@ -116,10 +116,10 @@ const ended = (): void => {
   nodes.gameover.element.show().animate({ opacity: 1 }, 600, "swing");
   nodes.gameover.playtime.text(timeFormat(Math.floor(PLAYTIME)));
   nodes.gameover.levels.text(`Lv.${DIFFICULTY_LEVELS}`);
-  nodes.gameover.achievementsLength.text(fillItem.length);
+  nodes.gameover.achievements.totals.text(fillItem.length);
   nodes.gameover.totals.fruits.text(TOTAL_FRUITS);
   nodes.gameover.totals.badFruits.text(TOTAL_BAD_FRUITS);
-  nodes.gameover.achievements.html(fillItem as never);
+  nodes.gameover.achievements.element.html(fillItem as never);
   nodes.gameover.scores.text(calcRepair(SCORES));
   nodes.gameover.details.animate({ height: 268 }, 800, () => {});
 };
