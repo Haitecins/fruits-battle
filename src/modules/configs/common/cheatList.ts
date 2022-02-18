@@ -19,8 +19,8 @@ const cheatList: CheatListProps = {
     enabled: true,
     custom: {
       attrs: {
-        width: nodes.player.width(),
-        height: nodes.player.height(),
+        width: 50,
+        height: 42,
       },
     },
     check() {
