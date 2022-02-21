@@ -12,7 +12,8 @@
     "prettier": "prettier --write .",
     "lint": "yarn lint:ts && yarn lint:less",
     "lint:ts": "eslint --ext .ts,.js src/ --fix",
-    "lint:less": "stylelint **/*.{less,css} --fix"
+    "lint:less": "stylelint **/*.{less,css} --fix",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -37,6 +38,7 @@
     "@typescript-eslint/parser": "^5.10.0",
     "@vitejs/plugin-legacy": "^1.6.4",
     "autoprefixer": "^10.4.2",
+    "conventional-changelog-cli": "^2.2.2",
     "eslint": "8.2.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-airbnb-typescript": "^16.1.0",
