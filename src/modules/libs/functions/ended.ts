@@ -1,5 +1,6 @@
 import achievements from "@/configs/events/achievements";
 import statistics from "@/configs/common/statistics";
+import cheatList from "@/configs/common/cheatList";
 import timer from "@/configs/common/timer";
 import audio from "@/configs/common/audio";
 import items from "@/configs/common/items";
@@ -19,7 +20,7 @@ const ended = (): void => {
   audio.end.play();
   player.isEnded = !player.isEnded;
   clearEntities();
-  // 清除遗留下来的难度提升日志
+  // 清除遗留下来的难度日志
   nodes.levels.element.stop(true).removeAttr("style");
   nodes.levels.value.empty();
   nodes.levels.container.empty();
@@ -31,6 +32,13 @@ const ended = (): void => {
     .forEach((item) => {
       clearTimeout((item.custom as { timer: NodeJS.Timeout }).timer);
     });
+  // 重置样式的验证属性
+  cheatList.PLAYER_EDIT_ARGUMENTS.custom = {
+    attrs: {
+      width: 50,
+      height: 42,
+    },
+  };
   // 重置玩家位置
   nodes.player.removeAttr("style").hide();
   // 显示本局的游戏数据
