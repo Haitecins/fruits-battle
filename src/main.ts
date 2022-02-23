@@ -1,7 +1,5 @@
 import "@/assets/styles/index.less";
 import "@/pages/app";
-import "@/pages/detailed";
-import "@/pages/navigation";
 import "@/utils/contextmenu";
 import "@/utils/ios";
 

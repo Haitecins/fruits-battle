@@ -10,6 +10,8 @@ import resetConfig from "@/libs/functions/resetConfig";
 import refreshHistory from "@/libs/functions/refreshHistory";
 import updateStatusbar from "@/libs/functions/updateStatusbar";
 import launcher from "@/libs/functions/launcher";
+import "@/pages/detailed";
+import "@/pages/navigation";
 
 const { nodes, resetPageStyles, resetIndexStyles } = elements;
 const startup = (): void => {
