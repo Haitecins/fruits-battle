@@ -1,4 +1,4 @@
-#  (2022-02-21)
+# 4.1.0-159 (2022-02-23)
 
 
 ### Bug Fixes
@@ -15,6 +15,7 @@
 
 * 新增stylelint格式化工具 ([612fb13](https://github.com/chiyukikana/fruit-wars/commit/612fb13505c830ae8482cfadf47c44c87f23b890))
 * **build:** 增强构产物的浏览器兼容性 ([b4888da](https://github.com/chiyukikana/fruit-wars/commit/b4888daab835f4c976c1b347e567f31d78b22646))
+* **changelog:** 增加更新日志 ([ec24473](https://github.com/chiyukikana/fruit-wars/commit/ec244735fcddeb17bbc7576ff21a6a161d9ba71e))
 
 
 ### Performance Improvements
