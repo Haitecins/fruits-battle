@@ -30,5 +30,6 @@
     "source.fixAll": true
   },
   "typescript.inlayHints.parameterNames.enabled": "all",
-  "javascript.inlayHints.parameterNames.enabled": "all"
+  "javascript.inlayHints.parameterNames.enabled": "all",
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }
