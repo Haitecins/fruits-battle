@@ -177,8 +177,9 @@ const items: ItemProps = [
     custom: {
       timer: null,
       attrs: {
-        width: nodes.player.width(),
-        height: nodes.player.height(),
+        // 目前该数值只能写死，防止出现都为0的BUG。
+        width: 50,
+        height: 42,
       },
       chance: 55,
       duration: 10000,
