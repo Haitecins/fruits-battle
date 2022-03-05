@@ -1,9 +1,10 @@
-# 4.1.0-159 (2022-02-23)
+## 4.1.1-933 (2022-03-05)
 
 
 ### Bug Fixes
 
 * 移除了无效的路径别名 ([84a067d](https://github.com/chiyukikana/fruit-wars/commit/84a067d63475bdc872e49c3426a132592b370ac4))
+* **cake:** 修复0像素大小的错误 ([d741e92](https://github.com/chiyukikana/fruit-wars/commit/d741e923cd19a1bed8438b39f09dc8a6a7cf03a6))
 * **cheat:** 修复了在样式未加载的时候运行反作弊出错的问题 ([79ba3f2](https://github.com/chiyukikana/fruit-wars/commit/79ba3f2508e3d9311000f6c1dae317a09da2006e))
 * **less:** 修复动画名称引用错误 ([ef6f42d](https://github.com/chiyukikana/fruit-wars/commit/ef6f42d323c671bde5e80af0841b8598a90fa72f))
 * **player:** 修复了重新开始后玩家宽高异常的问题 ([2c40473](https://github.com/chiyukikana/fruit-wars/commit/2c40473afc39c7b94424237d347201e8031ff5e4))
@@ -16,6 +17,7 @@
 * 新增stylelint格式化工具 ([612fb13](https://github.com/chiyukikana/fruit-wars/commit/612fb13505c830ae8482cfadf47c44c87f23b890))
 * **build:** 增强构产物的浏览器兼容性 ([b4888da](https://github.com/chiyukikana/fruit-wars/commit/b4888daab835f4c976c1b347e567f31d78b22646))
 * **changelog:** 增加更新日志 ([ec24473](https://github.com/chiyukikana/fruit-wars/commit/ec244735fcddeb17bbc7576ff21a6a161d9ba71e))
+* **version:** v4.1.0-0159 ([106d05e](https://github.com/chiyukikana/fruit-wars/commit/106d05e23870f4cb6c412e69fd4f15db6b5bcad5))
 
 
 ### Performance Improvements
