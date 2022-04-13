@@ -1,7 +1,6 @@
 import jQuery from "jquery";
 import elements from "@/configs/common/elements";
 import calcRepair from "@/libs/functions/calcRepair";
-import DetailBlockProps from "@/types/libs/functions/detailBlocks";
 
 const { nodes } = elements;
 /**
@@ -80,5 +79,22 @@ const detailBlocks = ({
     );
   }
 };
+
+interface DetailBlockProps {
+  id: string;
+  location: {
+    x: number;
+    y: number;
+  };
+  value: {
+    before: number;
+    after: number;
+    suffix?: string;
+  };
+  extra?: () => unknown;
+  fixed?: number;
+}
+
+export { DetailBlockProps };
 
 export default detailBlocks;

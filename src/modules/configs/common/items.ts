@@ -6,7 +6,6 @@ import cheatList from "@/configs/common/cheatList";
 import Random from "@/libs/classes/Random";
 import setChance from "@/libs/functions/setChance";
 import detailBlocks from "@/libs/functions/detailBlocks";
-import ItemProps from "@/types/configs/common/items";
 
 const { nodes, entities } = elements;
 const items: ItemProps = [
@@ -382,5 +381,28 @@ items
   .forEach((item, index) => {
     item.priority = 100 + index;
   });
+
+interface ItemsObject {
+  id: string;
+  type: string;
+  priority: number;
+  speed: {
+    min: number;
+    max: number;
+  };
+  valid: {
+    min: number;
+    max: number;
+  };
+  custom?: {
+    timer?: NodeJS.Timeout | null | number | undefined;
+    [propName: string]: unknown;
+  };
+  description: () => string;
+  effect: (element: HTMLElement | JQuery<HTMLElement>) => void;
+}
+type ItemProps = ItemsObject[];
+
+export { ItemsObject, ItemProps };
 
 export default items;

@@ -1,5 +1,3 @@
-import LevelProps from "@/types/configs/common/levels";
-
 const levels: LevelProps = {
   // 基础得分 (default: 1)
   BASE_SCORES: 1,
@@ -19,6 +17,19 @@ const levels: LevelProps = {
   DIFFICULTY_LEVELS: 1,
 };
 const levelsCopied: LevelProps = { ...levels };
+
+interface LevelProps {
+  BASE_SCORES: number;
+  BASE_SCORES_MULTIPLE: number;
+  BASE_MOVE_SPEED: number;
+  ENTITY_SPAWN_SPEED: number;
+  ITEMS_SPAWN_CHANCE: number;
+  HEALTHY_FRUITS_SPAWN_CHANCE: number;
+  BAD_FRUITS_CHANCE: number;
+  DIFFICULTY_LEVELS: number;
+}
+
+export { LevelProps };
 
 export default levels;
 export { levelsCopied };

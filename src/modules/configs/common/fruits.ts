@@ -1,5 +1,3 @@
-import FruitProps from "@/types/configs/common/fruits";
-
 const fruits: FruitProps = [
   {
     id: "apple",
@@ -248,5 +246,19 @@ fruits
   .forEach((fruit, index) => {
     fruit.priority = index;
   });
+
+interface FruitsObject {
+  id: string;
+  type: string;
+  priority: number;
+  scores: number;
+  speed: {
+    min: number;
+    max: number;
+  };
+}
+type FruitProps = FruitsObject[];
+
+export { FruitsObject, FruitProps };
 
 export default fruits;

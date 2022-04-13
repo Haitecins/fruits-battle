@@ -1,6 +1,5 @@
 import levels from "@/configs/common/levels";
 import Random from "@/libs/classes/Random";
-import DifficultyProps from "@/types/configs/events/difficulty";
 
 const difficulty: DifficultyProps = [
   {
@@ -103,5 +102,16 @@ const difficulty: DifficultyProps = [
     },
   },
 ];
+
+interface DifficultyObject {
+  chance: number;
+  title: string;
+  data: () => string | number | boolean;
+  change: () => number;
+  suffixes?: () => string;
+}
+type DifficultyProps = DifficultyObject[];
+
+export { DifficultyObject, DifficultyProps };
 
 export default difficulty;

@@ -1,7 +1,6 @@
 import player from "@/configs/common/player";
 import statistics from "@/configs/common/statistics";
 import levels from "@/configs/common/levels";
-import AchievementProps from "@/types/configs/events/achievements";
 
 // 计算偏差，游戏数值在计算时可能会出现偏差，使用后可以避免偏差。
 const deviation = 0.1;
@@ -345,5 +344,16 @@ const achievements: AchievementProps = [
     },
   },
 ];
+
+interface AchievementsObject {
+  id: string;
+  required?: object;
+  cond: () => boolean;
+  title: string;
+  description: () => string;
+}
+type AchievementProps = AchievementsObject[];
+
+export { AchievementsObject, AchievementProps };
 
 export default achievements;

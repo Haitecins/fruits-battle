@@ -1,4 +1,3 @@
-import PlayerProps from "@/types/configs/common/player";
 import countdown_test from "@/test/countdown.test";
 
 const player: PlayerProps = {
@@ -16,6 +15,17 @@ const player: PlayerProps = {
   isEnded: false,
 };
 const playerCopied: PlayerProps = { ...player };
+
+interface PlayerProps {
+  health: number;
+  mana: number;
+  not_moving_ticks: number;
+  countdown: number;
+  isRunning: boolean;
+  isEnded: boolean;
+}
+
+export { PlayerProps };
 
 export default player;
 export { playerCopied };

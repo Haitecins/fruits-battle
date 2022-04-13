@@ -1,6 +1,5 @@
 import jQuery from "jquery";
 import elements from "@/configs/common/elements";
-import CheatListProps from "@/types/configs/common/cheatList";
 
 const { nodes } = elements;
 const cheatList: CheatListProps = {
@@ -85,5 +84,17 @@ const cheatList: CheatListProps = {
     },
   },
 };
+
+interface CheatListObject {
+  enabled: boolean;
+  custom?: object;
+  check: () => boolean;
+  actions: () => void;
+}
+interface CheatListProps {
+  [propName: string]: CheatListObject;
+}
+
+export { CheatListObject, CheatListProps };
 
 export default cheatList;
