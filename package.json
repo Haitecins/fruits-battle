@@ -12,8 +12,7 @@
     "prettier": "prettier --write .",
     "lint": "yarn lint:ts && yarn lint:less",
     "lint:ts": "eslint --ext .ts,.js src/ --fix",
-    "lint:less": "stylelint **/*.{less,css} --fix",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    "lint:less": "stylelint **/*.{less,css} --fix"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
