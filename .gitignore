@@ -15,7 +15,6 @@
 tsconfig.tsbuildinfo
 
 # misc
-.DS_Store
 *.pem
 
 # debug
@@ -31,3 +30,14 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# Editor directories and files
+.idea
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
