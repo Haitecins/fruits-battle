@@ -1,9 +1,8 @@
 import jQuery from "jquery";
 import Random from "@/libs/classes/Random";
-import fruits from "@/configs/common/fruits";
-import audio from "@/configs/common/audio";
-import elements from "@/configs/common/elements";
-import { FruitsObject } from "@/types/configs/common/fruits";
+import fruits, { FruitsObject } from "@/modules/config/common/fruits";
+import audio from "@/modules/config/common/audio";
+import elements from "@/modules/config/common/elements";
 
 jQuery(".random-fruit").each(function () {
   jQuery(this).addClass(

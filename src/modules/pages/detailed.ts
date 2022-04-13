@@ -1,6 +1,6 @@
-import elements from "@/configs/common/elements";
-import fruits from "@/configs/common/fruits";
-import items from "@/configs/common/items";
+import elements from "@/modules/config/common/elements";
+import fruits from "@/modules/config/common/fruits";
+import items from "@/modules/config/common/items";
 
 const {
   nodes: {

@@ -1,18 +1,17 @@
 import jQuery from "jquery";
-import fruits from "@/configs/common/fruits";
-import items from "@/configs/common/items";
-import statistics from "@/configs/common/statistics";
-import levels from "@/configs/common/levels";
-import elements from "@/configs/common/elements";
+import fruits, { FruitsObject } from "@/modules/config/common/fruits";
+import items, { ItemsObject } from "@/modules/config/common/items";
+import statistics from "@/modules/config/common/statistics";
+import levels from "@/modules/config/common/levels";
+import elements from "@/modules/config/common/elements";
 import setChance from "@/libs/functions/setChance";
 import Random from "@/libs/classes/Random";
 import calcRepair from "@/libs/functions/calcRepair";
-import { FruitsObject } from "@/types/configs/common/fruits";
-import { ItemsObject } from "@/types/configs/common/items";
 
 const { nodes } = elements;
+
 class Entity {
-  public element: JQuery<HTMLElement>;
+  public element: JQuery;
 
   public constructor() {
     let getEntityObject = new Random().getItem<FruitsObject | ItemsObject>([
@@ -163,7 +162,7 @@ class Entity {
     this.element.prop({ xSpeed: x, ySpeed: y });
   }
 
-  public additionals(handler: (entity: JQuery<HTMLElement>) => void): void {
+  public additional(handler: (entity: JQuery<HTMLElement>) => void): void {
     handler && handler(this.element);
   }
 }

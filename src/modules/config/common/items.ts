@@ -1,8 +1,8 @@
 import jQuery from "jquery";
-import player from "@/configs/common/player";
-import statistics from "@/configs/common/statistics";
-import elements from "@/configs/common/elements";
-import cheatList from "@/configs/common/cheatList";
+import player from "@/modules/config/common/player";
+import statistics from "@/modules/config/common/statistics";
+import elements from "@/modules/config/common/elements";
+import cheatList from "@/modules/config/common/cheatList";
 import Random from "@/libs/classes/Random";
 import setChance from "@/libs/functions/setChance";
 import detailBlocks from "@/libs/functions/detailBlocks";
@@ -215,7 +215,7 @@ const items: ItemProps = [
         (cheatList.PLAYER_EDIT_ARGUMENTS.custom as CustomProps).attrs.height =
           heightChanged;
         statistics.CAKE_ITEM_INFLUENCE_VALUE =
-          1 + ((widthChanged - width) / width) * 1;
+          1 + (widthChanged - width) / width;
         nodes.player.animate(
           {
             width: widthChanged,
@@ -401,6 +401,7 @@ interface ItemsObject {
   description: () => string;
   effect: (element: HTMLElement | JQuery<HTMLElement>) => void;
 }
+
 type ItemProps = ItemsObject[];
 
 export { ItemsObject, ItemProps };

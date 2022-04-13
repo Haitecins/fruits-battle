@@ -1,4 +1,4 @@
-import cheatList from "@/configs/common/cheatList";
+import cheatList from "@/modules/config/common/cheatList";
 
 const antiCheat = (): void => {
   Object.keys(cheatList).forEach((key) => {

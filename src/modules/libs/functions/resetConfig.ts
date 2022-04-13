@@ -1,9 +1,15 @@
-import levels, { levelsCopied } from "@/configs/common/levels";
-import player, { playerCopied } from "@/configs/common/player";
-import statistics, { statisticsCopied } from "@/configs/common/statistics";
-import LevelProps from "@/types/configs/common/levels";
-import PlayerProps from "@/types/configs/common/player";
-import StatisticProps from "@/types/configs/common/statistics";
+import levels, {
+  LevelProps,
+  levelsCopied,
+} from "@/modules/config/common/levels";
+import player, {
+  playerCopied,
+  PlayerProps,
+} from "@/modules/config/common/player";
+import statistics, {
+  StatisticProps,
+  statisticsCopied,
+} from "@/modules/config/common/statistics";
 
 const resetConfig = (): void => {
   const resetHandler = (configs: ResetConfigProps): void => {
@@ -36,6 +42,7 @@ interface ResetConfigObject {
   original: LevelProps | PlayerProps | StatisticProps;
   replaced: LevelProps | PlayerProps | StatisticProps;
 }
+
 type ResetConfigProps = ResetConfigObject[];
 
 export { ResetConfigProps, ResetConfigObject };

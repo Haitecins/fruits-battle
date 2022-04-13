@@ -1,6 +1,6 @@
-import player from "@/configs/common/player";
-import statistics from "@/configs/common/statistics";
-import elements from "@/configs/common/elements";
+import player from "@/modules/config/common/player";
+import statistics from "@/modules/config/common/statistics";
+import elements from "@/modules/config/common/elements";
 import calcRepair from "@/libs/functions/calcRepair";
 import timeFormat from "@/libs/functions/timeFormat";
 
@@ -20,8 +20,9 @@ const updateStatusbar = (): void => {
   statusbar.scores.text(calcRepair(statistics.SCORES));
   statusbar.countdown.text(() => {
     statistics.PLAYTIME += 0.01;
-    const formated = timeFormat(Math.ceil((player.countdown -= 0.01)));
-    return formated;
+    const decrement = Math.ceil((player.countdown -= 0.01));
+
+    return timeFormat(decrement);
   });
 };
 

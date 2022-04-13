@@ -1,6 +1,6 @@
-import player from "@/configs/common/player";
-import statistics from "@/configs/common/statistics";
-import levels from "@/configs/common/levels";
+import player from "@/modules/config/common/player";
+import statistics from "@/modules/config/common/statistics";
+import levels from "@/modules/config/common/levels";
 
 // 计算偏差，游戏数值在计算时可能会出现偏差，使用后可以避免偏差。
 const deviation = 0.1;

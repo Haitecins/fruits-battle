@@ -1,4 +1,4 @@
-import levels from "@/configs/common/levels";
+import levels from "@/modules/config/common/levels";
 import Random from "@/libs/classes/Random";
 
 const difficulty: DifficultyProps = [

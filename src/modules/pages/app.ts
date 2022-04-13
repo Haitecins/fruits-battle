@@ -1,10 +1,10 @@
 import jQuery from "jquery";
-import { isMobile, useDeviceEvents } from "@/configs/common/mobile";
-import audio from "@/configs/common/audio";
-import elements from "@/configs/common/elements";
-import player from "@/configs/common/player";
-import statistics from "@/configs/common/statistics";
-import cheatList from "@/configs/common/cheatList";
+import { isMobile, useDeviceEvents } from "@/modules/config/common/mobile";
+import audio from "@/modules/config/common/audio";
+import elements from "@/modules/config/common/elements";
+import player from "@/modules/config/common/player";
+import statistics from "@/modules/config/common/statistics";
+import cheatList from "@/modules/config/common/cheatList";
 import antiCheat from "@/libs/functions/antiCheat";
 import resetConfig from "@/libs/functions/resetConfig";
 import refreshHistory from "@/libs/functions/refreshHistory";

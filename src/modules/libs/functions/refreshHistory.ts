@@ -1,7 +1,7 @@
-import elements from "@/configs/common/elements";
+import elements from "@/modules/config/common/elements";
 import calcRepair from "@/libs/functions/calcRepair";
 import timeFormat from "@/libs/functions/timeFormat";
-import StatisticProps from "@/types/configs/common/statistics";
+import { StatisticProps } from "@/config/common/statistics";
 
 const { nodes } = elements;
 const refreshHistory = (): void => {
@@ -10,7 +10,7 @@ const refreshHistory = (): void => {
     timestamp: number;
   };
   const getHistory = JSON.parse(
-    window.localStorage.getItem("app_history") as string
+    <string>window.localStorage.getItem("app_history")
   ) as HistoryProps[];
   if (getHistory) {
     const fillElements = getHistory.map((history: HistoryProps) => {

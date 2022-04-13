@@ -1,12 +1,14 @@
 import jQuery from "jquery";
 import Entity from "@/libs/classes/Entity";
-import audio from "@/configs/common/audio";
-import levels from "@/configs/common/levels";
-import player from "@/configs/common/player";
-import statistics from "@/configs/common/statistics";
-import difficulty from "@/configs/events/difficulty";
-import timer from "@/configs/common/timer";
-import elements from "@/configs/common/elements";
+import audio from "@/modules/config/common/audio";
+import levels from "@/modules/config/common/levels";
+import player from "@/modules/config/common/player";
+import statistics from "@/modules/config/common/statistics";
+import difficulty, {
+  DifficultyObject,
+} from "@/modules/config/events/difficulty";
+import timer from "@/modules/config/common/timer";
+import elements from "@/modules/config/common/elements";
 import antiCheat from "@/libs/functions/antiCheat";
 import isCollide from "@/libs/functions/isCollide";
 import hasOutArea from "@/libs/functions/hasOutArea";
@@ -16,10 +18,9 @@ import setChance from "@/libs/functions/setChance";
 import updateStatusbar from "@/libs/functions/updateStatusbar";
 import detailBlocks from "@/libs/functions/detailBlocks";
 import Random from "@/libs/classes/Random";
-import { FruitsObject } from "@/types/configs/common/fruits";
-import { ItemsObject } from "@/types/configs/common/items";
-import { DifficultyObject } from "@/types/configs/events/difficulty";
 import levels_test from "@/test/levels.test";
+import { FruitsObject } from "@/config/common/fruits";
+import { ItemsObject } from "@/config/common/items";
 
 const { nodes, entities } = elements;
 const launcher = (): void => {

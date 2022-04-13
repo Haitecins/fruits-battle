@@ -22,13 +22,13 @@ export default defineConfig({
   },
   plugins: [
     legacy({
-      // <rootPath>/.browserslistrc
+      // 默认值为根目录下的browserslistrc文件
       targets: "defaults",
     }),
     alias({
       entries: [
         resolve("@/assets", "src/assets"),
-        resolve("@/configs", "src/modules/configs"),
+        resolve("@/config", "src/modules/config"),
         resolve("@/libs", "src/modules/libs"),
         resolve("@/pages", "src/modules/pages"),
         resolve("@/utils", "src/modules/utils"),
@@ -49,8 +49,7 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes("node_modules")) {
-            const libName = id.split("node_modules/")[1].split("/")[0];
-            return libName;
+            return id.split("node_modules/")[1].split("/")[0];
           }
         },
       },

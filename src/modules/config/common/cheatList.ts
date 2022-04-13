@@ -1,5 +1,5 @@
 import jQuery from "jquery";
-import elements from "@/configs/common/elements";
+import elements from "@/modules/config/common/elements";
 
 const { nodes } = elements;
 const cheatList: CheatListProps = {
