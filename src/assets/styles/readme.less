@@ -3,12 +3,10 @@
   max-height: 500px;
   display: flex;
   position: absolute;
-  padding:
-    constant(safe-area-inset-top) constant(safe-area-inset-right)
-    constant(safe-area-inset-bottom) constant(safe-area-inset-left);
-  padding:
-    env(safe-area-inset-top) env(safe-area-inset-right)
-    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  //noinspection CssOverwrittenProperties
+  padding: constant(safe-area-inset-top) constant(safe-area-inset-right) constant(safe-area-inset-bottom) constant(safe-area-inset-left);
+  //noinspection CssOverwrittenProperties
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   left: 0;
   right: 0;
   top: 0;
@@ -29,6 +27,10 @@
       font-size: 20px;
       font-weight: normal;
       margin-top: 10px;
+
+      > a {
+        text-decoration: none;
+      }
     }
 
     .random-fruit {
