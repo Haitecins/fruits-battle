@@ -45,14 +45,5 @@ export default defineConfig({
   build: {
     outDir: "out",
     assetsDir: "static",
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes("node_modules")) {
-            return id.split("node_modules/")[1].split("/")[0];
-          }
-        },
-      },
-    },
   },
 });
