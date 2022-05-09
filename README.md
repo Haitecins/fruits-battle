@@ -2,4 +2,4 @@
 
 ## How to play
 
-[cloudflare.com](https://fruits-battle.pages.dev/)
+[vercel.com](https://fruits-battle.vercel.app/)
