@@ -43,8 +43,6 @@ export default defineConfig({
     port: 8080,
   },
   build: {
-    outDir: "out",
-    assetsDir: "static",
     assetsInlineLimit: 16384,
   },
 });
