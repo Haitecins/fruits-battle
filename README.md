@@ -2,4 +2,4 @@
 
 ## How to play
 
-[cloud.tencent.com](https://fruits-battle-6gyadt9u2aaa28c8-1256732922.ap-shanghai.app.tcloudbase.com/)
+[cloud.tencent.com](https://fruits-battle-1g2jnlof7ab2586b-1256732922.ap-shanghai.app.tcloudbase.com/)
